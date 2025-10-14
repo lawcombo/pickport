@@ -31,11 +31,28 @@
 
     /* ===================== Header & Top Search ===================== */
     .header{position:sticky;top:0;z-index:1000;backdrop-filter:saturate(1.2) blur(8px);background: color-mix(in oklab, var(--bg) 86%, transparent);border-bottom:1px solid var(--outline)}
-    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .nav {
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between; /* 양쪽 정렬 */
+	  gap: 16px;
+	  padding: 12px 0;
+	}
     .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:-.2px}
     .brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:0 6px 20px var(--ring)}
-    .top-search{width:min(720px,100%);margin:8px auto 16px}
-    .search-card{border:1px solid var(--outline);background:linear-gradient(180deg,color-mix(in oklab,var(--card) 96%,transparent),color-mix(in oklab,var(--card) 92%,transparent));box-shadow:0 10px 24px var(--shadow);padding:10px}
+    .top-search {
+	  flex: 1; /* 가운데 영역 차지 */
+	  max-width: 720px;
+	  margin: 0 auto; /* 가운데 정렬 */
+	}
+    .search-card {
+	  border: 1px solid var(--outline);
+	  background: linear-gradient(180deg,
+				  color-mix(in oklab, var(--card) 96%, transparent),
+				  color-mix(in oklab, var(--card) 92%, transparent));
+	  box-shadow: 0 10px 24px var(--shadow);
+	  padding: 10px;
+	}
     .search-hint{margin:6px auto 0;max-width:780px;text-align:center;color:var(--muted);font-size:13px}
 
     /* ===================== Hero / Slider ===================== */
@@ -56,9 +73,69 @@
     /* ===================== Section system (no <hr>) ===================== */
     .section{position:relative;padding:40px 0}
     /* soft divider band that never affects layout */    
+	/*
     .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
     .section-title{font-size:22px;font-weight:900;letter-spacing:-.2px;display:flex;gap:10px;align-items:center}
     .kicker{font-size:13px;color:var(--muted);font-weight:600}
+	*/
+	.section-head {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  margin-bottom: 18px;
+	  flex-wrap: wrap;
+	}
+
+	/* 제목 스타일 */
+	.section-title {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+	  font-size: 22px;
+	  font-weight: 900;
+	  letter-spacing: -0.3px;
+	  color: var(--text);
+	  position: relative;
+	}
+
+	/* 좌측 포인트 바 */
+	.section-title::before {
+	  content: "";
+	  display: inline-block;
+	  width: 6px;
+	  height: 24px;
+	  border-radius: 4px;
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  box-shadow: 0 0 8px var(--ring);
+	}
+
+	/* 더보기 링크 */
+	.more-link {
+	  font-size: 14px;
+	  font-weight: 600;
+	  color: var(--brand);
+	  text-decoration: none;
+	  background: color-mix(in oklab, var(--brand) 6%, transparent);
+	  padding: 3px 8px;
+	  border-radius: 8px;
+	  transition: all 0.25s ease;
+	  margin-left: 6px;
+	}
+
+	.more-link:hover {
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  color: #fff;
+	  box-shadow: 0 4px 10px var(--ring);
+	}
+
+	/* 부제 / 설명 */
+	.kicker {
+	  font-size: 13px;
+	  color: var(--muted);
+	  font-weight: 600;
+	}
+
+
 
     /* Section surface contains large grids so content never visually "spills" */
     .surface{border:1px solid var(--outline);border-radius:20px;background:
@@ -140,25 +217,35 @@
     }
 
 
+
   </style>
 </head>
 <body>
   <header class="header">
-    <div class="container">
-      <div class="nav">
-        <div class="brand">
-          <div class="brand-badge" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z"/></svg></div>
-          <span>PickPort</span>
-        </div>
-      </div>
-      <div class="top-search">
-        <div class="search-card">
-          <iframe src="https://coupa.ng/ckeU4C" width="100%" height="44" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 검색"></iframe>
-        </div>
-        <p class="search-hint">원하는 상품을 검색해보세요.</p>
-      </div>
-    </div>
-  </header>
+	  <div class="container">
+		<div class="nav">
+		  <div class="brand">
+			<div class="brand-badge" aria-hidden="true">
+			  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"
+				   xmlns="http://www.w3.org/2000/svg">
+				<path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z"/>
+			  </svg>
+			</div>
+			<span>PickPort</span>
+		  </div>
+
+		  <div class="top-search">
+			<div class="search-card">
+			  <iframe src="https://coupa.ng/ckeU4C"
+					  width="100%" height="44" frameborder="0"
+					  scrolling="no" referrerpolicy="unsafe-url"
+					  browsingtopics title="쿠팡 검색"></iframe>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</header>
+
 
 
   <!-- Hero / Slider -->
@@ -206,6 +293,24 @@
         <div class="grid" id="gridPopular"></div>
       </div>
     </section>
+
+	<!-- 1+1 상품 섹션 -->
+	<section class="section" id="sec-oneplus">
+	  <div class="section-head">
+		  <h2 class="section-title">
+			1+1 상품
+			<a href="https://link.coupang.com/a/cWz0ck" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+			  더보기 +
+			</a>
+		  </h2>
+		  <span class="kicker" id="countOnePlus"></span>
+		</div>
+	  <div class="surface">
+		<div class="grid" id="gridOnePlus"></div>
+	  </div>
+	</section>
+
+
 
     <!-- 패션 섹션 -->
     <section class="section" id="sec-fashion">
@@ -320,12 +425,22 @@
         "https://coupa.ng/ckfae5","https://coupa.ng/ckfafe","https://coupa.ng/ckfafq","https://coupa.ng/ckfafA",
         "https://coupa.ng/ckfafC","https://coupa.ng/ckfafG","https://coupa.ng/ckfafM","https://coupa.ng/ckfafZ"
       ],
+	  oneplus: [
+		  "https://coupa.ng/ckffMX",
+		  "https://coupa.ng/ckffND",
+		  "https://coupa.ng/ckffOj",
+		  "https://coupa.ng/ckffOS",
+		  "https://coupa.ng/ckffPH",
+		  "https://coupa.ng/ckffR7",
+		  "https://coupa.ng/ckffUo",
+		  "https://coupa.ng/ckff4q"
+		],
       fashion: [
         "https://coupa.ng/ckeVfb","https://coupa.ng/ckeVfs","https://coupa.ng/ckeVfD","https://coupa.ng/ckeVgb",
         "https://coupa.ng/ckeVgs","https://coupa.ng/ckeVhm","https://coupa.ng/ckeVn0","https://coupa.ng/ckeVod",
         "https://coupa.ng/ckeVoh","https://coupa.ng/ckeVox","https://coupa.ng/ckeVpS","https://coupa.ng/ckeVp0",
         "https://coupa.ng/ckeVqg","https://coupa.ng/ckeVqH","https://coupa.ng/ckeVqR","https://coupa.ng/ckeVqY",
-        "https://coupa.ng/ckeVqY","https://coupa.ng/ckeVrr","https://coupa.ng/ckeVry","https://coupa.ng/ckeVrF","https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8"
+        "https://coupa.ng/ckffD3","https://coupa.ng/ckeVrr","https://coupa.ng/ckeVry","https://coupa.ng/ckeVrF","https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8"
       ],
       fresh: [
         "https://coupa.ng/ckeU9G","https://coupa.ng/ckeU9P","https://coupa.ng/ckeU9W","https://coupa.ng/ckeU99",
@@ -369,15 +484,19 @@
     // ====== 섹션 렌더 ======
     function drawProducts(){
       const pWrap = $('#gridPopular');
+	  const oWrap = $('#gridOnePlus');
       const fWrap = $('#gridFashion');
       const rWrap = $('#gridFresh');
       const p = shuffleDaily(DATA.popular);
+	  const o = shuffleDaily(DATA.oneplus);
       const f = shuffleDaily(DATA.fashion);
       const r = shuffleDaily(DATA.fresh);
       pWrap.innerHTML = p.map(Card).join('');
+	  oWrap.innerHTML = o.map(Card).join('');
       fWrap.innerHTML = f.map(Card).join('');
       rWrap.innerHTML = r.map(Card).join('');
       $('#countPopular').textContent = `${p.length}개 · 매일 순서 랜덤`;
+	  $('#countOnePlus').textContent = `${o.length}개 · 1+1 혜택 상품`;
       $('#countFashion').textContent = `${f.length}개 · 매일 순서 랜덤`;
       $('#countFresh').textContent = `${r.length}개 · 매일 순서 랜덤`;
     }
