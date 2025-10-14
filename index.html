@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,7 +16,9 @@
       :root{ --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --shadow:rgba(0,0,0,.35); --ring:rgba(0,182,255,.2); --outline: color-mix(in oklab, var(--text) 18%, transparent); --divider: linear-gradient(180deg, rgba(0,182,255,.16), rgba(0,182,255,.08) 60%, transparent); }
     }
     *{box-sizing:border-box}
+    /*
     html,body{height:100%}
+    */
     body{
       margin:0;font-family:'Pretendard','Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
       /*
@@ -121,6 +124,22 @@
     /* ===================== Top Button ===================== */
     .top-btn{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--outline);background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 10px 24px var(--ring); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity .2s ease, transform .2s ease}
     .top-btn.show{opacity:1; pointer-events:auto; transform:translateY(0)}
+
+
+
+    .banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto; /* 위아래 여백 */
+    }
+
+    .banner img {
+      max-width: 100%;
+      height: auto;
+    }
+
+
   </style>
 </head>
 <body>
@@ -136,10 +155,11 @@
         <div class="search-card">
           <iframe src="https://coupa.ng/ckeU4C" width="100%" height="44" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 검색"></iframe>
         </div>
-        <p class="search-hint">원하는 상품을 검색해보세요. 아래 섹션에서 매일 달라지는 추천 위젯을 확인하세요.</p>
+        <p class="search-hint">원하는 상품을 검색해보세요.</p>
       </div>
     </div>
   </header>
+
 
   <!-- Hero / Slider -->
   <section class="hero">
@@ -154,6 +174,13 @@
       </div>
     </div>
   </section>
+
+  <!-- 🔽 쿠팡 배너 추가 -->
+  <div class="banner">
+    <a href="https://link.coupang.com/a/cWx2NB" target="_blank" referrerpolicy="unsafe-url">
+      <img src="https://ads-partners.coupang.com/banners/931559?subId=&traceId=V0-301-7e6e8eb8ddfa1bfb-I931559&w=728&h=90" alt="Coupang banner">
+    </a>
+  </div>
 
   <main class="container">
     <!-- 👇 인기 카테고리 섹션 제거됨 -->
@@ -254,7 +281,7 @@
             <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
           </details>
         </div>
-        <div class="helper" style="margin-top:16px"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
+        <div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
       </div>
     </section>
   </main>
@@ -298,7 +325,7 @@
         "https://coupa.ng/ckeVgs","https://coupa.ng/ckeVhm","https://coupa.ng/ckeVn0","https://coupa.ng/ckeVod",
         "https://coupa.ng/ckeVoh","https://coupa.ng/ckeVox","https://coupa.ng/ckeVpS","https://coupa.ng/ckeVp0",
         "https://coupa.ng/ckeVqg","https://coupa.ng/ckeVqH","https://coupa.ng/ckeVqR","https://coupa.ng/ckeVqY",
-        "https://coupa.ng/ckeVqY","https://coupa.ng/ckeVrr","https://coupa.ng/ckeVry","https://coupa.ng/ckeVrF","https://coupa.ng/ckeVrL"
+        "https://coupa.ng/ckeVqY","https://coupa.ng/ckeVrr","https://coupa.ng/ckeVry","https://coupa.ng/ckeVrF","https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8"
       ],
       fresh: [
         "https://coupa.ng/ckeU9G","https://coupa.ng/ckeU9P","https://coupa.ng/ckeU9W","https://coupa.ng/ckeU99",
@@ -428,5 +455,10 @@
     initTimer();
     initTopBtn();
   </script>
+
+
+
+  
+
 </body>
 </html>
