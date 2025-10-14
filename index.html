@@ -1,16 +1,18 @@
-<!DOCTYPE html><html lang="ko">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PickPort | 쿠팡 추천 시스템</title>
+  <title>PickPort | 쿠팡 추천 — 원페이지 (개선안 v2, CTA 제거)</title>
   <meta name="color-scheme" content="light dark" />
   <style>
     :root {
-      --brand:#1273ea; --brand-2:#00b6ff; --bg:#f6f8fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --ring:rgba(18,115,234,.15); --shadow:rgba(17,24,39,.08); --radius:16px;
-      --outline: color-mix(in oklab, var(--text) 12%, transparent);
+      --brand:#1273ea; --brand-2:#00b6ff; --bg:#f6f8fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --ring:rgba(18,115,234,.15); --shadow:rgba(17,24,39,.08);
+      --radius:16px; --outline: color-mix(in oklab, var(--text) 12%, transparent);
     }
     @media (prefers-color-scheme: dark) {
-      :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --shadow:rgba(0,0,0,.35); --ring:rgba(0,182,255,.2); --outline: color-mix(in oklab, var(--text) 18%, transparent);} }
+      :root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --shadow:rgba(0,0,0,.35); --ring:rgba(0,182,255,.2); --outline: color-mix(in oklab, var(--text) 18%, transparent); }
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -19,145 +21,135 @@
       color:var(--text)
     }
     a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;padding:0 24px;margin:0 auto}/* ===================== Header & Top Search ===================== */
-.header{
-  position:sticky;top:0;z-index:1000;
-  backdrop-filter:saturate(1.2) blur(8px);
-  background: color-mix(in oklab, var(--bg) 86%, transparent);
-  border-bottom:1px solid var(--outline);
-}
-.nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
-.brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:-.2px}
-.brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:0 6px 20px var(--ring)}
+    .container{max-width:1200px;padding:0 24px;margin:0 auto}
 
-/* Search fused into header */
-.top-search{width:min(720px,100%);margin:8px auto 16px}
-.search-card{
-  border:1px solid var(--outline);
-  border-radius:18px;
-  background:linear-gradient(180deg,color-mix(in oklab,var(--card) 96%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
-  box-shadow:0 10px 24px var(--shadow);
-  padding:10px;
-}
-.search-hint{margin:6px auto 0;max-width:780px;text-align:center;color:var(--muted);font-size:13px}
+    /* ===================== Header & Top Search ===================== */
+    .header{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      border-bottom:1px solid var(--outline);
+    }
+    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:-.2px}
+    .brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:0 6px 20px var(--ring)}
 
-/* ===================== Homepage Hero / Slider ===================== */
-.hero{
-  padding:14px 0 6px;
-}
-.slider{
-  position:relative; border:1px solid var(--outline); border-radius:18px; overflow:hidden;
-  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent));
-  box-shadow:0 12px 26px var(--shadow);
-}
-.slides{
-  display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
-}
-.slides::-webkit-scrollbar{display:none}
-.slide{flex:0 0 100%; height:220px; display:grid; place-items:center; scroll-snap-align:start; position:relative}
-.slide.is-1{background:radial-gradient(800px 300px at 80% -100px, rgba(18,115,234,.25), transparent)}
-.slide.is-2{background:radial-gradient(800px 300px at 20% -100px, rgba(0,182,255,.25), transparent)}
-.slide.is-3{background:radial-gradient(800px 300px at 50% -100px, rgba(18,115,234,.18), transparent)}
-.slide h2{font-size:26px;letter-spacing:-.3px;margin:0 0 4px}
-.slide p{color:var(--muted);margin:0}
-.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
-.dot{width:8px;height:8px;border-radius:999px;background:color-mix(in oklab, var(--text) 16%, transparent)}
-.dot.active{background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    /* Search fused into header */
+    .top-search{width:min(720px,100%);margin:8px auto 16px}
+    .search-card{
+      border:1px solid var(--outline);
+      border-radius:18px;
+      background:linear-gradient(180deg,color-mix(in oklab,var(--card) 96%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
+      box-shadow:0 10px 24px var(--shadow);
+      padding:10px;
+    }
+    .search-hint{margin:6px auto 0;max-width:780px;text-align:center;color:var(--muted);font-size:13px}
 
-/* ===================== Sections ===================== */
-.section{padding:32px 0}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
-.section-title{font-size:22px;font-weight:900;letter-spacing:-.2px;display:flex;gap:10px;align-items:center}
-.kicker{font-size:13px;color:var(--muted);font-weight:600}
-.rule{height:1px;background:var(--outline);border:0;margin:12px 0 0}
+    /* ===================== Homepage Hero / Slider ===================== */
+    .hero{padding:14px 0 6px;}
+    .slider{
+      position:relative; border:1px solid var(--outline); border-radius:18px; overflow:hidden;
+      background:linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent));
+      box-shadow:0 12px 26px var(--shadow);
+    }
+    .slides{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+    .slides::-webkit-scrollbar{display:none}
+    .slide{flex:0 0 100%; height:220px; display:grid; place-items:center; scroll-snap-align:start; position:relative}
+    .slide.is-1{background:radial-gradient(800px 300px at 80% -100px, rgba(18,115,234,.25), transparent)}
+    .slide.is-2{background:radial-gradient(800px 300px at 20% -100px, rgba(0,182,255,.25), transparent)}
+    .slide.is-3{background:radial-gradient(800px 300px at 50% -100px, rgba(18,115,234,.18), transparent)}
+    .slide h2{font-size:26px;letter-spacing:-.3px;margin:0 0 4px}
+    .slide p{color:var(--muted);margin:0}
+    .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+    .dot{width:8px;height:8px;border-radius:999px;background:color-mix(in oklab, var(--text) 16%, transparent)}
+    .dot.active{background:linear-gradient(135deg,var(--brand),var(--brand-2))}
 
-/* Popular categories */
-.cats{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
-@media (max-width:1200px){.cats{grid-template-columns:repeat(6,1fr)}}
-@media (max-width:780px){.cats{grid-template-columns:repeat(4,1fr)}}
-.cat{
-  display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px;border:1px solid var(--outline);border-radius:14px;
-  background:linear-gradient(180deg,color-mix(in oklab,var(--card) 97%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
-  box-shadow:0 8px 20px var(--shadow);
-  transition:transform .18s ease, box-shadow .2s ease, border-color .2s ease;
-}
-.cat:hover{transform:translateY(-2px);box-shadow:0 12px 24px var(--shadow);border-color:color-mix(in oklab,var(--brand) 24%, transparent)}
-.cat i{font-style:normal;font-size:22px}
-.cat span{font-weight:700;font-size:13px}
+    /* ===================== Sections ===================== */
+    .section{padding:32px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+    .section-title{font-size:22px;font-weight:900;letter-spacing:-.2px;display:flex;gap:10px;align-items:center}
+    .kicker{font-size:13px;color:var(--muted);font-weight:600}
+    .rule{height:1px;background:var(--outline);border:0;margin:12px 0 0}
 
-/* ===================== Product Grid & Card (refined) ===================== */
-.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
-@media (max-width:1200px){.grid{grid-template-columns:repeat(8,1fr)}}
-@media (max-width:780px){.grid{grid-template-columns:repeat(4,1fr)}}
-@media (max-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
+    /* Popular categories */
+    .cats{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+    @media (max-width:1200px){.cats{grid-template-columns:repeat(6,1fr)}}
+    @media (max-width:780px){.cats{grid-template-columns:repeat(4,1fr)}}
+    .cat{
+      display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px;border:1px solid var(--outline);border-radius:14px;
+      background:linear-gradient(180deg,color-mix(in oklab,var(--card) 97%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
+      box-shadow:0 8px 20px var(--shadow);
+      transition:transform .18s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .cat:hover{transform:translateY(-2px);box-shadow:0 12px 24px var(--shadow);border-color:color-mix(in oklab,var(--brand) 24%, transparent)}
+    .cat i{font-style:normal;font-size:22px}
+    .cat span{font-weight:700;font-size:13px}
 
-.card{
-  grid-column:span 2;
-  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 94%, transparent));
-  border:1px solid var(--outline);
-  border-radius:20px;
-  box-shadow:0 10px 22px var(--shadow);
-  overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:12px;
-  transition:transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease;
-}
-.card:hover{transform:translateY(-3px);box-shadow:0 16px 28px var(--shadow);border-color:color-mix(in oklab,var(--brand) 26%, transparent)}
-.widget{width:120px;height:240px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px var(--shadow);background:color-mix(in oklab,var(--text) 3%, transparent)}
-.widget iframe{width:120px;height:240px;border:0}
-.card-cta{width:100%;display:flex;justify-content:center;margin-top:10px}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:999px;font-weight:800;font-size:13px;
-  background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 8px 20px var(--ring);
-  transition:transform .15s ease, filter .2s ease;
-}
-.btn:hover{filter:saturate(1.05)}
+    /* ===================== Product Grid & Card (refined) ===================== */
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+    @media (max-width:1200px){.grid{grid-template-columns:repeat(8,1fr)}}
+    @media (max-width:780px){.grid{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
 
-/* ===================== Banners ===================== */
-.banner-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:18px}
-.banner-grid a{display:block;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px var(--shadow);transition:transform .2s ease, box-shadow .3s ease}
-.banner-grid a:hover{transform:translateY(-3px);box-shadow:0 8px 18px var(--shadow)}
-.banner-grid img{display:block;width:728px;height:90px;object-fit:cover}
-@media (max-width:780px){.banner-grid img{width:100%;height:auto}}
+    .card{
+      grid-column:span 2;
+      background:linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 94%, transparent));
+      border:1px solid var(--outline);
+      border-radius:20px;
+      box-shadow:0 10px 22px var(--shadow);
+      overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:12px;
+      transition:transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover{transform:translateY(-3px);box-shadow:0 16px 28px var(--shadow);border-color:color-mix(in oklab,var(--brand) 26%, transparent)}
+    .widget{width:120px;height:240px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px var(--shadow);background:color-mix(in oklab,var(--text) 3%, transparent)}
+    .widget iframe{width:120px;height:240px;border:0}
 
-/* ===================== Deals (Today) ===================== */
-.deals{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.deal{grid-column:span 3;background:linear-gradient(180deg,color-mix(in oklab,var(--card) 97%,transparent),color-mix(in oklab,var(--card) 92%,transparent));border:1px solid var(--outline);border-radius:18px;box-shadow:0 10px 24px var(--shadow);padding:12px;display:flex;flex-direction:column;gap:10px}
-.deal .widget{margin:0 auto}
-.deal .meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-.timer{font-weight:900;letter-spacing:.5px}
-@media (max-width:1200px){.deal{grid-column:span 4}}
-@media (max-width:780px){.deal{grid-column:span 6}}
-@media (max-width:480px){.deal{grid-column:span 12}}
+    /* ===================== Banners ===================== */
+    .banner-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:18px}
+    .banner-grid a{display:block;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px var(--shadow);transition:transform .2s ease, box-shadow .3s ease}
+    .banner-grid a:hover{transform:translateY(-3px);box-shadow:0 8px 18px var(--shadow)}
+    .banner-grid img{display:block;width:728px;height:90px;object-fit:cover}
+    @media (max-width:780px){.banner-grid img{width:100%;height:auto}}
 
-/* ===================== FAQ & Helper ===================== */
-.faq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width:780px){.faq{grid-template-columns:1fr}}
-.faq details{border:1px solid var(--outline);border-radius:14px;background:radial-gradient(1200px 400px at 80% -200px, color-mix(in oklab,var(--brand-2) 10%, transparent), transparent), linear-gradient(180deg, color-mix(in oklab,var(--card) 98%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow:0 8px 22px var(--shadow); overflow:hidden; transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease}
-.faq details:hover{border-color:color-mix(in oklab, var(--brand) 22%, transparent); transform: translateY(-2px); box-shadow:0 12px 26px var(--shadow)}
-.faq summary{list-style:none;cursor:pointer;position:relative;padding:14px 16px 14px 44px;font-weight:800;letter-spacing:-.2px;user-select:none}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary .qdot{position:absolute; left:14px; top:50%; transform: translateY(-50%); width:22px; height:22px; border-radius:8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 6px 18px var(--ring)}
-.faq summary .chev{position:absolute; right:14px; top:50%; transform: translateY(-50%) rotate(0); width:18px; height:18px; opacity:.7; transition: transform .25s ease, opacity .2s ease}
-.faq details[open] summary .chev{transform: translateY(-50%) rotate(180deg); opacity:1}
-.faq .answer{padding:0 16px 16px 44px;color:var(--muted);font-size:14px;line-height:1.65;border-top:1px dashed var(--outline); max-height:0; overflow:hidden; transition:max-height .35s ease}
-.faq details[open] .answer{max-height:320px}
-.helper{border:1px solid var(--outline); border-radius:12px; padding:12px; background: linear-gradient(180deg, color-mix(in oklab,var(--card) 97%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow: 0 6px 18px var(--shadow)}
+    /* ===================== Deals (Today) ===================== */
+    .deals{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .deal{grid-column:span 3;background:linear-gradient(180deg,color-mix(in oklab,var(--card) 97%,transparent),color-mix(in oklab,var(--card) 92%,transparent));border:1px solid var(--outline);border-radius:18px;box-shadow:0 10px 24px var(--shadow);padding:12px;display:flex;flex-direction:column;gap:10px}
+    .deal .widget{margin:0 auto}
+    .deal .meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+    .timer{font-weight:900;letter-spacing:.5px}
+    @media (max-width:1200px){.deal{grid-column:span 4}}
+    @media (max-width:780px){.deal{grid-column:span 6}}
+    @media (max-width:480px){.deal{grid-column:span 12}}
 
-/* ===================== Footer ===================== */
-.site-footer{background:linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent)); border-top:1px solid var(--outline); padding:32px 0 20px}
-.ft-wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:16px}
-.ft-col{flex:1;min-width:260px}
-.ft-brand{display:flex;gap:12px;align-items:center}
-.ft-brand strong{font-size:16px;font-weight:800;letter-spacing:-0.3px}
-.ft-notice{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.6;max-width:520px}
-.ft-bottom{border-top:1px solid color-mix(in oklab, var(--text) 8%, transparent); padding-top:12px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:13px; flex-wrap:wrap}
-.ft-links{display:flex;gap:14px}
-.ft-links a{color:var(--muted);transition:color .2s ease}
-.ft-links a:hover{color:var(--brand)}
+    /* ===================== FAQ & Helper ===================== */
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:780px){.faq{grid-template-columns:1fr}}
+    .faq details{border:1px solid var(--outline);border-radius:14px;background:radial-gradient(1200px 400px at 80% -200px, color-mix(in oklab,var(--brand-2) 10%, transparent), transparent), linear-gradient(180deg, color-mix(in oklab,var(--card) 98%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow:0 8px 22px var(--shadow); overflow:hidden; transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease}
+    .faq details:hover{border-color:color-mix(in oklab, var(--brand) 22%, transparent); transform: translateY(-2px); box-shadow:0 12px 26px var(--shadow)}
+    .faq summary{list-style:none;cursor:pointer;position:relative;padding:14px 16px 14px 44px;font-weight:800;letter-spacing:-.2px;user-select:none}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary .qdot{position:absolute; left:14px; top:50%; transform: translateY(-50%); width:22px; height:22px; border-radius:8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 6px 18px var(--ring)}
+    .faq summary .chev{position:absolute; right:14px; top:50%; transform: translateY(-50%) rotate(0); width:18px; height:18px; opacity:.7; transition: transform .25s ease, opacity .2s ease}
+    .faq details[open] summary .chev{transform: translateY(-50%) rotate(180deg); opacity:1}
+    .faq .answer{padding:0 16px 16px 44px;color:var(--muted);font-size:14px;line-height:1.65;border-top:1px dashed var(--outline); max-height:0; overflow:hidden; transition:max-height .35s ease}
+    .faq details[open] .answer{max-height:320px}
+    .helper{border:1px solid var(--outline); border-radius:12px; padding:12px; background: linear-gradient(180deg, color-mix(in oklab,var(--card) 97%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow: 0 6px 18px var(--shadow)}
 
-/* ===================== Top Button ===================== */
-.top-btn{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--outline);background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 10px 24px var(--ring); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity .2s ease, transform .2s ease}
-.top-btn.show{opacity:1; pointer-events:auto; transform:translateY(0)}
+    /* ===================== Footer ===================== */
+    .site-footer{background:linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent)); border-top:1px solid var(--outline); padding:32px 0 20px}
+    .ft-wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:16px}
+    .ft-col{flex:1;min-width:260px}
+    .ft-brand{display:flex;gap:12px;align-items:center}
+    .ft-brand strong{font-size:16px;font-weight:800;letter-spacing:-0.3px}
+    .ft-notice{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.6;max-width:520px}
+    .ft-bottom{border-top:1px solid color-mix(in oklab, var(--text) 8%, transparent); padding-top:12px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:13px; flex-wrap:wrap}
+    .ft-links{display:flex;gap:14px}
+    .ft-links a{color:var(--muted);transition:color .2s ease}
+    .ft-links a:hover{color:var(--brand)}
 
+    /* ===================== Top Button ===================== */
+    .top-btn{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--outline);background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 10px 24px var(--ring); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity .2s ease, transform .2s ease}
+    .top-btn.show{opacity:1; pointer-events:auto; transform:translateY(0)}
   </style>
 </head>
 <body>
@@ -177,7 +169,10 @@
         <p class="search-hint">원하는 상품을 검색해보세요. 아래 섹션에서 매일 달라지는 추천 위젯을 확인하세요.</p>
       </div>
     </div>
-  </header>  <!-- Hero / Slider -->  <section class="hero">
+  </header>
+
+  <!-- Hero / Slider -->
+  <section class="hero">
     <div class="container">
       <div class="slider" aria-label="메인 프로모션">
         <div class="slides" id="slides">
@@ -203,7 +198,9 @@
         <div class="dots" id="dots" aria-hidden="true"></div>
       </div>
     </div>
-  </section>  <main class="container">
+  </section>
+
+  <main class="container">
     <!-- 인기 카테고리 바로가기 -->
     <section class="section" id="sec-cats">
       <div class="section-head">
@@ -212,87 +209,91 @@
       </div>
       <div class="cats" id="catWrap"></div>
       <hr class="rule"/>
-    </section><!-- 오늘의 특가 -->
-<section class="section" id="sec-deals">
-  <div class="section-head">
-    <h2 class="section-title">오늘의 특가 <span class="kicker" id="dealTimer">00:00:00 남음</span></h2>
-    <span class="kicker">한정 시간만 오픈되는 상품</span>
-  </div>
-  <div class="deals" id="dealsGrid"></div>
-</section>
+    </section>
 
-<!-- 패션 섹션 -->
-<section class="section" id="sec-fashion">
-  <div class="section-head">
-    <h2 class="section-title">패션 추천</h2>
-    <span class="kicker" id="countFashion"></span>
-  </div>
-  <div class="grid" id="gridFashion"></div>
-  <hr class="rule"/>
-</section>
+    <!-- 오늘의 특가 -->
+    <section class="section" id="sec-deals">
+      <div class="section-head">
+        <h2 class="section-title">오늘의 특가 <span class="kicker" id="dealTimer">00:00:00 남음</span></h2>
+        <span class="kicker">한정 시간만 오픈되는 상품</span>
+      </div>
+      <div class="deals" id="dealsGrid"></div>
+    </section>
 
-<!-- 로켓프레시 섹션 -->
-<section class="section" id="sec-fresh">
-  <div class="section-head">
-    <h2 class="section-title">로켓프레시 추천</h2>
-    <span class="kicker" id="countFresh"></span>
-  </div>
-  <div class="grid" id="gridFresh"></div>
-</section>
+    <!-- 패션 섹션 -->
+    <section class="section" id="sec-fashion">
+      <div class="section-head">
+        <h2 class="section-title">패션 추천</h2>
+        <span class="kicker" id="countFashion"></span>
+      </div>
+      <div class="grid" id="gridFashion"></div>
+      <hr class="rule"/>
+    </section>
 
-<!-- 카테고리 배너: 모자이크 -->
-<section class="section" id="sec-banners">
-  <div class="section-head">
-    <h2 class="section-title">카테고리 배너</h2>
-    <span class="kicker">728×90 배너를 모자이크로 배치</span>
-  </div>
-  <div class="banner-grid" id="bannerGrid"></div>
-</section>
+    <!-- 로켓프레시 섹션 -->
+    <section class="section" id="sec-fresh">
+      <div class="section-head">
+        <h2 class="section-title">로켓프레시 추천</h2>
+        <span class="kicker" id="countFresh"></span>
+      </div>
+      <div class="grid" id="gridFresh"></div>
+    </section>
 
-<!-- FAQ & 가이드 -->
-<section class="section">
-  <div class="section-head">
-    <h2 class="section-title">도움말 & FAQ</h2>
-    <span class="kicker">결제/배송/환불/파트너스 고지</span>
-  </div>
-  <div class="faq">
-    <details>
-      <summary>
-        <span class="qdot" aria-hidden="true"></span>
-        쿠팡 파트너스 링크인가요?
-        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-      </summary>
-      <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받을 수 있습니다.</div>
-    </details>
-    <details>
-      <summary>
-        <span class="qdot" aria-hidden="true"></span>
-        가격/이미지는 왜 다를 수 있나요?
-        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-      </summary>
-      <div class="answer">상품의 가격·재고·이미지는 판매처 사정에 따라 수시로 변경될 수 있습니다. 최종 구매 전 쿠팡 상품 페이지를 확인하세요.</div>
-    </details>
-    <details>
-      <summary>
-        <span class="qdot" aria-hidden="true"></span>
-        로켓배송/프레시는 무엇인가요?
-        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-      </summary>
-      <div class="answer">로켓배송은 빠른 배송 서비스, 로켓프레시는 신선식품 새벽/당일 배송 서비스입니다. 지역에 따라 제공 여부가 다를 수 있습니다.</div>
-    </details>
-    <details>
-      <summary>
-        <span class="qdot" aria-hidden="true"></span>
-        환불/교환은 어디서 하나요?
-        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-      </summary>
-      <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
-    </details>
-  </div>
-  <div class="helper" style="margin-top:16px"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
-</section>
+    <!-- 카테고리 배너: 모자이크 -->
+    <section class="section" id="sec-banners">
+      <div class="section-head">
+        <h2 class="section-title">카테고리 배너</h2>
+        <span class="kicker">728×90 배너를 모자이크로 배치</span>
+      </div>
+      <div class="banner-grid" id="bannerGrid"></div>
+    </section>
 
-  </main>  <!-- Footer -->  <footer class="site-footer">
+    <!-- FAQ & 가이드 -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">도움말 & FAQ</h2>
+        <span class="kicker">결제/배송/환불/파트너스 고지</span>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>
+            <span class="qdot" aria-hidden="true"></span>
+            쿠팡 파트너스 링크인가요?
+            <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
+          </summary>
+          <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받을 수 있습니다.</div>
+        </details>
+        <details>
+          <summary>
+            <span class="qdot" aria-hidden="true"></span>
+            가격/이미지는 왜 다를 수 있나요?
+            <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
+          </summary>
+          <div class="answer">상품의 가격·재고·이미지는 판매처 사정에 따라 수시로 변경될 수 있습니다. 최종 구매 전 쿠팡 상품 페이지를 확인하세요.</div>
+        </details>
+        <details>
+          <summary>
+            <span class="qdot" aria-hidden="true"></span>
+            로켓배송/프레시는 무엇인가요?
+            <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
+          </summary>
+          <div class="answer">로켓배송은 빠른 배송 서비스, 로켓프레시는 신선식품 새벽/당일 배송 서비스입니다. 지역에 따라 제공 여부가 다를 수 있습니다.</div>
+        </details>
+        <details>
+          <summary>
+            <span class="qdot" aria-hidden="true"></span>
+            환불/교환은 어디서 하나요?
+            <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
+          </summary>
+          <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
+        </details>
+      </div>
+      <div class="helper" style="margin-top:16px"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
     <div class="container">
       <div class="ft-wrap">
         <div class="ft-col">
@@ -311,7 +312,10 @@
         <div class="ft-links"><a href="#">문의</a><a href="#">광고문의</a></div>
       </div>
     </div>
-  </footer>  <!-- Top Button --><button class="top-btn" id="topBtn" aria-label="상단으로 이동">↑</button>
+  </footer>
+
+  <!-- Top Button -->
+  <button class="top-btn" id="topBtn" aria-label="상단으로 이동">↑</button>
 
   <script>
     // ====== 데이터: 사용자 제공 URL 전부 반영 + 섹션 추가 ======
@@ -362,17 +366,14 @@
       return copy;
     }
 
-    // ====== 카드: iframe + CTA 버튼 (아이프레임 자체는 건드리지 않음) ======
+    // ====== 카드: iframe만 (CTA 제거)
     function Card(url){
       return `
         <article class="card">
           <div class="widget">
             <iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 추천 위젯"></iframe>
           </div>
-          <div class="card-cta">
-            <a class="btn" href="${url}" target="_blank" rel="noopener" referrerpolicy="unsafe-url" aria-label="쿠팡에서 상품 보기">쿠팡에서 보기</a>
-          </div>
-        </article>`
+        </article>`;
     }
 
     // ====== 섹션 렌더 ======
@@ -389,11 +390,11 @@
 
     function drawDeals(){
       const el = $('#dealsGrid');
+      // CTA 제거: 메타 + 위젯만 렌더링
       const html = DATA.deals.map(url => `
         <article class="deal">
           <div class="meta"><span>한정 특가</span><span class="timer" aria-live="polite">진행중</span></div>
           <div class="widget"><iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="특가 위젯"></iframe></div>
-          <div class="card-cta"><a class="btn" href="${url}" target="_blank" rel="noopener" referrerpolicy="unsafe-url">지금 구매</a></div>
         </article>`).join('');
       el.innerHTML = html;
     }
@@ -409,7 +410,7 @@
       el.innerHTML = DATA.cats.map(c=>`<a class="cat" href="${c.href}"><i>${c.icon}</i><span>${c.label}</span></a>`).join('');
     }
 
-    // ====== Hero slider dots ======
+    // ====== Hero slider dots & autoplay ======
     function initSlider(){
       const slides = $('#slides');
       const dots = $('#dots');
@@ -467,5 +468,6 @@
     initSlider();
     initTimer();
     initTopBtn();
-  </script></body>
+  </script>
+</body>
 </html>
