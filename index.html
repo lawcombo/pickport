@@ -17,298 +17,367 @@
 
 
 
-  <style>
-    :root{
-      --brand:#1273ea; --brand-2:#00b6ff; --bg:#f6f8fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --ring:rgba(18,115,234,.15); --shadow:rgba(17,24,39,.08);
-      --radius:16px; --outline: color-mix(in oklab, var(--text) 12%, transparent);
-      --divider: linear-gradient(180deg, rgba(18,115,234,.14), rgba(18,115,234,.06) 60%, transparent);
+<style>
+    :root {
+        --brand: #1273ea;
+        --brand-2: #00b6ff;
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --ring: rgba(18, 115, 234, .15);
+        --shadow: rgba(17, 24, 39, .08);
+        --radius: 16px;
+        --outline: color-mix(in oklab, var(--text) 12%, transparent);
+        --divider: linear-gradient(180deg, rgba(18, 115, 234, .14), rgba(18, 115, 234, .06) 60%, transparent);
     }
-    @media (prefers-color-scheme: dark){
-      :root{ --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --shadow:rgba(0,0,0,.35); --ring:rgba(0,182,255,.2); --outline: color-mix(in oklab, var(--text) 18%, transparent); --divider: linear-gradient(180deg, rgba(0,182,255,.16), rgba(0,182,255,.08) 60%, transparent); }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #0b1220;
+            --card: #0f172a;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --shadow: rgba(0, 0, 0, .35);
+            --ring: rgba(0, 182, 255, .2);
+            --outline: color-mix(in oklab, var(--text) 18%, transparent);
+            --divider: linear-gradient(180deg, rgba(0, 182, 255, .16), rgba(0, 182, 255, .08) 60%, transparent);
+        }
     }
-    *{box-sizing:border-box}
+
+    * {
+        box-sizing: border-box
+    }
+
     /*
     html,body{height:100%}
     */
-    body{
-      margin:0;font-family:'Pretendard','Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      /*
+    body {
+        margin: 0;
+        font-family: 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        /*
       background: radial-gradient(1200px 800px at 80% -200px, rgba(0,182,255,0.08), transparent), var(--bg);
       */
-      color:var(--text)
+        color: var(--text)
     }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;padding:0 24px;margin:0 auto}
+
+    a {
+        color: inherit;
+        text-decoration: none
+    }
+
+    .container {
+        max-width: 1200px;
+        padding: 0 24px;
+        margin: 0 auto
+    }
 
     /* ===================== Header & Top Search ===================== */
-    .header{position:sticky;top:0;z-index:1000;backdrop-filter:saturate(1.2) blur(8px);background: color-mix(in oklab, var(--bg) 86%, transparent);border-bottom:1px solid var(--outline)}
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: saturate(1.2) blur(8px);
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        border-bottom: 1px solid var(--outline)
+    }
+
     .nav {
-	  display: flex;
-	  align-items: center;
-	  justify-content: space-between; /* 양쪽 정렬 */
-	  gap: 16px;
-	  padding: 12px 0;
-	}
-    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:-.2px}
-    .brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:0 6px 20px var(--ring)}
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* 양쪽 정렬 */
+        gap: 16px;
+        padding: 12px 0;
+    }
+
+    .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 800;
+        letter-spacing: -.2px
+    }
+
+    .brand-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        display: grid;
+        place-items: center;
+        box-shadow: 0 6px 20px var(--ring)
+    }
+
     .top-search {
-	  flex: 1; /* 가운데 영역 차지 */
-	  max-width: 720px;
-	  margin: 0 auto; /* 가운데 정렬 */
-	}
+        flex: 1;
+        /* 가운데 영역 차지 */
+        max-width: 720px;
+        margin: 0 auto;
+        /* 가운데 정렬 */
+    }
+
     .search-card {
-	  border: 1px solid var(--outline);
-	  background: linear-gradient(180deg,
-				  color-mix(in oklab, var(--card) 96%, transparent),
-				  color-mix(in oklab, var(--card) 92%, transparent));
-	  box-shadow: 0 10px 24px var(--shadow);
-	  padding: 10px;
-	}
-    .search-hint{margin:6px auto 0;max-width:780px;text-align:center;color:var(--muted);font-size:13px}
+        border: 1px solid var(--outline);
+        background: linear-gradient(180deg,
+                color-mix(in oklab, var(--card) 96%, transparent),
+                color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 10px 24px var(--shadow);
+        padding: 10px;
+    }
+
+    .search-hint {
+        margin: 6px auto 0;
+        max-width: 780px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px
+    }
 
     /* ===================== Hero / Slider ===================== */
     /*
 	.hero{padding:14px 0 6px}
 	*/
-	/* ===================== Hero: modern value-first header ===================== */
-.hero {
-            position: relative;
-            isolation: isolate;
-        }
+    /* ===================== Hero: modern value-first header ===================== */
+    .hero {
+        position: relative;
+        isolation: isolate;
+    }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.12), transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(139, 92, 246, 0.08), transparent 50%);
-            filter: blur(80px);
-            opacity: 0.6;
-        }
+    .hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.12), transparent 50%),
+            radial-gradient(circle at 80% 60%, rgba(139, 92, 246, 0.08), transparent 50%);
+        filter: blur(80px);
+        opacity: 0.6;
+    }
 
+    .hero-head {
+        border: 1px solid var(--outline);
+        border-radius: 24px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 95%, transparent),
+                color-mix(in oklab, var(--card) 88%, transparent));
+        backdrop-filter: blur(20px);
+        box-shadow:
+            0 20px 60px var(--shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        padding: 48px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-head::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        color: var(--brand-light);
+        padding: 8px 16px;
+        border-radius: 999px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--brand) 15%, transparent),
+                color-mix(in oklab, var(--accent) 10%, transparent));
+        border: 1px solid color-mix(in oklab, var(--brand) 20%, transparent);
+        box-shadow: 0 8px 24px var(--ring);
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-eyebrow::before {
+        content: "✨";
+        font-size: 14px;
+    }
+
+    .hero-title {
+        margin: 24px 0 16px;
+        font-size: clamp(32px, 4.5vw, 48px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-title-break {
+        display: none;
+    }
+
+    .hero-sub {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 0 0 36px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-sub strong {
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .hero-sub em {
+        color: var(--brand-light);
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .hero-divider {
+        height: 1px;
+        margin: 32px 0;
+        background: linear-gradient(90deg,
+                transparent,
+                var(--outline) 20%,
+                var(--outline) 80%,
+                transparent);
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 20px 18px;
+        border-radius: 16px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 80%, transparent),
+                color-mix(in oklab, var(--card) 60%, transparent));
+        border: 1px solid color-mix(in oklab, var(--outline) 80%, transparent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-feature:hover {
+        border-color: color-mix(in oklab, var(--brand) 30%, transparent);
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 90%, transparent),
+                color-mix(in oklab, var(--card) 70%, transparent));
+        transform: translateY(-2px);
+    }
+
+    .feature-icon {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg,
+                color-mix(in oklab, var(--brand) 15%, transparent),
+                color-mix(in oklab, var(--accent) 10%, transparent));
+        color: var(--brand-light);
+    }
+
+    .feature-content {
+        flex: 1;
+    }
+
+    .feature-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+        letter-spacing: -0.01em;
+    }
+
+    .feature-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 32px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--outline);
+        background: color-mix(in oklab, var(--card) 60%, transparent);
+        backdrop-filter: blur(10px);
+        transition: all 0.2s ease;
+    }
+
+    .hero-badge:hover {
+        border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+        color: var(--text);
+    }
+
+    @media (max-width: 768px) {
         .hero-head {
-            border: 1px solid var(--outline);
-            border-radius: 24px;
-            background: 
-                linear-gradient(135deg,
-                    color-mix(in oklab, var(--card) 95%, transparent),
-                    color-mix(in oklab, var(--card) 88%, transparent));
-            backdrop-filter: blur(20px);
-            box-shadow: 
-                0 20px 60px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.03);
-            padding: 48px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-head::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            color: var(--brand-light);
-            padding: 8px 16px;
-            border-radius: 999px;
-            background: 
-                linear-gradient(135deg, 
-                    color-mix(in oklab, var(--brand) 15%, transparent),
-                    color-mix(in oklab, var(--accent) 10%, transparent));
-            border: 1px solid color-mix(in oklab, var(--brand) 20%, transparent);
-            box-shadow: 0 8px 24px var(--ring);
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow::before {
-            content: "✨";
-            font-size: 14px;
+            padding: 32px 24px;
+            border-radius: 20px;
         }
 
         .hero-title {
-            margin: 24px 0 16px;
-            font-size: clamp(32px, 4.5vw, 48px);
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
+            font-size: 28px;
+            margin: 20px 0 12px;
         }
-		.hero-title-break {
-			display: none;
-		}
 
         .hero-sub {
-            color: var(--muted);
-            font-size: 16px;
-            line-height: 1.75;
-            margin: 0 0 36px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-sub strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .hero-sub em {
-            color: var(--brand-light);
-            font-style: normal;
-            font-weight: 600;
-        }
-
-        .hero-divider {
-            height: 1px;
-            margin: 32px 0;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--outline) 20%, 
-                var(--outline) 80%, 
-                transparent);
-            position: relative;
-            z-index: 1;
+            font-size: 15px;
+            margin-bottom: 28px;
         }
 
         .hero-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: 1fr;
         }
 
-        .hero-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 20px 18px;
-            border-radius: 16px;
-            background: 
-                linear-gradient(135deg,
-                    color-mix(in oklab, var(--card) 80%, transparent),
-                    color-mix(in oklab, var(--card) 60%, transparent));
-            border: 1px solid color-mix(in oklab, var(--outline) 80%, transparent);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .hero-divider {
+            margin: 24px 0;
         }
 
-        .hero-feature:hover {
-            border-color: color-mix(in oklab, var(--brand) 30%, transparent);
-            background: 
-                linear-gradient(135deg,
-                    color-mix(in oklab, var(--card) 90%, transparent),
-                    color-mix(in oklab, var(--card) 70%, transparent));
-            transform: translateY(-2px);
+        .hero-title-break {
+            display: block;
         }
 
-        .feature-icon {
-            flex-shrink: 0;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: linear-gradient(135deg, 
-                color-mix(in oklab, var(--brand) 15%, transparent),
-                color-mix(in oklab, var(--accent) 10%, transparent));
-            color: var(--brand-light);
-        }
+    }
 
-        .feature-content {
-            flex: 1;
-        }
 
-        .feature-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 4px;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-desc {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--muted);
-            padding: 8px 14px;
-            border-radius: 999px;
-            border: 1px solid var(--outline);
-            background: color-mix(in oklab, var(--card) 60%, transparent);
-            backdrop-filter: blur(10px);
-            transition: all 0.2s ease;
-        }
-
-        .hero-badge:hover {
-            border-color: color-mix(in oklab, var(--brand) 40%, transparent);
-            color: var(--text);
-        }
-
-        @media (max-width: 768px) {
-            .hero-head {
-                padding: 32px 24px;
-                border-radius: 20px;
-            }
-
-            .hero-title {
-                font-size: 28px;
-                margin: 20px 0 12px;
-            }
-
-            .hero-sub {
-                font-size: 15px;
-                margin-bottom: 28px;
-            }
-
-            .hero-features {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-divider {
-                margin: 24px 0;
-            }
-
-			.hero-title-break {
-				display: block;
-			}
-
-        }
-
-	
 
 
 
@@ -324,216 +393,525 @@
 
 
     /* ===================== Section system (no <hr>) ===================== */
-    .section{position:relative;padding:20px 0}
-    /* soft divider band that never affects layout */    
-	/*
+    .section {
+        position: relative;
+        padding: 20px 0
+    }
+
+    /* soft divider band that never affects layout */
+    /*
     .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
     .section-title{font-size:22px;font-weight:900;letter-spacing:-.2px;display:flex;gap:10px;align-items:center}
     .kicker{font-size:13px;color:var(--muted);font-weight:600}
 	*/
-	.section-head {
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  margin-bottom: 18px;
-	  flex-wrap: wrap;
-	}
+    .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
 
-	/* 제목 스타일 */
-	.section-title {
-	  display: flex;
-	  align-items: center;
-	  gap: 10px;
-	  font-size: 22px;
-	  font-weight: 900;
-	  letter-spacing: -0.3px;
-	  color: var(--text);
-	  position: relative;
-	}
+    /* 제목 스타일 */
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        color: var(--text);
+        position: relative;
+    }
 
-	/* 좌측 포인트 바 */
-	.section-title::before {
-	  content: "";
-	  display: inline-block;
-	  width: 6px;
-	  height: 24px;
-	  border-radius: 4px;
-	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
-	  box-shadow: 0 0 8px var(--ring);
-	}
+    /* 좌측 포인트 바 */
+    .section-title::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 24px;
+        border-radius: 4px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 8px var(--ring);
+    }
 
-	/* 더보기 링크 */
-	.more-link {
-	  font-size: 14px;
-	  font-weight: 600;
-	  color: var(--brand);
-	  text-decoration: none;
-	  background: color-mix(in oklab, var(--brand) 6%, transparent);
-	  padding: 3px 8px;
-	  border-radius: 8px;
-	  transition: all 0.25s ease;
-	  margin-left: 6px;
-	}
+    /* 더보기 링크 */
+    .more-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand);
+        text-decoration: none;
+        background: color-mix(in oklab, var(--brand) 6%, transparent);
+        padding: 3px 8px;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+        margin-left: 6px;
+    }
 
-	.more-link:hover {
-	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
-	  color: #fff;
-	  box-shadow: 0 4px 10px var(--ring);
-	}
+    .more-link:hover {
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: #fff;
+        box-shadow: 0 4px 10px var(--ring);
+    }
 
-	/* 부제 / 설명 */
-	.kicker {
-	  font-size: 13px;
-	  color: var(--muted);
-	  font-weight: 600;
-	}
+    /* 부제 / 설명 */
+    .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+    }
 
 
 
     /* Section surface contains large grids so content never visually "spills" */
-    .surface{border:1px solid var(--outline);border-radius:20px;background:
-      radial-gradient(1200px 400px at 80% -220px, color-mix(in oklab,var(--brand-2) 12%, transparent), transparent),
-      linear-gradient(180deg, color-mix(in oklab,var(--card) 98%, transparent), color-mix(in oklab,var(--card) 92%, transparent));
-      box-shadow:0 10px 22px var(--shadow); padding:16px
+    .surface {
+        border: 1px solid var(--outline);
+        border-radius: 20px;
+        background:
+            radial-gradient(1200px 400px at 80% -220px, color-mix(in oklab, var(--brand-2) 12%, transparent), transparent),
+            linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 10px 22px var(--shadow);
+        padding: 16px
     }
 
     /* ===================== Product Grid & Card ===================== */
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
-    @media (max-width:1200px){.grid{grid-template-columns:repeat(8,1fr)}}
-    @media (max-width:780px){.grid{grid-template-columns:repeat(4,1fr)}}
-    @media (max-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(12, 1fr)
+    }
 
-    .card{grid-column:span 2;background:linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 94%, transparent));border:1px solid var(--outline);border-radius:20px;box-shadow:0 10px 22px var(--shadow);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:12px;transition:transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 16px 28px var(--shadow);border-color:color-mix(in oklab,var(--brand) 26%, transparent)}
-    .widget{width:120px;height:240px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px var(--shadow);background:color-mix(in oklab,var(--text) 3%, transparent)}
-    .widget iframe{width:120px;height:240px;border:0}
+    @media (max-width:1200px) {
+        .grid {
+            grid-template-columns: repeat(8, 1fr)
+        }
+    }
+
+    @media (max-width:780px) {
+        .grid {
+            grid-template-columns: repeat(4, 1fr)
+        }
+    }
+
+    @media (max-width:480px) {
+        .grid {
+            grid-template-columns: repeat(2, 1fr)
+        }
+    }
+
+    .card {
+        grid-column: span 2;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 94%, transparent));
+        border: 1px solid var(--outline);
+        border-radius: 20px;
+        box-shadow: 0 10px 22px var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px;
+        transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease, border-color .25s ease
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 28px var(--shadow);
+        border-color: color-mix(in oklab, var(--brand) 26%, transparent)
+    }
+
+    .widget {
+        width: 120px;
+        height: 240px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px var(--shadow);
+        background: color-mix(in oklab, var(--text) 3%, transparent)
+    }
+
+    .widget iframe {
+        width: 120px;
+        height: 240px;
+        border: 0
+    }
 
     /* ===================== Deals ===================== */
-    .deals{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .deal{grid-column:span 3;background:linear-gradient(180deg,color-mix(in oklab,var(--card) 97%,transparent),color-mix(in oklab,var(--card) 92%,transparent));border:1px solid var(--outline);border-radius:18px;box-shadow:0 10px 24px var(--shadow);padding:12px;display:flex;flex-direction:column;gap:10px}
-    .deal .widget{margin:0 auto}
-    .deal .meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-    .timer{font-weight:900;letter-spacing:.5px}
-    @media (max-width:1200px){.deal{grid-column:span 4}}
-    @media (max-width:780px){.deal{grid-column:span 6}}
-    @media (max-width:480px){.deal{grid-column:span 12}}
+    .deals {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px
+    }
+
+    .deal {
+        grid-column: span 3;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 97%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        border: 1px solid var(--outline);
+        border-radius: 18px;
+        box-shadow: 0 10px 24px var(--shadow);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+
+    .deal .widget {
+        margin: 0 auto
+    }
+
+    .deal .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: var(--muted)
+    }
+
+    .timer {
+        font-weight: 900;
+        letter-spacing: .5px
+    }
+
+    @media (max-width:1200px) {
+        .deal {
+            grid-column: span 4
+        }
+    }
+
+    @media (max-width:780px) {
+        .deal {
+            grid-column: span 6
+        }
+    }
+
+    @media (max-width:480px) {
+        .deal {
+            grid-column: span 12
+        }
+    }
 
     /* ===================== Banners ===================== */
-    .banner-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:6px}
-    .banner-grid a{display:block;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px var(--shadow);transition:transform .2s ease, box-shadow .3s ease}
-    .banner-grid a:hover{transform:translateY(-3px);box-shadow:0 8px 18px var(--shadow)}
-    .banner-grid img{display:block;width:728px;height:90px;object-fit:cover}
-    @media (max-width:780px){.banner-grid img{width:100%;height:auto}}
+    .banner-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 6px
+    }
+
+    .banner-grid a {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px var(--shadow);
+        transition: transform .2s ease, box-shadow .3s ease
+    }
+
+    .banner-grid a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px var(--shadow)
+    }
+
+    .banner-grid img {
+        display: block;
+        width: 728px;
+        height: 90px;
+        object-fit: cover
+    }
+
+    @media (max-width:780px) {
+        .banner-grid img {
+            width: 100%;
+            height: auto
+        }
+    }
 
     /* ===================== FAQ & Helper ===================== */
-    .faq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width:780px){.faq{grid-template-columns:1fr}}
-    .faq details{border:1px solid var(--outline);border-radius:14px;background:radial-gradient(1200px 400px at 80% -200px, color-mix(in oklab,var(--brand-2) 10%, transparent), transparent), linear-gradient(180deg, color-mix(in oklab,var(--card) 98%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow:0 8px 22px var(--shadow); overflow:hidden; transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease}
-    .faq details:hover{border-color:color-mix(in oklab, var(--brand) 22%, transparent); transform: translateY(-2px); box-shadow:0 12px 26px var(--shadow)}
-    .faq summary{list-style:none;cursor:pointer;position:relative;padding:14px 16px 14px 44px;font-weight:800;letter-spacing:-.2px;user-select:none}
-    .faq summary::-webkit-details-marker{display:none}
-    .faq summary .qdot{position:absolute; left:14px; top:50%; transform: translateY(-50%); width:22px; height:22px; border-radius:8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 6px 18px var(--ring)}
-    .faq summary .chev{position:absolute; right:14px; top:50%; transform: translateY(-50%) rotate(0); width:18px; height:18px; opacity:.7; transition: transform .25s ease, opacity .2s ease}
-    .faq details[open] summary .chev{transform: translateY(-50%) rotate(180deg); opacity:1}
-    .faq .answer{padding:0 16px 16px 44px;color:var(--muted);font-size:14px;line-height:1.65;border-top:1px dashed var(--outline); max-height:0; overflow:hidden; transition:max-height .35s ease}
-    .faq details[open] .answer{max-height:320px}
-    .helper{border:1px solid var(--outline); border-radius:12px; padding:12px; background: linear-gradient(180deg, color-mix(in oklab,var(--card) 97%, transparent), color-mix(in oklab,var(--card) 92%, transparent)); box-shadow: 0 6px 18px var(--shadow)}
+    .faq {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px
+    }
+
+    @media (max-width:780px) {
+        .faq {
+            grid-template-columns: 1fr
+        }
+    }
+
+    .faq details {
+        border: 1px solid var(--outline);
+        border-radius: 14px;
+        background: radial-gradient(1200px 400px at 80% -200px, color-mix(in oklab, var(--brand-2) 10%, transparent), transparent), linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 8px 22px var(--shadow);
+        overflow: hidden;
+        transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease
+    }
+
+    .faq details:hover {
+        border-color: color-mix(in oklab, var(--brand) 22%, transparent);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px var(--shadow)
+    }
+
+    .faq summary {
+        list-style: none;
+        cursor: pointer;
+        position: relative;
+        padding: 14px 16px 14px 44px;
+        font-weight: 800;
+        letter-spacing: -.2px;
+        user-select: none
+    }
+
+    .faq summary::-webkit-details-marker {
+        display: none
+    }
+
+    .faq summary .qdot {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 6px 18px var(--ring)
+    }
+
+    .faq summary .chev {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%) rotate(0);
+        width: 18px;
+        height: 18px;
+        opacity: .7;
+        transition: transform .25s ease, opacity .2s ease
+    }
+
+    .faq details[open] summary .chev {
+        transform: translateY(-50%) rotate(180deg);
+        opacity: 1
+    }
+
+    .faq .answer {
+        padding: 0 16px 16px 44px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+        border-top: 1px dashed var(--outline);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease
+    }
+
+    .faq details[open] .answer {
+        max-height: 320px
+    }
+
+    .helper {
+        border: 1px solid var(--outline);
+        border-radius: 12px;
+        padding: 12px;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 97%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 6px 18px var(--shadow)
+    }
 
     /* ===================== Footer ===================== */
-    .site-footer{background:linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent)); border-top:1px solid var(--outline); padding:32px 0 20px}
-    .ft-wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:16px}
-    .ft-col{flex:1;min-width:260px}
-    .ft-brand{display:flex;gap:12px;align-items:center}
-    .ft-brand strong{font-size:16px;font-weight:800;letter-spacing:-0.3px}
-    .ft-notice{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.6;max-width:520px}
-    .ft-bottom{border-top:1px solid color-mix(in oklab, var(--text) 8%, transparent); padding-top:12px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:13px; flex-wrap:wrap}
-    .ft-links{display:flex;gap:14px}
-    .ft-links a{color:var(--muted);transition:color .2s ease}
-    .ft-links a:hover{color:var(--brand)}
+    .site-footer {
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent));
+        border-top: 1px solid var(--outline);
+        padding: 32px 0 20px
+    }
+
+    .ft-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-bottom: 16px
+    }
+
+    .ft-col {
+        flex: 1;
+        min-width: 260px
+    }
+
+    .ft-brand {
+        display: flex;
+        gap: 12px;
+        align-items: center
+    }
+
+    .ft-brand strong {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: -0.3px
+    }
+
+    .ft-notice {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+        max-width: 520px
+    }
+
+    .ft-bottom {
+        border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+        padding-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        flex-wrap: wrap
+    }
+
+    .ft-links {
+        display: flex;
+        gap: 14px
+    }
+
+    .ft-links a {
+        color: var(--muted);
+        transition: color .2s ease
+    }
+
+    .ft-links a:hover {
+        color: var(--brand)
+    }
 
     /* ===================== Top Button ===================== */
-    .top-btn{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--outline);background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:0 10px 24px var(--ring); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity .2s ease, transform .2s ease}
-    .top-btn.show{opacity:1; pointer-events:auto; transform:translateY(0)}
+    .top-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--outline);
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: #fff;
+        box-shadow: 0 10px 24px var(--ring);
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity .2s ease, transform .2s ease
+    }
+
+    .top-btn.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0)
+    }
 
 
 
     .banner {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px auto; /* 위아래 여백 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto;
+        /* 위아래 여백 */
     }
 
     .banner img {
-      max-width: 100%;
-      height: auto;
+        max-width: 100%;
+        height: auto;
     }
 
 
 
-	/* === Mobile: header condense (<=780px) === */
-	@media (max-width: 780px) {
-	  .nav {
-		justify-content: center;       /* 가운데 정렬 */
-		gap: 8px;
-		padding: 8px 0;
-	  }
-	  .brand {
-		display: none;                 /* PickPort 숨기기 */
-	  }
-	  .top-search {
-		flex: 1;                       /* 남는 공간 전부 차지 */
-		max-width: none;               /* 최대폭 제한 해제 */
-		margin: 0;
-	  }
-	  .search-card {
-		padding: 6px;                  /* 모바일 여백 살짝 줄이기 */
-	  }
-	}
+    /* === Mobile: header condense (<=780px) === */
+    @media (max-width: 780px) {
+        .nav {
+            justify-content: center;
+            /* 가운데 정렬 */
+            gap: 8px;
+            padding: 8px 0;
+        }
 
-	@media (max-width: 780px) {
-	  .top-search iframe { height: 44px; }
-	}
+        .brand {
+            display: none;
+            /* PickPort 숨기기 */
+        }
 
+        .top-search {
+            flex: 1;
+            /* 남는 공간 전부 차지 */
+            max-width: none;
+            /* 최대폭 제한 해제 */
+            margin: 0;
+        }
 
+        .search-card {
+            padding: 6px;
+            /* 모바일 여백 살짝 줄이기 */
+        }
+    }
 
-/* === Mobile cards: 2 per row === */
-@media (max-width: 480px) {
-  /* 카드 격자: 2열 + 간격 살짝 축소 */
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px; /* 필요시 10~16px 사이로 조절 */
-  }
-
-  /* 각 카드가 1칸만 차지하도록 (=> 한 줄에 2개) */
-  .card {
-    grid-column: span 1;
-    padding: 10px; /* 모바일 여백 소폭 조정 (선택) */
-  }
-}
+    @media (max-width: 780px) {
+        .top-search iframe {
+            height: 44px;
+        }
+    }
 
 
 
-/* === Mobile deals: 2 per row (선택) === */
-@media (max-width: 480px) {
-  .deals {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .deal {
-    grid-column: auto; /* 기존 span 규칙 무효화 */
-  }
-}
+    /* === Mobile cards: 2 per row === */
+    @media (max-width: 480px) {
+
+        /* 카드 격자: 2열 + 간격 살짝 축소 */
+        .grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            /* 필요시 10~16px 사이로 조절 */
+        }
+
+        /* 각 카드가 1칸만 차지하도록 (=> 한 줄에 2개) */
+        .card {
+            grid-column: span 1;
+            padding: 10px;
+            /* 모바일 여백 소폭 조정 (선택) */
+        }
+    }
 
 
-  </style>
+
+    /* === Mobile deals: 2 per row (선택) === */
+    @media (max-width: 480px) {
+        .deals {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .deal {
+            grid-column: auto;
+            /* 기존 span 규칙 무효화 */
+        }
+    }
+</style>
 </head>
 <body>
   <header class="header">
-	  <div class="container">
-		<div class="nav">
-		  <!-- 
+    <div class="container">
+
+        <div style="text-align:-webkit-center">
+            <!-- 🔽 여기에 추가 -->
+            <p class="ft-notice" style="text-align:center; font-size:13px; color:var(--muted); margin:4px 0 8px;">
+                본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.
+            </p>
+        </div>
+
+        <div class="nav">
+            <!-- 
 		  <div class="brand">
 			<div class="brand-badge" aria-hidden="true">
 			  <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"
@@ -543,413 +921,435 @@
 			</div>
 			<span>훈픽's</span>
 		  </div>
-			--> 
+			-->
 
-		  <div class="top-search">
-			<div class="search-card">
-			  <iframe src="https://coupa.ng/ckeU4C"
-					  width="100%" height="44" frameborder="0"
-					  scrolling="no" referrerpolicy="unsafe-url"
-					  browsingtopics title="쿠팡 검색"></iframe>
-			</div>
-		  </div>
-		</div>
+            <div class="top-search">
+                <div class="search-card">
+                    <iframe src="https://coupa.ng/ckeU4C" width="100%" height="44" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 검색"></iframe>
+                </div>
+            </div>
+        </div>
 
-		<div style="text-align:-webkit-center">
-		   <!-- 🔽 여기에 추가 -->
-			<p class="ft-notice" style="text-align:center; font-size:13px; color:var(--muted); margin:4px 0 8px;">
-			  본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.
-			</p>
-		</div>
-	  </div>
-	</header>
+
+    </div>
+</header>
 
 
 
 <!-- 🔽 쿠팡 배너 추가 -->
-  <div class="banner">
+<div class="banner">
     <a href="https://link.coupang.com/a/cWx2NB" target="_blank" referrerpolicy="unsafe-url">
-      <img src="https://ads-partners.coupang.com/banners/931559?subId=&traceId=V0-301-7e6e8eb8ddfa1bfb-I931559&w=728&h=90" alt="Coupang banner">
+        <img src="https://ads-partners.coupang.com/banners/931559?subId=&traceId=V0-301-7e6e8eb8ddfa1bfb-I931559&w=728&h=90" alt="Coupang banner">
     </a>
-  </div>
+</div>
 
 
 
-  <!-- Hero / Slider -->
+<!-- Hero / Slider -->
 <section class="hero">
-        <div class="container">
-            <div class="hero-head" aria-labelledby="heroTitle" aria-describedby="heroDesc">
-                <span class="hero-eyebrow" aria-hidden="true" style="width:100%;">훈픽스 (HoonPick's) 큐레이션 </span>
-                
-                <h1 id="heroTitle" class="hero-title">오늘의 쿠팡 베스트<br class="hero-title-break"> 한눈에 담다</h1>
-                
-                <p id="heroDesc" class="hero-sub">
-                    복잡한 탐색은 이제 그만. <strong>특가·로켓프레시·1+1·패션</strong>까지 
-                    엄선된 상품만 모았습니다. 매일 자동으로 랜덤 큐레이션되어 <em>항상 새로운 발견</em>이 기다립니다.
-                </p>
+    <div class="container">
+        <div class="hero-head" aria-labelledby="heroTitle" aria-describedby="heroDesc">
+            <span class="hero-eyebrow" aria-hidden="true" style="width:100%;">훈픽스 (HoonPick's) 큐레이션 </span>
 
-                <div class="hero-divider"></div>
+            <h1 id="heroTitle" class="hero-title">오늘의 쿠팡 베스트<br class="hero-title-break"> 한눈에 담다</h1>
 
-                <div class="hero-features" role="list">
-                    <div class="hero-feature" role="listitem">
-                        <div class="feature-icon" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M9 11l3 3L22 4"></path>
-                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                            </svg>
-                        </div>
-                        <div class="feature-content">
-                            <div class="feature-title">즉시 스캔</div>
-                            <div class="feature-desc">슬라이드와 그리드로 핵심만 빠르게</div>
-                        </div>
+            <p id="heroDesc" class="hero-sub">
+                복잡한 탐색은 이제 그만. <strong>특가·로켓프레시·1+1·패션</strong>까지
+                엄선된 상품만 모았습니다. 매일 자동으로 랜덤 큐레이션되어 <em>항상 새로운 발견</em>이 기다립니다.
+            </p>
+
+            <div class="hero-divider"></div>
+
+			<!-- 
+            <div class="hero-features" role="list">
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                        </svg>
                     </div>
-
-                    <div class="hero-feature" role="listitem">
-                        <div class="feature-icon" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                        <div class="feature-content">
-                            <div class="feature-title">매일 갱신</div>
-                            <div class="feature-desc">랜덤 시드로 매일 다른 순서</div>
-                        </div>
-                    </div>
-
-                    <div class="hero-feature" role="listitem">
-                        <div class="feature-icon" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                            </svg>
-                        </div>
-                        <div class="feature-content">
-                            <div class="feature-title">가벼운 로딩</div>
-                            <div class="feature-desc">불필요한 요소 제거로 빠른 탐색</div>
-                        </div>
-                    </div>
-
-                    <div class="hero-feature" role="listitem">
-                        <div class="feature-icon" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="8" y1="6" x2="21" y2="6"></line>
-                                <line x1="8" y1="12" x2="21" y2="12"></line>
-                                <line x1="8" y1="18" x2="21" y2="18"></line>
-                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                            </svg>
-                        </div>
-                        <div class="feature-content">
-                            <div class="feature-title">카테고리별 정리</div>
-                            <div class="feature-desc">특가·패션·프레시·1+1 바로 확인</div>
-                        </div>
+                    <div class="feature-content">
+                        <div class="feature-title">즉시 스캔</div>
+                        <div class="feature-desc">슬라이드와 그리드로 핵심만 빠르게</div>
                     </div>
                 </div>
 
-                <div class="hero-badges" aria-label="추가 정보">
-                    <span class="hero-badge">모바일 최적화</span>
-                    <span class="hero-badge">쿠팡 파트너스</span>
-                    <span class="hero-badge">매일 업데이트</span>
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">매일 갱신</div>
+                        <div class="feature-desc">랜덤 시드로 매일 다른 순서</div>
+                    </div>
+                </div>
+
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">가벼운 로딩</div>
+                        <div class="feature-desc">불필요한 요소 제거로 빠른 탐색</div>
+                    </div>
+                </div>
+
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">카테고리별 정리</div>
+                        <div class="feature-desc">특가·패션·프레시·1+1 바로 확인</div>
+                    </div>
                 </div>
             </div>
+
+            <div class="hero-badges" aria-label="추가 정보">
+                <span class="hero-badge">모바일 최적화</span>
+                <span class="hero-badge">쿠팡 파트너스</span>
+                <span class="hero-badge">매일 업데이트</span>
+            </div>
+			--> 
         </div>
-    </section>
+    </div>
+</section>
 
 
-	
 
-  
 
-  <main class="container">
+
+
+<main class="container">
     <!-- 👇 인기 카테고리 섹션 제거됨 -->
 
     <!-- 오늘의 특가 -->
     <section class="section" id="sec-deals">
-      <div class="section-head">
-        <h2 class="section-title">오늘의 특가</h2>
-        <span class="kicker">한정 시간만 오픈되는 상품</span>
-      </div>
-      <div class="surface">
-        <div class="deals" id="dealsGrid"></div>
-      </div>
+		<div class="section-head">
+            <h2 class="section-title">
+                오늘의 특가
+                <a href="https://link.coupang.com/a/cWLroR" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </h2>
+            <span class="kicker">한정 시간만 오픈되는 상품</span>
+        </div>
+        <div class="surface">
+            <div class="deals" id="dealsGrid"></div>
+        </div>
     </section>
 
     <!-- 최근 많이 팔린 상품 -->
     <section class="section" id="sec-popular">
-      <div class="section-head">
-        <h2 class="section-title">최근 많이 팔린 상품</h2>
-        <span class="kicker" id="countPopular"></span>
-      </div>
-      <div class="surface">
-        <div class="grid" id="gridPopular"></div>
-      </div>
+        <div class="section-head">
+            <h2 class="section-title">최근 많이 팔린 상품</h2>
+            <span class="kicker" id="countPopular"></span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridPopular"></div>
+        </div>
     </section>
 
-	<!-- 1+1 상품 섹션 -->
-	<section class="section" id="sec-oneplus">
-	  <div class="section-head">
-		  <h2 class="section-title">
-			1+1 상품
-			<a href="https://link.coupang.com/a/cWz0ck" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
-			  더보기 +
-			</a>
-		  </h2>
-		  <span class="kicker" id="countOnePlus"></span>
-		</div>
-	  <div class="surface">
-		<div class="grid" id="gridOnePlus"></div>
-	  </div>
-	</section>
+    <!-- 1+1 상품 섹션 -->
+    <section class="section" id="sec-oneplus">
+        <div class="section-head">
+            <h2 class="section-title">
+                1+1 상품
+                <a href="https://link.coupang.com/a/cWz0ck" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </h2>
+            <span class="kicker" id="countOnePlus"></span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridOnePlus"></div>
+        </div>
+    </section>
 
 
-	<!-- 🔽 쿠팡 배너 추가 -->
-	<div class="banner">
-		<a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
-			<img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
-		</a>
-	</div>
+    <!-- 🔽 쿠팡 배너 추가 -->
+    <div class="banner">
+        <a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
+            <img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
+        </a>
+    </div>
 
 
 
     <!-- 패션 섹션 -->
     <section class="section" id="sec-fashion">
-		<div class="section-head">
-		  <h2 class="section-title">
-			패션 추천
-			<a href="https://link.coupang.com/a/cWz6uf" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
-			  더보기 +
-			</a>
-		  </h2>
-		  <span class="kicker" id="countFashion"></span>
-		</div>
-      <div class="surface">
-        <div class="grid" id="gridFashion"></div>
-      </div>
+        <div class="section-head">
+            <h2 class="section-title">
+                패션 추천
+                <a href="https://link.coupang.com/a/cWz6uf" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </h2>
+            <span class="kicker" id="countFashion"></span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridFashion"></div>
+        </div>
     </section>
 
     <!-- 로켓프레시 섹션 -->
     <section class="section" id="sec-fresh">
-      <div class="section-head">
-        <h2 class="section-title">로켓프레시 추천</h2>
-        <span class="kicker" id="countFresh"></span>
-      </div>
-      <div class="surface">
-        <div class="grid" id="gridFresh"></div>
-      </div>
+        <div class="section-head">
+            <h2 class="section-title">로켓프레시 추천</h2>
+            <span class="kicker" id="countFresh"></span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridFresh"></div>
+        </div>
     </section>
 
     <!-- 카테고리 배너: 모자이크 -->
     <section class="section" id="sec-banners">
-      <div class="section-head">
-        <h2 class="section-title">카테고리 배너</h2>
-        <span class="kicker">728×90 배너를 모자이크로 배치</span>
-      </div>
-      <div class="surface">
-        <div class="banner-grid" id="bannerGrid"></div>
-      </div>
+        <div class="section-head">
+            <h2 class="section-title">카테고리 배너</h2>
+            <span class="kicker">728×90 배너를 모자이크로 배치</span>
+        </div>
+        <div class="surface">
+            <div class="banner-grid" id="bannerGrid"></div>
+        </div>
     </section>
 
     <!-- FAQ & 가이드 -->
     <section class="section">
-      <div class="section-head">
-        <h2 class="section-title">도움말 & FAQ</h2>
-        <span class="kicker">결제/배송/환불/파트너스 고지</span>
-      </div>
-      <div class="surface">
-        <div class="faq">
-          <details>
-            <summary>
-              <span class="qdot" aria-hidden="true"></span>
-              쿠팡 파트너스 링크인가요?
-              <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-            </summary>
-            <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받을 수 있습니다.</div>
-          </details>
-          <details>
-            <summary>
-              <span class="qdot" aria-hidden="true"></span>
-              가격/이미지는 왜 다를 수 있나요?
-              <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-            </summary>
-            <div class="answer">상품의 가격·재고·이미지는 판매처 사정에 따라 수시로 변경될 수 있습니다. 최종 구매 전 쿠팡 상품 페이지를 확인하세요.</div>
-          </details>
-          <details>
-            <summary>
-              <span class="qdot" aria-hidden="true"></span>
-              로켓배송/프레시는 무엇인가요?
-              <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-            </summary>
-            <div class="answer">로켓배송은 빠른 배송 서비스, 로켓프레시는 신선식품 새벽/당일 배송 서비스입니다. 지역에 따라 제공 여부가 다를 수 있습니다.</div>
-          </details>
-          <details>
-            <summary>
-              <span class="qdot" aria-hidden="true"></span>
-              환불/교환은 어디서 하나요?
-              <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z"/></svg>
-            </summary>
-            <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
-          </details>
+        <div class="section-head">
+            <h2 class="section-title">도움말 & FAQ</h2>
+            <span class="kicker">결제/배송/환불/파트너스 고지</span>
         </div>
-        <div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="ft-wrap">
-        <div class="ft-col">
-          <div class="ft-brand">
-            <div class="brand-badge" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z"/></svg></div>
-            <div>
-              <strong>훈픽스 (HoonPick's)</strong>
-              <div class="kicker">오늘의 쿠팡 추천 큐레이션</div>
+        <div class="surface">
+            <div class="faq">
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        쿠팡 파트너스 링크인가요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받을 수 있습니다.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        가격/이미지는 왜 다를 수 있나요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">상품의 가격·재고·이미지는 판매처 사정에 따라 수시로 변경될 수 있습니다. 최종 구매 전 쿠팡 상품 페이지를 확인하세요.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        로켓배송/프레시는 무엇인가요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">로켓배송은 빠른 배송 서비스, 로켓프레시는 신선식품 새벽/당일 배송 서비스입니다. 지역에 따라 제공 여부가 다를 수 있습니다.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        환불/교환은 어디서 하나요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
+                </details>
             </div>
-          </div>
-          <p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
+            <div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
         </div>
-      </div>
-      <div class="ft-bottom">
-        <div>© 2025 에이엔소프트 [ANSOFT]</div>
-        <div class="ft-links"><a href="#">문의</a><a href="#">광고문의</a></div>
-      </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="ft-wrap">
+            <div class="ft-col">
+                <div class="ft-brand">
+                    <div class="brand-badge" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z" /></svg></div>
+                    <div>
+                        <strong>훈픽스 (HoonPick's)</strong>
+                        <div class="kicker">오늘의 쿠팡 추천 큐레이션</div>
+                    </div>
+                </div>
+                <p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
+            </div>
+        </div>
+        <div class="ft-bottom">
+            <div>© 2025 에이엔소프트 [ANSOFT]</div>
+            <div class="ft-links"><a href="#">문의</a><a href="#">광고문의</a></div>
+        </div>
     </div>
-  </footer>
+</footer>
 
-  <button class="top-btn" id="topBtn" aria-label="상단으로 이동">↑</button>
+<button class="top-btn" id="topBtn" aria-label="상단으로 이동">↑</button>
 
-  <script>
-    // ====== 데이터 (원본 유지) ======
-    const DATA = {
-      popular: [
-        "https://coupa.ng/ckfadJ","https://coupa.ng/ckfadT","https://coupa.ng/ckfadZ","https://coupa.ng/ckfad4",
-        "https://coupa.ng/ckfaxK","https://coupa.ng/ckfayX","https://coupa.ng/ckfaes","https://coupa.ng/ckfaez",
-        "https://coupa.ng/ckfaeG","https://coupa.ng/ckfaeN","https://coupa.ng/ckfaeS","https://coupa.ng/ckfaeW",
-        "https://coupa.ng/ckfae5","https://coupa.ng/ckfafe","https://coupa.ng/ckfafq","https://coupa.ng/ckfafA",
-        "https://coupa.ng/ckfafC","https://coupa.ng/ckfafG","https://coupa.ng/ckfafM","https://coupa.ng/ckfafZ"
-      ],
-	  oneplus: [
-		  "https://coupa.ng/ckffMX",
-		  "https://coupa.ng/ckffND",
-		  "https://coupa.ng/ckffOj",
-		  "https://coupa.ng/ckffOS",
-		  "https://coupa.ng/ckffPH",
-		  "https://coupa.ng/ckffR7",
-		  "https://coupa.ng/ckffUo",
-		  "https://coupa.ng/ckff4q"
-		],
-      fashion: [
-        "https://coupa.ng/ckeVfb","https://coupa.ng/ckeVfs","https://coupa.ng/ckeVfD","https://coupa.ng/ckeVgb",
-        "https://coupa.ng/ckeVgs","https://coupa.ng/ckeVhm","https://coupa.ng/ckeVn0","https://coupa.ng/ckeVod",
-        "https://coupa.ng/ckeVoh","https://coupa.ng/ckeVox","https://coupa.ng/ckeVpS","https://coupa.ng/ckeVp0",
-        "https://coupa.ng/ckeVqg","https://coupa.ng/ckeVqH","https://coupa.ng/ckeVqR","https://coupa.ng/ckeVqY",
-        "https://coupa.ng/ckffD3","https://coupa.ng/ckeVrr","https://coupa.ng/ckeVry","https://coupa.ng/ckeVrF","https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8"
-      ],
-      fresh: [
-        "https://coupa.ng/ckeU9G","https://coupa.ng/ckeU9P","https://coupa.ng/ckeU9W","https://coupa.ng/ckeU99",
-        "https://coupa.ng/ckeVai","https://coupa.ng/ckeVaq","https://coupa.ng/ckeVaA","https://coupa.ng/ckeVaL",
-        "https://coupa.ng/ckeVaT","https://coupa.ng/ckeVbh","https://coupa.ng/ckeVbr",
-        "https://coupa.ng/ckeVbI","https://coupa.ng/ckeVbU","https://coupa.ng/ckeVcc","https://coupa.ng/ckeVcX",
-        "https://coupa.ng/ckeVdR","https://coupa.ng/ckeVd9","https://coupa.ng/ckeVek"
-      ],
-      deals: [
-        "https://coupa.ng/ckeVfb","https://coupa.ng/ckeVgs","https://coupa.ng/ckeVn0","https://coupa.ng/ckeU9W","https://coupa.ng/ckeVaA","https://coupa.ng/ckeVcc"
-      ],
-      banners: [
-        { href: "https://link.coupang.com/a/cWqYJ7", src: "https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" },
-        { href: "https://link.coupang.com/a/cWqZaR", src: "https://ads-partners.coupang.com/banners/931573?subId=&traceId=V0-301-f5c692db558def48-I931573&w=728&h=90"},
-        { href: "https://link.coupang.com/a/cWqZoP", src: "https://ads-partners.coupang.com/banners/931574?subId=&traceId=V0-301-12cd6d67384e2afb-I931574&w=728&h=90" },
-        { href: "https://link.coupang.com/a/cWqZt9", src: "https://ads-partners.coupang.com/banners/931575?subId=&traceId=V0-301-0fd2df58973b32a5-I931575&w=728&h=90"},
-        { href: "https://link.coupang.com/a/cWq08w", src: "https://ads-partners.coupang.com/banners/931579?subId=&traceId=V0-301-efafde73812c2264-I931579&w=728&h=90" }
-      ]
-    };
+<script>
+// ====== 데이터 (원본 유지) ======
+const DATA = {
+    popular: [
+        "https://coupa.ng/ckfadJ", "https://coupa.ng/ckfadT", "https://coupa.ng/ckfadZ", "https://coupa.ng/ckfad4",
+        "https://coupa.ng/ckfaxK", "https://coupa.ng/ckfayX", "https://coupa.ng/ckfaes", "https://coupa.ng/ckfaez",
+        "https://coupa.ng/ckfaeG", "https://coupa.ng/ckfaeN", "https://coupa.ng/ckfaeS", "https://coupa.ng/ckfaeW",
+        "https://coupa.ng/ckfae5", "https://coupa.ng/ckfafe", "https://coupa.ng/ckfafq", "https://coupa.ng/ckfafA",
+        "https://coupa.ng/ckfafC", "https://coupa.ng/ckfafG", "https://coupa.ng/ckfafM", "https://coupa.ng/ckfafZ"
+    ],
+    oneplus: [
+        "https://coupa.ng/ckffMX",
+        "https://coupa.ng/ckffND",
+        "https://coupa.ng/ckffOj",
+        "https://coupa.ng/ckffOS",
+        "https://coupa.ng/ckffPH",
+        "https://coupa.ng/ckffR7",
+        "https://coupa.ng/ckffUo",
+        "https://coupa.ng/ckff4q"
+    ],
+    fashion: [
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVfs", "https://coupa.ng/ckeVfD", "https://coupa.ng/ckeVgb",
+        "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVhm", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeVod",
+        "https://coupa.ng/ckeVoh", "https://coupa.ng/ckeVox", "https://coupa.ng/ckeVpS", "https://coupa.ng/ckeVp0",
+        "https://coupa.ng/ckeVqg", "https://coupa.ng/ckeVqH", "https://coupa.ng/ckeVqR", "https://coupa.ng/ckeVqY",
+        "https://coupa.ng/ckffD3", "https://coupa.ng/ckeVrr", "https://coupa.ng/ckeVry", "https://coupa.ng/ckeVrF", "https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8"
+    ],
+    fresh: [
+        "https://coupa.ng/ckeU9G", "https://coupa.ng/ckeU9P", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckeU99",
+        "https://coupa.ng/ckeVai", "https://coupa.ng/ckeVaq", "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVaL",
+        "https://coupa.ng/ckeVaT", "https://coupa.ng/ckeVbh", "https://coupa.ng/ckeVbr",
+        "https://coupa.ng/ckeVbI", "https://coupa.ng/ckeVbU", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckeVcX",
+        "https://coupa.ng/ckeVdR", "https://coupa.ng/ckeVd9", "https://coupa.ng/ckeVek"
+    ],
+    deals: [
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc"
+    ],
+    banners: [{
+            href: "https://link.coupang.com/a/cWqYJ7",
+            src: "https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZaR",
+            src: "https://ads-partners.coupang.com/banners/931573?subId=&traceId=V0-301-f5c692db558def48-I931573&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZoP",
+            src: "https://ads-partners.coupang.com/banners/931574?subId=&traceId=V0-301-12cd6d67384e2afb-I931574&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZt9",
+            src: "https://ads-partners.coupang.com/banners/931575?subId=&traceId=V0-301-0fd2df58973b32a5-I931575&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWq08w",
+            src: "https://ads-partners.coupang.com/banners/931579?subId=&traceId=V0-301-efafde73812c2264-I931579&w=728&h=90"
+        }
+    ]
+};
 
-    // ====== 유틸 ======
-    const $ = (s, r=document)=>r.querySelector(s);
-    const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
-    const shuffleDaily = (arr)=>{
-      const seed = new Date().toDateString().split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-      const copy = [...arr];
-      for (let i=copy.length-1;i>0;i--) { const j=(seed+i)%copy.length; [copy[i],copy[j]]=[copy[j],copy[i]]; }
-      return copy;
+// ====== 유틸 ======
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const shuffleDaily = (arr) => {
+    const seed = new Date().toDateString().split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = (seed + i) % copy.length;
+        [copy[i], copy[j]] = [copy[j], copy[i]];
     }
+    return copy;
+}
 
-    // ====== 카드: iframe만 (CTA 제거) ======
-    function Card(url){
-      return `
+// ====== 카드: iframe만 (CTA 제거) ======
+function Card(url) {
+    return `
         <article class="card">
           <div class="widget">
             <iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 추천 위젯"></iframe>
           </div>
         </article>`;
-    }
+}
 
-    // ====== 섹션 렌더 ======
-    function drawProducts(){
-      const pWrap = $('#gridPopular');
-	  const oWrap = $('#gridOnePlus');
-      const fWrap = $('#gridFashion');
-      const rWrap = $('#gridFresh');
-      const p = shuffleDaily(DATA.popular);
-	  const o = shuffleDaily(DATA.oneplus);
-      const f = shuffleDaily(DATA.fashion);
-      const r = shuffleDaily(DATA.fresh);
-      pWrap.innerHTML = p.map(Card).join('');
-	  oWrap.innerHTML = o.map(Card).join('');
-      fWrap.innerHTML = f.map(Card).join('');
-      rWrap.innerHTML = r.map(Card).join('');
-      $('#countPopular').textContent = `${p.length}개 · 매일 순서 랜덤`;
-	  $('#countOnePlus').textContent = `${o.length}개 · 1+1 혜택 상품`;
-      $('#countFashion').textContent = `${f.length}개 · 매일 순서 랜덤`;
-      $('#countFresh').textContent = `${r.length}개 · 매일 순서 랜덤`;
-    }
+// ====== 섹션 렌더 ======
+function drawProducts() {
+    const pWrap = $('#gridPopular');
+    const oWrap = $('#gridOnePlus');
+    const fWrap = $('#gridFashion');
+    const rWrap = $('#gridFresh');
+    const p = shuffleDaily(DATA.popular);
+    const o = shuffleDaily(DATA.oneplus);
+    const f = shuffleDaily(DATA.fashion);
+    const r = shuffleDaily(DATA.fresh);
+    pWrap.innerHTML = p.map(Card).join('');
+    oWrap.innerHTML = o.map(Card).join('');
+    fWrap.innerHTML = f.map(Card).join('');
+    rWrap.innerHTML = r.map(Card).join('');
+    $('#countPopular').textContent = `${p.length}개 · 매일 순서 랜덤`;
+    $('#countOnePlus').textContent = `${o.length}개 · 1+1 혜택 상품`;
+    $('#countFashion').textContent = `${f.length}개 · 매일 순서 랜덤`;
+    $('#countFresh').textContent = `${r.length}개 · 매일 순서 랜덤`;
+}
 
-    function drawDeals(){
-      const el = $('#dealsGrid');
-      const html = DATA.deals.map(url => `
+function drawDeals() {
+    const el = $('#dealsGrid');
+    const html = DATA.deals.map(url => `
         <article class="deal">
           <div class="meta"><span>한정 특가</span></div>
           <div class="widget"><iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="특가 위젯"></iframe></div>
         </article>`).join('');
-      el.innerHTML = html;
-    }
+    el.innerHTML = html;
+}
 
-    function drawBanners(){
-      const el = $('#bannerGrid');
-      const html = DATA.banners.map(b=>`<a href="${b.href}" target="_blank" rel="noopener" referrerpolicy="unsafe-url"><img src="${b.src}" alt="카테고리 배너"></a>`).join('');
-      el.innerHTML = html;
-    }
+function drawBanners() {
+    const el = $('#bannerGrid');
+    const html = DATA.banners.map(b => `<a href="${b.href}" target="_blank" rel="noopener" referrerpolicy="unsafe-url"><img src="${b.src}" alt="카테고리 배너"></a>`).join('');
+    el.innerHTML = html;
+}
 
-    
 
-    
 
-    // ====== Top button ======
-    function initTopBtn(){
-      const btn = $('#topBtn');
-      const onScroll = ()=>{
+
+// ====== Top button ======
+function initTopBtn() {
+    const btn = $('#topBtn');
+    const onScroll = () => {
         const y = window.scrollY || document.documentElement.scrollTop;
         btn.classList.toggle('show', y > 400);
-      };
-      window.addEventListener('scroll', onScroll, {passive:true});
-      btn.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
-      onScroll();
-    }
+    };
+    window.addEventListener('scroll', onScroll, {
+        passive: true
+    });
+    btn.addEventListener('click', () => window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    }));
+    onScroll();
+}
 
 
 
 
-    // init
-    drawDeals();
-    drawProducts();
-    drawBanners();
-    //initSlider();
-    //initTimer();
-    initTopBtn();
-
-  </script>
+// init
+drawDeals();
+drawProducts();
+drawBanners();
+initTopBtn();
+</script>
 
 
 
