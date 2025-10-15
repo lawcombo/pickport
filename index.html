@@ -566,7 +566,7 @@
       const el = $('#dealsGrid');
       const html = DATA.deals.map(url => `
         <article class="deal">
-          <div class="meta"><span>한정 특가</span><span class="timer" aria-live="polite">진행중</span></div>
+          <div class="meta"><span>한정 특가</span></div>
           <div class="widget"><iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="특가 위젯"></iframe></div>
         </article>`).join('');
       el.innerHTML = html;
@@ -610,7 +610,6 @@
         const m = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
         const s = String(Math.floor(diff%60000/1000)).padStart(2,'0');
         label.textContent = `${h}:${m}:${s} 남음`;
-        $$('.deal .timer').forEach(el=>el.textContent=label.textContent);
       };
       tick(); setInterval(tick, 1000);
     }
