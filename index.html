@@ -218,6 +218,32 @@
 
 
 
+	/* === Mobile: header condense (<=780px) === */
+	@media (max-width: 780px) {
+	  .nav {
+		justify-content: center;       /* 가운데 정렬 */
+		gap: 8px;
+		padding: 8px 0;
+	  }
+	  .brand {
+		display: none;                 /* PickPort 숨기기 */
+	  }
+	  .top-search {
+		flex: 1;                       /* 남는 공간 전부 차지 */
+		max-width: none;               /* 최대폭 제한 해제 */
+		margin: 0;
+	  }
+	  .search-card {
+		padding: 6px;                  /* 모바일 여백 살짝 줄이기 */
+	  }
+	}
+
+	@media (max-width: 780px) {
+	  .top-search iframe { height: 44px; }
+	}
+
+
+
   </style>
 </head>
 <body>
