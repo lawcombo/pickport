@@ -244,6 +244,36 @@
 
 
 
+/* === Mobile cards: 2 per row === */
+@media (max-width: 480px) {
+  /* 카드 격자: 2열 + 간격 살짝 축소 */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; /* 필요시 10~16px 사이로 조절 */
+  }
+
+  /* 각 카드가 1칸만 차지하도록 (=> 한 줄에 2개) */
+  .card {
+    grid-column: span 1;
+    padding: 10px; /* 모바일 여백 소폭 조정 (선택) */
+  }
+}
+
+
+
+/* === Mobile deals: 2 per row (선택) === */
+@media (max-width: 480px) {
+  .deals {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .deal {
+    grid-column: auto; /* 기존 span 규칙 무효화 */
+  }
+}
+
+
   </style>
 </head>
 <body>
