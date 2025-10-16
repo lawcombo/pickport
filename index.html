@@ -144,6 +144,7 @@
     .hero {
         position: relative;
         isolation: isolate;
+		padding-bottom: 20px;
     }
 
     .hero::before {
@@ -948,6 +949,76 @@
 
 
 
+	/* ===== Filter Bar (Quick Nav) ===== */
+	.filterbar{
+	  position: sticky;
+	  top: calc(var(--header-offset, 0px)); /* JS에서 헤더 높이 반영 */
+	  z-index: 900;
+	  backdrop-filter: saturate(1.2) blur(8px);
+	  background: color-mix(in oklab, var(--bg) 86%, transparent);
+	  border-top: 1px solid var(--outline);
+	  border-bottom: 1px solid var(--outline);
+	}
+
+	.filterbar .container{padding: 10px 24px;}
+
+	.filterbar-track{
+	  display: grid;
+	  grid-auto-flow: column;
+	  grid-auto-columns: max-content;
+	  gap: 10px;
+	  overflow-x: auto;
+	  padding-bottom: 4px;
+	  scroll-snap-type: x mandatory;
+	}
+
+	.filter-chip{
+	  scroll-snap-align: start;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 8px;
+	  padding: 10px 14px;
+	  border-radius: 999px;
+	  font-weight: 700;
+	  font-size: 14px;
+	  letter-spacing: -.1px;
+	  border: 1px solid var(--outline);
+	  background: linear-gradient(135deg,
+		  color-mix(in oklab, var(--card) 95%, transparent),
+		  color-mix(in oklab, var(--card) 85%, transparent));
+	  box-shadow: 0 6px 16px var(--shadow);
+	  cursor: pointer;
+	  white-space: nowrap;
+	  transition: transform .15s ease, border-color .2s ease, box-shadow .25s ease, background .25s ease;
+	}
+
+	.filter-chip:hover{
+	  transform: translateY(-1px);
+	  border-color: color-mix(in oklab, var(--brand) 26%, transparent);
+	  box-shadow: 0 10px 22px var(--shadow);
+	}
+
+	.filter-chip[aria-selected="true"]{
+	  color:#fff;
+	  border-color: transparent;
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  box-shadow: 0 10px 24px var(--ring);
+	}
+
+	@media (max-width:780px){
+	  .filterbar .container{padding-inline: 16px;}
+	  .filter-chip{font-size:13px; padding: 9px 12px;}
+	}
+
+	/* 선택: 수평 스크롤바 얇게/숨김 */
+	.filterbar-track::-webkit-scrollbar{height:6px}
+	.filterbar-track::-webkit-scrollbar-thumb{
+	  background: color-mix(in oklab, var(--text) 10%, transparent);
+	  border-radius: 999px;
+	}
+
+
+
 
 </style>
 </head>
@@ -1080,7 +1151,12 @@
 </section>
 
 
-
+<!-- 🔽 빠른 이동 필터 바 -->
+<nav class="filterbar" aria-label="콘텐츠 빠른 이동">
+  <div class="container">
+    <div class="filterbar-track" id="filterChips" role="tablist" aria-label="섹션 필터"></div>
+  </div>
+</nav>
 
 
 
@@ -1157,6 +1233,26 @@
             <img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
         </a>
     </div>
+
+
+
+	<!-- 가성비 컴퓨터 섹션 -->
+	<section class="section" id="sec-budgetpc">
+	  <div class="section-head">
+		<h2 class="section-title">가성비 컴퓨터 추천</h2>
+		<span class="kicker">
+		  <a href="https://link.coupang.com/a/cWPnFA" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+			더보기 +
+		  </a>
+		</span>
+	  </div>
+	  <div class="surface">
+		<!-- 6개 × 2줄 = 12개 -->
+		<div class="grid" id="gridBudgetPC"></div>
+	  </div>
+	</section>
+
+
 
 
 
@@ -1302,6 +1398,23 @@ const DATA = {
         "https://coupa.ng/ckffPH", "https://coupa.ng/ckffR7", "https://coupa.ng/ckffUo", "https://coupa.ng/ckff4q",
 		"https://coupa.ng/ckgeZz", "https://coupa.ng/ckgeZ5", "https://coupa.ng/ckge0t", "https://coupa.ng/ckge1k"
     ],
+	budgetpc: [
+	  "https://coupa.ng/ckgiWN",
+	  "https://coupa.ng/ckgiXu",
+	  "https://coupa.ng/ckgiXS",
+	  "https://coupa.ng/ckgiYx",
+	  "https://coupa.ng/ckgiZi",
+	  "https://coupa.ng/ckgiZG",
+	  "https://coupa.ng/ckgiZZ",
+	  "https://coupa.ng/ckgi0p",
+	  "https://coupa.ng/ckgi1k",
+	  "https://coupa.ng/ckgi1U",
+	  "https://coupa.ng/ckgi2q",
+	  "https://coupa.ng/ckgi5K",
+	  "https://coupa.ng/ckgi6g",
+	  "https://coupa.ng/ckgi6H",
+	  "https://coupa.ng/ckgi7c"
+	],
     fashion: [
         "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVfs", "https://coupa.ng/ckeVfD", "https://coupa.ng/ckeVgb",
         "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVhm", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeVod",
@@ -1456,8 +1569,20 @@ function drawPromoBanners() {
   wrap.innerHTML = items.map(html => `<div class="promo-banner-item">${html}</div>`).join('');
 }
 
-// 초기화 시 한 번 호출
-drawPromoBanners();
+
+
+
+
+
+function drawBudgetPC() {
+  const wrap = document.getElementById('gridBudgetPC');
+  if (!wrap) return;
+  // 접속/새로고침 때마다 무작위 순서, 최대 12개
+  const items = shuffleOnce(DATA.budgetpc).slice(0, 12);
+  wrap.innerHTML = items.map(Card).join('');
+}
+
+
 
 
 
@@ -1482,6 +1607,107 @@ function initTopBtn() {
 }
 
 
+/* ===== Filter Bar Logic ===== */
+
+// (A) 버튼 정의만 바꾸면 확장 쉬움!
+const FILTER_SECTIONS = [
+  { id: "sec-deals",    label: "오늘의 특가" },
+  { id: "sec-popular",  label: "최근 많이 팔린 상품" },
+  { id: "sec-oneplus",  label: "1+1 상품" },
+  { id: "sec-budgetpc", label: "가성비 컴퓨터" },
+  { id: "sec-fashion",  label: "패션" },
+  { id: "sec-fresh",    label: "로켓프레시" },
+];
+// 👉 새 섹션을 만들면 위 배열에 { id:"sec-새아이디", label:"보일이름" } 한 줄 추가하면 끝!
+
+function getHeaderOffset(){
+  const header = document.querySelector('.header');
+  return header ? header.offsetHeight : 0;
+}
+
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  const y = el.getBoundingClientRect().top + window.scrollY;
+
+  // 👇 헤더 + 필터바 높이(대략 60px 정도) + 여유 10px
+  const offset = getHeaderOffset() + 70;
+
+  window.scrollTo({ top: Math.max(0, y - offset), behavior: 'smooth' });
+}
+
+
+// 렌더
+function initFilterBar(){
+  // 헤더 높이를 CSS var로 반영(Sticky 보정)
+  document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+
+  const track = document.getElementById('filterChips');
+  if(!track) return;
+
+  track.innerHTML = FILTER_SECTIONS.map((s, i) => `
+    <button class="filter-chip" role="tab" aria-selected="${i===0?'true':'false'}" data-target="${s.id}">
+      ${s.label}
+    </button>
+  `).join('');
+
+  track.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.filter-chip');
+    if(!btn) return;
+    const id = btn.getAttribute('data-target');
+    scrollToSection(id);
+  });
+
+  // 스크롤스파이: 현재 보이는 섹션 하이라이트
+  const chips = Array.from(track.querySelectorAll('.filter-chip'));
+  const map = new Map(FILTER_SECTIONS.map(s => [s.id, chips.find(c => c.dataset.target === s.id)]));
+
+  const observer = new IntersectionObserver((entries)=>{
+    // 가장 화면 상단/중앙 쪽에 가까운 섹션을 active
+    let best = null;
+    let bestScore = -Infinity;
+    const vh = window.innerHeight;
+
+    entries.forEach(ent=>{
+      if(!ent.isIntersecting) return;
+      // 중앙에서 얼마나 가까운지 점수
+      const rect = ent.target.getBoundingClientRect();
+      const centerDist = Math.abs(rect.top + rect.height/2 - vh/2);
+      const score = 1 / (1 + centerDist);
+      if(score > bestScore){
+        bestScore = score;
+        best = ent.target.id;
+      }
+    });
+
+    if(best && map.has(best)){
+      chips.forEach(c => c.setAttribute('aria-selected','false'));
+      map.get(best).setAttribute('aria-selected','true');
+      // 자동 스크롤(칩 트랙) 가시성 확보
+      map.get(best).scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
+    }
+  }, {
+    // 헤더 높이만큼 위쪽 감안
+    root: null,
+    rootMargin: `-${getHeaderOffset()+20}px 0px -60% 0px`, // 위쪽 여백 보정 + 아래 넉넉히
+    threshold: [0.2, 0.4, 0.6]
+  });
+
+  FILTER_SECTIONS.forEach(s=>{
+    const el = document.getElementById(s.id);
+    if(el) observer.observe(el);
+  });
+
+  // 리사이즈/폰 회전 시 보정
+  window.addEventListener('resize', () => {
+    document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+  }, {passive:true});
+}
+
+
+
+
 
 
 // init
@@ -1489,6 +1715,10 @@ drawDeals();
 drawProducts();
 drawBanners();
 initTopBtn();
+drawPromoBanners();
+drawBudgetPC();
+initFilterBar();
+
 </script>
 
 
