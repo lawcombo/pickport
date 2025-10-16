@@ -1657,12 +1657,20 @@ function drawProducts() {
 	*/
 
     // ✅ 각 섹션 12개만 노출(중복 없이)
-    const p = pickDaily(DATA.popular, 6);
+    // 하루하루마다 바뀌게끔
+	/*
+	const p = pickDaily(DATA.popular, 6);
     const o = pickDaily(DATA.oneplus, 6);
     const f = pickDaily(DATA.fashion, 6);
     const r = pickDaily(DATA.fresh, 6);
-	//const s = pickDaily(DATA.speech, 12);
+	const s = pickDaily(DATA.speech, 12);
+	*/
+	
 	// 새로고침마다 셔플하려면:
+	const p = shuffleOnce(DATA.popular).slice(0, 6);
+    const o = shuffleOnce(DATA.oneplus).slice(0, 6);
+    const f = shuffleOnce(DATA.fashion).slice(0, 6);
+    const r = shuffleOnce(DATA.fresh).slice(0, 6);
 	const s = shuffleOnce(DATA.speech).slice(0, 6);
 
     pWrap.innerHTML = p.map(Card).join('');
