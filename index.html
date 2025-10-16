@@ -411,7 +411,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+/*
         margin-bottom: 18px;
+*/
         flex-wrap: wrap;
     }
 
@@ -1021,6 +1023,59 @@
 
 
 
+
+
+
+	/* ===== Reviews (구매 후기) - brand-badge 버전 ===== */
+	.reviews {
+	  display: grid;
+	  grid-template-columns: repeat(12, 1fr);
+	  gap: 14px;
+	}
+	.review-card {
+	  grid-column: span 4;
+	  border: 1px solid var(--outline);
+	  border-radius: 16px;
+	  background: linear-gradient(180deg,
+		color-mix(in oklab, var(--card) 98%, transparent),
+		color-mix(in oklab, var(--card) 92%, transparent));
+	  box-shadow: 0 8px 20px var(--shadow);
+	  padding: 16px;
+	  display: grid;
+	  grid-template-columns: 48px 1fr;
+	  gap: 12px;
+	  align-items: start;
+	}
+	.brand-badge {
+	  width: 48px;
+	  height: 48px;
+	  border-radius: 12px;
+	  display: grid;
+	  place-items: center;
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  box-shadow: 0 8px 18px var(--ring);
+	}
+	.review-body { display: grid; gap: 6px; }
+	.review-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+	.review-name { font-weight: 800; font-size: 14px; }
+	.review-stars { font-size: 14px; letter-spacing: .2px; color: #eab308; }
+	.review-title { font-weight: 700; letter-spacing: -.2px; }
+	.review-text { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+	/* 반응형 */
+	@media (max-width:1200px){ .review-card{ grid-column: span 6; } }
+	@media (max-width:780px){
+	  .reviews{ grid-template-columns: repeat(6, 1fr); }
+	  .review-card{ grid-column: span 6; }
+	}
+	@media (max-width:480px){
+	  .reviews{ grid-template-columns: repeat(2, 1fr); gap: 12px; }
+	  .review-card{ grid-column: span 2; grid-template-columns: 40px 1fr; }
+	  .brand-badge{ width:40px; height:40px; border-radius:10px; }
+	}
+
+
+
 </style>
 </head>
 <body>
@@ -1351,6 +1406,24 @@
             <div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
         </div>
     </section>
+
+
+
+
+	<!-- 후기 섹션 -->
+	<section class="section" id="sec-reviews" aria-label="훈픽스 구매 후기">
+	  <div class="section-head">
+		<h2 class="section-title">훈픽스 이용 후기</h2>
+		<span class="kicker">훈픽스 링크를 통해 구매한 간단 후기</span>
+	  </div>
+	  <div class="surface">
+		<div class="reviews" id="reviewsGrid"></div>
+	  </div>
+	</section>
+
+
+
+
 </main>
 
 <!-- Footer -->
@@ -1882,6 +1955,129 @@ drawPromoBanners();
 drawBudgetPC();
 initFilterBar();
 
+</script>
+
+
+
+<script>
+const REVIEWS = [
+  { name: "현*준", stars: 5, title: "한눈에 상품 찾기 쉬워요", text: "훈픽스 페이지 UI가 깔끔해서 원하는 쿠팡 상품을 바로 찾을 수 있었어요." },
+  { name: "서*연", stars: 5, title: "앱 없어도 바로 검색 가능", text: "쿠팡 앱 설치 없이도 상품을 바로 검색하고 구매까지 가능해서 편했어요." },
+  { name: "민*지", stars: 5, title: "심플하고 직관적인 구성", text: "복잡한 메뉴 없이 필요한 링크만 보여줘서 보기 편했어요." },
+  { name: "도*훈", stars: 4, title: "빠른 로딩과 깔끔한 페이지", text: "페이지 로딩도 빠르고 UX가 단순해서 처음 이용했는데도 금방 알겠더라구요." },
+  { name: "지*호", stars: 5, title: "쿠팡 상품 찾기가 쉬웠어요", text: "검색창이 명확해서 원하는 제품 바로 찾고 구매할 수 있었습니다." },
+  { name: "이*빈", stars: 4, title: "심플한 인터페이스가 좋아요", text: "불필요한 정보가 없어서 집중해서 상품만 볼 수 있었어요." },
+  { name: "박*서", stars: 5, title: "디자인이 감각적이에요", text: "모던하고 깔끔한 느낌이라 신뢰감이 들었어요. UX도 잘 되어 있네요." },
+  { name: "김*선", stars: 4, title: "PC, 모바일 둘 다 편리", text: "모바일에서도 보기 편하고 PC에서도 구성 그대로 보여서 좋았습니다." },
+  { name: "윤*혁", stars: 5, title: "직관적인 검색 시스템", text: "필요한 카테고리를 바로 눌러서 원하는 쿠팡 상품 찾기가 쉬웠어요." },
+  { name: "한*은", stars: 5, title: "쿠팡으로 자연스럽게 연결", text: "링크 클릭만으로 바로 쿠팡 상품 페이지로 이동돼서 매끄러웠어요." },
+  { name: "정*호", stars: 4, title: "심플한 UX라 보기 편해요", text: "첫 방문이었는데도 구조가 단순해서 금방 익숙해졌어요." },
+  { name: "박*림", stars: 5, title: "불필요한 광고가 없어요", text: "광고나 팝업 없이 바로 상품 볼 수 있어서 좋았습니다." },
+  { name: "신*진", stars: 5, title: "깔끔한 페이지 구성", text: "필요한 정보만 딱 보여줘서 쿠팡 상품 고르기가 쉬웠어요." },
+  { name: "최*혁", stars: 4, title: "UX가 직관적이라 좋아요", text: "버튼 위치나 디자인이 명확해서 어디를 눌러야 할지 헷갈리지 않았어요." },
+  { name: "배*지", stars: 5, title: "한눈에 보이는 상품 추천", text: "카테고리별로 정리돼 있어서 원하는 상품을 빠르게 찾을 수 있었습니다." },
+  { name: "문*아", stars: 5, title: "쿠팡앱 없어도 편리", text: "앱이 없어도 바로 쿠팡 상품 페이지로 이동되니까 너무 간편했어요." },
+  { name: "오*성", stars: 4, title: "UX가 잘 설계된 페이지", text: "단순하지만 사용자 입장에서 필요한 기능만 있어 좋았습니다." },
+  { name: "정*연", stars: 5, title: "검색이 빠르고 결과가 깔끔", text: "입력하자마자 관련 상품이 바로 보여서 정말 편했어요." },
+  { name: "김*원", stars: 5, title: "디자인이 모던해서 보기 좋아요", text: "폰에서도 깔끔하게 정렬돼 있어서 눈이 피로하지 않았어요." },
+  { name: "박*하", stars: 5, title: "훈픽스 통해 쿠팡 구매 편했어요", text: "쿠팡 상품으로 자연스럽게 이어져서 구매 과정이 간단했습니다." },
+];
+
+
+function pickCountByWidth(w) {
+  if (w <= 480) return 3;
+  if (w <= 780) return 4;
+  if (w <= 1200) return 6;
+  return 6;
+}
+
+function shuffleInPlace(arr) {
+  const a = arr.slice();
+  if (window.crypto?.getRandomValues) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const u32 = new Uint32Array(1);
+      crypto.getRandomValues(u32);
+      const j = u32[0] % (i + 1);
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+  } else {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+  }
+  return a;
+}
+
+function starsToText(n) {
+  const full = "★".repeat(Math.max(0, Math.min(5, n|0)));
+  const empty = "☆".repeat(5 - full.length);
+  return full + empty;
+}
+
+/** 후기 카드 생성 (brand-badge 사용) */
+function createReviewCard({ name, stars, title, text }) {
+  const article = document.createElement("article");
+  article.className = "review-card";
+
+  // 브랜드 뱃지 SVG
+  const badge = document.createElement("div");
+  badge.className = "brand-badge";
+  badge.setAttribute("aria-hidden", "true");
+  badge.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z"/>
+    </svg>
+  `;
+
+  const body = document.createElement("div");
+  body.className = "review-body";
+
+  const top = document.createElement("div");
+  top.className = "review-top";
+
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "review-name";
+  nameSpan.textContent = name;
+
+  const starSpan = document.createElement("span");
+  starSpan.className = "review-stars";
+  starSpan.setAttribute("aria-label", `별점 ${stars}점`);
+  starSpan.textContent = starsToText(stars);
+
+  top.appendChild(nameSpan);
+  top.appendChild(starSpan);
+
+  const titleDiv = document.createElement("div");
+  titleDiv.className = "review-title";
+  titleDiv.textContent = title;
+
+  const textP = document.createElement("p");
+  textP.className = "review-text";
+  textP.textContent = text;
+
+  body.appendChild(top);
+  body.appendChild(titleDiv);
+  body.appendChild(textP);
+
+  article.appendChild(badge);
+  article.appendChild(body);
+  return article;
+}
+
+/** 랜덤 렌더 */
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("reviewsGrid");
+  if (!grid) return;
+
+  const count = Math.min(pickCountByWidth(window.innerWidth), REVIEWS.length);
+  const picked = shuffleInPlace(REVIEWS).slice(0, count);
+
+  grid.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  picked.forEach(item => frag.appendChild(createReviewCard(item)));
+  grid.appendChild(frag);
+});
 </script>
 
 
