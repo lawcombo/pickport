@@ -1632,13 +1632,13 @@ function drawProducts() {
 	*/
 
     // ✅ 각 섹션 12개만 노출(중복 없이)
-    const p = pickDaily(DATA.popular, 12);
-    const o = pickDaily(DATA.oneplus, 12);
-    const f = pickDaily(DATA.fashion, 12);
-    const r = pickDaily(DATA.fresh, 12);
+    const p = pickDaily(DATA.popular, 6);
+    const o = pickDaily(DATA.oneplus, 6);
+    const f = pickDaily(DATA.fashion, 6);
+    const r = pickDaily(DATA.fresh, 6);
 	//const s = pickDaily(DATA.speech, 12);
 	// 새로고침마다 셔플하려면:
-	const s = shuffleOnce(DATA.speech).slice(0, 12);
+	const s = shuffleOnce(DATA.speech).slice(0, 6);
 
     pWrap.innerHTML = p.map(Card).join('');
     oWrap.innerHTML = o.map(Card).join('');
@@ -1706,7 +1706,7 @@ function drawBudgetPC() {
     const wrap = document.getElementById('gridBudgetPC');
     if (!wrap) return;
     // 접속/새로고침 때마다 무작위 순서, 최대 12개
-    const items = shuffleOnce(DATA.budgetpc).slice(0, 12);
+    const items = shuffleOnce(DATA.budgetpc).slice(0, 6);
     wrap.innerHTML = items.map(Card).join('');
 }
 
