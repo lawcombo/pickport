@@ -1329,6 +1329,28 @@
         </div>
     </section>
 
+
+	   <!-- 언어치료 교구 섹션 -->
+    <section class="section" id="sec-speech">
+        <div class="section-head">
+            <h2 class="section-title">언어치료 교구 추천</h2>
+            <span class="kicker">
+                <!-- 필요시 링크 교체 -->
+                <a href="https://link.coupang.com/a/cWUDb8" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridSpeech"></div>
+        </div>
+    </section>
+
+
+
+
+
+
     <!-- 로켓프레시 섹션 -->
     <section class="section" id="sec-fresh">
         <div class="section-head">
@@ -1413,7 +1435,7 @@
 	<!-- 후기 섹션 -->
 	<section class="section" id="sec-reviews" aria-label="훈픽스 구매 후기">
 	  <div class="section-head">
-		<h2 class="section-title">훈픽스 (HoonPick's)</h2>
+		<h2 class="section-title">훈픽스 (HoonPick's) 이용 후기</h2>
 		<span class="kicker">훈픽스 링크를 통해 구매한 간단 후기</span>
 	  </div>
 	  <div class="surface">
@@ -1498,6 +1520,29 @@ const DATA = {
         "https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8", "https://coupa.ng/ckgeXw", "https://coupa.ng/ckgeXW",
         "https://coupa.ng/ckgeYt", "https://coupa.ng/ckgeYD", "https://coupa.ng/ckgeYV", "https://coupa.ng/ckgeZl"
     ],
+    speech: [
+        "https://coupa.ng/ckgChp",
+        "https://coupa.ng/ckgCh7",
+        "https://coupa.ng/ckgCi7",
+        "https://coupa.ng/ckgCjg",
+        "https://coupa.ng/ckgCjz",
+        "https://coupa.ng/ckgCjL",
+        "https://coupa.ng/ckgCj8",
+        "https://coupa.ng/ckgCkh",
+        "https://coupa.ng/ckgCkL",
+        "https://coupa.ng/ckgCk2",
+        "https://coupa.ng/ckgClj",
+        "https://coupa.ng/ckgClu",
+        "https://coupa.ng/ckgCxY",
+        "https://coupa.ng/ckgClZ",
+        "https://coupa.ng/ckgCl6",
+        "https://coupa.ng/ckgCmf",
+        "https://coupa.ng/ckgCmp",
+        "https://coupa.ng/ckgCmE",
+        "https://coupa.ng/ckgCmV",
+        "https://coupa.ng/ckgCnn",
+        "https://coupa.ng/ckgCnx"
+    ],
     fresh: [
         "https://coupa.ng/ckeU9G", "https://coupa.ng/ckeU9P", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckeU99",
         "https://coupa.ng/ckeVai", "https://coupa.ng/ckeVaq", "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVaL",
@@ -1575,6 +1620,7 @@ function drawProducts() {
     const oWrap = $('#gridOnePlus');
     const fWrap = $('#gridFashion');
     const rWrap = $('#gridFresh');
+	const sWrap = $('#gridSpeech');
     /*
 	const p = shuffleDaily(DATA.popular);
     const o = shuffleDaily(DATA.oneplus);
@@ -1587,11 +1633,15 @@ function drawProducts() {
     const o = pickDaily(DATA.oneplus, 12);
     const f = pickDaily(DATA.fashion, 12);
     const r = pickDaily(DATA.fresh, 12);
+	//const s = pickDaily(DATA.speech, 12);
+	// 새로고침마다 셔플하려면:
+	const s = shuffleOnce(DATA.speech).slice(0, 12);
 
     pWrap.innerHTML = p.map(Card).join('');
     oWrap.innerHTML = o.map(Card).join('');
     fWrap.innerHTML = f.map(Card).join('');
     rWrap.innerHTML = r.map(Card).join('');
+	sWrap.innerHTML = s.map(Card).join('');
 
 }
 
@@ -1700,6 +1750,10 @@ const FILTER_SECTIONS = [{
     {
         id: "sec-fashion",
         label: "패션"
+    },
+	{
+        id: "sec-speech",
+        label: "언어치료 교구"
     },
     {
         id: "sec-fresh",
