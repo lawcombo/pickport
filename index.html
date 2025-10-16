@@ -2,38 +2,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>훈픽스 (HoonPick's) | 쿠팡 큐레이션</title>
+  <meta name="color-scheme" content="light dark" />
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>훈픽스 (HoonPick's) | 쿠팡 큐레이션</title>
-<meta name="color-scheme" content="light dark" />
 
-<!-- Google Search Console 소유권 확인용 -->
-<meta name="google-site-verification" content="pIhBwRcHXApbMp71yU7wo7u6xGiIueNQuev55azt9vw" />
-
-<!-- NAVER 서치어드바이저 소유권 확인용 -->
-<meta name="naver-site-verification" content="e64af32472d1d9c6e0cebe95e944747cb38c3122" />
-
-<!-- ✅ 정규 URL 지정 -->
-<link rel="canonical" href="https://lawcombo.github.io/pickport/" />
-
-<!-- 검색엔진(SEO)용 -->
-<meta name="description" content="쿠팡 베스트, 가성비 컴퓨터, 패션, 로켓프레시 등 오늘의 추천상품을 한눈에 확인하세요! 훈픽스에서 인기 쿠팡템을 빠르게 픽하세요.">
-<meta name="keywords" content="쿠팡 추천, 쿠팡 베스트, 가성비 컴퓨터, 훈픽스, hoonpicks, 로켓프레시, 패션 추천, 1+1, 오늘의 특가, pickport">
-<meta name="robots" content="index, follow">
-
-<!-- 전화번호 자동 링크 방지 -->
 <meta name="format-detection" content="telephone=no" />
-
-<!-- SNS 공유(Open Graph)용 -->
-<meta property="og:url" content="https://lawcombo.github.io/pickport/" />
+<meta property="og:url" content="https://hoonpicks.co.kr" />
 <meta property="og:title" content="훈픽스 (HoonPick's)" />
 <meta property="og:description" content="오늘의 쿠팡 베스트, 훈픽스에서 한눈에 확인하세요" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
-<!-- 
-<meta property="og:image" content="https://lawcombo.github.io/pickport/assets/images/og-thumbnail.jpg" />
--->
+
 
 
 <style>
@@ -988,6 +969,7 @@
 	  gap: 10px;
 	  overflow-x: auto;
 	  padding-bottom: 4px;
+  	  padding-top: 4px;
 	  scroll-snap-type: x mandatory;
 	}
 
@@ -1203,7 +1185,7 @@
 	<!-- 배너 세로형 카드 섹션 -->
 	<section class="section" id="sec-promo-banners">
 	  <div class="section-head">
-		<h2 class="section-title">배너 광고</h2>
+		<h2 class="section-title">배너 상품</h2>
 	  </div>
 	  <div class="surface">
 		<div class="promo-banner-grid" id="promoBannerGrid"></div>
@@ -1402,10 +1384,10 @@
 // ====== 데이터 (원본 유지) ======
 const DATA = {
     deals: [
-        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W", 
-		"https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckgcAK", "https://coupa.ng/ckgcBX"
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W",
+        "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckgcAK", "https://coupa.ng/ckgcBX"
     ],
-	popular: [
+    popular: [
         "https://coupa.ng/ckfadJ", "https://coupa.ng/ckfadT", "https://coupa.ng/ckfadZ", "https://coupa.ng/ckfad4",
         "https://coupa.ng/ckfaxK", "https://coupa.ng/ckfayX", "https://coupa.ng/ckfaes", "https://coupa.ng/ckfaez",
         "https://coupa.ng/ckfaeG", "https://coupa.ng/ckfaeN", "https://coupa.ng/ckfaeS", "https://coupa.ng/ckfaeW",
@@ -1415,40 +1397,40 @@ const DATA = {
     oneplus: [
         "https://coupa.ng/ckffMX", "https://coupa.ng/ckffND", "https://coupa.ng/ckffOj", "https://coupa.ng/ckffOS",
         "https://coupa.ng/ckffPH", "https://coupa.ng/ckffR7", "https://coupa.ng/ckffUo", "https://coupa.ng/ckff4q",
-		"https://coupa.ng/ckgeZz", "https://coupa.ng/ckgeZ5", "https://coupa.ng/ckge0t", "https://coupa.ng/ckge1k"
+        "https://coupa.ng/ckgeZz", "https://coupa.ng/ckgeZ5", "https://coupa.ng/ckge0t", "https://coupa.ng/ckge1k"
     ],
-	budgetpc: [
-	  "https://coupa.ng/ckgiWN",
-	  "https://coupa.ng/ckgiXu",
-	  "https://coupa.ng/ckgiXS",
-	  "https://coupa.ng/ckgiYx",
-	  "https://coupa.ng/ckgiZi",
-	  "https://coupa.ng/ckgiZG",
-	  "https://coupa.ng/ckgiZZ",
-	  "https://coupa.ng/ckgi0p",
-	  "https://coupa.ng/ckgi1k",
-	  "https://coupa.ng/ckgi1U",
-	  "https://coupa.ng/ckgi2q",
-	  "https://coupa.ng/ckgi5K",
-	  "https://coupa.ng/ckgi6g",
-	  "https://coupa.ng/ckgi6H",
-	  "https://coupa.ng/ckgi7c"
-	],
+    budgetpc: [
+        "https://coupa.ng/ckgiWN",
+        "https://coupa.ng/ckgiXu",
+        "https://coupa.ng/ckgiXS",
+        "https://coupa.ng/ckgiYx",
+        "https://coupa.ng/ckgiZi",
+        "https://coupa.ng/ckgiZG",
+        "https://coupa.ng/ckgiZZ",
+        "https://coupa.ng/ckgi0p",
+        "https://coupa.ng/ckgi1k",
+        "https://coupa.ng/ckgi1U",
+        "https://coupa.ng/ckgi2q",
+        "https://coupa.ng/ckgi5K",
+        "https://coupa.ng/ckgi6g",
+        "https://coupa.ng/ckgi6H",
+        "https://coupa.ng/ckgi7c"
+    ],
     fashion: [
         "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVfs", "https://coupa.ng/ckeVfD", "https://coupa.ng/ckeVgb",
         "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVhm", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeVod",
         "https://coupa.ng/ckeVoh", "https://coupa.ng/ckeVox", "https://coupa.ng/ckeVpS", "https://coupa.ng/ckeVp0",
         "https://coupa.ng/ckeVqg", "https://coupa.ng/ckeVqH", "https://coupa.ng/ckeVqR", "https://coupa.ng/ckeVqY",
-        "https://coupa.ng/ckffD3", "https://coupa.ng/ckeVrr", "https://coupa.ng/ckeVry", "https://coupa.ng/ckeVrF", 
-		"https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8", "https://coupa.ng/ckgeXw", "https://coupa.ng/ckgeXW",
-		"https://coupa.ng/ckgeYt", "https://coupa.ng/ckgeYD", "https://coupa.ng/ckgeYV", "https://coupa.ng/ckgeZl"
+        "https://coupa.ng/ckffD3", "https://coupa.ng/ckeVrr", "https://coupa.ng/ckeVry", "https://coupa.ng/ckeVrF",
+        "https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8", "https://coupa.ng/ckgeXw", "https://coupa.ng/ckgeXW",
+        "https://coupa.ng/ckgeYt", "https://coupa.ng/ckgeYD", "https://coupa.ng/ckgeYV", "https://coupa.ng/ckgeZl"
     ],
     fresh: [
         "https://coupa.ng/ckeU9G", "https://coupa.ng/ckeU9P", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckeU99",
         "https://coupa.ng/ckeVai", "https://coupa.ng/ckeVaq", "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVaL",
         "https://coupa.ng/ckeVaT", "https://coupa.ng/ckeVbh", "https://coupa.ng/ckeVbr", "https://coupa.ng/ckeVcX",
         "https://coupa.ng/ckeVbI", "https://coupa.ng/ckeVbU", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckeVek",
-        "https://coupa.ng/ckeVdR", "https://coupa.ng/ckeVd9", 
+        "https://coupa.ng/ckeVdR", "https://coupa.ng/ckeVd9",
     ],
     banners: [{
             href: "https://link.coupang.com/a/cWqYJ7",
@@ -1478,27 +1460,27 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 // === 유틸: 매일 동일 시드로 셔플 ===
 const shuffleDaily = (arr) => {
-  const seed = new Date().toDateString().split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = (seed + i) % copy.length;
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
+    const seed = new Date().toDateString().split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = (seed + i) % copy.length;
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
 };
 
 // ✅ 추가: 매일 랜덤으로 n개만 뽑기(중복 없이)
 function pickDaily(arr, n = 12) {
-  const s = shuffleDaily(arr);
-  return s.slice(0, Math.min(n, s.length));
+    const s = shuffleDaily(arr);
+    return s.slice(0, Math.min(n, s.length));
 }
 
 // 필요 시 “무조건 12개”가 필요하면(원본이 12개 미만일 때 중복 허용):
 function pickDailyFill(arr, n = 12) {
-	const s = shuffleDaily(arr);
-	const out = [];
-	for (let i = 0; i < n; i++) out.push(s[i % s.length]);
-	return out;
+    const s = shuffleDaily(arr);
+    const out = [];
+    for (let i = 0; i < n; i++) out.push(s[i % s.length]);
+    return out;
 }
 
 
@@ -1527,11 +1509,11 @@ function drawProducts() {
     const r = shuffleDaily(DATA.fresh);
 	*/
 
-	// ✅ 각 섹션 12개만 노출(중복 없이)
-	const p = pickDaily(DATA.popular, 12);
-	const o = pickDaily(DATA.oneplus, 12);
-	const f = pickDaily(DATA.fashion, 12);
-	const r = pickDaily(DATA.fresh, 12);
+    // ✅ 각 섹션 12개만 노출(중복 없이)
+    const p = pickDaily(DATA.popular, 12);
+    const o = pickDaily(DATA.oneplus, 12);
+    const f = pickDaily(DATA.fashion, 12);
+    const r = pickDaily(DATA.fresh, 12);
 
     pWrap.innerHTML = p.map(Card).join('');
     oWrap.innerHTML = o.map(Card).join('');
@@ -1559,51 +1541,48 @@ function drawBanners() {
 
 // (1) 주소/HTML 목록 (네가 준 항목 그대로)
 const PROMO_BANNERS = [
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932226&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931780&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932230&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931601&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932233&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932235&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932236&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
-  `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932238&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932226&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931780&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932230&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931601&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932233&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932235&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932236&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932238&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`
 ];
 
 // (2) 새로고침마다 섞기 → 3개만 뽑기
 function shuffleOnce(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }
-function pick3(arr) { return shuffleOnce(arr).slice(0, Math.min(3, arr.length)); }
+
+function pick3(arr) {
+    return shuffleOnce(arr).slice(0, Math.min(3, arr.length));
+}
 
 // (3) 렌더
 function drawPromoBanners() {
-  const wrap = document.getElementById('promoBannerGrid');
-  if (!wrap) return;
-  const items = pick3(PROMO_BANNERS);
-  wrap.innerHTML = items.map(html => `<div class="promo-banner-item">${html}</div>`).join('');
+    const wrap = document.getElementById('promoBannerGrid');
+    if (!wrap) return;
+    const items = pick3(PROMO_BANNERS);
+    wrap.innerHTML = items.map(html => `<div class="promo-banner-item">${html}</div>`).join('');
 }
-
-
 
 
 
 
 function drawBudgetPC() {
-  const wrap = document.getElementById('gridBudgetPC');
-  if (!wrap) return;
-  // 접속/새로고침 때마다 무작위 순서, 최대 12개
-  const items = shuffleOnce(DATA.budgetpc).slice(0, 12);
-  wrap.innerHTML = items.map(Card).join('');
+    const wrap = document.getElementById('gridBudgetPC');
+    if (!wrap) return;
+    // 접속/새로고침 때마다 무작위 순서, 최대 12개
+    const items = shuffleOnce(DATA.budgetpc).slice(0, 12);
+    wrap.innerHTML = items.map(Card).join('');
 }
-
-
-
-
 
 
 
@@ -1629,102 +1608,267 @@ function initTopBtn() {
 /* ===== Filter Bar Logic ===== */
 
 // (A) 버튼 정의만 바꾸면 확장 쉬움!
-const FILTER_SECTIONS = [
-  { id: "sec-deals",    label: "오늘의 특가" },
-  { id: "sec-popular",  label: "최근 많이 팔린 상품" },
-  { id: "sec-oneplus",  label: "1+1 상품" },
-  { id: "sec-budgetpc", label: "가성비 컴퓨터" },
-  { id: "sec-fashion",  label: "패션" },
-  { id: "sec-fresh",    label: "로켓프레시" },
+const FILTER_SECTIONS = [{
+        id: "sec-deals",
+        label: "오늘의 특가"
+    },
+    {
+        id: "sec-popular",
+        label: "최근 많이 팔린 상품"
+    },
+    {
+        id: "sec-oneplus",
+        label: "1+1 상품"
+    },
+    {
+        id: "sec-budgetpc",
+        label: "가성비 컴퓨터"
+    },
+    {
+        id: "sec-fashion",
+        label: "패션"
+    },
+    {
+        id: "sec-fresh",
+        label: "로켓프레시"
+    },
 ];
 // 👉 새 섹션을 만들면 위 배열에 { id:"sec-새아이디", label:"보일이름" } 한 줄 추가하면 끝!
 
-function getHeaderOffset(){
-  const header = document.querySelector('.header');
-  return header ? header.offsetHeight : 0;
+function getHeaderOffset() {
+    const header = document.querySelector('.header');
+    return header ? header.offsetHeight : 0;
 }
 
-function scrollToSection(id){
-  const el = document.getElementById(id);
-  if(!el) return;
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-  const y = el.getBoundingClientRect().top + window.scrollY;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const y = el.getBoundingClientRect().top + scrollTop;
 
-  // 👇 헤더 + 필터바 높이(대략 60px 정도) + 여유 10px
-  const offset = getHeaderOffset() + 70;
 
-  window.scrollTo({ top: Math.max(0, y - offset), behavior: 'smooth' });
+    // ✅ PC/모바일 분기 — PC는 기존 그대로, 모바일은 헤더+필터 더 높게
+    const isMobile = window.innerWidth <= 780;
+    const offset = getHeaderOffset() + (isMobile ? 65 : 70);
+
+    window.scrollTo({
+        top: Math.max(0, y - offset),
+        behavior: 'smooth'
+    });
+
 }
+
+// === 전역 플래그 추가 ===
+// 🔽 추가: 클릭 스크롤 해제 타이머(전역)
+let navUnlockTimer = null;
+
+// 🔽 추가: 필터바 공유 컨텍스트(전역)
+const FILTER_CTX = {
+    track: null, // DOM: #filterChips
+    chips: [], // NodeList of .filter-chip
+    map: null // Map(sectionId -> chipEl)
+};
+
+// 클릭/스크롤 중 옵저버 일시정지용 (모든 함수에서 접근 가능)
+let userNavigating = false;
+
+function releaseNavLock() {
+    userNavigating = false;
+}
+
 
 
 // 렌더
-function initFilterBar(){
-  // 헤더 높이를 CSS var로 반영(Sticky 보정)
-  document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+function initFilterBar() {
+    // 헤더 높이를 CSS var로 반영(Sticky 보정)
+    document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
 
-  const track = document.getElementById('filterChips');
-  if(!track) return;
+    const track = document.getElementById('filterChips');
+    if (!track) return;
 
-  track.innerHTML = FILTER_SECTIONS.map((s, i) => `
+    // 버튼 렌더
+    track.innerHTML = FILTER_SECTIONS.map((s, i) => `
     <button class="filter-chip" role="tab" aria-selected="${i===0?'true':'false'}" data-target="${s.id}">
       ${s.label}
     </button>
   `).join('');
 
-  track.addEventListener('click', (e)=>{
-    const btn = e.target.closest('.filter-chip');
-    if(!btn) return;
-    const id = btn.getAttribute('data-target');
-    scrollToSection(id);
-  });
+    // ✅ chips/map 은 클릭 리스너보다 "위"에서 준비
+    const chips = Array.from(track.querySelectorAll('.filter-chip'));
+    const map = new Map(FILTER_SECTIONS.map(s => [s.id, chips.find(c => c.dataset.target === s.id)]));
 
-  // 스크롤스파이: 현재 보이는 섹션 하이라이트
-  const chips = Array.from(track.querySelectorAll('.filter-chip'));
-  const map = new Map(FILTER_SECTIONS.map(s => [s.id, chips.find(c => c.dataset.target === s.id)]));
+    // 🔽 추가: 전역 컨텍스트에 주입
+    FILTER_CTX.track = track;
+    FILTER_CTX.chips = chips;
+    FILTER_CTX.map = map;
 
-  const observer = new IntersectionObserver((entries)=>{
-    // 가장 화면 상단/중앙 쪽에 가까운 섹션을 active
-    let best = null;
-    let bestScore = -Infinity;
-    const vh = window.innerHeight;
 
-    entries.forEach(ent=>{
-      if(!ent.isIntersecting) return;
-      // 중앙에서 얼마나 가까운지 점수
-      const rect = ent.target.getBoundingClientRect();
-      const centerDist = Math.abs(rect.top + rect.height/2 - vh/2);
-      const score = 1 / (1 + centerDist);
-      if(score > bestScore){
-        bestScore = score;
-        best = ent.target.id;
-      }
+    // 클릭 시: 즉시 칩 활성화 + 스크롤
+    track.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-chip');
+        if (!btn) return;
+        const id = btn.getAttribute('data-target');
+
+        // 클릭 즉시 칩 활성화(옵저버 반응 전 체감용)
+        chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+        btn.setAttribute('aria-selected', 'true');
+
+        // ✅ [추가] 클릭 스크롤 동안 옵저버 개입 금지
+        userNavigating = true;
+        if (navUnlockTimer) {
+            clearTimeout(navUnlockTimer);
+            navUnlockTimer = null;
+        }
+
+        scrollToSection(id);
+
+        // ✅ 스크롤 종료 시 락 해제 (지원 브라우저는 scrollend, 그 외 타임아웃)
+        if ('onscrollend' in window) {
+            const once = () => {
+                releaseNavLock();
+                window.removeEventListener('scrollend', once);
+            };
+            window.addEventListener('scrollend', once);
+        } else {
+            navUnlockTimer = setTimeout(releaseNavLock, 450); // 스무스 스크롤 지속시간과 유사
+        }
     });
 
-    if(best && map.has(best)){
-      chips.forEach(c => c.setAttribute('aria-selected','false'));
-      map.get(best).setAttribute('aria-selected','true');
-      // 자동 스크롤(칩 트랙) 가시성 확보
-      map.get(best).scrollIntoView({ block:'nearest', inline:'center', behavior:'smooth' });
+    // ==== 옵저버 생성 ====
+    function makeObserver() {
+        const topGuard = getHeaderOffset() + (window.innerWidth <= 780 ? 110 : 70);
+        return new IntersectionObserver((entries) => {
+            // 🔒 클릭/프로그래매틱 스크롤 중에는 옵저버 패스 (PC 트랙 흔들림 방지)
+            if (userNavigating) return;
+
+            // 가장 화면 중앙에 가까운 섹션을 active
+            let best = null,
+                bestScore = -Infinity;
+            const vh = window.innerHeight;
+
+            entries.forEach(ent => {
+                if (!ent.isIntersecting) return;
+                const rect = ent.target.getBoundingClientRect();
+                const centerDist = Math.abs((rect.top + rect.height / 2) - vh / 2);
+                const score = 1 / (1 + centerDist);
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = ent.target.id;
+                }
+            });
+
+            if (best && map.has(best)) {
+                const next = map.get(best);
+                // ✅ [추가] 이미 선택된 칩이면 아무것도 하지 않음(중복 스크롤/지터 방지)
+                const current = track.querySelector('.filter-chip[aria-selected="true"]');
+                if (current === next) return;
+
+                chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+                next.setAttribute('aria-selected', 'true');
+                // 칩 트랙 안에서 보이도록
+                next.scrollIntoView({
+                    block: 'nearest',
+                    inline: 'center',
+                    behavior: 'smooth'
+                });
+            }
+        }, {
+            root: null,
+            rootMargin: `-${topGuard}px 0px -55% 0px`,
+            threshold: [0.15, 0.35, 0.55]
+        });
     }
-  }, {
-    // 헤더 높이만큼 위쪽 감안
-    root: null,
-    rootMargin: `-${getHeaderOffset()+20}px 0px -60% 0px`, // 위쪽 여백 보정 + 아래 넉넉히
-    threshold: [0.2, 0.4, 0.6]
-  });
 
-  FILTER_SECTIONS.forEach(s=>{
-    const el = document.getElementById(s.id);
-    if(el) observer.observe(el);
-  });
+    let observer = makeObserver();
 
-  // 리사이즈/폰 회전 시 보정
-  window.addEventListener('resize', () => {
-    document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
-  }, {passive:true});
+    // 관찰 시작
+    FILTER_SECTIONS.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (el) observer.observe(el);
+    });
+
+    // ==== 옵저버 재생성 훅 ====
+    function refreshObserver() {
+        document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+        observer.disconnect();
+        observer = makeObserver();
+        FILTER_SECTIONS.forEach(s => {
+            const el = document.getElementById(s.id);
+            if (el) observer.observe(el);
+        });
+    }
+
+    // 화면 크기/회전/주소창(visualViewport) 변화 모두 대응
+    window.addEventListener('resize', refreshObserver, {
+        passive: true
+    });
+    window.addEventListener('orientationchange', refreshObserver, {
+        passive: true
+    });
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', refreshObserver, {
+            passive: true
+        });
+        window.visualViewport.addEventListener('scroll', refreshObserver, {
+            passive: true
+        });
+    }
 }
 
 
+let rafId = null;
+
+function updateActiveByScroll() {
+    if (userNavigating) return; // 클릭 스크롤 중엔 패스
+    const topGuard = getHeaderOffset() + (window.innerWidth <= 780 ? 110 : 70);
+    const midY = topGuard + (window.innerHeight - topGuard) / 2;
+
+    // 화면 중앙에 가장 가까운 섹션 찾기
+    let bestId = null,
+        bestScore = Infinity;
+    for (const s of FILTER_SECTIONS) {
+        const el = document.getElementById(s.id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const d = Math.abs(center - midY);
+        if (d < bestScore) {
+            bestScore = d;
+            bestId = s.id;
+        }
+    }
+
+    const {
+        track,
+        chips,
+        map
+    } = FILTER_CTX;
+    if (!track || !map || !chips.length) return; // 초기화 전이면 패스
+
+    if (bestId && map.has(bestId)) {
+        const current = track.querySelector('.filter-chip[aria-selected="true"]');
+        const next = map.get(bestId);
+        if (current !== next) {
+            chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+            next.setAttribute('aria-selected', 'true');
+            next.scrollIntoView({
+                block: 'nearest',
+                inline: 'center',
+                behavior: 'smooth'
+            });
+        }
+    }
+
+}
+
+window.addEventListener('scroll', () => {
+    // 옵저버가 못 잡는 프레임을 보조
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(updateActiveByScroll);
+}, {
+    passive: true
+});
 
 
 
