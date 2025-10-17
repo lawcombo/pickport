@@ -2181,6 +2181,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
+
+<!-- 열린 모달 수”를 기준으로 스크롤을 잠그고 해제 -->
+<script>
+/* ===== Global ModalGuard: modal open count 기반으로 body scroll lock 관리 ===== */
+(() => {
+  const ModalGuard = (function(){
+    let openCount = 0;
+    let scrollY = 0;
+
+    function lock(){
+      if (openCount === 0) {
+        scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        const b = document.body;
+        b.style.position = 'fixed';
+        b.style.top = `-${scrollY}px`;
+        b.style.left = '0';
+        b.style.right = '0';
+        b.style.width = '100%';
+        b.style.overflow = 'hidden';
+      }
+      openCount++;
+    }
+
+    function unlock(){
+      openCount = Math.max(0, openCount - 1);
+      if (openCount === 0) {
+        const b = document.body;
+        b.style.position = '';
+        b.style.top = '';
+        b.style.left = '';
+        b.style.right = '';
+        b.style.width = '';
+        b.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      }
+    }
+
+    function isLocked(){ return openCount > 0; }
+    function count(){ return openCount; }
+
+    return { lock, unlock, isLocked, count };
+  })();
+
+  // 전역 노출
+  window.ModalGuard = ModalGuard;
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
 <!-- ========== [START] 최초 진입 안내 모달 v5 (Smooth Anim + Scroll Lock) ========== -->
 <style>
   :root { --cpz: 9999; }
@@ -2277,53 +2336,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrap = document.getElementById('cpFirstVisitV5');
   const ok   = document.getElementById('cpfv5Ok');
 
-  let _scrollY = 0;
-  function lockScroll(){
-    // 저장 후 body 고정 (iOS 대응: position:fixed + top)
-    _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    const b = document.body;
-    b.style.position = 'fixed';
-    b.style.top = `-${_scrollY}px`;
-    b.style.left = '0'; b.style.right = '0';
-    b.style.width = '100%';
-    b.style.overflow = 'hidden';
-  }
-  function unlockScroll(){
-    const b = document.body;
-    b.style.position = ''; b.style.top = ''; b.style.left = ''; b.style.right = '';
-    b.style.width = ''; b.style.overflow = '';
-    window.scrollTo(0, _scrollY);
+  function openModal(){
+    if (wrap.style.display !== 'flex') {
+      wrap.style.display = 'flex';
+      requestAnimationFrame(() => wrap.classList.add('show'));
+      window.ModalGuard?.lock();  // ✅ 전역 가드로 잠금
+      setTimeout(() => ok?.focus(), 0);
+    }
   }
 
-  function openModal(){
-    wrap.style.display = 'flex';
-    // 첫 프레임 이후 show 추가(트랜지션 트리거)
-    requestAnimationFrame(() => wrap.classList.add('show'));
-    lockScroll();
-    setTimeout(() => ok?.focus(), 0);
-  }
   function closeModal(){
-    wrap.classList.remove('show');
-    // 트랜지션이 끝난 뒤 display:none, 스크롤 복구
-    setTimeout(() => { wrap.style.display = 'none'; unlockScroll(); }, 220);
+    if (wrap.style.display === 'flex') {
+      wrap.classList.remove('show');
+      setTimeout(() => {
+        wrap.style.display = 'none';
+        window.ModalGuard?.unlock(); // ✅ 전역 가드로 해제(다른 모달이 열려있으면 유지됨)
+      }, 220);
+    }
   }
 
   ok.addEventListener('click', closeModal);
   wrap.addEventListener('click', e => { if (e.target === wrap) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // 매 페이지 로드 시마다 표시
+  // 페이지 로드시 표시 (원 코드 로직 유지)
   if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
   else document.addEventListener('DOMContentLoaded', openModal);
-
-  /* (옵션) 하루 1번만 띄우고 싶다면, 위 openModal() 호출 대신 아래 블록을 사용하세요.
-  const KEY = 'cp_first_visit_banner_v5_date';
-  const today = new Date().toISOString().slice(0,10);
-  const shown = localStorage.getItem(KEY);
-  function maybeOpen(){ if (shown !== today) { openModal(); localStorage.setItem(KEY, today); } }
-  if (document.readyState === 'complete' || document.readyState === 'interactive') maybeOpen();
-  else document.addEventListener('DOMContentLoaded', maybeOpen);
-  */
 })();
 </script>
 
@@ -2484,32 +2522,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById('promoJoinModal');
   const later = document.getElementById('promoLaterBtn');
 
-  let _scrollY = 0;
-  function lockScroll(){
-    _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    const b = document.body;
-    b.style.position = 'fixed';
-    b.style.top = `-${_scrollY}px`;
-    b.style.left = '0'; b.style.right = '0'; b.style.width = '100%';
-    b.style.overflow = 'hidden';
-  }
-  function unlockScroll(){
-    const b = document.body;
-    b.style.position = ''; b.style.top = ''; b.style.left = ''; b.style.right = '';
-    b.style.width = ''; b.style.overflow = '';
-    window.scrollTo(0, _scrollY);
-  }
   function openModal(){
-    modal.style.display = 'flex';
-    requestAnimationFrame(() => modal.classList.add('show'));
-    lockScroll();
-  }
-  function closeModal(){
-    modal.classList.remove('show');
-    setTimeout(() => { modal.style.display = 'none'; unlockScroll(); }, 220);
+    if (modal.style.display !== 'flex') {
+      modal.style.display = 'flex';
+      requestAnimationFrame(() => modal.classList.add('show'));
+      window.ModalGuard?.lock(); // ✅ 전역 가드로 잠금
+    }
   }
 
-  // 첫 방문 시 즉시 노출 (원하면 하루 1회 규칙으로 바꿔줄게)
+  function closeModal(){
+    if (modal.style.display === 'flex') {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        window.ModalGuard?.unlock(); // ✅ 전역 가드로 해제
+      }, 220);
+    }
+  }
+
+  // 첫 방문 시 즉시 노출 (원 코드 로직 유지)
   if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
   else document.addEventListener('DOMContentLoaded', openModal);
 
