@@ -2337,9 +2337,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-<!-- ========== [START] 훈픽스 홍보 참여 모달 (수정본) ========== -->
+<!-- ========== [START] 홍보 참여 모달 (on load) ========== -->
 <style>
   .promo-backdrop{
     position:fixed; inset:0; display:none;
@@ -2349,6 +2347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: 0; transition: opacity .24s ease;
   }
   .promo-backdrop.show{ display:flex; opacity:1; }
+
   .promo-modal{
     width:min(94vw, 420px);
     border-radius:16px;
@@ -2363,6 +2362,7 @@ document.addEventListener("DOMContentLoaded", () => {
     transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
   }
   .promo-backdrop.show .promo-modal{ opacity:1; transform:translateY(0) scale(1); }
+
   .promo-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
   .promo-ico{
     width:30px;height:30px;border-radius:50%;
@@ -2372,9 +2372,12 @@ document.addEventListener("DOMContentLoaded", () => {
     font-weight:900;
   }
   .promo-title{margin:0;font-size:16px;font-weight:900;letter-spacing:-.2px;}
-  .promo-lines p{margin:6px 0; font-size:14px; line-height:1.7; color:var(--muted,#64748b);}
-  .promo-lines strong{color:var(--text);}
-  .promo-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:10px}
+  .promo-body{font-size:14px;line-height:1.7;color:var(--muted,#64748b);margin:6px 0 10px;}
+  .promo-body strong{color:var(--text);}
+  .promo-steps{display:grid;gap:8px;margin:10px 0;}
+  .promo-steps li{font-size:13.5px;color:var(--muted);}
+
+  .promo-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:8px}
   .promo-btn{
     appearance:none;border:0;border-radius:12px;cursor:pointer;
     padding:10px 14px;font-weight:900;letter-spacing:-.2px;
@@ -2392,26 +2395,22 @@ document.addEventListener("DOMContentLoaded", () => {
   <div class="promo-modal" role="document">
     <div class="promo-head">
       <div class="promo-ico" aria-hidden="true">💎</div>
-      <!-- 제목 수정: '훈픽스 홍보하고 쿠폰받기' -->
-      <h3 class="promo-title" id="promoJoinTitle">훈픽스 홍보하고 쿠폰받기</h3>
+      <h3 class="promo-title" id="promoJoinTitle">훈픽스 홍보 이벤트</h3>
     </div>
-
-    <!-- 본문은 '한 줄에 한 문장' 형식으로 정리 -->
-    <div class="promo-lines">
-      <p>훈픽스 주소(<a href="https://lawcombo.github.io/pickport/" target="_blank" rel="noopener">https://lawcombo.github.io/pickport/</a>)를 20곳 이상에 홍보하세요.</p>
-      <p>각 게시물 스크린샷 20장을 준비해 주세요.</p>
-      <p>스크린샷은 압축 파일 또는 폴더(URL)로 제출해 주세요.</p>
-      <p>인증 메일을 <strong>leicombo@gmail.com</strong> 으로 보내 주세요.</p>
-      <p>메일 제목은 [훈픽스 홍보 인증] 이름/연락처 로 작성해 주세요.</p>
-      <p>확인 후 메가커피 쿠폰 1장을 드립니다.</p>
+    <div class="promo-body">
+      '훈픽스'를 <strong>10곳 이상</strong>에 홍보하고 스샷을 <strong>leicombo@gmail.com</strong> 으로 보내면
+      <strong>메가커피 쿠폰 1장</strong>을 드려요.<br />[홍보 주소] 복사해서 붙여넣기!<br />https://lawcombo.github.io/pickport
+      <ul class="promo-steps">
+        <li>① 블로그/인스타/커뮤니티 등 10곳에 훈픽스 주소 노출</li>
+        <li>② 각 게시물 스크린샷 10장 준비(압축/URL)</li>
+        <li>③ 메일 제목: [훈픽스 홍보 인증] 이름/연락처</li>
+      </ul>
     </div>
-
     <div class="promo-actions">
       <button type="button" class="promo-btn secondary" id="promoLaterBtn">다음에</button>
       <a class="promo-btn" id="promoMailCta"
-         href="mailto:leicombo@gmail.com?subject=%5B%ED%9B%88%ED%94%BD%EC%8A%A4%20%ED%99%8D%EB%B3%B4%20%EC%9D%B8%EC%A6%9D%5D%20%EC%9D%B4%EB%A6%84%2F%EC%97%B0%EB%9D%BD%EC%B2%98&body=%ED%9B%88%ED%94%BD%EC%8A%A4%20%EC%A3%BC%EC%86%8C%28https%3A%2F%2Flawcombo.github.io%2Fpickport%2F%29%20%ED%99%8D%EB%B3%B4%201%29%20%EC%98%81%EC%97%AD%20%EB%82%B4%EC%9A%A9%20%EA%B0%80%EB%8A%A5%0A20%EA%B0%9C%20%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%20%EB%B6%99%EC%9E%84%20%EA%B0%80%EB%8A%A5%0A%EC%95%95%EC%B6%95%2F%ED%8F%B4%EB%8D%94%20URL%20%EA%B3%B5%EC%9C%A0%20%EA%B0%80%EB%8A%A5">
-        이메일로 인증 제출
-      </a>
+         href="mailto:leicombo@gmail.com?subject=%5B%ED%9B%88%ED%94%BD%EC%8A%A4%20%ED%99%8D%EB%B3%B4%20%EC%9D%B8%EC%A6%9D%5D%20%EC%9D%B4%EB%A6%84%2F%EC%97%B0%EB%9D%BD%EC%B2%98&body=%E2%80%A2%20%ED%99%8D%EB%B3%B4%20%EC%B2%98%20%EA%B5%AC%EA%B8%80%ED%8F%AC%ED%95%A8%20%EA%B8%B0%EC%9E%90%EC%9E%90%20URL%0A%E2%80%A2%2020%EA%B0%9C%20%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%20%EB%B6%99%EC%9E%84%20%EA%B0%80%EB%8A%A5"
+         >이메일로 인증 제출</a>
     </div>
   </div>
 </div>
@@ -2427,7 +2426,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const b = document.body;
     b.style.position = 'fixed';
     b.style.top = `-${_scrollY}px`;
-    b.style.left = '0'; b.style.right = '0'; b.style.width = '100%';
+    b.style.left = '0'; b.style.right = '0';
+    b.style.width = '100%';
     b.style.overflow = 'hidden';
   }
   function unlockScroll(){
@@ -2436,6 +2436,7 @@ document.addEventListener("DOMContentLoaded", () => {
     b.style.width = ''; b.style.overflow = '';
     window.scrollTo(0, _scrollY);
   }
+
   function openModal(){
     modal.style.display = 'flex';
     requestAnimationFrame(() => modal.classList.add('show'));
@@ -2446,7 +2447,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { modal.style.display = 'none'; unlockScroll(); }, 220);
   }
 
-  // 페이지 접근 시 자동 노출
+  // 페이지 접근 시 항상 노출 (원하면 하루 1회로 바꿔드릴 수 있어요)
   if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
   else document.addEventListener('DOMContentLoaded', openModal);
 
@@ -2454,14 +2455,17 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // 본문 섹션 버튼(#promoGuideBtn)이 모달을 다시 열도록 연결
+  // 섹션의 "참여 가이드 다시 보기" 버튼이 모달을 열도록 연결
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('#promoGuideBtn');
-    if (btn) openModal();
+    if (!btn) return;
+    openModal();
   });
 })();
 </script>
-<!-- ========== [END] 훈픽스 홍보 참여 모달 (수정본) ========== -->
+<!-- ========== [END] 홍보 참여 모달 ========== -->
+
+
 
 </body>
 </html>
