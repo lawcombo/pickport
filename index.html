@@ -1161,7 +1161,7 @@
 
 			<div class="hero-features" role="list">
 				<p class="ft-notice" style="text-align:center; font-size:13px; color:var(--muted); margin:4px 0 8px;">
-					※ 본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.
+					※ 본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
 				</p>
 			</div>
 
@@ -1424,7 +1424,7 @@
                         <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg> 
                     </summary>
-                    <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받을 수 있습니다.</div>
+                    <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받습니다.</div>
                 </details>
                 <details>
                     <summary>
@@ -1500,7 +1500,7 @@
 				© 2025 <a href="https://ansoft-90.github.io/" target="_blank" rel="noopener noreferrer"> 에이엔소프트 [ANSOFT]</a> | 대표 : 장성훈
 			</div>
             <div class="ft-links">
-				<p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
+				<p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
             </div>
         </div>
     </div>
@@ -2176,21 +2176,20 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-  <!-- ========== [START] 최초 진입 안내 모달 v5 (Smooth Anim + Scroll Lock) ========== -->
+
+
+
+<!-- ========== [START] 최초 진입 안내 모달 v4 (Compact + Reason Text) ========== -->
 <style>
   :root { --cpz: 9999; }
-
-  .cpfv5-backdrop{
+  .cpfv4-backdrop{
     position:fixed; inset:0; display:none;
-    align-items:center; justify-content:center; z-index:var(--cpz);
+    align-items:center; justify-content:center;
     background: color-mix(in oklab, var(--text, #0f172a) 20%, transparent);
     backdrop-filter: blur(8px) saturate(1.1);
-    /* fade-in/out */
-    opacity: 0; transition: opacity .24s ease;
+    z-index:var(--cpz);
   }
-  .cpfv5-backdrop.show{ display:flex; opacity: 1; }
-
-  .cpfv5-modal{
+  .cpfv4-modal{
     width:min(94vw,380px);
     border-radius:12px;
     border:1px solid color-mix(in oklab, var(--text, #0f172a) 10%, transparent);
@@ -2200,127 +2199,91 @@ document.addEventListener("DOMContentLoaded", () => {
     box-shadow:0 16px 40px var(--shadow,rgba(17,24,39,.16));
     color:var(--text,#0f172a);
     padding:14px;
-    /* smoother pop-in (opacity + translate + scale) */
-    opacity: 0; transform: translateY(10px) scale(.965);
-    transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
-    will-change: transform, opacity;
+    transform:translateY(8px) scale(.985);
+    opacity:0;
+    transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease;
   }
-  .cpfv5-backdrop.show .cpfv5-modal{ opacity: 1; transform: translateY(0) scale(1); }
+  .cpfv4-backdrop.show .cpfv4-modal{transform:translateY(0) scale(1);opacity:1}
 
-  .cpfv5-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-  .cpfv5-ico{
-    width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;
+  .cpfv4-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .cpfv4-ico{
+    width:28px;height:28px;border-radius:50%;flex:none;
+    display:grid;place-items:center;
     background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
     color:#fff;font-size:15px;font-weight:900;
     box-shadow:0 6px 14px var(--ring,rgba(18,115,234,.18));
   }
-  .cpfv5-title{margin:0;font-size:15px;font-weight:900;letter-spacing:-.2px;}
+  .cpfv4-title{margin:0;font-size:15px;font-weight:900;letter-spacing:-.2px;}
 
-  .cpfv5-body{font-size:13.5px;line-height:1.65;color:var(--muted,#64748b);margin-bottom:8px;}
-  .cpfv5-body strong{color:var(--text,#0f172a);font-weight:800;}
-  .cpfv5-tip{
+  .cpfv4-body{font-size:13.5px;line-height:1.65;color:var(--muted,#64748b);margin-bottom:8px;}
+  .cpfv4-body strong{color:var(--text,#0f172a);font-weight:800;}
+
+  .cpfv4-tip{
     margin-top:6px;padding:8px 10px;border-radius:10px;
     border:1px dashed color-mix(in oklab,var(--text,#0f172a) 12%,transparent);
     background:color-mix(in oklab,var(--card,#fff) 88%,transparent);
     font-size:12.5px;line-height:1.55;
   }
 
-  .cpfv5-actions{display:flex;justify-content:flex-end;margin-top:8px;}
-  .cpfv5-btn{
+  .cpfv4-actions{display:flex;justify-content:flex-end;margin-top:8px;}
+  .cpfv4-btn{
     appearance:none;cursor:pointer;border:0;border-radius:10px;
     padding:9px 14px;font-size:13.5px;font-weight:900;letter-spacing:-.2px;color:#fff;
     background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
     box-shadow:0 10px 24px var(--ring,rgba(18,115,234,.2));
-    transition: transform .12s ease, filter .18s ease;
+    transition:transform .1s ease,filter .18s ease;
   }
-  .cpfv5-btn:hover{ transform: translateY(-1px); }
-  .cpfv5-btn:active{ transform: translateY(0); filter: saturate(1.05); }
-
-  @media (max-width: 420px){
-    .cpfv5-modal{ width:min(96vw, 360px); padding:12px; }
-    .cpfv5-body{ font-size:13px; }
-    .cpfv5-tip{ font-size:12.2px; }
-    .cpfv5-btn{ padding:10px 12px; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .cpfv5-backdrop, .cpfv5-modal{ transition: none !important; }
-  }
+  .cpfv4-btn:hover{transform:translateY(-1px);}
+  .cpfv4-btn:active{transform:translateY(0);filter:saturate(1.05);}
 </style>
 
-<div class="cpfv5-backdrop" id="cpFirstVisitV5" role="dialog" aria-modal="true" aria-labelledby="cpFirstVisitV5Title">
-  <div class="cpfv5-modal" role="document">
-    <div class="cpfv5-head">
-      <div class="cpfv5-ico" aria-hidden="true">ℹ︎</div>
-      <h3 class="cpfv5-title" id="cpFirstVisitV5Title">브라우저로 열기 안내</h3>
+<div class="cpfv4-backdrop" id="cpFirstVisitV4" role="dialog" aria-modal="true" aria-labelledby="cpFirstVisitV4Title">
+  <div class="cpfv4-modal" role="document">
+    <div class="cpfv4-head">
+      <div class="cpfv4-ico" aria-hidden="true">ℹ︎</div>
+      <h3 class="cpfv4-title" id="cpFirstVisitV4Title">브라우저로 열기 안내</h3>
     </div>
-    <div class="cpfv5-body">
-      쿠팡 링크는 <strong>브라우저에서 열어야</strong> 추적이 정확해요.
-      <div class="cpfv5-tip">
+    <div class="cpfv4-body">
+      쿠팡 링크는 <strong>브라우저에서 열어야</strong> 추적이 정확해요.<br>
+      앱으로 열면 혜택이 누락될 수 있습니다.
+      <div class="cpfv4-tip">
         • 안드로이드: 쿠팡이 열릴 때 “웹으로 계속” 선택<br>
         • iOS: 자동 앱 실행 시 브라우저로 돌아와 다시 시도
       </div>
     </div>
-    <div class="cpfv5-actions">
-      <button type="button" class="cpfv5-btn" id="cpfv5Ok">확인</button>
+    <div class="cpfv4-actions">
+      <button type="button" class="cpfv4-btn" id="cpfv4Ok">확인</button>
     </div>
   </div>
 </div>
 
 <script>
 (() => {
-  const wrap = document.getElementById('cpFirstVisitV5');
-  const ok   = document.getElementById('cpfv5Ok');
-
-  let _scrollY = 0;
-  function lockScroll(){
-    // 저장 후 body 고정 (iOS 대응: position:fixed + top)
-    _scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    const b = document.body;
-    b.style.position = 'fixed';
-    b.style.top = `-${_scrollY}px`;
-    b.style.left = '0'; b.style.right = '0';
-    b.style.width = '100%';
-    b.style.overflow = 'hidden';
-  }
-  function unlockScroll(){
-    const b = document.body;
-    b.style.position = ''; b.style.top = ''; b.style.left = ''; b.style.right = '';
-    b.style.width = ''; b.style.overflow = '';
-    window.scrollTo(0, _scrollY);
-  }
-
+  const wrap=document.getElementById('cpFirstVisitV4');
+  const ok=document.getElementById('cpfv4Ok');
   function openModal(){
-    wrap.style.display = 'flex';
-    // 첫 프레임 이후 show 추가(트랜지션 트리거)
-    requestAnimationFrame(() => wrap.classList.add('show'));
-    lockScroll();
-    setTimeout(() => ok?.focus(), 0);
+    wrap.style.display='flex';
+    requestAnimationFrame(()=>wrap.classList.add('show'));
+    setTimeout(()=>ok.focus(),0);
   }
   function closeModal(){
     wrap.classList.remove('show');
-    // 트랜지션이 끝난 뒤 display:none, 스크롤 복구
-    setTimeout(() => { wrap.style.display = 'none'; unlockScroll(); }, 220);
+    setTimeout(()=>{wrap.style.display='none';},120);
   }
-
-  ok.addEventListener('click', closeModal);
-  wrap.addEventListener('click', e => { if (e.target === wrap) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
+  ok.addEventListener('click',closeModal);
+  wrap.addEventListener('click',e=>{if(e.target===wrap)closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
   // 매 페이지 로드 시마다 표시
-  if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
-  else document.addEventListener('DOMContentLoaded', openModal);
-
-  /* (옵션) 하루 1번만 띄우고 싶다면, 위 openModal() 호출 대신 아래 블록을 사용하세요.
-  const KEY = 'cp_first_visit_banner_v5_date';
-  const today = new Date().toISOString().slice(0,10);
-  const shown = localStorage.getItem(KEY);
-  function maybeOpen(){ if (shown !== today) { openModal(); localStorage.setItem(KEY, today); } }
-  if (document.readyState === 'complete' || document.readyState === 'interactive') maybeOpen();
-  else document.addEventListener('DOMContentLoaded', maybeOpen);
-  */
+  if(document.readyState==='complete'||document.readyState==='interactive')openModal();
+  else document.addEventListener('DOMContentLoaded',openModal);
 })();
 </script>
-<!-- ========== [END] 최초 진입 안내 모달 v5 (Smooth Anim + Scroll Lock) ========== -->
+<!-- ========== [END] 최초 진입 안내 모달 v4 (Compact + Reason Text) ========== -->
+
+
+
+
+  
 
 </body>
 </html>
