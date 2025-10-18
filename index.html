@@ -1527,8 +1527,11 @@
 // ====== 데이터 (원본 유지) ======
 const DATA = {
     deals: [
-        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W",
-        "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckgcAK", "https://coupa.ng/ckgcBX"
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckhGRp", "https://coupa.ng/ckhGR5", "https://coupa.ng/ckhGSz",
+        "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckgcAK", "https://coupa.ng/ckgcBX", "https://coupa.ng/ckhGRE", "https://coupa.ng/ckhGSn", "https://coupa.ng/ckhGSJ",
+		"https://coupa.ng/ckhGS8", "https://coupa.ng/ckhGTB", "https://coupa.ng/ckhGT5", "https://coupa.ng/ckhGUI", "https://coupa.ng/ckhGU5", "https://coupa.ng/ckhGWr", "https://coupa.ng/ckhGWz",
+		"https://coupa.ng/ckhGWM", "https://coupa.ng/ckhGW1", "https://coupa.ng/ckhGXk", "https://coupa.ng/ckhGXw", "https://coupa.ng/ckhGXM", "https://coupa.ng/ckhGXU", "https://coupa.ng/ckhGX4",
+		"https://coupa.ng/ckhGYl"
     ],
     popular: [
         "https://coupa.ng/ckfadJ", "https://coupa.ng/ckfadT", "https://coupa.ng/ckfadZ", "https://coupa.ng/ckfad4",
@@ -1538,8 +1541,8 @@ const DATA = {
         "https://coupa.ng/ckfafC", "https://coupa.ng/ckfafG", "https://coupa.ng/ckfafM", "https://coupa.ng/ckfafZ"
     ],
     oneplus: [
-        "https://coupa.ng/ckffMX", "https://coupa.ng/ckffND", "https://coupa.ng/ckffOj", "https://coupa.ng/ckffOS",
-        "https://coupa.ng/ckffPH", "https://coupa.ng/ckffR7", "https://coupa.ng/ckffUo", "https://coupa.ng/ckff4q",
+        "https://coupa.ng/ckffMX", "https://coupa.ng/ckffND", "https://coupa.ng/ckffOj", "https://coupa.ng/ckffOS", "https://coupa.ng/ckhG0R", "https://coupa.ng/ckhG1l", "https://coupa.ng/ckhG1Q",
+        "https://coupa.ng/ckffPH", "https://coupa.ng/ckffR7", "https://coupa.ng/ckffUo", "https://coupa.ng/ckff4q", "https://coupa.ng/ckhG2f", "https://coupa.ng/ckhG23", "https://coupa.ng/ckhG3u",
         "https://coupa.ng/ckgeZz", "https://coupa.ng/ckgeZ5", "https://coupa.ng/ckge0t", "https://coupa.ng/ckge1k"
     ],
     budgetpc: [
@@ -1703,13 +1706,15 @@ function drawProducts() {
 
 function drawDeals() {
     const el = $('#dealsGrid');
-    const html = DATA.deals.map(url => `
+    const urls = shuffleOnce(DATA.deals);  // 🔽 여기서 무작위 셔플
+    const html = urls.map(url => `
         <article class="deal">
           <div class="meta"><span>한정 특가</span></div>
           <div class="widget"><iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="특가 위젯"></iframe></div>
-        </article>`).join('');
+        </article>`).slice(0, 8).join('');  // 4개씩 2줄: 총 8개만 사용
     el.innerHTML = html;
 }
+
 
 function drawBanners() {
     const el = $('#bannerGrid');
@@ -2532,14 +2537,14 @@ document.addEventListener("DOMContentLoaded", () => {
       </li>
       <li class="promo-step">
         <div class="num-badge">2</div>
-        <div class="step-text">각 게시물의 링크가 보이게 <strong>스크린샷 10장</strong>을 준비해 <strong>압축(zip)</strong> 또는 <strong>폴더(URL)</strong>로 정리해 주세요.</div>
+        <div class="step-text">게시한 <strong>스크린샷 10장</strong>을 <strong>압축(zip)</strong>하여 보내 주세요.<br />또는 <strong>게시한 위치(주소)</strong>을 <strong>정리</strong>하여 보내 주세요.</div>
       </li>
       <li class="promo-step">
         <div class="num-badge">3</div>
         <div class="step-text">
           메일 제목은 <strong>[훈픽스 홍보 인증] 이름/연락처</strong>로 작성하고, 아래 주소로 보내 주세요.
           <div style="margin-top:8px">
-            <span class="email-pill">📧 leicombo@gmail.com</span>
+            <span class="email-pill">📧 leicombo@gmail.com</span> *반복가능
           </div>
         </div>
       </li>
