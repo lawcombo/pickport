@@ -1,1 +1,2610 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>훈픽스 (HoonPick's) | 쿠팡 큐레이션</title>
+<meta name="color-scheme" content="light dark" />
+
+<!-- Google Search Console 소유권 확인용 -->
+<meta name="google-site-verification" content="pIhBwRcHXApbMp71yU7wo7u6xGiIueNQuev55azt9vw" />
+
+<!-- NAVER 서치어드바이저 소유권 확인용 -->
+<meta name="naver-site-verification" content="e64af32472d1d9c6e0cebe95e944747cb38c3122" />
+
+<!-- 파비콘 -->
+<link rel="icon" type="image/jpeg" href="assets/images/logo.png" />
+
+<!-- ✅ 정규 URL 지정 -->
+<link rel="canonical" href="https://lawcombo.github.io/pickport/" />
+
+<!-- 검색엔진(SEO)용 -->
+<meta name="description" content="쿠팡 인기템, 이젠 훈픽스에서 한눈에! 🚀 가성비 컴퓨터부터 패션, 로켓프레시까지 매일 새로 업데이트되는 베스트 상품을 지금 바로 픽하세요.">
+<meta name="keywords" content="쿠팡 추천, 쿠팡 베스트, 가성비 컴퓨터, 훈픽스, hoonpicks, 로켓프레시, 패션 추천, 1+1, 오늘의 특가, pickport">
+<meta name="robots" content="index, follow">
+
+<!-- 전화번호 자동 링크 방지 -->
+<meta name="format-detection" content="telephone=no" />
+
+<!-- SNS 공유(Open Graph)용 -->
+<meta property="og:url" content="https://lawcombo.github.io/pickport/" />
+<meta property="og:title" content="훈픽스 (HoonPick's)" />
+<meta property="og:description" content="오늘의 쿠팡 베스트, 훈픽스에서 한눈에 확인하세요" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:image" content="https://lawcombo.github.io/pickport/assets/images/logo.png" />
+
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="googlebot" content="index, follow, max-image-preview:large" />
+
+
+<style>
+    :root {
+        --brand: #1273ea;
+        --brand-2: #00b6ff;
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --ring: rgba(18, 115, 234, .15);
+        --shadow: rgba(17, 24, 39, .08);
+        --radius: 16px;
+        --outline: color-mix(in oklab, var(--text) 12%, transparent);
+        --divider: linear-gradient(180deg, rgba(18, 115, 234, .14), rgba(18, 115, 234, .06) 60%, transparent);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #0b1220;
+            --card: #0f172a;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --shadow: rgba(0, 0, 0, .35);
+            --ring: rgba(0, 182, 255, .2);
+            --outline: color-mix(in oklab, var(--text) 18%, transparent);
+            --divider: linear-gradient(180deg, rgba(0, 182, 255, .16), rgba(0, 182, 255, .08) 60%, transparent);
+        }
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    /*
+    html,body{height:100%}
+    */
+    body {
+        margin: 0;
+        font-family: 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        /*
+      background: radial-gradient(1200px 800px at 80% -200px, rgba(0,182,255,0.08), transparent), var(--bg);
+      */
+        color: var(--text)
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none
+    }
+
+    .container {
+        max-width: 1200px;
+        padding: 0 24px;
+        margin: 0 auto
+    }
+
+    /* ===================== Header & Top Search ===================== */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: saturate(1.2) blur(8px);
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        border-bottom: 1px solid var(--outline)
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* 양쪽 정렬 */
+        gap: 16px;
+        padding: 12px 0;
+    }
+
+    .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 800;
+        letter-spacing: -.2px
+    }
+
+    .brand-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        display: grid;
+        place-items: center;
+        box-shadow: 0 6px 20px var(--ring)
+    }
+
+    .top-search {
+        flex: 1;
+        /* 가운데 영역 차지 */
+        /*
+		max-width: 720px;
+		*/
+        margin: 0 auto;
+        /* 가운데 정렬 */
+    }
+
+    .search-card {
+        border: 1px solid var(--outline);
+        background: linear-gradient(180deg,
+                color-mix(in oklab, var(--card) 96%, transparent),
+                color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 10px 24px var(--shadow);
+        padding: 10px;
+    }
+
+    .search-hint {
+        margin: 6px auto 0;
+        max-width: 780px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px
+    }
+
+    /* ===================== Hero / Slider ===================== */
+    /*
+	.hero{padding:14px 0 6px}
+	*/
+    /* ===================== Hero: modern value-first header ===================== */
+    .hero {
+        position: relative;
+        isolation: isolate;
+		padding-bottom: 20px;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.12), transparent 50%),
+            radial-gradient(circle at 80% 60%, rgba(139, 92, 246, 0.08), transparent 50%);
+        filter: blur(80px);
+        opacity: 0.6;
+    }
+
+    .hero-head {
+        border: 1px solid var(--outline);
+        border-radius: 24px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 95%, transparent),
+                color-mix(in oklab, var(--card) 88%, transparent));
+        backdrop-filter: blur(20px);
+        box-shadow:
+            0 20px 60px var(--shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        padding: 48px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-head::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        color: var(--brand-light);
+        padding: 8px 16px;
+        border-radius: 999px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--brand) 15%, transparent),
+                color-mix(in oklab, var(--accent) 10%, transparent));
+        border: 1px solid color-mix(in oklab, var(--brand) 20%, transparent);
+        box-shadow: 0 8px 24px var(--ring);
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-eyebrow::before {
+        content: "✨";
+        font-size: 14px;
+    }
+
+    .hero-title {
+        margin: 24px 0 16px;
+        font-size: clamp(32px, 4.5vw, 48px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-title-break {
+        display: none;
+    }
+
+    .hero-sub {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 0 0 36px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-sub strong {
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .hero-sub em {
+        color: var(--brand-light);
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .hero-divider {
+        height: 1px;
+        margin: 32px 0;
+        background: linear-gradient(90deg,
+                transparent,
+                var(--outline) 20%,
+                var(--outline) 80%,
+                transparent);
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 20px 18px;
+        border-radius: 16px;
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 80%, transparent),
+                color-mix(in oklab, var(--card) 60%, transparent));
+        border: 1px solid color-mix(in oklab, var(--outline) 80%, transparent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-feature:hover {
+        border-color: color-mix(in oklab, var(--brand) 30%, transparent);
+        background:
+            linear-gradient(135deg,
+                color-mix(in oklab, var(--card) 90%, transparent),
+                color-mix(in oklab, var(--card) 70%, transparent));
+        transform: translateY(-2px);
+    }
+
+    .feature-icon {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg,
+                color-mix(in oklab, var(--brand) 15%, transparent),
+                color-mix(in oklab, var(--accent) 10%, transparent));
+        color: var(--brand-light);
+    }
+
+    .feature-content {
+        flex: 1;
+    }
+
+    .feature-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+        letter-spacing: -0.01em;
+    }
+
+    .feature-desc {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 32px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--outline);
+        background: color-mix(in oklab, var(--card) 60%, transparent);
+        backdrop-filter: blur(10px);
+        transition: all 0.2s ease;
+    }
+
+    .hero-badge:hover {
+        border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+        color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+        .hero-head {
+            padding: 32px 24px;
+            border-radius: 20px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            margin: 20px 0 12px;
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .hero-features {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-divider {
+            margin: 24px 0;
+        }
+
+        .hero-title-break {
+            display: block;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ===================== Section system (no <hr>) ===================== */
+    .section {
+        position: relative;
+        padding: 20px 0
+    }
+
+    /* soft divider band that never affects layout */
+    /*
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+    .section-title{font-size:22px;font-weight:900;letter-spacing:-.2px;display:flex;gap:10px;align-items:center}
+    .kicker{font-size:13px;color:var(--muted);font-weight:600}
+	*/
+    .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+/*
+        margin-bottom: 18px;
+*/
+        flex-wrap: wrap;
+    }
+
+    /* 제목 스타일 */
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        color: var(--text);
+        position: relative;
+    }
+
+    /* 좌측 포인트 바 */
+    .section-title::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 24px;
+        border-radius: 4px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 8px var(--ring);
+    }
+
+    /* 더보기 링크 */
+    .more-link {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--brand);
+        text-decoration: none;
+        background: color-mix(in oklab, var(--brand) 6%, transparent);
+        padding: 3px 8px;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+        margin-left: 6px;
+    }
+
+    .more-link:hover {
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: #fff;
+        box-shadow: 0 4px 10px var(--ring);
+    }
+
+    /* 부제 / 설명 */
+    .kicker {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+    }
+
+
+
+    /* Section surface contains large grids so content never visually "spills" */
+    .surface {
+        border: 1px solid var(--outline);
+        border-radius: 20px;
+        background:
+            radial-gradient(1200px 400px at 80% -220px, color-mix(in oklab, var(--brand-2) 12%, transparent), transparent),
+            linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 10px 22px var(--shadow);
+        padding: 16px
+    }
+
+    /* ===================== Product Grid & Card ===================== */
+    .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(12, 1fr)
+    }
+
+    @media (max-width:1200px) {
+        .grid {
+            grid-template-columns: repeat(8, 1fr)
+        }
+    }
+
+    @media (max-width:780px) {
+        .grid {
+            grid-template-columns: repeat(4, 1fr)
+        }
+    }
+
+    @media (max-width:480px) {
+        .grid {
+            grid-template-columns: repeat(2, 1fr)
+        }
+    }
+
+    .card {
+        grid-column: span 2;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 94%, transparent));
+        border: 1px solid var(--outline);
+        border-radius: 20px;
+        box-shadow: 0 10px 22px var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px;
+        transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease, border-color .25s ease
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 28px var(--shadow);
+        border-color: color-mix(in oklab, var(--brand) 26%, transparent)
+    }
+
+    .widget {
+        width: 120px;
+        height: 240px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px var(--shadow);
+        background: color-mix(in oklab, var(--text) 3%, transparent)
+    }
+
+    .widget iframe {
+        width: 120px;
+        height: 240px;
+        border: 0
+    }
+
+    /* ===================== Deals ===================== */
+    .deals {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px
+    }
+
+    .deal {
+        grid-column: span 3;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 97%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        border: 1px solid var(--outline);
+        border-radius: 18px;
+        box-shadow: 0 10px 24px var(--shadow);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+
+    .deal .widget {
+        margin: 0 auto
+    }
+
+    .deal .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: var(--muted)
+    }
+
+    .timer {
+        font-weight: 900;
+        letter-spacing: .5px
+    }
+
+    @media (max-width:1200px) {
+        .deal {
+            grid-column: span 4
+        }
+    }
+
+    @media (max-width:780px) {
+        .deal {
+            grid-column: span 6
+        }
+    }
+
+    @media (max-width:480px) {
+        .deal {
+            grid-column: span 12
+        }
+    }
+
+    /* ===================== Banners ===================== */
+    .banner-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 6px
+    }
+
+    .banner-grid a {
+        display: block;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px var(--shadow);
+        transition: transform .2s ease, box-shadow .3s ease
+    }
+
+    .banner-grid a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px var(--shadow)
+    }
+
+    .banner-grid img {
+        display: block;
+        width: 728px;
+        height: 90px;
+        object-fit: cover
+    }
+
+    @media (max-width:780px) {
+        .banner-grid img {
+            width: 100%;
+            height: auto
+        }
+    }
+
+    /* ===================== FAQ & Helper ===================== */
+    .faq {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px
+    }
+
+    @media (max-width:780px) {
+        .faq {
+            grid-template-columns: 1fr
+        }
+    }
+
+    .faq details {
+        border: 1px solid var(--outline);
+        border-radius: 14px;
+        background: radial-gradient(1200px 400px at 80% -200px, color-mix(in oklab, var(--brand-2) 10%, transparent), transparent), linear-gradient(180deg, color-mix(in oklab, var(--card) 98%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 8px 22px var(--shadow);
+        overflow: hidden;
+        transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease
+    }
+
+    .faq details:hover {
+        border-color: color-mix(in oklab, var(--brand) 22%, transparent);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px var(--shadow)
+    }
+
+    .faq summary {
+        list-style: none;
+        cursor: pointer;
+        position: relative;
+        padding: 14px 16px 14px 44px;
+        font-weight: 800;
+        letter-spacing: -.2px;
+        user-select: none
+    }
+
+    .faq summary::-webkit-details-marker {
+        display: none
+    }
+
+    .faq summary .qdot {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 6px 18px var(--ring)
+    }
+
+    .faq summary .chev {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%) rotate(0);
+        width: 18px;
+        height: 18px;
+        opacity: .7;
+        transition: transform .25s ease, opacity .2s ease
+    }
+
+    .faq details[open] summary .chev {
+        transform: translateY(-50%) rotate(180deg);
+        opacity: 1
+    }
+
+    .faq .answer {
+        padding: 0 16px 16px 44px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+        border-top: 1px dashed var(--outline);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease
+    }
+
+    .faq details[open] .answer {
+        max-height: 320px
+    }
+
+    .helper {
+        border: 1px solid var(--outline);
+        border-radius: 12px;
+        padding: 12px;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 97%, transparent), color-mix(in oklab, var(--card) 92%, transparent));
+        box-shadow: 0 6px 18px var(--shadow)
+    }
+
+    /* ===================== Footer ===================== */
+    .site-footer {
+        background: linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, transparent), color-mix(in oklab, var(--card) 90%, transparent));
+        border-top: 1px solid var(--outline);
+        padding: 32px 0 20px
+    }
+
+    .ft-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-bottom: 16px
+    }
+
+    .ft-col {
+        flex: 1;
+        min-width: 260px
+    }
+
+    .ft-brand {
+        display: flex;
+        gap: 12px;
+        align-items: center
+    }
+
+    .ft-brand strong {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: -0.3px
+    }
+
+    .ft-notice {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+        /*
+		max-width: 520px
+		*/
+    }
+
+    .ft-bottom {
+        border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+        padding-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        flex-wrap: wrap
+    }
+
+    .ft-links {
+        display: flex;
+        gap: 14px
+    }
+
+    .ft-links a {
+        color: var(--muted);
+        transition: color .2s ease
+    }
+
+    .ft-links a:hover {
+        color: var(--brand)
+    }
+
+    /* ===================== Top Button ===================== */
+    .top-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--outline);
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: #fff;
+        box-shadow: 0 10px 24px var(--ring);
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity .2s ease, transform .2s ease
+    }
+
+    .top-btn.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0)
+    }
+
+
+
+    .banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto;
+        /* 위아래 여백 */
+    }
+
+    .banner img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+
+    /* === Mobile: header condense (<=780px) === */
+    @media (max-width: 780px) {
+        .nav {
+            justify-content: center;
+            /* 가운데 정렬 */
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .brand {
+            display: none;
+            /* PickPort 숨기기 */
+        }
+
+        .top-search {
+            flex: 1;
+            /* 남는 공간 전부 차지 */
+            max-width: none;
+            /* 최대폭 제한 해제 */
+            margin: 0;
+        }
+
+        .search-card {
+            padding: 6px;
+            /* 모바일 여백 살짝 줄이기 */
+        }
+    }
+
+    @media (max-width: 780px) {
+        .top-search iframe {
+            height: 44px;
+        }
+    }
+
+
+
+    /* === Mobile cards: 2 per row === */
+    @media (max-width: 480px) {
+
+        /* 카드 격자: 2열 + 간격 살짝 축소 */
+        .grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            /* 필요시 10~16px 사이로 조절 */
+        }
+
+        /* 각 카드가 1칸만 차지하도록 (=> 한 줄에 2개) */
+        .card {
+            grid-column: span 1;
+            padding: 10px;
+            /* 모바일 여백 소폭 조정 (선택) */
+        }
+    }
+
+
+
+    /* === Mobile deals: 2 per row (선택) === */
+    @media (max-width: 480px) {
+        .deals {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .deal {
+            grid-column: auto;
+            /* 기존 span 규칙 무효화 */
+        }
+    }
+
+
+
+
+
+
+	/* 프로모 배너 1줄 3개, 가운데 정렬 */
+	/* 데스크톱: 3열, 가운데 정렬 */
+	.promo-banner-grid {
+	  display: grid;
+	  gap: 16px;
+	  grid-template-columns: repeat(3, 320px);
+	  justify-content: center;
+	  align-items: start;
+	}
+
+	/* 모바일(≤780px): 1열(한 장씩) */
+	@media (max-width: 780px) {
+	  .promo-banner-grid {
+		grid-template-columns: 1fr;   /* 한 줄에 하나 */
+		justify-content: center;
+	  }
+	  .promo-banner-item {
+		width: min(100%, 360px);      /* 화면에 맞추되 너무 커지지 않게 */
+		margin-inline: auto;
+	  }
+	  /* 배너 콘텐츠(iframe/img)도 화면폭에 맞게 */
+	  .promo-banner-item iframe,
+	  .promo-banner-item img {
+		display: block;
+		width: 100% !important;
+		height: auto !important;
+		aspect-ratio: 2 / 3;          /* 원본 320x480 비율 유지 */
+	  }
+	}
+
+	/* (데스크톱 공통) 카드 스타일은 그대로 */
+	.promo-banner-item {
+	  border: 1px solid var(--outline, #e5e7eb);
+	  border-radius: 16px;
+	  overflow: hidden;
+	  background: var(--card, #fff);
+	  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+	}
+
+
+
+	/* ===== Filter Bar (Quick Nav) ===== */
+	.filterbar{
+	  position: sticky;
+	  top: calc(var(--header-offset, 0px)); /* JS에서 헤더 높이 반영 */
+	  z-index: 900;
+	  backdrop-filter: saturate(1.2) blur(8px);
+		/*
+	  background: color-mix(in oklab, var(--bg) 86%, transparent);
+	  */
+  	  background: color-mix(in oklab, #d4e4fc 86%, transparent);
+	  border-top: 1px solid var(--outline);
+	  border-bottom: 1px solid var(--outline);
+	}
+
+	.filterbar .container{padding: 10px 24px;}
+
+	.filterbar-track{
+	  display: grid;
+	  grid-auto-flow: column;
+	  grid-auto-columns: max-content;
+	  gap: 10px;
+	  overflow-x: auto;
+	  padding-bottom: 4px;
+  	  padding-top: 4px;
+	  scroll-snap-type: x mandatory;
+	}
+
+	.filter-chip{
+	  scroll-snap-align: start;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 8px;
+	  padding: 10px 14px;
+	  border-radius: 999px;
+	  font-weight: 700;
+	  font-size: 14px;
+	  letter-spacing: -.1px;
+	  border: 1px solid var(--outline);
+	  background: linear-gradient(135deg,
+		  color-mix(in oklab, var(--card) 95%, transparent),
+		  color-mix(in oklab, var(--card) 85%, transparent));
+	  box-shadow: 0 6px 16px var(--shadow);
+	  cursor: pointer;
+	  white-space: nowrap;
+	  transition: transform .15s ease, border-color .2s ease, box-shadow .25s ease, background .25s ease;
+	}
+
+	.filter-chip:hover{
+	  transform: translateY(-1px);
+	  border-color: color-mix(in oklab, var(--brand) 26%, transparent);
+	  box-shadow: 0 10px 22px var(--shadow);
+	}
+
+	.filter-chip[aria-selected="true"]{
+	  color:#fff;
+	  border-color: transparent;
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  box-shadow: 0 10px 24px var(--ring);
+	}
+
+	@media (max-width:780px){
+	  .filterbar .container{padding-inline: 16px;}
+	  .filter-chip{font-size:13px; padding: 9px 12px;}
+	}
+
+	/* 선택: 수평 스크롤바 얇게/숨김 */
+	.filterbar-track::-webkit-scrollbar{height:6px}
+	.filterbar-track::-webkit-scrollbar-thumb{
+	  background: color-mix(in oklab, var(--text) 10%, transparent);
+	  border-radius: 999px;
+	}
+
+
+
+
+
+
+
+	/* ===== Reviews (구매 후기) - brand-badge 버전 ===== */
+	.reviews {
+	  display: grid;
+	  grid-template-columns: repeat(12, 1fr);
+	  gap: 14px;
+	}
+	.review-card {
+	  grid-column: span 4;
+	  border: 1px solid var(--outline);
+	  border-radius: 16px;
+	  background: linear-gradient(180deg,
+		color-mix(in oklab, var(--card) 98%, transparent),
+		color-mix(in oklab, var(--card) 92%, transparent));
+	  box-shadow: 0 8px 20px var(--shadow);
+	  padding: 16px;
+	  display: grid;
+	  grid-template-columns: 48px 1fr;
+	  gap: 12px;
+	  align-items: start;
+	}
+	.brand-badge {
+	  width: 48px;
+	  height: 48px;
+	  border-radius: 12px;
+	  display: grid;
+	  place-items: center;
+	  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+	  box-shadow: 0 8px 18px var(--ring);
+	}
+	.review-body { display: grid; gap: 6px; }
+	.review-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+	.review-name { font-weight: 800; font-size: 14px; }
+	.review-stars { font-size: 14px; letter-spacing: .2px; color: #eab308; }
+	.review-title { font-weight: 700; letter-spacing: -.2px; }
+	.review-text { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+	/* 반응형 */
+	@media (max-width:1200px){ .review-card{ grid-column: span 6; } }
+	@media (max-width:780px){
+	  .reviews{ grid-template-columns: repeat(6, 1fr); }
+	  .review-card{ grid-column: span 6; }
+	}
+	@media (max-width:480px){
+	  .reviews{ grid-template-columns: repeat(2, 1fr); gap: 12px; }
+	  .review-card{ grid-column: span 2; grid-template-columns: 40px 1fr; }
+	  .brand-badge{ width:40px; height:40px; border-radius:10px; }
+	}
+
+
+
+
+
+
+  /* 검색 카드 깜박 효과 */
+  .top-search .search-card.blink-border {
+    border-radius: 12px;              /* 모서리 살짝 둥글게 */
+    animation: headerBorderBlink 1.4s ease-in-out infinite;
+  }
+  @keyframes headerBorderBlink {
+    0%, 100% { box-shadow: 0 0 0 1.5px rgba(18,115,234,0.40), 0 8px 18px rgba(0,0,0,0.08); }
+    50%      { box-shadow: 0 0 0 3px rgba(0,182,255,0.85), 0 10px 22px rgba(0,0,0,0.12); }
+  }
+
+  /* 사용자 접근성: 모션 최소화 설정 시 애니메이션 끔 */
+  @media (prefers-reduced-motion: reduce) {
+    .top-search .search-card.blink-border { animation: none; box-shadow: 0 0 0 2px rgba(18,115,234,0.40); }
+  }
+
+</style>
+
+<!-- 구글 AdSense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8565821511972606"
+     crossorigin="anonymous"></script>
+	
+
+	
+
+
+	
+
+	
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+
+        <div class="nav">
+            <div class="top-search">
+                <div class="search-card">
+                    <iframe src="https://coupa.ng/ckeU4C" width="100%" height="44" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 검색"></iframe>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</header>
+
+
+
+<!-- 🔽 쿠팡 배너 추가 -->
+<div class="banner">
+    <a href="https://link.coupang.com/a/cWx2NB" target="_blank" referrerpolicy="unsafe-url">
+        <img src="https://ads-partners.coupang.com/banners/931559?subId=&traceId=V0-301-7e6e8eb8ddfa1bfb-I931559&w=728&h=90" alt="Coupang banner">
+    </a>
+</div>
+
+
+
+
+<!-- Hero / Slider -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-head" aria-labelledby="heroTitle" aria-describedby="heroDesc">
+            <span class="hero-eyebrow" aria-hidden="true" style="width:100%;">훈픽스 (HoonPick's) 큐레이션 </span>
+
+            <h1 id="heroTitle" class="hero-title">오늘의 쿠팡 베스트<br class="hero-title-break"> 한눈에 담다</h1>
+
+            <p id="heroDesc" class="hero-sub">
+                복잡한 탐색은 이제 그만!<br /> <strong>특가·로켓프레시·1+1·패션</strong>까지
+                엄선된 상품만 모았습니다. 매일 자동으로 랜덤 큐레이션되어 <em>항상 새로운 발견</em>이 기다립니다.
+            </p>
+
+            <div class="hero-divider"></div>
+
+			<div class="hero-features" role="list">
+				<p class="ft-notice" style="text-align:center; font-size:13px; color:red; margin:4px 0 8px;">
+					※ 본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+				</p>
+			</div>
+
+			<!-- 
+            <div class="hero-features" role="list">
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">즉시 스캔</div>
+                        <div class="feature-desc">슬라이드와 그리드로 핵심만 빠르게</div>
+                    </div>
+                </div>
+
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">매일 갱신</div>
+                        <div class="feature-desc">랜덤 시드로 매일 다른 순서</div>
+                    </div>
+                </div>
+
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">가벼운 로딩</div>
+                        <div class="feature-desc">불필요한 요소 제거로 빠른 탐색</div>
+                    </div>
+                </div>
+
+                <div class="hero-feature" role="listitem">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-title">카테고리별 정리</div>
+                        <div class="feature-desc">특가·패션·프레시·1+1 바로 확인</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-badges" aria-label="추가 정보">
+                <span class="hero-badge">모바일 최적화</span>
+                <span class="hero-badge">쿠팡 파트너스</span>
+                <span class="hero-badge">매일 업데이트</span>
+            </div>
+			--> 
+        </div>
+
+		<div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> <span style="color:blue; font-weight:bold;">상단 검색 창에서 원하는 키워드를 입력</span>하면 더 많은 상품을 확인할 수 있어요. <br />인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
+    </div>
+</section>
+
+
+<!-- 🔽 빠른 이동 필터 바 -->
+<nav class="filterbar" aria-label="콘텐츠 빠른 이동">
+  <div class="container">
+    <div class="filterbar-track" id="filterChips" role="tablist" aria-label="섹션 필터"></div>
+  </div>
+</nav>
+
+
+
+<main class="container">
+    <!-- 👇 인기 카테고리 섹션 제거됨 -->
+
+    <!-- 오늘의 특가 -->
+    <section class="section" id="sec-deals">
+		<div class="section-head">
+            <h2 class="section-title">
+                오늘의 특가
+            </h2>
+            <span class="kicker">
+				<a href="https://link.coupang.com/a/cWLroR" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+			</span>
+        </div>
+        <div class="surface">
+            <div class="deals" id="dealsGrid"></div>
+        </div>
+    </section>
+
+
+	<!-- 배너 세로형 카드 섹션 -->
+	<section class="section" id="sec-promo-banners">
+	  <div class="section-head">
+		<h2 class="section-title">배너 상품</h2>
+	  </div>
+	  <div class="surface">
+		<div class="promo-banner-grid" id="promoBannerGrid"></div>
+	  </div>
+	</section>
+
+    <!-- 최근 많이 팔린 상품 -->
+    <section class="section" id="sec-popular">
+        <div class="section-head">
+            <h2 class="section-title">최근 많이 팔린 상품</h2>
+            <span class="kicker">
+				<a href="https://link.coupang.com/a/cWL1HW" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+				</a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridPopular"></div>
+        </div>
+    </section>
+
+    <!-- 1+1 상품 섹션 -->
+    <section class="section" id="sec-oneplus">
+        <div class="section-head">
+            <h2 class="section-title">
+                1+1 상품
+            </h2>
+            <span class="kicker">
+				<a href="https://link.coupang.com/a/cWz0ck" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridOnePlus"></div>
+        </div>
+    </section>
+
+
+    <!-- 🔽 쿠팡 배너 추가 -->
+    <div class="banner">
+        <a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
+            <img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
+        </a>
+    </div>
+
+
+
+	<!-- 가성비 컴퓨터 섹션 -->
+	<section class="section" id="sec-budgetpc">
+	  <div class="section-head">
+		<h2 class="section-title">가성비 컴퓨터 추천</h2>
+		<span class="kicker">
+		  <a href="https://link.coupang.com/a/cWPnFA" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+			더보기 +
+		  </a>
+		</span>
+	  </div>
+	  <div class="surface">
+		<!-- 6개 × 2줄 = 12개 -->
+		<div class="grid" id="gridBudgetPC"></div>
+	  </div>
+	</section>
+
+
+
+
+
+    <!-- 패션 섹션 -->
+    <section class="section" id="sec-fashion">
+        <div class="section-head">
+            <h2 class="section-title">
+                패션 추천
+            </h2>
+            <span class="kicker">
+				<a href="https://link.coupang.com/a/cWz6uf" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridFashion"></div>
+        </div>
+    </section>
+
+
+	   <!-- 언어치료 교구 섹션 -->
+    <section class="section" id="sec-speech">
+        <div class="section-head">
+            <h2 class="section-title">언어치료 교구 추천</h2>
+            <span class="kicker">
+                <!-- 필요시 링크 교체 -->
+                <a href="https://link.coupang.com/a/cWUDb8" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridSpeech"></div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <!-- 로켓프레시 섹션 -->
+    <section class="section" id="sec-fresh">
+        <div class="section-head">
+            <h2 class="section-title">로켓프레시 추천</h2>
+            <span class="kicker">
+				<a href="https://link.coupang.com/a/cWLH1G" class="more-link" target="_blank" rel="noopener" referrerpolicy="unsafe-url">
+                    더보기 +
+                </a>
+            </span>
+        </div>
+        <div class="surface">
+            <div class="grid" id="gridFresh"></div>
+        </div>
+    </section>
+
+
+
+
+    <!-- 카테고리 배너: 모자이크 -->
+    <section class="section" id="sec-banners">
+        <div class="section-head">
+            <h2 class="section-title">카테고리 배너</h2>
+			<!-- 
+            <span class="kicker">728×90 배너를 모자이크로 배치</span>
+			-->
+        </div>
+        <div class="surface">
+            <div class="banner-grid" id="bannerGrid"></div>
+        </div>
+    </section>
+
+    <!-- FAQ & 가이드 -->
+    <section class="section">
+        <div class="section-head">
+            <h2 class="section-title">도움말 & FAQ</h2>
+            <span class="kicker">결제/배송/환불/파트너스 고지</span>
+        </div>
+        <div class="surface">
+            <div class="faq">
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        쿠팡 파트너스 링크인가요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg> 
+                    </summary>
+                    <div class="answer">네. 본 페이지는 쿠팡 파트너스 활동의 일환이며, 링크를 통해 구매 시 일정액의 수수료를 제공받습니다.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        가격/이미지는 왜 다를 수 있나요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">상품의 가격·재고·이미지는 판매처 사정에 따라 수시로 변경될 수 있습니다. 최종 구매 전 쿠팡 상품 페이지를 확인하세요.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        로켓배송/프레시는 무엇인가요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">로켓배송은 빠른 배송 서비스, 로켓프레시는 신선식품 새벽/당일 배송 서비스입니다. 지역에 따라 제공 여부가 다를 수 있습니다.</div>
+                </details>
+                <details>
+                    <summary>
+                        <span class="qdot" aria-hidden="true"></span>
+                        환불/교환은 어디서 하나요?
+                        <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 15.5 5.5 9 7 7.5l5 5 5-5 1.5 1.5z" /></svg>
+                    </summary>
+                    <div class="answer">모든 주문·배송·환불 업무는 쿠팡 고객센터 정책을 따릅니다. 본 페이지는 큐레이션을 제공하는 중개 성격입니다.</div>
+                </details>
+            </div>
+            <div class="helper" style="margin-top:16px; text-align: center;"><strong>Tip.</strong> 상단 검색에서 원하는 키워드를 입력하면 더 많은 상품을 확인할 수 있어요. 인기 키워드: “운동화”, “와이셔츠”, “밀키트”, “캡슐커피”</div>
+        </div>
+    </section>
+
+
+
+
+	<!-- 후기 섹션 -->
+	<section class="section" id="sec-reviews" aria-label="훈픽스 구매 후기">
+	  <div class="section-head">
+		<h2 class="section-title">훈픽스 (HoonPick's) 이용 후기</h2>
+		<!-- 
+		<span class="kicker">훈픽스 링크를 통해 구매한 간단 후기</span>
+		-->
+	  </div>
+	  <div class="surface">
+		<div class="reviews" id="reviewsGrid"></div>
+	  </div>
+	</section>
+
+
+
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="ft-wrap">
+            <div class="ft-col">
+                <div class="ft-brand">
+                    <div class="brand-badge" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z" /></svg></div>
+                    <div>
+                        <strong>훈픽스 (HoonPick's)</strong>
+                        <div class="kicker">오늘의 쿠팡 추천 큐레이션</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="ft-bottom">
+			<div>
+				© 2025 <a href="https://ansoft-90.github.io/" target="_blank" rel="noopener noreferrer"> 에이엔소프트 [ANSOFT]</a> | 대표 : 장성훈
+			</div>
+            <div class="ft-links">
+				<p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<button class="top-btn" id="topBtn" aria-label="상단으로 이동">↑</button>
+
+<script>
+// ====== 데이터 (원본 유지) ======
+const DATA = {
+    deals: [
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckhGRp", "https://coupa.ng/ckhGR5", "https://coupa.ng/ckhGSz",
+        "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckgcAK", "https://coupa.ng/ckgcBX", "https://coupa.ng/ckhGRE", "https://coupa.ng/ckhGSn", "https://coupa.ng/ckhGSJ",
+		"https://coupa.ng/ckhGS8", "https://coupa.ng/ckhGTB", "https://coupa.ng/ckhGT5", "https://coupa.ng/ckhGUI", "https://coupa.ng/ckhGU5", "https://coupa.ng/ckhGWr", "https://coupa.ng/ckhGWz",
+		"https://coupa.ng/ckhGWM", "https://coupa.ng/ckhGW1", "https://coupa.ng/ckhGXk", "https://coupa.ng/ckhGXw", "https://coupa.ng/ckhGXM", "https://coupa.ng/ckhGXU", "https://coupa.ng/ckhGX4",
+		"https://coupa.ng/ckhGYl"
+    ],
+    popular: [
+        "https://coupa.ng/ckfadJ", "https://coupa.ng/ckfadT", "https://coupa.ng/ckfadZ", "https://coupa.ng/ckfad4",
+        "https://coupa.ng/ckfaxK", "https://coupa.ng/ckfayX", "https://coupa.ng/ckfaes", "https://coupa.ng/ckfaez",
+        "https://coupa.ng/ckfaeG", "https://coupa.ng/ckfaeN", "https://coupa.ng/ckfaeS", "https://coupa.ng/ckfaeW",
+        "https://coupa.ng/ckfae5", "https://coupa.ng/ckfafe", "https://coupa.ng/ckfafq", "https://coupa.ng/ckfafA",
+        "https://coupa.ng/ckfafC", "https://coupa.ng/ckfafG", "https://coupa.ng/ckfafM", "https://coupa.ng/ckfafZ"
+    ],
+    oneplus: [
+        "https://coupa.ng/ckffMX", "https://coupa.ng/ckffND", "https://coupa.ng/ckffOj", "https://coupa.ng/ckffOS", "https://coupa.ng/ckhG0R", "https://coupa.ng/ckhG1l", "https://coupa.ng/ckhG1Q",
+        "https://coupa.ng/ckffPH", "https://coupa.ng/ckffR7", "https://coupa.ng/ckffUo", "https://coupa.ng/ckff4q", "https://coupa.ng/ckhG2f", "https://coupa.ng/ckhG23", "https://coupa.ng/ckhG3u",
+        "https://coupa.ng/ckgeZz", "https://coupa.ng/ckgeZ5", "https://coupa.ng/ckge0t", "https://coupa.ng/ckge1k"
+    ],
+    budgetpc: [
+        "https://coupa.ng/ckgiWN",
+        "https://coupa.ng/ckgiXu",
+        "https://coupa.ng/ckgiXS",
+        "https://coupa.ng/ckgiYx",
+        "https://coupa.ng/ckgiZi",
+        "https://coupa.ng/ckgiZG",
+        "https://coupa.ng/ckgiZZ",
+        "https://coupa.ng/ckgi0p",
+        "https://coupa.ng/ckgi1k",
+        "https://coupa.ng/ckgi1U",
+        "https://coupa.ng/ckgi2q",
+        "https://coupa.ng/ckgi5K",
+        "https://coupa.ng/ckgi6g",
+        "https://coupa.ng/ckgi6H",
+        "https://coupa.ng/ckgi7c"
+    ],
+    fashion: [
+        "https://coupa.ng/ckeVfb", "https://coupa.ng/ckeVfs", "https://coupa.ng/ckeVfD", "https://coupa.ng/ckeVgb",
+        "https://coupa.ng/ckeVgs", "https://coupa.ng/ckeVhm", "https://coupa.ng/ckeVn0", "https://coupa.ng/ckeVod",
+        "https://coupa.ng/ckeVoh", "https://coupa.ng/ckeVox", "https://coupa.ng/ckeVpS", "https://coupa.ng/ckeVp0",
+        "https://coupa.ng/ckeVqg", "https://coupa.ng/ckeVqH", "https://coupa.ng/ckeVqR", "https://coupa.ng/ckeVqY",
+        "https://coupa.ng/ckffD3", "https://coupa.ng/ckeVrr", "https://coupa.ng/ckeVry", "https://coupa.ng/ckeVrF",
+        "https://coupa.ng/ckeVrL", "https://coupa.ng/ckfdb8", "https://coupa.ng/ckgeXw", "https://coupa.ng/ckgeXW",
+        "https://coupa.ng/ckgeYt", "https://coupa.ng/ckgeYD", "https://coupa.ng/ckgeYV", "https://coupa.ng/ckgeZl"
+    ],
+    speech: [
+        "https://coupa.ng/ckgChp",
+        "https://coupa.ng/ckgCh7",
+        "https://coupa.ng/ckgCi7",
+        "https://coupa.ng/ckgCjg",
+        "https://coupa.ng/ckgCjz",
+        "https://coupa.ng/ckgCjL",
+        "https://coupa.ng/ckgCj8",
+        "https://coupa.ng/ckgCkh",
+        "https://coupa.ng/ckgCkL",
+        "https://coupa.ng/ckgCk2",
+        "https://coupa.ng/ckgClj",
+        "https://coupa.ng/ckgClu",
+        "https://coupa.ng/ckgCxY",
+        "https://coupa.ng/ckgClZ",
+        "https://coupa.ng/ckgCl6",
+        "https://coupa.ng/ckgCmf",
+        "https://coupa.ng/ckgCmp",
+        "https://coupa.ng/ckgCmE",
+        "https://coupa.ng/ckgCmV",
+        "https://coupa.ng/ckgCnn",
+        "https://coupa.ng/ckgCnx"
+    ],
+    fresh: [
+        "https://coupa.ng/ckeU9G", "https://coupa.ng/ckeU9P", "https://coupa.ng/ckeU9W", "https://coupa.ng/ckeU99",
+        "https://coupa.ng/ckeVai", "https://coupa.ng/ckeVaq", "https://coupa.ng/ckeVaA", "https://coupa.ng/ckeVaL",
+        "https://coupa.ng/ckeVaT", "https://coupa.ng/ckeVbh", "https://coupa.ng/ckeVbr", "https://coupa.ng/ckeVcX",
+        "https://coupa.ng/ckeVbI", "https://coupa.ng/ckeVbU", "https://coupa.ng/ckeVcc", "https://coupa.ng/ckeVek",
+        "https://coupa.ng/ckeVdR", "https://coupa.ng/ckeVd9",
+    ],
+    banners: [{
+            href: "https://link.coupang.com/a/cWqYJ7",
+            src: "https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZaR",
+            src: "https://ads-partners.coupang.com/banners/931573?subId=&traceId=V0-301-f5c692db558def48-I931573&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZoP",
+            src: "https://ads-partners.coupang.com/banners/931574?subId=&traceId=V0-301-12cd6d67384e2afb-I931574&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWqZt9",
+            src: "https://ads-partners.coupang.com/banners/931575?subId=&traceId=V0-301-0fd2df58973b32a5-I931575&w=728&h=90"
+        },
+        {
+            href: "https://link.coupang.com/a/cWq08w",
+            src: "https://ads-partners.coupang.com/banners/931579?subId=&traceId=V0-301-efafde73812c2264-I931579&w=728&h=90"
+        }
+    ]
+};
+
+// ====== 유틸 ======
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+// === 유틸: 매일 동일 시드로 셔플 ===
+const shuffleDaily = (arr) => {
+    const seed = new Date().toDateString().split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = (seed + i) % copy.length;
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+};
+
+// ✅ 추가: 매일 랜덤으로 n개만 뽑기(중복 없이)
+function pickDaily(arr, n = 12) {
+    const s = shuffleDaily(arr);
+    return s.slice(0, Math.min(n, s.length));
+}
+
+// 필요 시 “무조건 12개”가 필요하면(원본이 12개 미만일 때 중복 허용):
+function pickDailyFill(arr, n = 12) {
+    const s = shuffleDaily(arr);
+    const out = [];
+    for (let i = 0; i < n; i++) out.push(s[i % s.length]);
+    return out;
+}
+
+
+
+
+// ====== 카드: iframe만 (CTA 제거) ======
+function Card(url) {
+    return `
+        <article class="card">
+          <div class="widget">
+            <iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="쿠팡 추천 위젯"></iframe>
+          </div>
+        </article>`;
+}
+
+// ====== 섹션 렌더 ======
+function drawProducts() {
+    const pWrap = $('#gridPopular');
+    const oWrap = $('#gridOnePlus');
+    const fWrap = $('#gridFashion');
+    const rWrap = $('#gridFresh');
+	const sWrap = $('#gridSpeech');
+    /*
+	const p = shuffleDaily(DATA.popular);
+    const o = shuffleDaily(DATA.oneplus);
+    const f = shuffleDaily(DATA.fashion);
+    const r = shuffleDaily(DATA.fresh);
+	*/
+
+    // ✅ 각 섹션 12개만 노출(중복 없이)
+    // 하루하루마다 바뀌게끔
+	/*
+	const p = pickDaily(DATA.popular, 6);
+    const o = pickDaily(DATA.oneplus, 6);
+    const f = pickDaily(DATA.fashion, 6);
+    const r = pickDaily(DATA.fresh, 6);
+	const s = pickDaily(DATA.speech, 12);
+	*/
+	
+	// 새로고침마다 셔플하려면:
+	const p = shuffleOnce(DATA.popular).slice(0, 6);
+    const o = shuffleOnce(DATA.oneplus).slice(0, 6);
+    const f = shuffleOnce(DATA.fashion).slice(0, 6);
+    const r = shuffleOnce(DATA.fresh).slice(0, 6);
+	const s = shuffleOnce(DATA.speech).slice(0, 6);
+
+    pWrap.innerHTML = p.map(Card).join('');
+    oWrap.innerHTML = o.map(Card).join('');
+    fWrap.innerHTML = f.map(Card).join('');
+    rWrap.innerHTML = r.map(Card).join('');
+	sWrap.innerHTML = s.map(Card).join('');
+
+}
+
+function drawDeals() {
+    const el = $('#dealsGrid');
+    const urls = shuffleOnce(DATA.deals);  // 🔽 여기서 무작위 셔플
+    const html = urls.map(url => `
+        <article class="deal">
+          <div class="meta"><span>한정 특가</span></div>
+          <div class="widget"><iframe src="${url}" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics title="특가 위젯"></iframe></div>
+        </article>`).slice(0, 8).join('');  // 4개씩 2줄: 총 8개만 사용
+    el.innerHTML = html;
+}
+
+
+function drawBanners() {
+    const el = $('#bannerGrid');
+    const html = DATA.banners.map(b => `<a href="${b.href}" target="_blank" rel="noopener" referrerpolicy="unsafe-url"><img src="${b.src}" alt="카테고리 배너"></a>`).join('');
+    el.innerHTML = html;
+}
+
+
+// (1) 주소/HTML 목록 (네가 준 항목 그대로)
+const PROMO_BANNERS = [
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932226&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931780&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932230&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=931601&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932233&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932235&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932236&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`,
+    `<iframe src="https://ads-partners.coupang.com/widgets.html?id=932238&template=banner&trackingCode=AF5315280&subId=&width=320&height=480" width="320" height="480" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>`
+];
+
+// (2) 새로고침마다 섞기 → 3개만 뽑기
+function shuffleOnce(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function pick3(arr) {
+    return shuffleOnce(arr).slice(0, Math.min(3, arr.length));
+}
+
+// (3) 렌더
+function drawPromoBanners() {
+    const wrap = document.getElementById('promoBannerGrid');
+    if (!wrap) return;
+    const items = pick3(PROMO_BANNERS);
+    wrap.innerHTML = items.map(html => `<div class="promo-banner-item">${html}</div>`).join('');
+}
+
+
+
+
+function drawBudgetPC() {
+    const wrap = document.getElementById('gridBudgetPC');
+    if (!wrap) return;
+    // 접속/새로고침 때마다 무작위 순서, 최대 12개
+    const items = shuffleOnce(DATA.budgetpc).slice(0, 6);
+    wrap.innerHTML = items.map(Card).join('');
+}
+
+
+
+
+// ====== Top button ======
+function initTopBtn() {
+    const btn = $('#topBtn');
+    const onScroll = () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        btn.classList.toggle('show', y > 400);
+    };
+    window.addEventListener('scroll', onScroll, {
+        passive: true
+    });
+    btn.addEventListener('click', () => window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    }));
+    onScroll();
+}
+
+
+/* ===== Filter Bar Logic ===== */
+
+// (A) 버튼 정의만 바꾸면 확장 쉬움!
+const FILTER_SECTIONS = [{
+        id: "sec-deals",
+        label: "오늘의 특가"
+    },
+    {
+        id: "sec-popular",
+        label: "최근 많이 팔린 상품"
+    },
+    {
+        id: "sec-oneplus",
+        label: "1+1 상품"
+    },
+    {
+        id: "sec-budgetpc",
+        label: "가성비 컴퓨터"
+    },
+    {
+        id: "sec-fashion",
+        label: "패션"
+    },
+	{
+        id: "sec-speech",
+        label: "언어치료 교구"
+    },
+    {
+        id: "sec-fresh",
+        label: "로켓프레시"
+    },
+];
+// 👉 새 섹션을 만들면 위 배열에 { id:"sec-새아이디", label:"보일이름" } 한 줄 추가하면 끝!
+
+function getHeaderOffset() {
+    const header = document.querySelector('.header');
+    return header ? header.offsetHeight : 0;
+}
+
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const y = el.getBoundingClientRect().top + scrollTop;
+
+
+    // ✅ PC/모바일 분기 — PC는 기존 그대로, 모바일은 헤더+필터 더 높게
+    const isMobile = window.innerWidth <= 780;
+    const offset = getHeaderOffset() + (isMobile ? 65 : 70);
+
+    window.scrollTo({
+        top: Math.max(0, y - offset),
+        behavior: 'smooth'
+    });
+
+}
+
+// === 전역 플래그 추가 ===
+// 🔽 추가: 클릭 스크롤 해제 타이머(전역)
+let navUnlockTimer = null;
+
+// 🔽 추가: 필터바 공유 컨텍스트(전역)
+const FILTER_CTX = {
+    track: null, // DOM: #filterChips
+    chips: [], // NodeList of .filter-chip
+    map: null // Map(sectionId -> chipEl)
+};
+
+// 클릭/스크롤 중 옵저버 일시정지용 (모든 함수에서 접근 가능)
+let userNavigating = false;
+
+function releaseNavLock() {
+    userNavigating = false;
+}
+
+
+
+// 렌더
+function initFilterBar() {
+    // 헤더 높이를 CSS var로 반영(Sticky 보정)
+    document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+
+    const track = document.getElementById('filterChips');
+    if (!track) return;
+
+    // 버튼 렌더
+    track.innerHTML = FILTER_SECTIONS.map((s, i) => `
+    <button class="filter-chip" role="tab" aria-selected="${i===0?'true':'false'}" data-target="${s.id}">
+      ${s.label}
+    </button>
+  `).join('');
+
+    // ✅ chips/map 은 클릭 리스너보다 "위"에서 준비
+    const chips = Array.from(track.querySelectorAll('.filter-chip'));
+    const map = new Map(FILTER_SECTIONS.map(s => [s.id, chips.find(c => c.dataset.target === s.id)]));
+
+    // 🔽 추가: 전역 컨텍스트에 주입
+    FILTER_CTX.track = track;
+    FILTER_CTX.chips = chips;
+    FILTER_CTX.map = map;
+
+
+    // 클릭 시: 즉시 칩 활성화 + 스크롤
+    track.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-chip');
+        if (!btn) return;
+        const id = btn.getAttribute('data-target');
+
+        // 클릭 즉시 칩 활성화(옵저버 반응 전 체감용)
+        chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+        btn.setAttribute('aria-selected', 'true');
+
+        // ✅ [추가] 클릭 스크롤 동안 옵저버 개입 금지
+        userNavigating = true;
+        if (navUnlockTimer) {
+            clearTimeout(navUnlockTimer);
+            navUnlockTimer = null;
+        }
+
+        scrollToSection(id);
+
+        // ✅ 스크롤 종료 시 락 해제 (지원 브라우저는 scrollend, 그 외 타임아웃)
+        if ('onscrollend' in window) {
+            const once = () => {
+                releaseNavLock();
+                window.removeEventListener('scrollend', once);
+            };
+            window.addEventListener('scrollend', once);
+        } else {
+            navUnlockTimer = setTimeout(releaseNavLock, 450); // 스무스 스크롤 지속시간과 유사
+        }
+    });
+
+    // ==== 옵저버 생성 ====
+    function makeObserver() {
+        const topGuard = getHeaderOffset() + (window.innerWidth <= 780 ? 110 : 70);
+        return new IntersectionObserver((entries) => {
+            // 🔒 클릭/프로그래매틱 스크롤 중에는 옵저버 패스 (PC 트랙 흔들림 방지)
+            if (userNavigating) return;
+
+            // 가장 화면 중앙에 가까운 섹션을 active
+            let best = null,
+                bestScore = -Infinity;
+            const vh = window.innerHeight;
+
+            entries.forEach(ent => {
+                if (!ent.isIntersecting) return;
+                const rect = ent.target.getBoundingClientRect();
+                const centerDist = Math.abs((rect.top + rect.height / 2) - vh / 2);
+                const score = 1 / (1 + centerDist);
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = ent.target.id;
+                }
+            });
+
+            if (best && map.has(best)) {
+                const next = map.get(best);
+                // ✅ [추가] 이미 선택된 칩이면 아무것도 하지 않음(중복 스크롤/지터 방지)
+                const current = track.querySelector('.filter-chip[aria-selected="true"]');
+                if (current === next) return;
+
+                chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+                next.setAttribute('aria-selected', 'true');
+                // 칩 트랙 안에서 보이도록
+                next.scrollIntoView({
+                    block: 'nearest',
+                    inline: 'center',
+                    behavior: 'smooth'
+                });
+            }
+        }, {
+            root: null,
+            rootMargin: `-${topGuard}px 0px -55% 0px`,
+            threshold: [0.15, 0.35, 0.55]
+        });
+    }
+
+    let observer = makeObserver();
+
+    // 관찰 시작
+    FILTER_SECTIONS.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (el) observer.observe(el);
+    });
+
+    // ==== 옵저버 재생성 훅 ====
+    function refreshObserver() {
+        document.documentElement.style.setProperty('--header-offset', `${getHeaderOffset()}px`);
+        observer.disconnect();
+        observer = makeObserver();
+        FILTER_SECTIONS.forEach(s => {
+            const el = document.getElementById(s.id);
+            if (el) observer.observe(el);
+        });
+    }
+
+    // 화면 크기/회전/주소창(visualViewport) 변화 모두 대응
+    window.addEventListener('resize', refreshObserver, {
+        passive: true
+    });
+    window.addEventListener('orientationchange', refreshObserver, {
+        passive: true
+    });
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', refreshObserver, {
+            passive: true
+        });
+        window.visualViewport.addEventListener('scroll', refreshObserver, {
+            passive: true
+        });
+    }
+}
+
+
+let rafId = null;
+
+function updateActiveByScroll() {
+    if (userNavigating) return; // 클릭 스크롤 중엔 패스
+    const topGuard = getHeaderOffset() + (window.innerWidth <= 780 ? 110 : 70);
+    const midY = topGuard + (window.innerHeight - topGuard) / 2;
+
+    // 화면 중앙에 가장 가까운 섹션 찾기
+    let bestId = null,
+        bestScore = Infinity;
+    for (const s of FILTER_SECTIONS) {
+        const el = document.getElementById(s.id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const d = Math.abs(center - midY);
+        if (d < bestScore) {
+            bestScore = d;
+            bestId = s.id;
+        }
+    }
+
+    const {
+        track,
+        chips,
+        map
+    } = FILTER_CTX;
+    if (!track || !map || !chips.length) return; // 초기화 전이면 패스
+
+    if (bestId && map.has(bestId)) {
+        const current = track.querySelector('.filter-chip[aria-selected="true"]');
+        const next = map.get(bestId);
+        if (current !== next) {
+            chips.forEach(c => c.setAttribute('aria-selected', 'false'));
+            next.setAttribute('aria-selected', 'true');
+            next.scrollIntoView({
+                block: 'nearest',
+                inline: 'center',
+                behavior: 'smooth'
+            });
+        }
+    }
+
+}
+
+window.addEventListener('scroll', () => {
+    // 옵저버가 못 잡는 프레임을 보조
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(updateActiveByScroll);
+}, {
+    passive: true
+});
+
+
+
+
+// init
+drawDeals();
+drawProducts();
+drawBanners();
+initTopBtn();
+drawPromoBanners();
+drawBudgetPC();
+initFilterBar();
+
+</script>
+
+
+
+<script>
+const REVIEWS = [
+  { name: "현*준", stars: 5, title: "한눈에 상품 찾기 쉬워요", text: "훈픽스 페이지 UI가 깔끔해서 원하는 쿠팡 상품을 바로 찾을 수 있었어요." },
+  { name: "서*연", stars: 5, title: "앱 없어도 바로 검색 가능", text: "쿠팡 앱 설치 없이도 상품을 바로 검색하고 구매까지 가능해서 편했어요." },
+  { name: "민*지", stars: 5, title: "심플하고 직관적인 구성", text: "복잡한 메뉴 없이 필요한 링크만 보여줘서 보기 편했어요." },
+  { name: "도*훈", stars: 4, title: "빠른 로딩과 깔끔한 페이지", text: "페이지 로딩도 빠르고 UX가 단순해서 처음 이용했는데도 금방 알겠더라구요." },
+  { name: "지*호", stars: 5, title: "쿠팡 상품 찾기가 쉬웠어요", text: "검색창이 명확해서 원하는 제품 바로 찾고 구매할 수 있었습니다." },
+  { name: "이*빈", stars: 4, title: "심플한 인터페이스가 좋아요", text: "불필요한 정보가 없어서 집중해서 상품만 볼 수 있었어요." },
+  { name: "박*서", stars: 5, title: "디자인이 감각적이에요", text: "모던하고 깔끔한 느낌이라 신뢰감이 들었어요. UX도 잘 되어 있네요." },
+  { name: "김*선", stars: 4, title: "PC, 모바일 둘 다 편리", text: "모바일에서도 보기 편하고 PC에서도 구성 그대로 보여서 좋았습니다." },
+  { name: "윤*혁", stars: 5, title: "직관적인 검색 시스템", text: "필요한 카테고리를 바로 눌러서 원하는 쿠팡 상품 찾기가 쉬웠어요." },
+  { name: "한*은", stars: 5, title: "쿠팡으로 자연스럽게 연결", text: "링크 클릭만으로 바로 쿠팡 상품 페이지로 이동돼서 매끄러웠어요." },
+  { name: "정*호", stars: 4, title: "심플한 UX라 보기 편해요", text: "첫 방문이었는데도 구조가 단순해서 금방 익숙해졌어요." },
+  { name: "박*림", stars: 5, title: "불필요한 광고가 없어요", text: "광고나 팝업 없이 바로 상품 볼 수 있어서 좋았습니다." },
+  { name: "신*진", stars: 5, title: "깔끔한 페이지 구성", text: "필요한 정보만 딱 보여줘서 쿠팡 상품 고르기가 쉬웠어요." },
+  { name: "최*혁", stars: 4, title: "UX가 직관적이라 좋아요", text: "버튼 위치나 디자인이 명확해서 어디를 눌러야 할지 헷갈리지 않았어요." },
+  { name: "배*지", stars: 5, title: "한눈에 보이는 상품 추천", text: "카테고리별로 정리돼 있어서 원하는 상품을 빠르게 찾을 수 있었습니다." },
+  { name: "문*아", stars: 5, title: "쿠팡앱 없어도 편리", text: "앱이 없어도 바로 쿠팡 상품 페이지로 이동되니까 너무 간편했어요." },
+  { name: "오*성", stars: 4, title: "UX가 잘 설계된 페이지", text: "단순하지만 사용자 입장에서 필요한 기능만 있어 좋았습니다." },
+  { name: "정*연", stars: 5, title: "검색이 빠르고 결과가 깔끔", text: "입력하자마자 관련 상품이 바로 보여서 정말 편했어요." },
+  { name: "김*원", stars: 5, title: "디자인이 모던해서 보기 좋아요", text: "폰에서도 깔끔하게 정렬돼 있어서 눈이 피로하지 않았어요." },
+  { name: "박*하", stars: 5, title: "훈픽스 통해 쿠팡 구매 편했어요", text: "쿠팡 상품으로 자연스럽게 이어져서 구매 과정이 간단했습니다." },
+];
+
+
+function pickCountByWidth(w) {
+  if (w <= 480) return 3;
+  if (w <= 780) return 4;
+  if (w <= 1200) return 6;
+  return 6;
+}
+
+function shuffleInPlace(arr) {
+  const a = arr.slice();
+  if (window.crypto?.getRandomValues) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const u32 = new Uint32Array(1);
+      crypto.getRandomValues(u32);
+      const j = u32[0] % (i + 1);
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+  } else {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+  }
+  return a;
+}
+
+function starsToText(n) {
+  const full = "★".repeat(Math.max(0, Math.min(5, n|0)));
+  const empty = "☆".repeat(5 - full.length);
+  return full + empty;
+}
+
+/** 후기 카드 생성 (brand-badge 사용) */
+function createReviewCard({ name, stars, title, text }) {
+  const article = document.createElement("article");
+  article.className = "review-card";
+
+  // 브랜드 뱃지 SVG
+  const badge = document.createElement("div");
+  badge.className = "brand-badge";
+  badge.setAttribute("aria-hidden", "true");
+  badge.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2l2.39 4.84L20 7.27l-3.8 3.7.9 5.26L12 14.77 6.9 16.23l.9-5.26L4 7.27l5.61-.43L12 2z"/>
+    </svg>
+  `;
+
+  const body = document.createElement("div");
+  body.className = "review-body";
+
+  const top = document.createElement("div");
+  top.className = "review-top";
+
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "review-name";
+  nameSpan.textContent = name;
+
+  const starSpan = document.createElement("span");
+  starSpan.className = "review-stars";
+  starSpan.setAttribute("aria-label", `별점 ${stars}점`);
+  starSpan.textContent = starsToText(stars);
+
+  top.appendChild(nameSpan);
+  top.appendChild(starSpan);
+
+  const titleDiv = document.createElement("div");
+  titleDiv.className = "review-title";
+  titleDiv.textContent = title;
+
+  const textP = document.createElement("p");
+  textP.className = "review-text";
+  textP.textContent = text;
+
+  body.appendChild(top);
+  body.appendChild(titleDiv);
+  body.appendChild(textP);
+
+  article.appendChild(badge);
+  article.appendChild(body);
+  return article;
+}
+
+/** 랜덤 렌더 */
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("reviewsGrid");
+  if (!grid) return;
+
+  const count = Math.min(pickCountByWidth(window.innerWidth), REVIEWS.length);
+  const picked = shuffleInPlace(REVIEWS).slice(0, count);
+
+  grid.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  picked.forEach(item => frag.appendChild(createReviewCard(item)));
+  grid.appendChild(frag);
+});
+</script>
+
+
+
+
+
+
+
+
+<!-- 열린 모달 수”를 기준으로 스크롤을 잠그고 해제 -->
+<script>
+/* ===== Global ModalGuard: modal open count 기반으로 body scroll lock 관리 ===== */
+(() => {
+  const ModalGuard = (function(){
+    let openCount = 0;
+    let scrollY = 0;
+
+    
+
+    function lock(){
+      if (openCount === 0) {
+        scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        const b = document.body;
+        b.style.position = 'fixed';
+        b.style.top = `-${scrollY}px`;
+        b.style.left = '0';
+        b.style.right = '0';
+        b.style.width = '100%';
+        b.style.overflow = 'hidden';
+      }
+      openCount++;
+    }
+
+    function unlock(){
+      openCount = Math.max(0, openCount - 1);
+      if (openCount === 0) {
+        const b = document.body;
+        b.style.position = '';
+        b.style.top = '';
+        b.style.left = '';
+        b.style.right = '';
+        b.style.width = '';
+        b.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      }
+    }
+
+    function isLocked(){ return openCount > 0; }
+    function count(){ return openCount; }
+
+    return { lock, unlock, isLocked, count };
+  })();
+
+  // 전역 노출
+  window.ModalGuard = ModalGuard;
+})();
+</script>
+
+
+
+<script>
+(() => {
+  const searchCard = document.querySelector('.top-search .search-card');
+  if (!searchCard) return;
+
+  // 모달이 전부 닫혔을 때만 깜박임
+  function updateBlink() {
+    const openCount = window.ModalGuard?.count ? window.ModalGuard.count() : 0;
+    if (openCount === 0) searchCard.classList.add('blink-border');
+    else searchCard.classList.remove('blink-border');
+  }
+
+  // 초기 적용
+  if (document.readyState === 'complete' || document.readyState === 'interactive') updateBlink();
+  else document.addEventListener('DOMContentLoaded', updateBlink);
+
+  // ModalGuard 이벤트 연동 (있으면 사용)
+  window.addEventListener('modalguard:change', updateBlink);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ========== [START] 최초 진입 안내 모달 v5 (Smooth Anim + Scroll Lock) ========== -->
+<style>
+  :root { --cpz: 9999; }
+
+  .cpfv5-backdrop{
+    position:fixed; inset:0; display:none;
+    align-items:center; justify-content:center; z-index:var(--cpz);
+    background: color-mix(in oklab, var(--text, #0f172a) 20%, transparent);
+    backdrop-filter: blur(8px) saturate(1.1);
+    /* fade-in/out */
+    opacity: 0; transition: opacity .24s ease;
+  }
+  .cpfv5-backdrop.show{ display:flex; opacity: 1; }
+
+  .cpfv5-modal{
+    width:min(94vw,380px);
+    border-radius:12px;
+    border:1px solid color-mix(in oklab, var(--text, #0f172a) 10%, transparent);
+    background:linear-gradient(180deg,
+      color-mix(in oklab, var(--card,#fff) 98%,transparent),
+      color-mix(in oklab, var(--card,#fff) 92%,transparent));
+    box-shadow:0 16px 40px var(--shadow,rgba(17,24,39,.16));
+    color:var(--text,#0f172a);
+    padding:14px;
+    /* smoother pop-in (opacity + translate + scale) */
+    opacity: 0; transform: translateY(10px) scale(.965);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
+    will-change: transform, opacity;
+  }
+  .cpfv5-backdrop.show .cpfv5-modal{ opacity: 1; transform: translateY(0) scale(1); }
+
+  .cpfv5-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .cpfv5-ico{
+    width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
+    color:#fff;font-size:15px;font-weight:900;
+    box-shadow:0 6px 14px var(--ring,rgba(18,115,234,.18));
+  }
+  .cpfv5-title{margin:0;font-size:15px;font-weight:900;letter-spacing:-.2px;}
+
+  .cpfv5-body{font-size:13.5px;line-height:1.65;color:var(--muted,#64748b);margin-bottom:8px;}
+  .cpfv5-body strong{color:var(--text,#0f172a);font-weight:800;}
+  .cpfv5-tip{
+    margin-top:6px;padding:8px 10px;border-radius:10px;
+    border:1px dashed color-mix(in oklab,var(--text,#0f172a) 12%,transparent);
+    background:color-mix(in oklab,var(--card,#fff) 88%,transparent);
+    font-size:12.5px;line-height:1.55;
+  }
+
+  .cpfv5-actions{display:flex;justify-content:flex-end;margin-top:8px;}
+  .cpfv5-btn{
+    appearance:none;cursor:pointer;border:0;border-radius:10px;
+    padding:9px 14px;font-size:13.5px;font-weight:900;letter-spacing:-.2px;color:#fff;
+    background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
+    box-shadow:0 10px 24px var(--ring,rgba(18,115,234,.2));
+    transition: transform .12s ease, filter .18s ease;
+	width:100%;
+  }
+  .cpfv5-btn:hover{ transform: translateY(-1px); }
+  .cpfv5-btn:active{ transform: translateY(0); filter: saturate(1.05); }
+
+  @media (max-width: 420px){
+    .cpfv5-modal{ width:min(96vw, 360px); padding:12px; }
+    .cpfv5-body{ font-size:13px; }
+    .cpfv5-tip{ font-size:12.2px; }
+    .cpfv5-btn{ padding:10px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cpfv5-backdrop, .cpfv5-modal{ transition: none !important; }
+  }
+</style>
+
+<div class="cpfv5-backdrop" id="cpFirstVisitV5" role="dialog" aria-modal="true" aria-labelledby="cpFirstVisitV5Title">
+  <div class="cpfv5-modal" role="document">
+    <div class="cpfv5-head">
+      <div class="cpfv5-ico" aria-hidden="true">ℹ︎</div>
+      <h3 class="cpfv5-title" id="cpFirstVisitV5Title">브라우저로 열기 안내</h3>
+    </div>
+    <div class="cpfv5-body">
+      쿠팡 링크는 <strong>브라우저에서 열어야</strong> 확인이 정확해요.
+      <div class="cpfv5-tip">
+        • 안드로이드: 쿠팡이 열릴 때 <b style="font-weight:900">“쿠팡 웹으로 계속”</b> 선택<br>
+        • iOS: 자동 앱 실행 시 브라우저로 돌아와 다시 시도
+      </div>
+    </div>
+    <div class="cpfv5-actions">
+      <button type="button" class="cpfv5-btn" id="cpfv5Ok">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const wrap = document.getElementById('cpFirstVisitV5');
+  const ok   = document.getElementById('cpfv5Ok');
+
+  function openModal(){
+    if (wrap.style.display !== 'flex') {
+      wrap.style.display = 'flex';
+      requestAnimationFrame(() => wrap.classList.add('show'));
+      window.ModalGuard?.lock();  // ✅ 전역 가드로 잠금
+      setTimeout(() => ok?.focus(), 0);
+    }
+  }
+
+  function closeModal(){
+    if (wrap.style.display === 'flex') {
+      wrap.classList.remove('show');
+      setTimeout(() => {
+        wrap.style.display = 'none';
+        window.ModalGuard?.unlock(); // ✅ 전역 가드로 해제(다른 모달이 열려있으면 유지됨)
+      }, 220);
+    }
+  }
+
+  ok.addEventListener('click', closeModal);
+  wrap.addEventListener('click', e => { if (e.target === wrap) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // 페이지 로드시 표시 (원 코드 로직 유지)
+  if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
+  else document.addEventListener('DOMContentLoaded', openModal);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== [START] 훈픽스 홍보 이벤트 모달 (정돈/개선본) ========== -->
+<style>
+  .promo-backdrop{
+    position:fixed; inset:0; display:none;
+    align-items:center; justify-content:center; z-index:9999;
+    background: color-mix(in oklab, var(--text, #0f172a) 22%, transparent);
+    backdrop-filter: blur(10px) saturate(1.1);
+    opacity: 0; transition: opacity .24s ease;
+  }
+  .promo-backdrop.show{ display:flex; opacity:1; }
+
+  .promo-modal{
+    width:min(94vw, 450px);
+    border-radius:16px;
+    border:1px solid color-mix(in oklab, var(--text,#0f172a) 10%, transparent);
+    background:linear-gradient(180deg,
+      color-mix(in oklab, var(--card,#fff) 98%, transparent),
+      color-mix(in oklab, var(--card,#fff) 92%, transparent));
+    box-shadow:0 18px 44px var(--shadow,rgba(17,24,39,.18));
+    color:var(--text,#0f172a);
+    padding:18px 16px;
+    opacity:0; transform:translateY(10px) scale(.965);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
+  }
+  .promo-backdrop.show .promo-modal{ opacity:1; transform:translateY(0) scale(1); }
+
+  .promo-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .promo-ico{
+    width:30px;height:30px;border-radius:50%;
+    display:grid;place-items:center;flex:none;color:#fff;
+    background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
+    box-shadow:0 8px 18px var(--ring,rgba(18,115,234,.22));
+    font-weight:900;
+  }
+  .promo-title{margin:0;font-size:16px;font-weight:900;letter-spacing:-.2px;}
+
+  .promo-sub{
+    margin:10px 2px 12px; font-size:14px; line-height:1.75; color:var(--muted,#64748b);
+  }
+  .promo-sub .link{
+    color:var(--brand,#1273ea); font-weight:800; text-decoration:none;
+  }
+
+  .promo-divider{
+    height:1px; background:linear-gradient(90deg,transparent,var(--outline) 20%,var(--outline) 80%,transparent);
+    margin:10px 0 12px;
+  }
+
+  /* Steps */
+  .promo-steps{display:grid; gap:10px; margin:0; padding:0; list-style:none;}
+  .promo-step{
+    display:grid; grid-template-columns:auto 1fr; gap:10px;
+    align-items:flex-start;
+    padding:10px 12px; border:1px solid var(--outline);
+    border-radius:12px;
+    background:linear-gradient(180deg,color-mix(in oklab,var(--card) 98%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
+    box-shadow:0 8px 18px var(--shadow);
+  }
+  .num-badge{
+    width:28px; height:28px; border-radius:10px; display:grid; place-items:center;
+    font-weight:900; color:#fff;
+    background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff));
+    box-shadow:0 6px 16px var(--ring,rgba(18,115,234,.2));
+    flex:none;
+  }
+  .step-text{font-size:14px; line-height:1.7; color:var(--muted,#64748b);}
+  .step-text strong{color:var(--text);}
+
+  /* Email pill */
+  .email-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--outline); border-radius:999px; padding:6px 10px;
+    font-size:13px; font-weight:800; color:var(--text);
+    background:linear-gradient(180deg,color-mix(in oklab,var(--card) 98%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
+    box-shadow:0 6px 16px var(--shadow);
+  }
+
+  .promo-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}
+  .promo-btn{
+    appearance:none;border:0;border-radius:12px;cursor:pointer;
+    padding:10px 14px;font-weight:900;letter-spacing:-.2px;
+    background:linear-gradient(135deg,var(--brand,#1273ea),var(--brand-2,#00b6ff)); color:#fff;
+    box-shadow:0 10px 24px var(--ring,rgba(18,115,234,.22));
+  }
+  .promo-btn.secondary{
+    background:linear-gradient(180deg,color-mix(in oklab,var(--card) 98%,transparent),color-mix(in oklab,var(--card) 92%,transparent));
+    color:var(--text); border:1px solid var(--outline);
+    box-shadow:0 8px 18px var(--shadow);
+  }
+
+  @media (max-width:420px){
+    .promo-modal{ padding:14px 12px; }
+    .promo-sub{ font-size:13.5px; }
+    .step-text{ font-size:13.5px; }
+  }
+</style>
+
+<div class="promo-backdrop" id="promoJoinModal" role="dialog" aria-modal="true" aria-labelledby="promoJoinTitle">
+  <div class="promo-modal" role="document">
+    <div class="promo-head">
+      <div class="promo-ico" aria-hidden="true">💎</div>
+      <h3 class="promo-title" id="promoJoinTitle">훈픽스 홍보 이벤트</h3>
+    </div>
+
+    <!-- 한 줄 한 문장으로 깔끔히 정리 -->
+    <div class="promo-sub">
+      훈픽스 주소를 10곳 또는 10명에게 홍보하고 스크린샷을 제출하면 메가커피 쿠폰 1장을 드립니다.
+    </div>
+    <div class="promo-sub">
+      훈픽스 주소: <a class="link" href="https://lawcombo.github.io/pickport/" target="_blank" rel="noopener">https://lawcombo.github.io/pickport/</a>
+    </div>
+    <div class="promo-divider"></div>
+
+    <ul class="promo-steps">
+      <li class="promo-step">
+        <div class="num-badge">1</div>
+        <div class="step-text">블로그·인스타·카톡채팅 등 <strong>10곳</strong>에 훈픽스 주소를 노출하고 “쿠팡 큐레이션”, "쿠팡 상품 판매"라고 적어 주세요.</div>
+      </li>
+      <li class="promo-step">
+        <div class="num-badge">2</div>
+        <div class="step-text">게시한 <strong>스크린샷 10장</strong>을 <strong>압축(zip)</strong>하여 보내 주세요.<br />또는 <strong>게시한 위치(주소)</strong>을 <strong>정리</strong>하여 보내 주세요.</div>
+      </li>
+      <li class="promo-step">
+        <div class="num-badge">3</div>
+        <div class="step-text">
+          메일 제목은 <strong>[훈픽스 홍보 인증] 이름/연락처</strong>로 작성하고, 아래 주소로 보내 주세요.
+          <div style="margin-top:8px">
+            <span class="email-pill">📧 leicombo@gmail.com</span> *반복가능
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="promo-actions">
+      <button type="button" class="promo-btn secondary" id="promoLaterBtn">다음에</button>
+      <a class="promo-btn" id="promoMailCta"
+         href="mailto:leicombo@gmail.com?subject=%5B%ED%9B%88%ED%94%BD%EC%8A%A4%20%ED%99%8D%EB%B3%B4%20%EC%9D%B8%EC%A6%9D%5D%20%EC%9D%B4%EB%A6%84%2F%EC%97%B0%EB%9D%BD%EC%B2%98&body=%ED%9B%88%ED%94%BD%EC%8A%A4%20%EC%A3%BC%EC%86%8C%3A%20https%3A%2F%2Flawcombo.github.io%2Fpickport%2F%0A%0A1)%20%ED%99%8D%EB%B3%B4%20%EA%B2%BD%EB%A1%9C%3A%20%EB%B8%94%EB%A1%9C%EA%B7%B8%2F%EC%9D%B8%EC%8A%A4%ED%83%80%2F%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%EC%A7%80%EC%97%AD%0A2)%20%EC%A6%9D%EA%B0%80%EC%82%AC%ED%95%AD%3A%20%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%2010%EC%9E%A5%20%EB%B6%99%EC%9E%84%20%EA%B0%80%EB%8A%A5%0A3)%20%EB%B6%80%EA%B0%80%3A%20zip%20%EB%98%90%EB%8A%94%20%ED%8F%B4%EB%8D%94%20URL"
+         >이메일로 인증 제출</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const modal = document.getElementById('promoJoinModal');
+  const later = document.getElementById('promoLaterBtn');
+
+  function openModal(){
+    if (modal.style.display !== 'flex') {
+      modal.style.display = 'flex';
+      requestAnimationFrame(() => modal.classList.add('show'));
+      window.ModalGuard?.lock(); // ✅ 전역 가드로 잠금
+    }
+  }
+
+  function closeModal(){
+    if (modal.style.display === 'flex') {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        window.ModalGuard?.unlock(); // ✅ 전역 가드로 해제
+      }, 220);
+    }
+  }
+
+  // 첫 방문 시 즉시 노출 (원 코드 로직 유지)
+  if (document.readyState === 'complete' || document.readyState === 'interactive') openModal();
+  else document.addEventListener('DOMContentLoaded', openModal);
+
+  later.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // 본문 버튼(#promoGuideBtn)이 모달을 다시 열도록 연결
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('#promoGuideBtn');
+    if (btn) openModal();
+  });
+})();
+</script>
+<!-- ========== [END] 훈픽스 홍보 이벤트 모달 (정돈/개선본) ========== -->
+
+
+
+
+</body>
+</html>
