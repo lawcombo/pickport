@@ -1259,6 +1259,43 @@ padding:16px;
   }
 }
 
+@media (max-width: 768px) {
+  .streaming-head {
+    flex-direction: column;  /* ← 핵심! */
+    align-items: flex-start; /* 왼쪽 정렬 */
+  }
+
+  .streaming-head .badge {
+    font-size: 12px;
+    margin-top: 6px;
+    color: #888;
+    text-align: left;
+    line-height: 1.4;
+  }
+}
+
+.streaming-notice {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  line-height: 1.5;
+  padding-top:10px;
+}
+
+/* 모바일은 조금 더 작게, 여백 줄이기 */
+@media (max-width: 768px) {
+  .streaming-notice {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 8px;
+    padding: 0 10px;
+	padding-top:10px;
+  }
+}
+
+
+
 
 </style>
 
@@ -1278,6 +1315,7 @@ padding:16px;
   </div>
 </div>
 
+
 <!-- 🔽 쿠팡 배너 추가 -->
 <div class="banner">
 	<a href="https://link.coupang.com/a/cX2u5a" target="_blank" referrerpolicy="unsafe-url">
@@ -1285,7 +1323,6 @@ padding:16px;
 	</a>
 </div>
 
-	
 <!-- 2) 히어로 -->
 <section class="hero">
   <div class="container">
@@ -1319,6 +1356,7 @@ padding:16px;
 
 
 
+<!-- 유투브 쇼츠 영역 -->
 <section class="streaming-wrap" aria-label="스트리밍 영상">
   <div class="streaming-box">
     <div class="streaming-head">
@@ -1326,9 +1364,13 @@ padding:16px;
       <span class="badge">HoonPick's 추천</span>
     </div>
     <div class="video-grid" id="videoGrid"></div>
+
+	<p class="streaming-notice">
+      ※ 본 영상은 YouTube 원작자의 콘텐츠이며, 링크는 훈픽스 제휴(쿠팡 파트너스) 링크입니다.
+    </p>
+
   </div>
 </section>
-
 
 
 
@@ -1421,13 +1463,12 @@ padding:16px;
 
 
 
-
 <!-- 🔽 쿠팡 배너 추가 -->
-    <div class="banner">
-        <a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
-            <img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
-        </a>
-    </div>
+<div class="banner">
+	<a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
+		<img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
+	</a>
+</div>
 
 
 <section class="section section-reviews" data-section="reviews">
