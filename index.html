@@ -1129,9 +1129,141 @@ padding:16px;
       }
   }
 
+</style>
+
+
+
+
+<style>
+/* ===== TikTok Streaming (No Scroll Ver.) ===== */
+.streaming-wrap {
+  position: relative;
+  max-width: 1100px;
+  margin: 14px auto 0;
+  padding: 0 16px;
+  overflow: visible !important;
+}
+.streaming-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  overflow: visible !important;
+}
+.streaming-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.streaming-title {
+  position: relative;
+  padding-left: 14px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+.streaming-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 24px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--brand, #0b63c4), var(--brand-2, #38bdf8));
+  box-shadow: 0 0 8px var(--ring, rgba(11,99,196,.3));
+}
+
+/* 반응형 그리드 */
+.video-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  overflow: visible !important;
+}
+
+.video-card {
+  display: grid;
+  gap: 10px;
+  background: linear-gradient(180deg, #fff, #fbfcff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  overflow: visible !important;
+}
+
+/* 9:16 비율 유지 – 짤림 방지 */
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid #e6eaf2;
+}
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  overflow: hidden;
+}
+
+/* 쿠팡 버튼 */
+.cp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  background: linear-gradient(180deg, #0b7af0, #0657bb);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 10px 22px rgba(11,122,240,.28);
+  transition: .2s transform, .2s box-shadow, .2s filter;
+}
+.cp-btn::after {
+  content: "→";
+  font-weight: 700;
+}
+.cp-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(11,122,240,.35);
+  filter: brightness(1.02);
+}
+
+/* 다크 모드 */
+@media (prefers-color-scheme: dark) {
+  .streaming-box {
+    background: rgba(13,23,42,.7);
+    border-color: rgba(255,255,255,.08);
+  }
+  .video-card {
+    background: linear-gradient(180deg, rgba(14,24,45,.9), rgba(14,24,45,.82));
+    border-color: rgba(255,255,255,.08);
+  }
+  .video-frame {
+    border-color: rgba(255,255,255,.1);
+  }
+}
 
 
 </style>
+
+
+
 </head>
 <body>
 
@@ -1175,6 +1307,22 @@ padding:16px;
     </div>
   </div>
 </section>
+
+
+
+
+<section class="streaming-wrap" aria-label="스트리밍 영상">
+  <div class="streaming-box">
+    <div class="streaming-head">
+      <div class="streaming-title">꿀템 스트리밍</div>
+      <span class="badge">HoonPick's 추천</span>
+    </div>
+    <div class="video-grid" id="videoGrid"></div>
+  </div>
+</section>
+
+
+
 
 <!-- 3) 필터 -->
 <div class="filters" id="filtersBar">
@@ -2290,6 +2438,152 @@ window.addEventListener('resize', (()=> {
     }
   });
 </script>
+
+
+
+<!-- 틱톡 영상 script -->
+<!-- 
+<script>
+(function(){
+  /* ▶ TikTok 링크 (현재는 동일한 영상 4개) */
+  var tiktokLinks = [
+    "https://www.tiktok.com/@ppeccom02/video/7522456198982094098",
+    "https://www.tiktok.com/@ppeccom02/video/7522456198982094098",
+    "https://www.tiktok.com/@ppeccom02/video/7522456198982094098",
+    "https://www.tiktok.com/@ppeccom02/video/7522456198982094098"
+  ];
+
+  /* ▶ 쿠팡 링크 (없으면 기본 공통 링크 사용) */
+  var coupangLinkDefault = "https://link.coupang.com/a/cWL1HW";
+  var coupangLinks = [null, null, null, null];
+
+  function getTikTokId(u){
+    try{
+      var m = u.match(/\/video\/(\d+)/);
+      return m && m[1] ? m[1] : null;
+    }catch(e){ return null; }
+  }
+
+  function buildCard(url, cpUrl){
+    var vid = getTikTokId(url);
+    if(!vid){ return ""; }
+    /* 영상만 보이게 (controls=0, description=0) */
+    var embed = "https://www.tiktok.com/embed/v2/" + vid + "?lang=ko-KR&controls=0&description=0";
+    var h = "";
+    h += "<div class=\"video-card\">";
+    h +=   "<div class=\"video-frame\">";
+    h +=     "<iframe src=\"" + embed + "\" allow=\"encrypted-media; fullscreen; picture-in-picture\" referrerpolicy=\"no-referrer-when-downgrade\" loading=\"lazy\"></iframe>";
+    h +=   "</div>";
+    h +=   "<a class=\"cp-btn\" href=\"" + (cpUrl || coupangLinkDefault) + "\" target=\"_blank\" rel=\"noopener\" referrerpolicy=\"unsafe-url\">쿠팡 상품 보러가기</a>";
+    h += "</div>";
+    return h;
+  }
+
+  function renderTikToks(){
+    var host = document.getElementById("videoGrid");
+    if(!host){ return; }
+
+    var out = "";
+    for(var i=0;i<Math.min(4, tiktokLinks.length);i++){
+      out += buildCard(tiktokLinks[i], coupangLinks[i] || null);
+    }
+    host.innerHTML = out;
+  }
+
+  if(document.readyState === "complete" || document.readyState === "interactive"){
+    renderTikToks();
+  }else{
+    document.addEventListener("DOMContentLoaded", renderTikToks);
+  }
+})();
+</script>
+-->
+
+
+<!-- 유투브 쇼츠 script -->
+<script>
+(function(){
+  /* ▶ 유튜브 쇼츠 주소들 (임의 예시) */
+  var ytLinks = [
+    "https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k", // 애완용품 세이프 지퍼
+    "https://youtube.com/shorts/KOzPtqZJJzY?si=jyKq1VLswB6DPsWp", // 샤오비 보조배터리
+    "https://youtube.com/shorts/fVInEa-T54w?si=yFArHu0dASFs2MnK", // 지아이비 핸디형 무선 청소기
+    "https://youtube.com/shorts/8-1YuPzJLHA?si=YXfw8O9aKX-uvQvC", // 미니 빨래 건조대
+    "https://youtube.com/shorts/wN1tRDnO1fE?si=5x61qSlsODXfwGmI"  // 아가짱 샤워덕 조이 목욕핸들
+  ];
+
+  /* ▶ 각 영상별 쿠팡 링크 (영상 인덱스와 동일한 순서) */
+  var coupangLinks = [
+    "https://link.coupang.com/a/cXZexN", // 애완용품 세이프 지퍼
+    "https://link.coupang.com/a/cXZwtK", // 샤오비 보조배터리
+    "https://link.coupang.com/a/cXZKtP", // 지아이비 핸디형 무선 청소기
+    "https://link.coupang.com/a/cXZFI2", // 미니 빨래 건조대
+    "https://link.coupang.com/a/cXZNOd"  // 아가짱 샤워덕 조이 목욕핸들
+  ];
+
+  function getYouTubeId(u){
+    var m;
+    if((m = u.match(/\/shorts\/([A-Za-z0-9_-]{5,})/))) return m[1];
+    if((m = u.match(/[?&]v=([A-Za-z0-9_-]{5,})/))) return m[1];
+    if((m = u.match(/youtu\.be\/([A-Za-z0-9_-]{5,})/))) return m[1];
+    return null;
+  }
+
+  /* ▶ 랜덤 섞기 */
+  function shuffle(arr){
+    for(var i=arr.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+    }
+    return arr;
+  }
+
+  function buildCard(url, cpUrl){
+    var vid = getYouTubeId(url);
+    if(!vid){ return ""; }
+    var embed = "https://www.youtube.com/embed/" + vid +
+      "?modestbranding=1&rel=0&controls=0&playsinline=1&iv_load_policy=3&autoplay=1&mute=1&loop=1&playlist=" + vid;
+
+    var h = "";
+    h += "<div class=\"video-card\">";
+    h +=   "<div class=\"video-frame\">";
+    h +=     "<iframe src=\"" + embed + "\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen loading=\"lazy\"></iframe>";
+    h +=   "</div>";
+    h +=   "<a class=\"cp-btn\" href=\"" + cpUrl + "\" target=\"_blank\" rel=\"noopener\" referrerpolicy=\"unsafe-url\">쿠팡 상품 보러가기</a>";
+    h += "</div>";
+    return h;
+  }
+
+  function renderYT(){
+    var host = document.getElementById("videoGrid");
+    if(!host) return;
+
+    /* ▶ ytLinks와 coupangLinks를 같은 방식으로 섞기 */
+    var combined = ytLinks.map(function(link, idx){
+      return { yt: link, cp: coupangLinks[idx] };
+    });
+    shuffle(combined);
+
+    /* ▶ 3개만 노출 */
+    var out = "";
+    for(var i=0;i<Math.min(3, combined.length);i++){
+      out += buildCard(combined[i].yt, combined[i].cp);
+    }
+    host.innerHTML = out;
+  }
+
+  document.readyState === "complete" || document.readyState === "interactive"
+    ? renderYT()
+    : document.addEventListener("DOMContentLoaded", renderYT);
+})();
+</script>
+
+
+
+
+
+
+
 
 
 
