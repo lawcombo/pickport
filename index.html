@@ -1283,6 +1283,11 @@ padding:16px;
 
 
 
+.refresh-btn{ appearance:none; border:0; background:transparent; cursor:pointer; font-size:22px; line-height:1; transition:transform .28s ease; }
+.refresh-btn:hover{ transform:rotate(180deg) scale(1.05) }
+.refresh-btn:active{ transform:rotate(360deg) scale(.95) }
+
+
 </style>
 
 
@@ -1346,7 +1351,10 @@ padding:16px;
 <section class="streaming-wrap" aria-label="스트리밍 영상">
   <div class="streaming-box">
     <div class="streaming-head">
-      <div class="streaming-title">꿀템 스트리밍</div>
+      <div class="streaming-title">
+		꿀템 스트리밍
+		<button id="videoRefreshBtn" class="refresh-btn" type="button" title="랜덤 새로고침" aria-label="랜덤 새로고침">🔄</button>
+		</div>
       <span class="badge">HoonPick's 추천</span>
     </div>
     <div class="video-grid" id="videoGrid"></div>
@@ -2073,15 +2081,8 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
 
 
 
-
-
-
-
-
-
-
-
 <!-- ========== [START] 훈픽스 홍보 이벤트 모달 (정돈/개선본) ========== -->
+<!--
 <style>
   .promo-backdrop{
     position:fixed; inset:0; display:none;
@@ -2180,7 +2181,7 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
 
 
 
-  /* === [구분선/보더 강화 오버라이드] ================================ */
+/* === [구분선/보더 강화 오버라이드] ================================ */
 /* 범위 명확화를 위해 모달 루트(#promoJoinModal)로 한 번 더 한정 */
 #promoJoinModal .promo-divider{
   /* 높이/색 진하게 */
@@ -2241,6 +2242,7 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
 
 </style>
 
+
 <div class="promo-backdrop" id="promoJoinModal" role="dialog" aria-modal="true" aria-labelledby="promoJoinTitle">
   <div class="promo-modal" role="document">
     <div class="promo-head">
@@ -2248,7 +2250,7 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
       <h3 class="promo-title" id="promoJoinTitle">훈픽스 홍보 이벤트</h3>
     </div>
 
-    <!-- 한 줄 한 문장으로 깔끔히 정리 -->
+    
     <div class="promo-sub">
       훈픽스 주소를 10곳 또는 10명에게 홍보하고 스크린샷을 제출하면 메가커피 쿠폰 1장을 드립니다.
     </div>
@@ -2285,7 +2287,7 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
     </div>
   </div>
 </div>
-
+ 
 <script>
 (() => {
   const modal = document.getElementById('promoJoinModal');
@@ -2324,6 +2326,7 @@ renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
   });
 })();
 </script>
+-->
 <!-- ========== [END] 훈픽스 홍보 이벤트 모달 (정돈/개선본) ========== -->
 
 
@@ -2538,37 +2541,51 @@ window.addEventListener('resize', (()=> {
 <!-- 유투브 쇼츠 script -->
 <script>
 (function(){
-  /* ▶ 유튜브 쇼츠 주소들 (임의 예시) */
+  /* ▶ 유튜브 쇼츠 주소들 (네가 올린 그대로) */
   var ytLinks = [
     "https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k",	// 애완용품 세이프 지퍼
+    "https://youtube.com/shorts/cB0erbdES4s?si=jdeSR27i-8UabyRP",  	// 비누거치대
+    "https://youtube.com/shorts/uS9EGnShj0s?si=Vb5JOQwZb3Q-jDPv", 	// 원스채칼 무 당근 쏨땀 야채슬라이서
+    "https://youtube.com/shorts/8G3FHyKdIdg?si=8oDbu2d1NyVhaBdD", 	// 실리콘 채소 과일 보관용기
     "https://youtube.com/shorts/KOzPtqZJJzY?si=jyKq1VLswB6DPsWp",	// 샤오비 보조배터리
     "https://youtube.com/shorts/fVInEa-T54w?si=yFArHu0dASFs2MnK",	// 지아이비 핸디형 무선 청소기
     "https://youtube.com/shorts/8-1YuPzJLHA?si=YXfw8O9aKX-uvQvC",	// 미니 빨래 건조대
     "https://youtube.com/shorts/wN1tRDnO1fE?si=5x61qSlsODXfwGmI",	// 아가짱 샤워덕 조이 목욕핸들
-	"https://youtube.com/shorts/e4JobP8rqH0?si=e8T6Jk2AQK6rRGVc",	// 하이라이터 밑줄 스티커 펜
-	"https://youtube.com/shorts/lL05TQy27Ig?si=NBsyT6doLf6WSaiW"	// 방풍비닐
+    "https://youtube.com/shorts/e4JobP8rqH0?si=e8T6Jk2AQK6rRGVc",	// 하이라이터 밑줄 스티커 펜
+    "https://youtube.com/shorts/lL05TQy27Ig?si=NBsyT6doLf6WSaiW"	// 방풍비닐
   ];
 
-  /* ▶ 각 영상별 쿠팡 링크 (영상 인덱스와 동일한 순서) */
+  /* ▶ 각 영상별 쿠팡 링크 (인덱스 1:1 매핑) */
   var coupangLinks = [
     "https://link.coupang.com/a/cXZexN",	// 애완용품 세이프 지퍼
+    "https://link.coupang.com/a/cYbqpN", 	// 비누거치대
+    "https://link.coupang.com/a/cYbmOW", 	// 원스채칼 무 당근 쏨땀 야채슬라이서
+    "https://link.coupang.com/a/cYaTWq", 	// 실리콘 채소 과일 보관용기
     "https://link.coupang.com/a/cXZwtK",	// 샤오비 보조배터리
     "https://link.coupang.com/a/cXZKtP",	// 지아이비 핸디형 무선 청소기
     "https://link.coupang.com/a/cXZFI2",	// 미니 빨래 건조대
     "https://link.coupang.com/a/cXZNOd",	// 아가짱 샤워덕 조이 목욕핸들
-	"https://link.coupang.com/a/cX46Ru",	// 하이라이터 밑줄 스티커 펜
-	"https://link.coupang.com/a/cX310L"		//방품비닐
+    "https://link.coupang.com/a/cX46Ru",	// 하이라이터 밑줄 스티커 펜
+    "https://link.coupang.com/a/cX310L"		// 방풍비닐
   ];
 
+  /* ▶ 방어: 개수 불일치 시 더 짧은 쪽 기준으로 자름 (매핑 보전) */
+  if (ytLinks.length !== coupangLinks.length) {
+    var n = Math.min(ytLinks.length, coupangLinks.length);
+    ytLinks = ytLinks.slice(0, n);
+    coupangLinks = coupangLinks.slice(0, n);
+  }
+
+  /* ▶ id 추출 */
   function getYouTubeId(u){
     var m;
     if((m = u.match(/\/shorts\/([A-Za-z0-9_-]{5,})/))) return m[1];
-    if((m = u.match(/[?&]v=([A-Za-z0-9_-]{5,})/))) return m[1];
-    if((m = u.match(/youtu\.be\/([A-Za-z0-9_-]{5,})/))) return m[1];
+    if((m = u.match(/[?&]v=([A-Za-z0-9_-]{5,})/)))     return m[1];
+    if((m = u.match(/youtu\.be\/([A-Za-z0-9_-]{5,})/)))return m[1];
     return null;
   }
 
-  /* ▶ 랜덤 섞기 */
+  /* ▶ util: 섞기 */
   function shuffle(arr){
     for(var i=arr.length-1;i>0;i--){
       var j=Math.floor(Math.random()*(i+1));
@@ -2577,45 +2594,77 @@ window.addEventListener('resize', (()=> {
     return arr;
   }
 
-  function buildCard(url, cpUrl){
+  /* ▶ index→카드 빌드 (매핑 보장) */
+  function buildCardByIndex(idx){
+    var url = ytLinks[idx], cpUrl = coupangLinks[idx];
     var vid = getYouTubeId(url);
     if(!vid){ return ""; }
     var embed = "https://www.youtube.com/embed/" + vid +
       "?modestbranding=1&rel=0&controls=0&playsinline=1&iv_load_policy=3&autoplay=1&mute=1&loop=1&playlist=" + vid;
 
     var h = "";
-    h += "<div class=\"video-card\">";
-    h +=   "<div class=\"video-frame\">";
-    h +=     "<iframe src=\"" + embed + "\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen loading=\"lazy\"></iframe>";
-    h +=   "</div>";
-    h +=   "<a class=\"cp-btn\" href=\"" + cpUrl + "\" target=\"_blank\" rel=\"noopener\" referrerpolicy=\"unsafe-url\">쿠팡 상품 보러가기</a>";
-    h += "</div>";
+    h += '<div class="video-card">';
+    h +=   '<div class="video-frame">';
+    h +=     '<iframe src="'+ embed +'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; compute-pressure *" allowfullscreen loading="lazy"></iframe>';
+    h +=   '</div>';
+    h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
+    h += '</div>';
     return h;
   }
 
-  function renderYT(){
-    var host = document.getElementById("videoGrid");
-    if(!host) return;
-
-    /* ▶ ytLinks와 coupangLinks를 같은 방식으로 섞기 */
-    var combined = ytLinks.map(function(link, idx){
-      return { yt: link, cp: coupangLinks[idx] };
-    });
-    shuffle(combined);
-
-    /* ▶ 3개만 노출 */
-    var out = "";
-    for(var i=0;i<Math.min(3, combined.length);i++){
-      out += buildCard(combined[i].yt, combined[i].cp);
-    }
-    host.innerHTML = out;
+  /* ▶ 3개 인덱스 뽑기: 직전 3개 제외 */
+  function pick3Excluding(excludeSet){
+    // 후보: 0..N-1 중 exclude 아닌 것
+    var N = ytLinks.length;
+    var pool = [];
+    for (var i=0;i<N;i++) { if (!excludeSet.has(i)) pool.push(i); }
+    // 남은게 3 미만이면 제외 완화 (항상 3개 보장)
+    var base = (pool.length >= 3) ? pool : Array.from({length:N}, (_,k)=>k);
+    return shuffle(base.slice()).slice(0,3);
   }
 
-  document.readyState === "complete" || document.readyState === "interactive"
-    ? renderYT()
-    : document.addEventListener("DOMContentLoaded", renderYT);
+  /* ▶ 렌더 */
+  var lastBatch = []; // 직전 랜더링 인덱스 3개
+  function renderByIndexes(indexes){
+    var host = document.getElementById("videoGrid");
+    if(!host) return;
+    var out = "";
+    for (var i=0;i<indexes.length;i++){
+      out += buildCardByIndex(indexes[i]);
+    }
+    host.innerHTML = out;
+    lastBatch = indexes.slice(); // 저장
+  }
+
+  /* ▶ 초기 렌더: 무작위 3개 */
+  function initialRender(){
+    var idxs = Array.from({length: ytLinks.length}, (_,k)=>k);
+    shuffle(idxs);
+    renderByIndexes(idxs.slice(0,3));
+  }
+
+  /* ▶ 새로고침: 직전 3개 제외, 나머지에서 무작위 3개 */
+  function refreshRender(){
+    var exclude = new Set(lastBatch);
+    var next = pick3Excluding(exclude);
+    renderByIndexes(next);
+  }
+
+  /* ▶ 바인딩 */
+  function bind(){
+    var btn = document.getElementById("videoRefreshBtn");
+    if (btn) btn.addEventListener("click", refreshRender);
+  }
+
+  // 시작
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    initialRender(); bind();
+  } else {
+    document.addEventListener("DOMContentLoaded", function(){ initialRender(); bind(); });
+  }
 })();
 </script>
+
 
 
 
@@ -2707,5 +2756,3 @@ renderSection('fashion', '#src-fashion', '#cards-fashion');
 
 
 -->
-
-
