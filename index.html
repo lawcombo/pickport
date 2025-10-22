@@ -20,7 +20,7 @@
 
 <!-- 검색엔진(SEO)용 -->
 <meta name="description" content="쿠팡 인기템, 이젠 훈픽스에서 한눈에! 🚀 가성비 컴퓨터부터 패션, 로켓프레시까지 매일 새로 업데이트되는 베스트 상품을 지금 바로 픽하세요.">
-<meta name="keywords" content="쿠팡 추천, 쿠팡 베스트, 가성비 컴퓨터, 훈픽스, hoonpicks, 로켓프레시, 패션 추천, 1+1, 오늘의 특가, pickport">
+<meta name="keywords" content="쿠팡 추천, 쿠팡 베스트, 가성비 컴퓨터, 훈픽스, hoonpicks, 로켓프레시, 패션 추천, 1+1, 오늘의 특가, pickport, 가성비PC, 키보드, 꿀템, 육아용품">
 <meta name="robots" content="index, follow">
 
 <!-- 전화번호 자동 링크 방지 -->
@@ -1257,6 +1257,33 @@ padding:16px;
 
 /* 혹시 의사요소가 잘려 보이면 안전장치 (레이아웃 영향 없음) */
 .engine-wrap .top-search { overflow: visible; }
+
+
+
+/* === Captions for Shorts (overlay & below) === */
+/* === Captions for Shorts (overlay & below) === */
+.video-caption{font-size:14px;line-height:1.35;color:#0f172a}
+.video-caption.overlay{
+  position:absolute;left:10px;top:10px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:saturate(120%) blur(4px);
+  border-radius:999px;padding:6px 10px;
+  border:1px solid rgba(15,23,42,.08);
+  box-shadow:0 4px 10px rgba(2,6,23,.06);
+  max-width:85%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  /* 추가: 터치 막음/층위 고정 */
+  z-index:2; pointer-events:none;
+}
+.video-caption.below{
+  display:none;margin:8px 0 0 0;padding:6px 10px;border-radius:10px;
+  background:#f8fafc;border:1px solid rgba(2,6,23,.06)
+}
+
+/* 교체 포인트: 모바일에서도 overlay 보이고, below 숨김 */
+@media (max-width: 640px){
+  .video-caption.overlay{display:block}
+  .video-caption.below{display:none}
+}
 
 
 </style>
@@ -2723,6 +2750,27 @@ window.addEventListener('resize', (()=> {
     "https://link.coupang.com/a/cX310L"		// 방풍비닐
   ];
 
+  var productCaptions = [
+  "애완용품 세이프 지퍼로 깔끔끝 ✨",
+  "말차 한 스푼, 장원영 녹차가루 🍵",
+  "입술꿀광! 연예인 립밤 💄",
+  "가볍게 툭! 수지 패딩로 보온력 업 ⛄",
+  "이청아가 홀딱반한 향수! ✨",
+  "꾸안꾸 차예련 무드, 가디건 🧶",
+  "권나라 화이트닝 이거면 끝! ✨",
+  "닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
+  "미끌미끌 노프라블럼 비누거치대 🫧",
+  "썰·채·다짐 3초 컷 👩‍🍳",
+  "실리콘 채소 과일 보관용기 🥬",
+  "샤오미 미쳤음! 샤오미 보조배터리 🔋",
+  "먼지순삭 지아이비 핸디형 무선 청소기 🧹",
+  "빨래는 미니 빨래 건조대로 뽀송하게 🧺",
+  "목욕시간 목욕핸들로 즐겁게 🛁",
+  "밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
+  "한 장 깔면 바람컷! 🌬️"
+];
+
+
   /* ▶ 방어: 개수 불일치 시 더 짧은 쪽 기준으로 자름 (매핑 보전) */
   if (ytLinks.length !== coupangLinks.length) {
     var n = Math.min(ytLinks.length, coupangLinks.length);
@@ -2758,12 +2806,14 @@ window.addEventListener('resize', (()=> {
 
     var h = "";
     h += '<div class="video-card">';
-    h +=   '<div class="video-frame">';
-    h +=     '<iframe src="'+ embed +'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; compute-pressure *" allowfullscreen loading="lazy"></iframe>';
-    h +=   '</div>';
-    h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
-    h += '</div>';
-    return h;
+h +=   '<div class="video-frame">';
+h +=     '<iframe src="'+ embed +'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; screen-wake-lock; gamepad *; gamepadpose *; compute-pressure *" allowfullscreen loading="lazy"></iframe>';
+h +=     '<div class="video-caption overlay">'+ (productCaptions[idx] || '') +'</div>';
+h +=   '</div>';
+h +=   '<div class="video-caption below">'+ (productCaptions[idx] || '') +'</div>';
+h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
+h += '</div>';
+return h;
   }
 
   /* ▶ 3개 인덱스 뽑기: 직전 3개 제외 */
