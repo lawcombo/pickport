@@ -1129,6 +1129,136 @@ padding:16px;
       }
   }
 
+
+
+
+
+
+
+
+
+/* === 검색엔진 주목 화살표(의사요소 전용) === */
+.engine-wrap .top-search { position: relative; }
+
+/* 공통: 의사요소 기본값 (레이아웃 영향 X) */
+.engine-wrap .top-search::before,
+.engine-wrap .top-search::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: #0b63c4;
+  text-shadow: 0 0 14px rgba(11, 99, 196, .35);
+  pointer-events: none;           /* 클릭 방해 금지 */
+  user-select: none;              /* 드래그 금지  */
+  z-index: 1;                     /* 카드보다 위 */
+}
+
+/* PC/태블릿: 좌우 화살표 → [검색엔진] ←  */
+.engine-wrap .top-search::before { 
+  content: "→"; 
+  left: -22px; 
+  animation: arrowBlinkLeft 1.15s steps(2, end) infinite; 
+}
+.engine-wrap .top-search::after  { 
+  content: "←"; 
+  right: -22px; 
+  animation: arrowBlinkRight 1.15s steps(2, end) infinite; 
+}
+
+/* 살짝 깜박 + 좌우로 미세 진동 */
+@keyframes arrowBlinkLeft {
+  0%,100% { opacity: .28; transform: translate(-2px, -50%); }
+  50%     { opacity: 1;   transform: translate( 2px, -50%); }
+}
+@keyframes arrowBlinkRight {
+  0%,100% { opacity: .28; transform: translate( 2px, -50%); }
+  50%     { opacity: 1;   transform: translate(-2px, -50%); }
+}
+
+/* 모바일(<=768px): 아래 중앙에 ↑ 로 전환 */
+@media (max-width: 768px) {
+  .engine-wrap .top-search::before { content: none; }   /* 좌측 화살표 숨김 */
+  .engine-wrap .top-search::after  {
+    content: "↑";
+    top: auto; bottom: -14px;
+    left: 50%; right: auto;
+    transform: translate(-50%, 0);
+    font-size: 20px;
+    animation: arrowPulseUp 1.1s ease-in-out infinite;
+  }
+  @keyframes arrowPulseUp {
+    0%,100% { opacity: .28; transform: translate(-50%,  2px); }
+    50%     { opacity: 1;   transform: translate(-50%, -2px); }
+  }
+}
+
+/* ============================
+   🔥 강화 오버라이드 (굵기/개수 업)
+   ============================ */
+
+/* PC/태블릿: 좌우 화살표 더 굵고 큼직하게 */
+.engine-wrap .top-search::before,
+.engine-wrap .top-search::after {
+  font-size: clamp(26px, 2.6vw, 34px); /* ↑ 기존보다 키움 */
+  font-weight: 900;
+  /* 굵기 강조: 외곽선 + 번짐 그림자 */
+  -webkit-text-stroke: 1px rgba(0,0,0,0.25);
+  text-shadow: 
+    0 0 10px rgba(11,99,196,.40),
+    0 0 18px rgba(11,99,196,.25),
+    0 1px 0 rgba(0,0,0,.15);
+}
+
+/* 좌우 위치 약간 더 바깥으로 */
+.engine-wrap .top-search::before { left: -28px; }
+.engine-wrap .top-search::after  { right: -28px; }
+
+/* 깜박임도 좀 더 임팩트 있게 */
+@keyframes arrowBlinkLeft {
+  0%,100% { opacity: .18; transform: translate(-3px, -50%); }
+  50%     { opacity: 1;    transform: translate( 3px, -50%); }
+}
+@keyframes arrowBlinkRight {
+  0%,100% { opacity: .18; transform: translate( 3px, -50%); }
+  50%     { opacity: 1;    transform: translate(-3px, -50%); }
+}
+
+/* 모바일(<=768px): 아래쪽 화살표 개수 ↑, 굵직하게 */
+@media (max-width: 768px) {
+  /* 좌측 화살표는 계속 숨김 */
+  .engine-wrap .top-search::before { content: none; }
+
+  /* 아래 중앙에 다발 화살표. 예: ↑ ↑ ↑ */
+  .engine-wrap .top-search::after {
+    content: "↑ ↑ ↑";               /* ← 개수 늘림 */
+    bottom: -18px;                   /* 살짝 더 아래 */
+    left: 50%;
+    right: auto;
+    top: auto;
+    transform: translate(-50%, 0);
+    font-size: 26px;                 /* 굵직하게 */
+    letter-spacing: 6px;             /* 간격 넓게 */
+    -webkit-text-stroke: 1px rgba(0,0,0,0.25);
+    text-shadow:
+      0 0 10px rgba(11,99,196,.40),
+      0 0 18px rgba(11,99,196,.25),
+      0 1px 0 rgba(0,0,0,.15);
+    animation: arrowPulseUp 1.05s ease-in-out infinite;
+  }
+
+  /* 펄스도 더 강하게 */
+  @keyframes arrowPulseUp {
+    0%,100% { opacity: .2; transform: translate(-50%, 3px); }
+    50%     { opacity: 1;  transform: translate(-50%, -3px); }
+  }
+}
+
+/* 혹시 의사요소가 잘려 보이면 안전장치 (레이아웃 영향 없음) */
+.engine-wrap .top-search { overflow: visible; }
+
+
 </style>
 
 
