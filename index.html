@@ -1292,6 +1292,8 @@ padding:16px;
 
 
 
+
+
 </head>
 <body>
 
@@ -1307,12 +1309,9 @@ padding:16px;
 </div>
 
 
-<!-- 🔽 쿠팡 배너 추가 -->
-<div class="banner">
-	<a href="https://link.coupang.com/a/cX2u5a" target="_blank" referrerpolicy="unsafe-url">
-		<img src="https://ads-partners.coupang.com/banners/932234?subId=&traceId=V0-301-5f4982b43e2b4522-I932234&w=728&h=90" alt="">
-	</a>
-</div>
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
 
 <!-- 2) 히어로 -->
 <section class="hero">
@@ -1395,6 +1394,11 @@ padding:16px;
   <div class="cards" id="cards-deals"></div>
 </section>
 
+
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
+
 <section class="section section-best" data-section="best">
   <div class="section-head">
     <div class="section-title" data-label="BEST">최근 많이 팔린 상품</div>
@@ -1404,11 +1408,9 @@ padding:16px;
 </section>
 
 
-<div class="banner">
-    <a href="https://link.coupang.com/a/cWx2NB" target="_blank" referrerpolicy="unsafe-url">
-        <img src="https://ads-partners.coupang.com/banners/931559?subId=&traceId=V0-301-7e6e8eb8ddfa1bfb-I931559&w=728&h=90" alt="Coupang banner">
-    </a>
-</div>
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
 
 <!-- ★ 신규: 배너 상품(3개 랜덤) 섹션 -->
 <section class="section section-promobanners" data-section="promobanners" aria-label="프로모션 배너">
@@ -1430,6 +1432,10 @@ padding:16px;
   <div class="cards" id="cards-oneplus"></div>
 </section>
 
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
+
 <section class="section section-pcvalue" data-section="pcvalue">
   <div class="section-head">
     <div class="section-title" data-label="PC VALUE">가성비 컴퓨터</div>
@@ -1437,6 +1443,9 @@ padding:16px;
   </div>
   <div class="cards" id="cards-pcvalue"></div>
 </section>
+
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
 
 
 <section class="section section-keyboard" data-section="keyboard">
@@ -1446,6 +1455,10 @@ padding:16px;
   </div>
   <div class="cards" id="cards-keyboard"></div>
 </section>
+
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
 
 <section class="section section-petproduct" data-section="petproduct">
   <div class="section-head">
@@ -1457,12 +1470,9 @@ padding:16px;
 
 
 
-<!-- 🔽 쿠팡 배너 추가 -->
-<div class="banner">
-	<a href="https://link.coupang.com/a/cWGMsr" target="_blank" referrerpolicy="unsafe-url">
-		<img src="https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90" alt="Coupang banner">
-	</a>
-</div>
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
+
 
 
 <section class="section section-reviews" data-section="reviews">
@@ -2685,6 +2695,79 @@ window.addEventListener('resize', (()=> {
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) 배너 풀 정의
+  const BANNERS = [
+    { href: "https://link.coupang.com/a/cYhoqZ", img: "https://ads-partners.coupang.com/banners/932234?subId=&traceId=V0-301-5f4982b43e2b4522-I932234&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhoIN", img: "https://ads-partners.coupang.com/banners/932223?subId=&traceId=V0-301-2f679fc6bd8f2e58-I932223&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYho5G", img: "https://ads-partners.coupang.com/banners/934677?subId=&traceId=V0-301-5079b8362432a905-I934677&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhpkR", img: "https://ads-partners.coupang.com/banners/931574?subId=&traceId=V0-301-12cd6d67384e2afb-I931574&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhpt3", img: "https://ads-partners.coupang.com/banners/934196?subId=&traceId=V0-301-5a8c79a76485eb21-I934196&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhpD4", img: "https://ads-partners.coupang.com/banners/934678?subId=&traceId=V0-301-371ae01f4226dec2-I934678&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhpP4", img: "https://ads-partners.coupang.com/banners/932237?subId=&traceId=V0-301-8be2627c04ed5569-I932237&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhpZU", img: "https://ads-partners.coupang.com/banners/931504?subId=&traceId=V0-301-c1744fa69c93f626-I931504&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhp6v", img: "https://ads-partners.coupang.com/banners/931556?subId=&traceId=V0-301-5f9bd61900e673c0-I931556&w=728&h=90", alt: "" },
+    { href: "https://link.coupang.com/a/cYhqqO", img: "https://ads-partners.coupang.com/banners/934682?subId=&traceId=V0-301-2b8ef06377ec8f50-I934682&w=728&h=90", alt: "" },
+  ];
+
+  // 2) 추천 섹션 여부 판별 (부모에 특정 셀렉터가 있으면 제외)
+  const isInRecommendSection = (el) =>
+    !!el.closest('.recommend, .recommend-section, #recommend-banners, [data-section="recommend"]');
+
+  // 3) 대상 .banner 수집 (data-skip-random이 있으면 제외)
+  const all = Array.from(document.querySelectorAll('.banner'));
+  const targets = all.filter(el => !isInRecommendSection(el) && !el.hasAttribute('data-skip-random'));
+
+  if (targets.length === 0 || BANNERS.length === 0) return;
+
+  // 4) 셔플 함수
+  const shuffle = (arr) => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  // 5) 중복 없이 채우기: 필요 시 계속 셔플해서 채움
+  let pool = shuffle(BANNERS);
+  let idx = 0;
+
+  const buildBannerNode = ({ href, img, alt }) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.referrerPolicy = 'unsafe-url';
+
+    const image = document.createElement('img');
+    image.src = img;
+    image.alt = alt || '';
+    image.width = 728;
+    image.height = 90;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+
+    a.appendChild(image);
+    return a;
+  };
+
+  targets.forEach(container => {
+    // 컨테이너 비우고 새 배너 삽입
+    container.textContent = '';
+
+    // 풀을 다 썼으면 다시 셔플
+    if (idx >= pool.length) {
+      pool = shuffle(BANNERS);
+      idx = 0;
+    }
+    const banner = pool[idx++];
+    container.appendChild(buildBannerNode(banner));
+  });
+});
+</script>
 
 
 
