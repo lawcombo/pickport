@@ -1981,8 +1981,10 @@ padding:16px;
 
 
 	  
-      renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
-// 필터 클릭 동작
+      
+	
+		
+		// 필터 클릭 동작
       var autoChipByScroll = true; // "전체"일 때만 자동 하이라이트
 
       $('.chip').on('click', function(){
@@ -2079,8 +2081,8 @@ padding:16px;
    	  renderSection('petproduct', '#src-petproduct', '#cards-petproduct');
     
       
-      renderPromoBanners(); // ★ 추가
-renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
+      
+	renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
 };
   })(jQuery);
 </script>
@@ -2768,7 +2770,7 @@ window.addEventListener('resize', (()=> {
   ];
 
   var productCaptions = [
-"이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
+  "이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
   "애완용품 세이프 지퍼로 깔끔끝 ✨",
   "말차 한 스푼, 장원영 녹차가루 🍵",
   "입술꿀광! 연예인 립밤 💄",
@@ -2824,29 +2826,35 @@ window.addEventListener('resize', (()=> {
 
     var h = "";
     h += '<div class="video-card">';
-h +=   '<div class="video-frame">';
-h +=     '<iframe src="'+ embed +'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; screen-wake-lock; gamepad *; gamepadpose *; compute-pressure *" allowfullscreen loading="lazy"></iframe>';
-h +=     '<div class="video-caption overlay">'+ (productCaptions[idx] || '') +'</div>';
-h +=   '</div>';
-h +=   '<div class="video-caption below">'+ (productCaptions[idx] || '') +'</div>';
-h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener sponsored nofollow" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
-h += '</div>';
-return h;
-  }
+	h +=   '<div class="video-frame">';
+	h +=     '<iframe src="'+ embed +'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; screen-wake-lock; gamepad *; gamepadpose *; compute-pressure *" allowfullscreen loading="lazy"></iframe>';
+	h +=     '<div class="video-caption overlay">'+ (productCaptions[idx] || '') +'</div>';
+	h +=   '</div>';
+	h +=   '<div class="video-caption below">'+ (productCaptions[idx] || '') +'</div>';
+	h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener sponsored nofollow" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
+	h += '</div>';
+	return h;
+	}
 
-  /* ▶ 3개 인덱스 뽑기: 직전 3개 제외 */
-  function pick3Excluding(excludeSet){
-    // 후보: 0..N-1 중 exclude 아닌 것
+
+
+
+
+  /* ▶ 한 번에 보여줄 영상 개수 — 여기 숫자만 바꾸면 됩니다 */
+  const VIDEO_BATCH = 6; // 6으로 바꾸면 6개씩 노출
+
+  /* ▶ N개 인덱스 뽑기: 직전 배치 제외 */
+  function pickNExcluding(excludeSet, n = VIDEO_BATCH){
     var N = ytLinks.length;
     var pool = [];
     for (var i=0;i<N;i++) { if (!excludeSet.has(i)) pool.push(i); }
-    // 남은게 3 미만이면 제외 완화 (항상 3개 보장)
-    var base = (pool.length >= 3) ? pool : Array.from({length:N}, (_,k)=>k);
-    return shuffle(base.slice()).slice(0,3);
+    // 남은 게 n 미만이면 완화(항상 n개 보장)
+    var base = (pool.length >= n) ? pool : Array.from({length:N}, (_,k)=>k);
+    return shuffle(base.slice()).slice(0, n);
   }
 
   /* ▶ 렌더 */
-  var lastBatch = []; // 직전 랜더링 인덱스 3개
+  var lastBatch = []; // 직전 렌더링 인덱스 n개
   function renderByIndexes(indexes){
     var host = document.getElementById("videoGrid");
     if(!host) return;
@@ -2858,17 +2866,17 @@ return h;
     lastBatch = indexes.slice(); // 저장
   }
 
-  /* ▶ 초기 렌더: 무작위 3개 */
+  /* ▶ 초기 렌더: 무작위 n개 */
   function initialRender(){
     var idxs = Array.from({length: ytLinks.length}, (_,k)=>k);
     shuffle(idxs);
-    renderByIndexes(idxs.slice(0,3));
+    renderByIndexes(idxs.slice(0, VIDEO_BATCH));
   }
 
-  /* ▶ 새로고침: 직전 3개 제외, 나머지에서 무작위 3개 */
+  /* ▶ 새로고침: 직전 n개 제외한 풀에서 무작위 n개 */
   function refreshRender(){
     var exclude = new Set(lastBatch);
-    var next = pick3Excluding(exclude);
+    var next = pickNExcluding(exclude, VIDEO_BATCH);
     renderByIndexes(next);
   }
 
@@ -2884,6 +2892,8 @@ return h;
   } else {
     document.addEventListener("DOMContentLoaded", function(){ initialRender(); bind(); });
   }
+
+
 })();
 </script>
 
