@@ -2772,6 +2772,7 @@ window.addEventListener('resize', (()=> {
 (function(){
   /* ▶ 유튜브 쇼츠 주소들 (네가 올린 그대로) */
   var ytLinks = [
+  	"https://youtube.com/shorts/AdCYD7tPmaU?si=Gt5L97xcZyZ57Dn0",	// 스마트필름(커튼)
   	"https://youtube.com/shorts/jw3q06ZoVvk?si=hQtkh3l3Hx6Ly1r_",	// 미니세척기
   	"https://youtube.com/shorts/I7FwJq40LTg?si=cX9rbO01D5gNTaCk",	// 박보영 메이크업 전에 30초 버블팩
 	"https://youtube.com/shorts/YlSlckClIuE?si=DQeMA0RwmucvND3f",	// 최화정 곧은다리
@@ -2797,6 +2798,7 @@ window.addEventListener('resize', (()=> {
 
   /* ▶ 각 영상별 쿠팡 링크 (인덱스 1:1 매핑) */
   var coupangLinks = [
+  	"https://link.coupang.com/a/cYAP0B",	// 스마트필름(커튼)
   	"https://link.coupang.com/a/cYANHc",	// 미니세척기
   	"https://link.coupang.com/a/cYyLfs",	// 박보영 메이크업 전에 30초 버블팩
   	"https://link.coupang.com/a/cYyHxJ",	// 최화정 곧은다리
@@ -2821,6 +2823,7 @@ window.addEventListener('resize', (()=> {
   ];
 
   var productCaptions = [
+  	"요즘 누가 커튼사? 이제는 스마트필름이 대세🌤️",
   	"휴대용 미니세탁기(세척기)! 남편들 필수템!",
   	"화장 전에 꼭하세요. 더현대 1위 · 올영 품절템",
 	"꼬지 말고, 다리 모아! 오늘부터 습관 교정.",
@@ -2885,7 +2888,7 @@ window.addEventListener('resize', (()=> {
 	h +=     '<div class="video-caption overlay">'+ (productCaptions[idx] || '') +'</div>';
 	h +=   '</div>';
 	h +=   '<div class="video-caption below">'+ (productCaptions[idx] || '') +'</div>';
-	h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener sponsored nofollow" referrerpolicy="unsafe-url">쿠팡 상품 보러가기</a>';
+	h +=   '<a class="cp-btn" href="'+ cpUrl +'" target="_blank" rel="noopener sponsored nofollow" referrerpolicy="unsafe-url">👆 쿠팡 상품 보러가기</a>';
 	h += '</div>';
 	return h;
 	}
