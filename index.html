@@ -1275,8 +1275,6 @@ padding:16px;
 
 
 
-
-/* === Captions for Shorts (overlay & below) === */
 /* === Captions for Shorts (overlay & below) === */
 .video-caption{font-size:14px;line-height:1.35;color:#0f172a}
 .video-caption.overlay{
@@ -1286,7 +1284,8 @@ padding:16px;
   border-radius:999px;padding:6px 10px;
   border:1px solid rgba(15,23,42,.08);
   box-shadow:0 4px 10px rgba(2,6,23,.06);
-  max-width:85%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  /*max-width:85%;*/
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   /* 추가: 터치 막음/층위 고정 */
   z-index:2; pointer-events:none;
 }
@@ -2773,6 +2772,8 @@ window.addEventListener('resize', (()=> {
 (function(){
   /* ▶ 유튜브 쇼츠 주소들 (네가 올린 그대로) */
   var ytLinks = [
+  	"https://youtube.com/shorts/I7FwJq40LTg?si=cX9rbO01D5gNTaCk",	// 박보영 메이크업 전에 30초 버블팩
+	"https://youtube.com/shorts/YlSlckClIuE?si=DQeMA0RwmucvND3f",	// 최화정 곧은다리
 	"https://youtube.com/shorts/NK3dhvdNLv8?si=VhS_Zyh-mbz7oBBS",	// 이영자표 파김치
 	"https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k",	// 애완용품 세이프 지퍼
 	"https://youtube.com/shorts/EQYcFQlqStI?si=9aP1co1fOAJnOz33", 	// 장원영 녹차가루
@@ -2795,6 +2796,8 @@ window.addEventListener('resize', (()=> {
 
   /* ▶ 각 영상별 쿠팡 링크 (인덱스 1:1 매핑) */
   var coupangLinks = [
+  	"https://link.coupang.com/a/cYyLfs",	// 박보영 메이크업 전에 30초 버블팩
+  	"https://link.coupang.com/a/cYyHxJ",	// 최화정 곧은다리
 	"https://link.coupang.com/a/cYmH59",	// 이영자표 파김치
     "https://link.coupang.com/a/cXZexN",	// 애완용품 세이프 지퍼
 	"https://link.coupang.com/a/cYcdJX", 	// 장원영 녹차
@@ -2816,24 +2819,26 @@ window.addEventListener('resize', (()=> {
   ];
 
   var productCaptions = [
-	  "이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
-	  "애완용품 세이프 지퍼로 깔끔끝 ✨",
-	  "말차 한 스푼, 장원영 녹차가루 🍵",
-	  "입술꿀광! 연예인 립밤 💄",
-	  "가볍게 툭! 수지 패딩로 보온력 업 ⛄",
-	  "이청아가 홀딱반한 향수! ✨",
-	  "꾸안꾸 차예련 무드, 가디건 🧶",
-	  "권나라 화이트닝 이거면 끝! ✨",
-	  "닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
-	  "미끌미끌 노프라블럼 비누거치대 🫧",
-	  "썰·채·다짐 3초 컷 👩‍🍳",
-	  "실리콘 채소 과일 보관용기 🥬",
-	  "샤오미 미쳤음! 샤오미 보조배터리 🔋",
-	  "먼지순삭 지아이비 핸디형 무선 청소기 🧹",
-	  "빨래는 미니 빨래 건조대로 뽀송하게 🧺",
-	  "목욕시간 목욕핸들로 즐겁게 🛁",
-	  "밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
-	  "한 장 깔면 바람컷! 🌬️"
+  	"화장 전에 꼭하세요. 더현대 1위 · 올영 품절템",
+	"꼬지 말고, 다리 모아! 오늘부터 습관 교정.",
+	"이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
+	"애완용품 세이프 지퍼로 깔끔끝 ✨",
+	"말차 한 스푼, 장원영 녹차가루 🍵",
+	"입술꿀광! 연예인 립밤 💄",
+	"가볍게 툭! 수지 패딩로 보온력 업 ⛄",
+	"이청아가 홀딱반한 향수! ✨",
+	"꾸안꾸 차예련 무드, 가디건 🧶",
+	"권나라 화이트닝 이거면 끝! ✨",
+	"닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
+	"미끌미끌 노프라블럼 비누거치대 🫧",
+	"썰·채·다짐 3초 컷 👩‍🍳",
+	"실리콘 채소 과일 보관용기 🥬",
+	"샤오미 미쳤음! 샤오미 보조배터리 🔋",
+	"먼지순삭 지아이비 핸디형 무선 청소기 🧹",
+	"빨래는 미니 빨래 건조대로 뽀송하게 🧺",
+	"목욕시간 목욕핸들로 즐겁게 🛁",
+	"밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
+	"이번 겨울 필수템! 바람 그만! 🌬️"
 	];
 
 
