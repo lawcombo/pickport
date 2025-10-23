@@ -549,6 +549,11 @@
       color: #0e1726
   }
 
+
+
+
+
+
   .meta {
       font-size: 12px;
       color: #6b7280
@@ -1276,7 +1281,7 @@ padding:16px;
 .video-caption{font-size:14px;line-height:1.35;color:#0f172a}
 .video-caption.overlay{
   position:absolute;left:10px;top:10px;
-  background:rgba(255,255,255,.88);
+  background:rgb(222 255 175 / 88%);
   backdrop-filter:saturate(120%) blur(4px);
   border-radius:999px;padding:6px 10px;
   border:1px solid rgba(15,23,42,.08);
@@ -1456,6 +1461,58 @@ padding:16px;
 .refresh-btn:active{ transform:rotate(360deg) scale(.95) }
 
 
+
+
+
+
+
+/* === 카드 레이아웃: 세로형 & 4열 그리드 === */
+.cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 모바일/태블릿: 2열 */
+}
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* PC: 4열 */
+  }
+}
+
+/* 가로형 → 세로형(Stack) */
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 10px;
+}
+
+/* 이미지가 카드 상단에 크게 오도록 */
+.thumb {
+  width: 100% !important;         /* 기존 120px 고정 폭 덮어쓰기 */
+  aspect-ratio: 1 / 1;            /* 정사각형 썸네일 */
+  flex: none !important;
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 텍스트(상품설명)는 이미지 아래 */
+.info { min-width: 0; }
+
+/* 길어도 두 줄로 말줄임 */
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;              /* 위아래 여백 최소화 */
+}
+
+/* '바로가기' 버튼 전면 비활성화 */
+.go { display: none !important; }
+
 </style>
 
 
@@ -1537,7 +1594,8 @@ padding:16px;
 </section>
 
 
-
+<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
+<div class="banner"></div>
 
 <!-- 3) 필터 -->
 <div class="filters" id="filtersBar">
@@ -1557,6 +1615,7 @@ padding:16px;
   </div>
 </div>
 
+
 <!-- 섹션들 -->
 <section class="section section-deals" data-section="deals">
   <div class="section-head">
@@ -1567,8 +1626,7 @@ padding:16px;
 </section>
 
 
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
+
 
 
 <section class="section section-best" data-section="best">
@@ -1578,10 +1636,6 @@ padding:16px;
   </div>
   <div class="cards" id="cards-best"></div>
 </section>
-
-
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
 
 
 <!-- ★ 신규: 배너 상품(3개 랜덤) 섹션 -->
@@ -1604,9 +1658,6 @@ padding:16px;
   <div class="cards" id="cards-oneplus"></div>
 </section>
 
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
-
 
 <section class="section section-pcvalue" data-section="pcvalue">
   <div class="section-head">
@@ -1616,8 +1667,6 @@ padding:16px;
   <div class="cards" id="cards-pcvalue"></div>
 </section>
 
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
 
 
 <section class="section section-keyboard" data-section="keyboard">
@@ -1628,8 +1677,6 @@ padding:16px;
   <div class="cards" id="cards-keyboard"></div>
 </section>
 
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
 
 
 <section class="section section-petproduct" data-section="petproduct">
@@ -1641,9 +1688,6 @@ padding:16px;
 </section>
 
 
-
-<!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
-<div class="banner"></div>
 
 
 
@@ -1936,15 +1980,17 @@ padding:16px;
       h +=     '<div class="meta">쿠팡 파트너스</div>';
       //h +=     '<p class="desc">'+ desc +'</p>';
       h +=   '</div>';
-      h +=   '<button class="go" type="button" aria-hidden="true">바로가기</button>';
+      //h +=   '<button class="go" type="button" aria-hidden="true">바로가기</button>';
       h += '</a>';
       return h;
     }
 
+
+	// 상품 8개씩 랜덤 노출
     function renderSection(sectionKey, srcId, dstId){
       var $src = $(srcId);
       var list = toArray($src.find('a'));
-      var picks = takeRandom(list, 6);
+      var picks = takeRandom(list, 8);
       var out = '';
       for(var i=0;i<picks.length;i++){ out += buildCard(picks[i]); }
       $(dstId).html(out);
@@ -2770,25 +2816,25 @@ window.addEventListener('resize', (()=> {
   ];
 
   var productCaptions = [
-  "이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
-  "애완용품 세이프 지퍼로 깔끔끝 ✨",
-  "말차 한 스푼, 장원영 녹차가루 🍵",
-  "입술꿀광! 연예인 립밤 💄",
-  "가볍게 툭! 수지 패딩로 보온력 업 ⛄",
-  "이청아가 홀딱반한 향수! ✨",
-  "꾸안꾸 차예련 무드, 가디건 🧶",
-  "권나라 화이트닝 이거면 끝! ✨",
-  "닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
-  "미끌미끌 노프라블럼 비누거치대 🫧",
-  "썰·채·다짐 3초 컷 👩‍🍳",
-  "실리콘 채소 과일 보관용기 🥬",
-  "샤오미 미쳤음! 샤오미 보조배터리 🔋",
-  "먼지순삭 지아이비 핸디형 무선 청소기 🧹",
-  "빨래는 미니 빨래 건조대로 뽀송하게 🧺",
-  "목욕시간 목욕핸들로 즐겁게 🛁",
-  "밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
-  "한 장 깔면 바람컷! 🌬️"
-];
+	  "이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
+	  "애완용품 세이프 지퍼로 깔끔끝 ✨",
+	  "말차 한 스푼, 장원영 녹차가루 🍵",
+	  "입술꿀광! 연예인 립밤 💄",
+	  "가볍게 툭! 수지 패딩로 보온력 업 ⛄",
+	  "이청아가 홀딱반한 향수! ✨",
+	  "꾸안꾸 차예련 무드, 가디건 🧶",
+	  "권나라 화이트닝 이거면 끝! ✨",
+	  "닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
+	  "미끌미끌 노프라블럼 비누거치대 🫧",
+	  "썰·채·다짐 3초 컷 👩‍🍳",
+	  "실리콘 채소 과일 보관용기 🥬",
+	  "샤오미 미쳤음! 샤오미 보조배터리 🔋",
+	  "먼지순삭 지아이비 핸디형 무선 청소기 🧹",
+	  "빨래는 미니 빨래 건조대로 뽀송하게 🧺",
+	  "목욕시간 목욕핸들로 즐겁게 🛁",
+	  "밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
+	  "한 장 깔면 바람컷! 🌬️"
+	];
 
 
   /* ▶ 방어: 개수 불일치 시 더 짧은 쪽 기준으로 자름 (매핑 보전) */
