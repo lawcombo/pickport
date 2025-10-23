@@ -1146,11 +1146,11 @@ padding:16px;
 
 
 /* === 검색엔진 주목 화살표(의사요소 전용) === */
-.engine-wrap .top-search { position: relative; }
+.engine-wrap1 .top-search { position: relative; }
 
 /* 공통: 의사요소 기본값 (레이아웃 영향 X) */
-.engine-wrap .top-search::before,
-.engine-wrap .top-search::after {
+.engine-wrap1 .top-search::before,
+.engine-wrap1 .top-search::after {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1164,12 +1164,12 @@ padding:16px;
 }
 
 /* PC/태블릿: 좌우 화살표 → [검색엔진] ←  */
-.engine-wrap .top-search::before { 
+.engine-wrap1 .top-search::before { 
   content: "→"; 
   left: -22px; 
   animation: arrowBlinkLeft 1.15s steps(2, end) infinite; 
 }
-.engine-wrap .top-search::after  { 
+.engine-wrap1 .top-search::after  { 
   content: "←"; 
   right: -22px; 
   animation: arrowBlinkRight 1.15s steps(2, end) infinite; 
@@ -1187,8 +1187,8 @@ padding:16px;
 
 /* 모바일(<=768px): 아래 중앙에 ↑ 로 전환 */
 @media (max-width: 768px) {
-  .engine-wrap .top-search::before { content: none; }   /* 좌측 화살표 숨김 */
-  .engine-wrap .top-search::after  {
+  .engine-wrap1 .top-search::before { content: none; }   /* 좌측 화살표 숨김 */
+  .engine-wrap1 .top-search::after  {
     content: "↑";
     top: auto; bottom: -14px;
     left: 50%; right: auto;
@@ -1207,8 +1207,8 @@ padding:16px;
    ============================ */
 
 /* PC/태블릿: 좌우 화살표 더 굵고 큼직하게 */
-.engine-wrap .top-search::before,
-.engine-wrap .top-search::after {
+.engine-wrap1 .top-search::before,
+.engine-wrap1 .top-search::after {
   font-size: clamp(26px, 2.6vw, 34px); /* ↑ 기존보다 키움 */
   font-weight: 900;
   /* 굵기 강조: 외곽선 + 번짐 그림자 */
@@ -1220,8 +1220,8 @@ padding:16px;
 }
 
 /* 좌우 위치 약간 더 바깥으로 */
-.engine-wrap .top-search::before { left: -28px; }
-.engine-wrap .top-search::after  { right: -28px; }
+.engine-wrap1 .top-search::before { left: -28px; }
+.engine-wrap1 .top-search::after  { right: -28px; }
 
 /* 깜박임도 좀 더 임팩트 있게 */
 @keyframes arrowBlinkLeft {
@@ -1236,10 +1236,10 @@ padding:16px;
 /* 모바일(<=768px): 아래쪽 화살표 개수 ↑, 굵직하게 */
 @media (max-width: 768px) {
   /* 좌측 화살표는 계속 숨김 */
-  .engine-wrap .top-search::before { content: none; }
+  .engine-wrap1 .top-search::before { content: none; }
 
   /* 아래 중앙에 다발 화살표. 예: ↑ ↑ ↑ */
-  .engine-wrap .top-search::after {
+  .engine-wrap1 .top-search::after {
     content: "↑ ↑ ↑";               /* ← 개수 늘림 */
     bottom: -18px;                   /* 살짝 더 아래 */
     left: 50%;
@@ -1264,7 +1264,10 @@ padding:16px;
 }
 
 /* 혹시 의사요소가 잘려 보이면 안전장치 (레이아웃 영향 없음) */
-.engine-wrap .top-search { overflow: visible; }
+.engine-wrap1 .top-search { overflow: visible; }
+
+
+
 
 
 
@@ -1514,6 +1517,7 @@ padding:16px;
 
 
 <!-- 유투브 쇼츠 영역 -->
+
 <section class="streaming-wrap" aria-label="스트리밍 영상">
   <div class="streaming-box">
     <div class="streaming-head">
@@ -1531,6 +1535,7 @@ padding:16px;
 
   </div>
 </section>
+
 
 
 
@@ -2720,8 +2725,8 @@ window.addEventListener('resize', (()=> {
 (function(){
   /* ▶ 유튜브 쇼츠 주소들 (네가 올린 그대로) */
   var ytLinks = [
-"https://youtube.com/shorts/NK3dhvdNLv8?si=VhS_Zyh-mbz7oBBS",
- "https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k",	// 애완용품 세이프 지퍼
+	"https://youtube.com/shorts/NK3dhvdNLv8?si=VhS_Zyh-mbz7oBBS",	// 이영자표 파김치
+	"https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k",	// 애완용품 세이프 지퍼
 	"https://youtube.com/shorts/EQYcFQlqStI?si=9aP1co1fOAJnOz33", 	// 장원영 녹차가루
 	"https://youtube.com/shorts/BL_sn_UooCY?si=lLrNBdwWoy3Rup5z", 	// 연예인 립밤
 	"https://youtube.com/shorts/ia1silfO0cQ?si=gXdn_1fk3b-tuG4w", 	// 수지 패딩
@@ -2742,7 +2747,7 @@ window.addEventListener('resize', (()=> {
 
   /* ▶ 각 영상별 쿠팡 링크 (인덱스 1:1 매핑) */
   var coupangLinks = [
-"https://link.coupang.com/a/cYmH59",
+	"https://link.coupang.com/a/cYmH59",	// 이영자표 파김치
     "https://link.coupang.com/a/cXZexN",	// 애완용품 세이프 지퍼
 	"https://link.coupang.com/a/cYcdJX", 	// 장원영 녹차
 	"https://link.coupang.com/a/cYccGm", 	// 연예인 립밤
@@ -2961,6 +2966,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+
+
+
+
+
+
+
 
 
 
