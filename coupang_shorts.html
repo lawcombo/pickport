@@ -74,32 +74,18 @@
       scroll-snap-type: y mandatory;
       -webkit-overflow-scrolling: touch;
 	  touch-action: pan-y;              /* 제스처 충돌 완화 */
-    
-  height: calc(var(--vh, 1vh) * 100);
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: auto;
-  scroll-snap-type: y mandatory;
-  scroll-snap-stop: always;}
+    }
 
     .short {
       position: relative;
       /*height: calc(var(--vh, 1vh) * 100);*/ /* full screen per section */
-	  height: calc(var(--vh, 1vh) * 100);
-		min-height: calc(var(--vh, 1vh) * 100); /* 일부 기기 보강 */
+	  height: 100dvh;
+		min-height: 100dvh; /* 일부 기기 보강 */
       scroll-snap-align: start;
       display: grid; place-items: center;
       /*padding: 4px 12px 64px;*/ /* smaller top gap */
 	  padding: var(--gapY) 12px calc(var(--gapY) + env(safe-area-inset-bottom));
-    
-  height: calc(var(--vh, 1vh) * 100);
-  min-height: calc(var(--vh, 1vh) * 100);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;}
-
-.short video {
-  pointer-events: auto;
-  touch-action: manipulation;
-}
+    }
     .card {
       width: 100%;
       /*height: 100%;*/ /* fill available section height */
@@ -154,16 +140,7 @@
     /* ===== 모바일 간격/정렬 보정 (정리본) ===== */
 @media (max-width: 480px) {
   /* 섹션 여백: 상단 안전영역 + 6px, 좌우 8px, 하단 48px */
-  .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; 
-  height: calc(var(--vh, 1vh) * 100);
-  min-height: calc(var(--vh, 1vh) * 100);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;}
-
-.short video {
-  pointer-events: auto;
-  touch-action: manipulation;
-}
+  .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; }
 
   /* 카드: 모바일에선 살짝 좁게, 위 여백 좀 더 */
   .card { width: 100%; margin-top: 8px; }
@@ -382,74 +359,33 @@
   var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
   if (!feed || !sections.length) return;
 
-  var index = 0;
-  var lock = false;
-  var inFlight = false;
-  var settleTimer = null;
+  var index = 0, lock = false;
 
-  var THRESHOLD = 84;       // 터치 스와이프 임계치(px)
-  var THRESHOLD_WHEEL = 52; // 휠/트랙패드 임계치
-  var NAV_COOLDOWN = 480;   // 연속 입력 쿨다운(ms)
+  // [NEW] 같은 방향으로 빠르게 연속 입력되는 걸 한 번만 허용 (디바운스/스로틀)
   var lastNavAt = 0;
   var lastDir = 0;
+  var NAV_COOLDOWN = 480;   // 밀리초. 더 둔감하게 하려면 520~600으로
 
   // 현재 보이는 섹션 동기화 (0.8 이상 보일 때만)
-  var io = new IntersectionObserver(function(entries){
+  var io2 = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if (e.isIntersecting && e.intersectionRatio > 0.8) {
         var i = sections.indexOf(e.target);
         if (i >= 0) index = i;
       }
     });
-  }, { threshold: [0.25, 0.5, 0.8, 1] });
-  sections.forEach(function(s){ io.observe(s); });
-
-  function releaseLocks(){
-    inFlight = false;
-    lock = false;
-    if (settleTimer){ try { clearTimeout(settleTimer); } catch(_){} settleTimer = null; }
-  }
+  }, { root: feed, threshold: [0.8] });
+  sections.forEach(function(s){ io2.observe(s); });
 
   function scrollToIndex(i){
     var clamped = Math.max(0, Math.min(sections.length - 1, i));
-    if (inFlight) return;
-    var now = Date.now();
-    var dir = (clamped > index) ? 1 : (clamped < index ? -1 : 0);
-    if (dir !== 0 && dir === lastDir && (now - lastNavAt) < NAV_COOLDOWN) return;
-
-    inFlight = true;
     lock = true;
-    index = clamped;
-    lastDir = dir;
-    lastNavAt = now;
-
     sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
-
-    // scrollend 지원 시 우선 사용
-    function onEnd(){
-      try { feed.removeEventListener('scrollend', onEnd); } catch(_) {}
-      releaseLocks();
-    }
-    try { feed.addEventListener('scrollend', onEnd, { once: true }); } catch(_) {}
-
-    // scroll 디바운스 폴백
-    function onScroll(){
-      if (settleTimer) { clearTimeout(settleTimer); }
-      settleTimer = setTimeout(function(){
-        try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
-        releaseLocks();
-      }, 260);
-    }
-    feed.addEventListener('scroll', onScroll, { passive: true });
-
-    // 세이프티 타임아웃
-    settleTimer = setTimeout(function(){
-      try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
-      releaseLocks();
-    }, 900);
+    // [TUNING] 스무스 스크롤 시간 여유
+    setTimeout(function(){ lock = false; }, 420);
   }
 
-  // 터치(모바일)
+  // ── 터치(모바일)
   var startY = 0, lastY = 0, moved = false;
   feed.addEventListener('touchstart', function(e){
     if (e.touches.length !== 1) return;
@@ -458,34 +394,47 @@
   }, { passive: true });
 
   feed.addEventListener('touchmove', function(e){
-    if (lock || inFlight || e.touches.length !== 1) return;
+    if (lock || e.touches.length !== 1) return;
     lastY = e.touches[0].clientY;
     moved = true;
   }, { passive: true });
 
   feed.addEventListener('touchend', function(){
-    if (lock || inFlight || !moved) return;
-    var dy = lastY - startY;
-    if (Math.abs(dy) < THRESHOLD) return;
-    var dir = (dy > 0) ? -1 : 1;
+    if (lock || !moved) return;
+    var dy = lastY - startY;              // + 아래(이전), - 위(다음)
+    var THRESHOLD = 84;                   // 감도 노브: 60~96 권장. 수치↑ = 둔감
+    if (Math.abs(dy) <= THRESHOLD) {
+      // 임계치 미만이면 현재 카드로 되돌림
+      scrollToIndex(index);
+      return;
+    }
+
+    // [NEW] 같은 방향 연속 제스처 컷
+    var dir = (dy < 0 ? 1 : -1);
+    var now = performance.now();
+    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
+    lastNavAt = now; lastDir = dir;
+
     scrollToIndex(index + dir);
   }, { passive: true });
 
-  // 휠/트랙패드
+  // ── 휠/트랙패드(데스크톱)
   feed.addEventListener('wheel', function(e){
-    if (lock || inFlight) return;
-    var dy = e.deltaY;
-    if (Math.abs(dy) < THRESHOLD_WHEEL) return;
-    var dir = (dy > 0) ? 1 : -1;
-    scrollToIndex(index + dir);
-  }, { passive: true });
+    if (lock) return;
+    var THRESHOLD_WHEEL = 52;             // 휠 감도 노브: 40~64 권장
+    if (Math.abs(e.deltaY) < THRESHOLD_WHEEL) return;
 
-  // 최상단/최하단 러버밴드 방지
-  feed.addEventListener('scroll', function(){
-    var max = feed.scrollHeight - feed.clientHeight;
-    if (feed.scrollTop <= 0) feed.scrollTop = 1;
-    else if (feed.scrollTop >= max) feed.scrollTop = Math.max(0, max - 1);
-  }, {passive:true});
+    // [중요] 네이티브 관성으로 2~3장 넘김 방지
+    e.preventDefault();
+
+    // [NEW] 같은 방향 연속 휠 컷
+    var dir = (e.deltaY > 0 ? 1 : -1);
+    var now = performance.now();
+    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
+    lastNavAt = now; lastDir = dir;
+
+    scrollToIndex(index + dir);
+  }, { passive: false });
 })();
 
 
@@ -536,24 +485,167 @@
 
 
 
-<script>
+<style id="final-patch-styles">
+  html, body { height: 100%; overflow: hidden; }
+  /* Feed full-viewport, stabilized area */
+  #feed {
+    position: fixed; inset: 0;
+    height: var(--final-stable, 100vh);
+    padding-bottom: var(--final-addr, 0px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: auto;
+    scroll-snap-type: y mandatory;
+    scroll-snap-stop: always;
+    background: inherit;
+  }
+  /* Each short fills stabilized area */
+  .short {
+    height: calc(var(--final-stable, 100vh) - var(--final-addr, 0px));
+    min-height: calc(var(--final-stable, 100vh) - var(--final-addr, 0px));
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  /* Make sure video can be tapped and fills the card */
+  .short video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: auto;
+    touch-action: manipulation;
+    display: block;
+  }
+</style>
+<script id="final-patch-stablevh">
 (function(){
+  // Track the MAX viewport height we see (stable), and the current visible height.
+  // Use the difference as address bar compensation without resizing content.
+  var stable = 0;
   var raf = null;
-  function setVH(){
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(function(){
-      var h = (window.innerHeight || document.documentElement.clientHeight);
-      var vh = h * 0.01;
-      document.documentElement.style.setProperty('--vh', vh + 'px');
-    });
+  function compute(){
+    var cur = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
+    if (cur > stable) stable = cur; // adopt max seen height as the "stable" baseline
+    var addr = Math.max(0, stable - cur);
+    document.documentElement.style.setProperty('--final-stable', stable + 'px');
+    document.documentElement.style.setProperty('--final-addr', addr + 'px');
   }
-  setVH();
-  window.addEventListener('resize', setVH);
-  window.addEventListener('orientationchange', setVH);
+  function schedule(){ if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(compute); }
+  schedule();
+  window.addEventListener('resize', schedule);
+  window.addEventListener('orientationchange', function(){ stable = 0; setTimeout(schedule, 150); });
   if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', setVH);
-    window.visualViewport.addEventListener('scroll', setVH);
+    window.visualViewport.addEventListener('resize', schedule);
+    window.visualViewport.addEventListener('scroll', schedule);
   }
+})();
+</script>
+<script id="final-patch-paging">
+(function enableSingleStepPaging(){
+  var feed = document.getElementById('feed');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
+  if (!feed || !sections.length) return;
+
+  var index = 0;
+  var inFlight = false;
+  var settleTimer = null;
+
+  var THRESHOLD = 84;        // px, swipe distance threshold
+  var THRESHOLD_WHEEL = 52;  // wheel/trackpad threshold
+  var NAV_COOLDOWN = 420;    // ms, same-direction cooldown
+  var lastNavAt = 0;
+  var lastDir = 0;
+
+  // Sync current index based on what's mostly visible
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio > 0.8) {
+        var i = sections.indexOf(e.target);
+        if (i >= 0) index = i;
+      }
+    });
+  }, { threshold: [0.25, 0.5, 0.8, 1] });
+  sections.forEach(function(s){ io.observe(s); });
+
+  function release(){
+    inFlight = false;
+    if (settleTimer){ clearTimeout(settleTimer); settleTimer = null; }
+  }
+
+  function scrollToIndexOnce(i){
+    var clamped = Math.max(0, Math.min(sections.length - 1, i));
+    if (inFlight) return;
+    var now = Date.now();
+    var dir = (clamped > index) ? 1 : (clamped < index ? -1 : 0);
+    if (dir !== 0 && dir === lastDir && (now - lastNavAt) < NAV_COOLDOWN) return;
+
+    inFlight = true;
+    index = clamped;
+    lastDir = dir;
+    lastNavAt = now;
+
+    sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
+
+    // Prefer scrollend if available
+    function onEnd(){
+      try { feed.removeEventListener('scrollend', onEnd); } catch(_) {}
+      release();
+    }
+    try { feed.addEventListener('scrollend', onEnd, { once: true }); } catch(_) {}
+
+    // Fallback: scroll debounce
+    function onScroll(){
+      if (settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(function(){
+        try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
+        release();
+      }, 240);
+    }
+    feed.addEventListener('scroll', onScroll, { passive: true });
+
+    // Safety timeout
+    settleTimer = setTimeout(function(){
+      try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
+      release();
+    }, 900);
+  }
+
+  // Touch swipe (no preventDefault to keep video taps working)
+  var startY = 0, lastY = 0, moved = false;
+  feed.addEventListener('touchstart', function(e){
+    if (!e.touches || e.touches.length !== 1) return;
+    startY = lastY = e.touches[0].clientY;
+    moved = false;
+  }, {passive:true});
+
+  feed.addEventListener('touchmove', function(e){
+    if (!e.touches || e.touches.length !== 1) return;
+    lastY = e.touches[0].clientY;
+    moved = true;
+  }, {passive:true});
+
+  feed.addEventListener('touchend', function(){
+    if (!moved || inFlight) return;
+    var dy = lastY - startY;
+    if (Math.abs(dy) < THRESHOLD) return;
+    var dir = (dy > 0) ? -1 : 1;
+    scrollToIndexOnce(index + dir);
+  }, {passive:true});
+
+  // Wheel/trackpad
+  feed.addEventListener('wheel', function(e){
+    if (inFlight) return;
+    var dy = e.deltaY;
+    if (Math.abs(dy) < THRESHOLD_WHEEL) return;
+    var dir = (dy > 0) ? 1 : -1;
+    scrollToIndexOnce(index + dir);
+  }, {passive:true});
+
+  // Top/bottom rubber-band guard
+  feed.addEventListener('scroll', function(){
+    var max = feed.scrollHeight - feed.clientHeight;
+    if (feed.scrollTop <= 0) feed.scrollTop = 1;
+    else if (feed.scrollTop >= max) feed.scrollTop = Math.max(0, max - 1);
+  }, {passive:true});
 })();
 </script>
 </body>
