@@ -18,6 +18,7 @@
       --header-h: 0px; /* header removed */
       --radius: 20px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
+	  --gapY: 12px; /* 섹션 위·아래 여백 */
     }
     html, body { height: 100%; overscroll-behavior: none;}
     body {
@@ -80,11 +81,13 @@
       height: calc(var(--vh, 1vh) * 100); /* full screen per section */
       scroll-snap-align: start;
       display: grid; place-items: center;
-      padding: 4px 12px 64px; /* smaller top gap */
+      /*padding: 4px 12px 64px;*/ /* smaller top gap */
+	  padding: var(--gapY) 12px calc(var(--gapY) + env(safe-area-inset-bottom));
     }
     .card {
-      width: min(520px, 100vw);
-      height: 100%; /* fill available section height */
+      width: 100%;
+      /*height: 100%;*/ /* fill available section height */
+	  height: calc(100% - (var(--gapY)*2 + env(safe-area-inset-bottom)));
       background: var(--card);
       border: 1px solid rgba(255,255,255,.06);
       border-radius: var(--radius);
@@ -132,33 +135,31 @@
       .hint { bottom: 18px; }
     }
 
-    /* 모바일 간격/정렬 보정 */
-    @media (max-width: 480px) {
-      .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; }
-      .card { width: min(520px, 100vw); margin-top: 8px; }
-      .video-wrap iframe { pointer-events: none; }
-    }
-      .card { width: min(520px, 100vw); margin-top: 4px; }
-      .video-wrap iframe { pointer-events: none; } /* allow swipe on video area */
-    }
-      .brand { display: none; }
-      .search-iframe { height: 44px; max-height: 44px; }
-      .fallback-search form .input { padding: 10px 12px; }
-      .btn { padding: 10px 14px; }
-      .short { padding: 8px 10px 56px; }
-      .card { width: min(460px, 94vw); }
-    }
-    }
+    /* ===== 모바일 간격/정렬 보정 (정리본) ===== */
+@media (max-width: 480px) {
+  /* 섹션 여백: 상단 안전영역 + 6px, 좌우 8px, 하단 48px */
+  .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; }
 
-    /* 모바일 간격 보정 */
-    @media (max-width: 480px) {
-      .header { padding: calc(env(safe-area-inset-top) + 4px) 10px 8px 10px; }
-      .brand { display: none; }
-      .search-iframe { height: 44px; max-height: 44px; }
-      .fallback-search form .input { padding: 10px 12px; }
-      .btn { padding: 10px 14px; }
-    }
-    }
+  /* 카드: 모바일에선 살짝 좁게, 위 여백 좀 더 */
+  .card { width: 100%; margin-top: 8px; }
+
+  /* 동영상 위 스와이프 가능하도록 (모바일에서만) */
+  .video-wrap iframe { pointer-events: none; }
+
+  /* 상단 UI 컴팩트화 */
+  .header { padding: calc(env(safe-area-inset-top) + 4px) 10px 8px 10px; }
+  .brand { display: none; }
+  .search-iframe { height: 44px; max-height: 44px; }
+  .fallback-search form .input { padding: 10px 12px; }
+  .btn { padding: 10px 14px; }
+}
+
+/* ===== 데스크톱/기본값 (모바일 밖) ===== */
+/* 기본 카드 폭/여백 — 전역(모바일 밖)에서 한 번만 선언 */
+.card { width: 100%; margin-top: 4px; }
+
+
+
   </style>
   <!-- YouTube IFrame Player API (공식) -->
   <script src="https://www.youtube.com/iframe_api"></script>
@@ -350,12 +351,18 @@
 
 
 
+/* === 스와이프/휠: 한 번에 1장, 감도 조절, 연속 이벤트 컷 === */
 (function enablePagingSwipe(){
   var feed = document.getElementById('feed');
   var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
   if (!feed || !sections.length) return;
 
   var index = 0, lock = false;
+
+  // [NEW] 같은 방향으로 빠르게 연속 입력되는 걸 한 번만 허용 (디바운스/스로틀)
+  var lastNavAt = 0;
+  var lastDir = 0;
+  var NAV_COOLDOWN = 480;   // 밀리초. 더 둔감하게 하려면 520~600으로
 
   // 현재 보이는 섹션 동기화 (0.8 이상 보일 때만)
   var io2 = new IntersectionObserver(function(entries){
@@ -372,10 +379,11 @@
     var clamped = Math.max(0, Math.min(sections.length - 1, i));
     lock = true;
     sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
-    setTimeout(function(){ lock = false; }, 350);
+    // [TUNING] 스무스 스크롤 시간 여유
+    setTimeout(function(){ lock = false; }, 420);
   }
 
-  // ── 터치
+  // ── 터치(모바일)
   var startY = 0, lastY = 0, moved = false;
   feed.addEventListener('touchstart', function(e){
     if (e.touches.length !== 1) return;
@@ -391,24 +399,42 @@
 
   feed.addEventListener('touchend', function(){
     if (lock || !moved) return;
-    var dy = lastY - startY;         // +: 아래로 스와이프(이전), -: 위로 스와이프(다음)
-    var THRESHOLD = 60;              // ← 감도 노브 (80으로 올리면 더 둔감)
-    if (Math.abs(dy) > THRESHOLD) {
-      scrollToIndex(index + (dy < 0 ? 1 : -1));
-    } else {
+    var dy = lastY - startY;              // + 아래(이전), - 위(다음)
+    var THRESHOLD = 84;                   // 감도 노브: 60~96 권장. 수치↑ = 둔감
+    if (Math.abs(dy) <= THRESHOLD) {
+      // 임계치 미만이면 현재 카드로 되돌림
       scrollToIndex(index);
+      return;
     }
+
+    // [NEW] 같은 방향 연속 제스처 컷
+    var dir = (dy < 0 ? 1 : -1);
+    var now = performance.now();
+    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
+    lastNavAt = now; lastDir = dir;
+
+    scrollToIndex(index + dir);
   }, { passive: true });
 
-  // ── 데스크톱 휠/트랙패드
+  // ── 휠/트랙패드(데스크톱)
   feed.addEventListener('wheel', function(e){
     if (lock) return;
-    var THRESHOLD_WHEEL = 32;        // ← 휠 감도 노브
+    var THRESHOLD_WHEEL = 52;             // 휠 감도 노브: 40~64 권장
     if (Math.abs(e.deltaY) < THRESHOLD_WHEEL) return;
-    e.preventDefault();              // 관성으로 여러 장 넘어가는 것 방지
-    scrollToIndex(index + (e.deltaY > 0 ? 1 : -1));
+
+    // [중요] 네이티브 관성으로 2~3장 넘김 방지
+    e.preventDefault();
+
+    // [NEW] 같은 방향 연속 휠 컷
+    var dir = (e.deltaY > 0 ? 1 : -1);
+    var now = performance.now();
+    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
+    lastNavAt = now; lastDir = dir;
+
+    scrollToIndex(index + dir);
   }, { passive: false });
 })();
+
 
 
 
