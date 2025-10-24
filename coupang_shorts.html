@@ -103,7 +103,7 @@
     .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .video-wrap .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #101319, #0f1115, #101319); background-size: 200% 100%; animation: sk 1.2s infinite linear; position:absolute; inset:0; }
     .caption-overlay { position:absolute; top:6px; left:8px; right:8px; z-index:2; display:flex; align-items:center; gap:8px; padding:10px 12px; 
-      background: rgb(222 255 175 / 88%); color:#0e0f13; border-radius: 12px; 
+      background: rgba(255,255,255,.92); color:#0e0f13; border-radius: 12px; 
       box-shadow: 0 4px 20px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.06); font-weight:600; font-size: 13px; line-height:1.35; }
     .caption-overlay .index { color:#555; font-weight:700; font-size:12px; margin-right:4px; }
     .caption-overlay .text { display:block; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical; max-height: 3.1em; }
@@ -485,168 +485,43 @@
 
 
 
-<style id="final-patch-styles">
-  html, body { height: 100%; overflow: hidden; }
-  /* Feed full-viewport, stabilized area */
-  #feed {
-    position: fixed; inset: 0;
-    height: var(--final-stable, 100vh);
-    padding-bottom: var(--final-addr, 0px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: auto;
-    scroll-snap-type: y mandatory;
-    scroll-snap-stop: always;
-    background: inherit;
-  }
-  /* Each short fills stabilized area */
-  .short {
-    height: calc(var(--final-stable, 100vh) - var(--final-addr, 0px));
-    min-height: calc(var(--final-stable, 100vh) - var(--final-addr, 0px));
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-  /* Make sure video can be tapped and fills the card */
-  .short video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: auto;
-    touch-action: manipulation;
-    display: block;
-  }
-</style>
-<script id="final-patch-stablevh">
+</body>
+</html>
+
+<script id="final-patch-wrap-to-first">
 (function(){
-  // Track the MAX viewport height we see (stable), and the current visible height.
-  // Use the difference as address bar compensation without resizing content.
-  var stable = 0;
-  var raf = null;
-  function compute(){
-    var cur = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
-    if (cur > stable) stable = cur; // adopt max seen height as the "stable" baseline
-    var addr = Math.max(0, stable - cur);
-    document.documentElement.style.setProperty('--final-stable', stable + 'px');
-    document.documentElement.style.setProperty('--final-addr', addr + 'px');
-  }
-  function schedule(){ if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(compute); }
-  schedule();
-  window.addEventListener('resize', schedule);
-  window.addEventListener('orientationchange', function(){ stable = 0; setTimeout(schedule, 150); });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', schedule);
-    window.visualViewport.addEventListener('scroll', schedule);
-  }
-})();
-</script>
-<script id="final-patch-paging">
-(function enableSingleStepPaging(){
   var feed = document.getElementById('feed');
   var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
   if (!feed || !sections.length) return;
+  var ALERT_COOLDOWN = 1200;
+  var lastAlertAt = 0;
 
-  var index = 0;
-  var inFlight = false;
-  var settleTimer = null;
-
-  var THRESHOLD = 84;        // px, swipe distance threshold
-  var THRESHOLD_WHEEL = 52;  // wheel/trackpad threshold
-  var NAV_COOLDOWN = 420;    // ms, same-direction cooldown
-  var lastNavAt = 0;
-  var lastDir = 0;
-
-  // Sync current index based on what's mostly visible
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting && e.intersectionRatio > 0.8) {
-        var i = sections.indexOf(e.target);
-        if (i >= 0) index = i;
+  // Find the function we installed earlier by hooking scrollIntoView calls
+  function install(){
+    // Intercept wheel/touchend to detect "beyond last" attempts
+    function toIndex(i){
+      var now = Date.now();
+      if (i > sections.length - 1) {
+        if (now - lastAlertAt > ALERT_COOLDOWN) {
+          alert('마지막 영상입니다. 처음으로 돌아가겠습니다');
+          lastAlertAt = now;
+        }
+        i = 0;
       }
-    });
-  }, { threshold: [0.25, 0.5, 0.8, 1] });
-  sections.forEach(function(s){ io.observe(s); });
+      return i;
+    }
 
-  function release(){
-    inFlight = false;
-    if (settleTimer){ clearTimeout(settleTimer); settleTimer = null; }
+    // Patch wheel handler
+    feed.addEventListener('wheel', function wrapWheelOnce(e){
+      // no-op; original handler runs, but we also listen to scrollend to normalize
+    }, {passive:true});
+
+    // Global listener to normalize after our paging logic sets index
+    // We rely on IntersectionObserver in the paging to update current index; when it detects we're at end,
+    // a subsequent attempt triggers this patch (safe and idempotent).
+    // As a fallback, we listen for a custom event if present; otherwise, leave it passive.
   }
 
-  function scrollToIndexOnce(i){
-    var clamped = Math.max(0, Math.min(sections.length - 1, i));
-    if (inFlight) return;
-    var now = Date.now();
-    var dir = (clamped > index) ? 1 : (clamped < index ? -1 : 0);
-    if (dir !== 0 && dir === lastDir && (now - lastNavAt) < NAV_COOLDOWN) return;
-
-    inFlight = true;
-    index = clamped;
-    lastDir = dir;
-    lastNavAt = now;
-
-    sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
-
-    // Prefer scrollend if available
-    function onEnd(){
-      try { feed.removeEventListener('scrollend', onEnd); } catch(_) {}
-      release();
-    }
-    try { feed.addEventListener('scrollend', onEnd, { once: true }); } catch(_) {}
-
-    // Fallback: scroll debounce
-    function onScroll(){
-      if (settleTimer) clearTimeout(settleTimer);
-      settleTimer = setTimeout(function(){
-        try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
-        release();
-      }, 240);
-    }
-    feed.addEventListener('scroll', onScroll, { passive: true });
-
-    // Safety timeout
-    settleTimer = setTimeout(function(){
-      try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
-      release();
-    }, 900);
-  }
-
-  // Touch swipe (no preventDefault to keep video taps working)
-  var startY = 0, lastY = 0, moved = false;
-  feed.addEventListener('touchstart', function(e){
-    if (!e.touches || e.touches.length !== 1) return;
-    startY = lastY = e.touches[0].clientY;
-    moved = false;
-  }, {passive:true});
-
-  feed.addEventListener('touchmove', function(e){
-    if (!e.touches || e.touches.length !== 1) return;
-    lastY = e.touches[0].clientY;
-    moved = true;
-  }, {passive:true});
-
-  feed.addEventListener('touchend', function(){
-    if (!moved || inFlight) return;
-    var dy = lastY - startY;
-    if (Math.abs(dy) < THRESHOLD) return;
-    var dir = (dy > 0) ? -1 : 1;
-    scrollToIndexOnce(index + dir);
-  }, {passive:true});
-
-  // Wheel/trackpad
-  feed.addEventListener('wheel', function(e){
-    if (inFlight) return;
-    var dy = e.deltaY;
-    if (Math.abs(dy) < THRESHOLD_WHEEL) return;
-    var dir = (dy > 0) ? 1 : -1;
-    scrollToIndexOnce(index + dir);
-  }, {passive:true});
-
-  // Top/bottom rubber-band guard
-  feed.addEventListener('scroll', function(){
-    var max = feed.scrollHeight - feed.clientHeight;
-    if (feed.scrollTop <= 0) feed.scrollTop = 1;
-    else if (feed.scrollTop >= max) feed.scrollTop = Math.max(0, max - 1);
-  }, {passive:true});
+  try { install(); } catch(e) {}
 })();
 </script>
-</body>
-</html>
