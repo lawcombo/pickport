@@ -657,5 +657,130 @@
   }, {passive:true});
 })();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* 마지막 영상 안내 토스트 */
+  #endToast{
+    position: fixed;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom) + 24px);
+    transform: translateX(-50%) translateY(16px);
+    opacity: 0; pointer-events: none;
+    background: rgba(0,0,0,.8); color:#fff;
+    padding:10px 14px; border-radius:999px;
+    font-size:14px; line-height:1;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 9999;
+  }
+  #endToast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce){ #endToast{ transition:none; } }
+</style>
+
+<script>
+(() => {
+  const scroller = document.querySelector('#feed');
+  if (!scroller) return;
+
+  // 토스트 엘리먼트 (자동 생성)
+  let toast = document.getElementById('endToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'endToast';
+    toast.textContent = '마지막 영상입니다';
+    document.body.appendChild(toast);
+  }
+
+  let lastShown = 0;
+  const COOLDOWN = 1200; // ms
+  const showToast = () => {
+    const now = Date.now();
+    if (now - lastShown < COOLDOWN) return;
+    lastShown = now;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 1200);
+  };
+
+  // "마지막 카드가 화면에 충분히 들어왔는지" 상태 추적
+  let lastIsActive = false;
+  const updateObserver = () => {
+    const secs = scroller.querySelectorAll('.short');
+    if (!secs.length) return;
+    const last = secs[secs.length - 1];
+
+    const io = new IntersectionObserver((ents) => {
+      for (const e of ents) {
+        if (e.target === last) lastIsActive = e.isIntersecting && e.intersectionRatio > 0.8;
+      }
+    }, { root: scroller, threshold: [0, 0.8, 1] });
+
+    io.observe(last);
+  };
+
+  // 초기 + 동적 추가 대비
+  if (scroller.children.length) updateObserver();
+  const mo = new MutationObserver(() => updateObserver());
+  mo.observe(scroller, { childList: true });
+
+  // 스크롤 방향이 "아래로"이고, 이미 거의 끝에 도달했을 때 토스트
+  let prevTop = 0;
+  scroller.addEventListener('scroll', () => {
+    const el = scroller;
+    const maxTop = el.scrollHeight - el.clientHeight;
+    const curTop = el.scrollTop;
+    const goingDown = curTop > prevTop + 1; // 약간의 데드존
+    prevTop = curTop;
+
+    // 끝에서 1px 이내 + 마지막 카드가 활성화된 상태 + 아래로 더 내리는 중
+    if (goingDown && curTop >= maxTop - 1 && lastIsActive) {
+      showToast();
+    }
+  }, { passive: true });
+
+  // 데스크톱 휠/키보드(아래로)도 대응
+  scroller.addEventListener('wheel', (e) => {
+    if (e.deltaY > 0 && lastIsActive) {
+      const el = scroller;
+      if (Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight - 1) showToast();
+    }
+  }, { passive: true });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lastIsActive) return;
+    const keys = ['ArrowDown','PageDown',' ']; // 스페이스는 아래로 스크롤
+    if (keys.includes(e.key)) {
+      const el = scroller;
+      if (Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight - 1) showToast();
+    }
+  }, { passive: true });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+	
 </body>
 </html>
