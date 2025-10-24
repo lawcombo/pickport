@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>쿠팡 검색 + 유튜브 쇼츠 피드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --card: #111318;
+      --muted: #8b90a0;
+      --text: #e9e9ef;
+      --brand: #7c5cff;
+      --header-h: 0px; /* header removed */
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Pretendard', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif;
+      background: radial-gradient(1200px 600px at 70% -10%, #171a22 0%, #0b0c10 60%) fixed;
+      color: var(--text);
+      overflow: hidden; /* 상단 고정 + 피드 스냅 스크롤 전용 */
+    }
+
+    /* 상단 고정 헤더 (쿠팡 검색 iframe 영역) */
+    .header {
+      position: fixed; inset: 0 0 auto 0;
+      min-height: 56px;
+      backdrop-filter: saturate(160%) blur(12px);
+      -webkit-backdrop-filter: saturate(160%) blur(12px);
+      background: linear-gradient(180deg, rgba(11,12,16,.95), rgba(11,12,16,.75));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      z-index: 20;
+      display: flex; align-items: center; gap: 12px;
+      padding: env(safe-area-inset-top) 14px 10px 14px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px;
+      background: rgba(124,92,255,.12); color: #cfc7ff; border: 1px solid rgba(124,92,255,.25);
+      box-shadow: var(--shadow);
+      font-weight: 700; letter-spacing: .2px; white-space: nowrap; font-size: 14px;
+    }
+    .search-wrap { flex: 1; min-width: 0; height: 100%; display:flex; align-items:center; }
+    .search-iframe {
+      width: 100%; height: 100%; max-height: 56px; border: 0; border-radius: 12px; overflow: hidden; background: #0f1115;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    /* (옵션) 쿠팡 검색 대체 인풋 */
+    .fallback-search { display:none; width:100%; }
+    .fallback-search form { display:flex; gap:8px; width:100%; }
+    .input { flex:1; min-width:0; padding:12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background:#0f1115; color:var(--text); }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 12px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(124,92,255,.2), rgba(124,92,255,.06));
+      color:#efeaff; text-decoration:none; font-weight:700; letter-spacing:.2px; cursor:pointer;
+      box-shadow: var(--shadow);
+    }
+
+    /* 전체 피드 영역 */
+    #feed {
+      position: fixed; inset: 0 0 0 0; /* fill screen */
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .short {
+      position: relative;
+      height: calc(var(--vh, 1vh) * 100); /* full screen per section */
+      scroll-snap-align: start;
+      display: grid; place-items: center;
+      padding: 4px 12px 64px; /* smaller top gap */
+    }
+    .card {
+      width: min(520px, 100vw);
+      height: 100%; /* fill available section height */
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      display:flex; flex-direction:column;
+    }
+
+    .video-wrap { position: relative; flex: 1 1 auto; background: #000; display:grid; place-items:center; }
+    .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .video-wrap .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #101319, #0f1115, #101319); background-size: 200% 100%; animation: sk 1.2s infinite linear; position:absolute; inset:0; }
+    .caption-overlay { position:absolute; top:6px; left:8px; right:8px; z-index:2; display:flex; align-items:center; gap:8px; padding:10px 12px; 
+      background: rgba(255,255,255,.92); color:#0e0f13; border-radius: 12px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.06); font-weight:600; font-size: 13px; line-height:1.35; }
+    .caption-overlay .index { color:#555; font-weight:700; font-size:12px; margin-right:4px; }
+    .caption-overlay .text { display:block; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical; max-height: 3.1em; }
+    .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .video-wrap .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #101319, #0f1115, #101319); background-size: 200% 100%; animation: sk 1.2s infinite linear; }
+    @keyframes sk { 0%{background-position: 0% 0} 100%{background-position: 200% 0} } 100%{background-position: 200% 0} }
+    .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+    .meta {
+      padding: 12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.04));
+    }
+    .caption { font-size: 14px; line-height: 1.35; color:#e8e9f0; }
+    .index { color: var(--muted); font-size: 12px; margin-right: 6px; }
+
+    .product-btn { white-space:nowrap; }
+
+    /* 하단 작은 도움말 */
+    .hint {
+      position: fixed; bottom: 12px; left: 0; right: 0; z-index: 5;
+      display: grid; place-items: center; pointer-events: none;
+    }
+    .hint .pill {
+      pointer-events: auto; font-size: 12px; color:#c8cad6; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12); padding: 8px 12px; border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    @media (min-width: 1024px) {
+      .hint { bottom: 18px; }
+    }
+
+    /* 모바일 간격/정렬 보정 */
+    @media (max-width: 480px) {
+      .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; }
+      .card { width: min(520px, 100vw); margin-top: 8px; }
+      .video-wrap iframe { pointer-events: none; }
+    }
+      .card { width: min(520px, 100vw); margin-top: 4px; }
+      .video-wrap iframe { pointer-events: none; } /* allow swipe on video area */
+    }
+      .brand { display: none; }
+      .search-iframe { height: 44px; max-height: 44px; }
+      .fallback-search form .input { padding: 10px 12px; }
+      .btn { padding: 10px 14px; }
+      .short { padding: 8px 10px 56px; }
+      .card { width: min(460px, 94vw); }
+    }
+    }
+
+    /* 모바일 간격 보정 */
+    @media (max-width: 480px) {
+      .header { padding: calc(env(safe-area-inset-top) + 4px) 10px 8px 10px; }
+      .brand { display: none; }
+      .search-iframe { height: 44px; max-height: 44px; }
+      .fallback-search form .input { padding: 10px 12px; }
+      .btn { padding: 10px 14px; }
+    }
+    }
+  </style>
+  <!-- YouTube IFrame Player API (공식) -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+  <!-- HEADER: 쿠팡 검색 iframe 고정 -->
+  
+
+  <!-- 피드: 스크롤-스냅으로 쇼츠처럼 한 장씩 -->
+  <main id="feed" aria-label="YouTube Shorts feed"></main>
+
+  <div class="hint">
+    <div class="pill">위·아래로 스와이프하면 다음 영상으로 이동합니다</div>
+  </div>
+
+<script>
+  /* ===== 데이터 (사용자 제공) ===== */
+  var ytLinks = [
+    "https://youtube.com/shorts/AdCYD7tPmaU?si=Gt5L97xcZyZ57Dn0",
+    "https://youtube.com/shorts/jw3q06ZoVvk?si=hQtkh3l3Hx6Ly1r_",
+    "https://youtube.com/shorts/I7FwJq40LTg?si=cX9rbO01D5gNTaCk",
+    "https://youtube.com/shorts/YlSlckClIuE?si=DQeMA0RwmucvND3f",
+    "https://youtube.com/shorts/NK3dhvdNLv8?si=VhS_Zyh-mbz7oBBS",
+    "https://youtube.com/shorts/iskyNy6EGd4?si=XY3V6ljnIrknMt6k",
+    "https://youtube.com/shorts/EQYcFQlqStI?si=9aP1co1fOAJnOz33",
+    "https://youtube.com/shorts/BL_sn_UooCY?si=lLrNBdwWoy3Rup5z",
+    "https://youtube.com/shorts/ia1silfO0cQ?si=gXdn_1fk3b-tuG4w",
+    "https://youtube.com/shorts/cFlqkxtUkPc?si=p5UUfk0ee6e8q2cb",
+    "https://youtube.com/shorts/mT97G9kBJjc?si=KNDVSxdNonQt0AHz",
+    "https://youtube.com/shorts/cswuUrOpd5M?si=F4IdWVVOgoyldvgs",
+    "https://youtube.com/shorts/uGPcjkD35QQ?si=NyPGbd-_8Ai1iYNg",
+    "https://youtube.com/shorts/cB0erbdES4s?si=jdeSR27i-8UabyRP",
+    "https://youtube.com/shorts/uS9EGnShj0s?si=Vb5JOQwZb3Q-jDPv",
+    "https://youtube.com/shorts/8G3FHyKdIdg?si=8oDbu2d1NyVhaBdD",
+    "https://youtube.com/shorts/KOzPtqZJJzY?si=jyKq1VLswB6DPsWp",
+    "https://youtube.com/shorts/fVInEa-T54w?si=yFArHu0dASFs2MnK",
+    "https://youtube.com/shorts/8-1YuPzJLHA?si=YXfw8O9aKX-uvQvC",
+    "https://youtube.com/shorts/wN1tRDnO1fE?si=5x61qSlsODXfwGmI",
+    "https://youtube.com/shorts/e4JobP8rqH0?si=e8T6Jk2AQK6rRGVc",
+    "https://youtube.com/shorts/lL05TQy27Ig?si=NBsyT6doLf6WSaiW"
+  ];
+
+  var coupangLinks = [
+    "https://link.coupang.com/a/cYAP0B",
+    "https://link.coupang.com/a/cYANHc",
+    "https://link.coupang.com/a/cYyLfs",
+    "https://link.coupang.com/a/cYyHxJ",
+    "https://link.coupang.com/a/cYmH59",
+    "https://link.coupang.com/a/cXZexN",
+    "https://link.coupang.com/a/cYcdJX",
+    "https://link.coupang.com/a/cYccGm",
+    "https://link.coupang.com/a/cYcaHU",
+    "https://link.coupang.com/a/cYb628",
+    "https://link.coupang.com/a/cYb5Ux",
+    "https://link.coupang.com/a/cYb4n8",
+    "https://link.coupang.com/a/cYb1zP",
+    "https://link.coupang.com/a/cYbqpN",
+    "https://link.coupang.com/a/cYbmOW",
+    "https://link.coupang.com/a/cYaTWq",
+    "https://link.coupang.com/a/cXZwtK",
+    "https://link.coupang.com/a/cXZKtP",
+    "https://link.coupang.com/a/cXZFI2",
+    "https://link.coupang.com/a/cXZNOd",
+    "https://link.coupang.com/a/cX46Ru",
+    "https://link.coupang.com/a/cX310L"
+  ];
+
+  var productCaptions = [
+    "요즘 누가 커튼사? 이제는 스마트필름이 대세🌤️",
+    "휴대용 미니세탁기(세척기)! 남편들 필수템!",
+    "화장 전에 꼭하세요. 더현대 1위 · 올영 품절템",
+    "꼬지 말고, 다리 모아! 오늘부터 습관 교정.",
+    "이영자표 파김치! 다이어트 ㅃㅇ! 침질질~",
+    "애완용품 세이프 지퍼로 깔끔끝 ✨",
+    "말차 한 스푼, 장원영 녹차가루 🍵",
+    "입술꿀광! 연예인 립밤 💄",
+    "가볍게 툭! 수지 패딩로 보온력 업 ⛄",
+    "이청아가 홀딱반한 향수! ✨",
+    "꾸안꾸 차예련 무드, 가디건 🧶",
+    "권나라 화이트닝 이거면 끝! ✨",
+    "닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
+    "미끌미끌 노프라블럼 비누거치대 🫧",
+    "썰·채·다짐 3초 컷 👩‍🍳",
+    "실리콘 채소 과일 보관용기 🥬",
+    "샤오미 미쳤음! 샤오미 보조배터리 🔋",
+    "먼지순삭 지아이비 핸디형 무선 청소기 🧹",
+    "빨래는 미니 빨래 건조대로 뽀송하게 🧺",
+    "목욕시간 목욕핸들로 즐겁게 🛁",
+    "밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
+    "이번 겨울 필수템! 바람 그만! 🌬️"
+  ];
+
+  /* ===== 유틸 ===== */
+  function shortsToEmbed(url) {
+    var m = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+    var id = m ? m[1] : null;
+    if (!id) return null;
+    return 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id + '&controls=0&modestbranding=1&rel=0&playsinline=1&enablejsapi=1';
+  }
+
+  // 간단한 맵(구형 브라우저 호환)
+  var players = {};
+  function setPlayer(id, obj){ players[id] = obj; }
+  function getPlayer(id){ return players[id]; }
+  function delPlayer(id){ try { delete players[id]; } catch(e){} }
+
+  function mountPlayer($card, index){
+    var $wrap = $card.find('.video-wrap');
+    if ($wrap.data('mounted')) return;
+    var embed = shortsToEmbed(ytLinks[index]);
+    if (!embed) return;
+    var iframeId = 'yt-' + index;
+    var iframeHtml = '<iframe class="video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen id="' + iframeId + '" loading="eager" src="' + embed + '" title="YouTube Shorts ' + (index+1) + '"></iframe>';
+    var $iframe = $(iframeHtml);
+    $wrap.find('.skeleton').remove();
+    $wrap.append($iframe).data('mounted', true);
+
+    if (window.YT && YT.Player) {
+      try {
+        var p = new YT.Player(iframeId, {
+          events: {
+            'onReady': function(){ setPlayer(iframeId, { player: p, ready: true }); try { p.playVideo(); } catch(e){} }
+          }
+        });
+        setPlayer(iframeId, { player: p, ready: false });
+      } catch(e){}
+    }
+  }
+
+  function unmountPlayer($card, index){
+    var iframeId = 'yt-' + index;
+    var rec = getPlayer(iframeId);
+    if (rec) { try { rec.player.stopVideo(); rec.player.destroy(); } catch(e){} delPlayer(iframeId); }
+    var $wrap = $card.find('.video-wrap');
+    $wrap.find('iframe.video').remove();
+    if ($wrap.find('.skeleton').length === 0) { $wrap.append('<div class="skeleton"></div>'); }
+    $wrap.data('mounted', false);
+  }
+
+  function setVH(){
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+  }
+
+  /* ===== 초기화 ===== */
+  $(function(){
+    setVH();
+    $(window).on('resize orientationchange', function(){ setVH(); });
+
+    var $feed = $('#feed');
+    var len = Math.min(ytLinks.length, coupangLinks.length, productCaptions.length);
+
+    for (var i = 0; i < len; i++) {
+      var overlay = '<div class="caption-overlay"><span class="index">#' + (i+1) + '</span><span class="text">' + productCaptions[i] + '</span></div>';
+      var itemHtml = '<section class="short" data-index="' + i + '">' +
+        '<article class="card">' +
+        '<div class="video-wrap">' + overlay + '<div class="skeleton"></div></div>' +
+        '<div class="meta">' +
+        '<a class="btn product-btn" href="' + coupangLinks[i] + '" target="_blank" rel="noopener noreferrer sponsored">상품 보기</a>' +
+        '</div>' +
+        '</article>' +
+        '</section>';
+      var $item = $(itemHtml);
+      $feed.append($item);
+    }
+
+    // 보이는 순간 mount/재생, 벗어나면 unmount
+    var io = new IntersectionObserver(function(entries){
+      for (var j = 0; j < entries.length; j++) {
+        var entry = entries[j];
+        var $sec = $(entry.target);
+        var $card = $sec.find('.card');
+        var idx = parseInt($sec.data('index'), 10);
+        if (isNaN(idx)) { continue; }
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          mountPlayer($card, idx);
+        } else {
+          unmountPlayer($card, idx);
+        }
+      }
+    }, { root: document.querySelector('#feed'), threshold: [0, 0.6, 1] });
+
+    var secs = document.querySelectorAll('.short');
+    for (var k = 0; k < secs.length; k++) { io.observe(secs[k]); }
+
+    document.getElementById('feed').addEventListener('scroll', function(){}, { passive: true });
+  });
+
+  // IFrame API 준비 콜백 (observer가 mount를 담당)
+  window.onYouTubeIframeAPIReady = function(){};
+</script>
+</body>
+</html>
