@@ -1512,6 +1512,72 @@ padding:16px;
 /* '바로가기' 버튼 전면 비활성화 */
 .go { display: none !important; }
 
+
+
+
+/* ===== Shorts '더보기' 하이라이트 버튼 ===== */
+.more-chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:900; font-size:13.5px; letter-spacing:-.2px;
+  cursor:pointer; user-select:none;
+  color:#0b1b36;
+  background:
+    radial-gradient(120% 150% at 80% -20%, rgba(255,255,255,.8), transparent 60%),
+    linear-gradient(135deg, #ffe74f, #ffd21a 40%, #ff9f0a);
+  border:1px solid #f4c400;
+  box-shadow:
+    0 6px 18px rgba(255, 193, 7, .35),
+    0 0 0 6px rgba(255, 224, 88, .18);
+  transition: transform .18s ease, box-shadow .22s ease, filter .18s ease;
+  position: relative;
+  isolation: isolate;
+}
+.more-chip .ico{
+  display:inline-grid; place-items:center;
+  width:22px; height:22px; border-radius:8px; flex:none;
+  background: linear-gradient(135deg, #fff1a6, #ffd24d);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+}
+
+/* hover/focus: 살짝 점프 + 화사해짐 */
+.more-chip:hover,
+.more-chip:focus{
+  outline:none;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 10px 26px rgba(255,193,7,.45),
+    0 0 0 8px rgba(255, 224, 88, .24);
+}
+
+/* 주목 애니메이션(가벼운 펄스) */
+.more-chip{
+  animation: morePulse 2.3s ease-in-out infinite;
+}
+@keyframes morePulse{
+  0%,100%{ filter: saturate(1); transform: translateY(0) }
+  50%     { filter: saturate(1.1); transform: translateY(-1px) }
+}
+
+/* 다크모드 살짝 톤다운 */
+@media (prefers-color-scheme: dark){
+  .more-chip{
+    color:#0b1426;
+    box-shadow:
+      0 8px 22px rgba(255,193,7,.28),
+      0 0 0 6px rgba(255, 200, 80, .18);
+  }
+}
+
+/* 모바일(<=768px): 버튼 살짝 키우기 */
+@media (max-width: 768px){
+  .more-chip{ font-size:14px; padding:10px 16px; }
+  .more-chip .ico{ width:24px; height:24px; }
+}
+
+
+
 </style>
 
 
@@ -1581,7 +1647,15 @@ padding:16px;
 		꿀템 스트리밍
 		<button id="videoRefreshBtn" class="refresh-btn" type="button" title="랜덤 새로고침" aria-label="랜덤 새로고침">🔄</button>
 		</div>
-      <span class="badge" id="moreBtnOfShorts" role="button" tabindex="0" style="cursor:pointer;">+더보기</span>
+      <span
+  id="moreBtnOfShorts"
+  class="more-chip"
+  role="button"
+  tabindex="0"
+  aria-label="꿀템 스트리밍 더 보기"
+>
+  <b class="ico">🎬</b> 더보기
+</span>
     </div>
     <div class="video-grid" id="videoGrid"></div>
 
