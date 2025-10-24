@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>쿠팡 검색 + 유튜브 쇼츠 피드</title>
+  <title>훈픽스!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>훈픽스 (HoonPick's) | 꿀템 스트리밍</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
@@ -78,7 +83,9 @@
 
     .short {
       position: relative;
-      height: calc(var(--vh, 1vh) * 100); /* full screen per section */
+      /*height: calc(var(--vh, 1vh) * 100);*/ /* full screen per section */
+	  height: 100dvh;
+		min-height: 100dvh; /* 일부 기기 보강 */
       scroll-snap-align: start;
       display: grid; place-items: center;
       /*padding: 4px 12px 64px;*/ /* smaller top gap */
@@ -442,5 +449,46 @@
   // IFrame API 준비 콜백 (observer가 mount를 담당)
   window.onYouTubeIframeAPIReady = function(){};
 </script>
+
+
+
+<script>
+  // ── 엣지 가드: 최상단/최하단 러버밴드로 주소창 토글되는 현상 완화
+  (function edgeGuard(){
+    var feed = document.getElementById('feed');
+    if (!feed) return;
+
+    function armOffset(){
+      requestAnimationFrame(function(){
+        try { if (feed.scrollTop < 1) feed.scrollTop = 1; } catch(e){}
+      });
+    }
+    armOffset();
+
+    feed.addEventListener('scroll', function(){
+      var max = feed.scrollHeight - feed.clientHeight;
+      if (feed.scrollTop <= 0) feed.scrollTop = 1;            // 최상단 보호
+      else if (feed.scrollTop >= max) feed.scrollTop = Math.max(0, max - 1); // 최하단 보호
+    }, {passive:true});
+
+    window.addEventListener('resize', armOffset);
+    window.addEventListener('orientationchange', armOffset);
+  })();
+</script>
+<script>
+  // ── iOS 전용: 모멘텀 스크롤 완화로 주소창 토글 빈도 감소
+  (function softenIOSMomentum(){
+    var ua = navigator.userAgent || '';
+    var isiOS = /iP(hone|od|ad)/.test(ua);
+    if (!isiOS) return;
+    var feed = document.getElementById('feed');
+    if (!feed) return;
+    feed.style.webkitOverflowScrolling = 'auto'; // 기본 touch → iOS에서만 auto
+  })();
+</script>
+
+
+
+
 </body>
 </html>
