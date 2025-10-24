@@ -19,7 +19,7 @@
       --radius: 20px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    html, body { height: 100%; }
+    html, body { height: 100%; overscroll-behavior: none;}
     body {
       margin: 0;
       font-family: 'Pretendard', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif;
@@ -68,8 +68,11 @@
     #feed {
       position: fixed; inset: 0 0 0 0; /* fill screen */
       overflow-y: auto;
+	  scroll-snap-stop: always;         /* 여러 장을 한 번에 스킵 방지 */
+  overscroll-behavior-y: contain;   /* 위/아래 러버밴드로 밖으로 못 나가게 */
       scroll-snap-type: y mandatory;
       -webkit-overflow-scrolling: touch;
+	  touch-action: pan-y;              /* 제스처 충돌 완화 */
     }
 
     .short {
@@ -331,19 +334,84 @@
         var $card = $sec.find('.card');
         var idx = parseInt($sec.data('index'), 10);
         if (isNaN(idx)) { continue; }
-        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
           mountPlayer($card, idx);
         } else {
           unmountPlayer($card, idx);
         }
       }
-    }, { root: document.querySelector('#feed'), threshold: [0, 0.6, 1] });
+    }, { root: document.querySelector('#feed'), threshold: [0, 0.8, 1] });
 
     var secs = document.querySelectorAll('.short');
     for (var k = 0; k < secs.length; k++) { io.observe(secs[k]); }
 
     document.getElementById('feed').addEventListener('scroll', function(){}, { passive: true });
   });
+
+
+
+(function enablePagingSwipe(){
+  var feed = document.getElementById('feed');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
+  if (!feed || !sections.length) return;
+
+  var index = 0, lock = false;
+
+  // 현재 보이는 섹션 동기화 (0.8 이상 보일 때만)
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio > 0.8) {
+        var i = sections.indexOf(e.target);
+        if (i >= 0) index = i;
+      }
+    });
+  }, { root: feed, threshold: [0.8] });
+  sections.forEach(function(s){ io2.observe(s); });
+
+  function scrollToIndex(i){
+    var clamped = Math.max(0, Math.min(sections.length - 1, i));
+    lock = true;
+    sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
+    setTimeout(function(){ lock = false; }, 350);
+  }
+
+  // ── 터치
+  var startY = 0, lastY = 0, moved = false;
+  feed.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    startY = lastY = e.touches[0].clientY;
+    moved = false;
+  }, { passive: true });
+
+  feed.addEventListener('touchmove', function(e){
+    if (lock || e.touches.length !== 1) return;
+    lastY = e.touches[0].clientY;
+    moved = true;
+  }, { passive: true });
+
+  feed.addEventListener('touchend', function(){
+    if (lock || !moved) return;
+    var dy = lastY - startY;         // +: 아래로 스와이프(이전), -: 위로 스와이프(다음)
+    var THRESHOLD = 60;              // ← 감도 노브 (80으로 올리면 더 둔감)
+    if (Math.abs(dy) > THRESHOLD) {
+      scrollToIndex(index + (dy < 0 ? 1 : -1));
+    } else {
+      scrollToIndex(index);
+    }
+  }, { passive: true });
+
+  // ── 데스크톱 휠/트랙패드
+  feed.addEventListener('wheel', function(e){
+    if (lock) return;
+    var THRESHOLD_WHEEL = 32;        // ← 휠 감도 노브
+    if (Math.abs(e.deltaY) < THRESHOLD_WHEEL) return;
+    e.preventDefault();              // 관성으로 여러 장 넘어가는 것 방지
+    scrollToIndex(index + (e.deltaY > 0 ? 1 : -1));
+  }, { passive: false });
+})();
+
+
+
 
   // IFrame API 준비 콜백 (observer가 mount를 담당)
   window.onYouTubeIframeAPIReady = function(){};
