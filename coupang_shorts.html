@@ -75,18 +75,26 @@
       -webkit-overflow-scrolling: touch;
 	  touch-action: pan-y;              /* 제스처 충돌 완화 */
     
-	height: 100svh;}
+  height: calc(var(--vh, 1vh) * 100);
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: auto;
+  scroll-snap-type: y mandatory;
+  scroll-snap-stop: always;}
 
     .short {
       position: relative;
       /*height: calc(var(--vh, 1vh) * 100);*/ /* full screen per section */
-	  height: 100svh;
-		min-height: 100svh; /* 일부 기기 보강 */
+	  height: calc(var(--vh, 1vh) * 100);
+		min-height: calc(var(--vh, 1vh) * 100); /* 일부 기기 보강 */
       scroll-snap-align: start;
       display: grid; place-items: center;
       /*padding: 4px 12px 64px;*/ /* smaller top gap */
 	  padding: var(--gapY) 12px calc(var(--gapY) + env(safe-area-inset-bottom));
-    }
+    
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;}
     .card {
       width: 100%;
       /*height: 100%;*/ /* fill available section height */
@@ -141,7 +149,11 @@
     /* ===== 모바일 간격/정렬 보정 (정리본) ===== */
 @media (max-width: 480px) {
   /* 섹션 여백: 상단 안전영역 + 6px, 좌우 8px, 하단 48px */
-  .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; }
+  .short { padding: calc(env(safe-area-inset-top) + 6px) 8px 48px; 
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;}
 
   /* 카드: 모바일에선 살짝 좁게, 위 여백 좀 더 */
   .card { width: 100%; margin-top: 8px; }
@@ -360,10 +372,9 @@
   var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
   if (!feed || !sections.length) return;
 
-  var index = 0, lock = false;
+  var index = 0, lock = false; var inFlight = false; var settleTimer = null;
 
-  var inFlight = false; var settleTimer = null;
-// [NEW] 같은 방향으로 빠르게 연속 입력되는 걸 한 번만 허용 (디바운스/스로틀)
+  // [NEW] 같은 방향으로 빠르게 연속 입력되는 걸 한 번만 허용 (디바운스/스로틀)
   var lastNavAt = 0;
   var lastDir = 0;
   var NAV_COOLDOWN = 480;   // 밀리초. 더 둔감하게 하려면 520~600으로
@@ -380,43 +391,12 @@
   sections.forEach(function(s){ io2.observe(s); });
 
   function scrollToIndex(i){
-  var clamped = Math.max(0, Math.min(sections.length - 1, i));
-  if (inFlight) return;
-  inFlight = true;
-  lock = true;
-  index = clamped; // update immediately to avoid double-advances
-  sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
-
-  // Clear existing settle timer
-  if (settleTimer) { try { clearTimeout(settleTimer); } catch(e){} settleTimer = null; }
-
-  // When scrolling settles, release the lock.
-  var release = function(){
-    if (settleTimer) { try { clearTimeout(settleTimer); } catch(e){} settleTimer = null; }
-    inFlight = false;
-    lock = false;
-  };
-
-  // Prefer scrollend if supported
-  var onScrollEnd = function(){
-    feed.removeEventListener('scrollend', onScrollEnd);
-    release();
-  };
-  try { feed.addEventListener('scrollend', onScrollEnd, {once:true}); } catch(e) {
-    // Fallback: debounce on scroll
-    var onScroll = function(){
-      if (settleTimer) { clearTimeout(settleTimer); }
-      settleTimer = setTimeout(function(){
-        feed.removeEventListener('scroll', onScroll);
-        release();
-      }, 260);
-    };
-    feed.addEventListener('scroll', onScroll, {passive:true});
+    var clamped = Math.max(0, Math.min(sections.length - 1, i));
+    lock = true;
+    sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
+    // [TUNING] 스무스 스크롤 시간 여유
+    setTimeout(function(){ lock = false; }, 420);
   }
-
-  // Safety timeout in case events don't fire
-  settleTimer = setTimeout(release, 900);
-}
 
   // ── 터치(모바일)
   var startY = 0, lastY = 0, moved = false;
@@ -427,13 +407,14 @@
   }, { passive: true });
 
   feed.addEventListener('touchmove', function(e){
-    if (lock || inFlight || e.touches.length !== 1) return;
+    try{ if(event && event.cancelable) event.preventDefault(); }catch(_){ }
+if (lock || e.touches.length !== 1) return;
     lastY = e.touches[0].clientY;
     moved = true;
-  }, { passive: true });
+  }, { passive: true }), {passive:false});
 
   feed.addEventListener('touchend', function(){
-    if (lock || inFlight || !moved) return;
+    if (lock || !moved) return;
     var dy = lastY - startY;              // + 아래(이전), - 위(다음)
     var THRESHOLD = 84;                   // 감도 노브: 60~96 권장. 수치↑ = 둔감
     if (Math.abs(dy) <= THRESHOLD) {
@@ -449,11 +430,12 @@
     lastNavAt = now; lastDir = dir;
 
     scrollToIndex(index + dir);
-  }, { passive: true });
+  }, { passive: true }), {passive:false});
 
   // ── 휠/트랙패드(데스크톱)
   feed.addEventListener('wheel', function(e){
-    if (lock || inFlight) return;
+    try{ if(event && event.cancelable) event.preventDefault(); }catch(_){ }
+if (lock) return;
     var THRESHOLD_WHEEL = 52;             // 휠 감도 노브: 40~64 권장
     if (Math.abs(e.deltaY) < THRESHOLD_WHEEL) return;
 
@@ -467,7 +449,7 @@
     lastNavAt = now; lastDir = dir;
 
     scrollToIndex(index + dir);
-  }, { passive: false });
+  }, { passive: false }), {passive:false});
 })();
 
 
@@ -518,5 +500,25 @@
 
 
 
+<script>
+(function(){
+  var raf = null;
+  function setVH(){
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function(){
+      var h = (window.innerHeight || document.documentElement.clientHeight);
+      var vh = h * 0.01;
+      document.documentElement.style.setProperty('--vh', vh + 'px');
+    });
+  }
+  setVH();
+  window.addEventListener('resize', setVH);
+  window.addEventListener('orientationchange', setVH);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setVH);
+    window.visualViewport.addEventListener('scroll', setVH);
+  }
+})();
+</script>
 </body>
 </html>
