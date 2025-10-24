@@ -87,9 +87,7 @@
       display: grid; place-items: center;
       /*padding: 4px 12px 64px;*/ /* smaller top gap */
 	  padding: var(--gapY) 12px calc(var(--gapY) + env(safe-area-inset-bottom));
-    
-  height: calc(var(--stablevh, 100vh) - var(--addrbar, 0px));
-  min-height: calc(var(--stablevh, 100vh) - var(--addrbar, 0px));}
+    }
     .card {
       width: 100%;
       /*height: 100%;*/ /* fill available section height */
@@ -365,33 +363,69 @@
   var sections = Array.prototype.slice.call(document.querySelectorAll('.short'));
   if (!feed || !sections.length) return;
 
-  var index = 0, lock = false;
+  var index = 0;
+  var lock = false;
+  var inFlight = false;
+  var settleTimer = null;
 
-  // [NEW] 같은 방향으로 빠르게 연속 입력되는 걸 한 번만 허용 (디바운스/스로틀)
+  var THRESHOLD = 84;
+  var THRESHOLD_WHEEL = 52;
+  var NAV_COOLDOWN = 480;
   var lastNavAt = 0;
   var lastDir = 0;
-  var NAV_COOLDOWN = 480;   // 밀리초. 더 둔감하게 하려면 520~600으로
 
-  // 현재 보이는 섹션 동기화 (0.8 이상 보일 때만)
-  var io2 = new IntersectionObserver(function(entries){
+  var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if (e.isIntersecting && e.intersectionRatio > 0.8) {
         var i = sections.indexOf(e.target);
         if (i >= 0) index = i;
       }
     });
-  }, { root: feed, threshold: [0.8] });
-  sections.forEach(function(s){ io2.observe(s); });
+  }, { threshold: [0.25, 0.5, 0.8, 1] });
+  sections.forEach(function(s){ io.observe(s); });
+
+  function releaseLocks(){
+    inFlight = false;
+    lock = false;
+    if (settleTimer){ try { clearTimeout(settleTimer); } catch(_){} settleTimer = null; }
+  }
 
   function scrollToIndex(i){
     var clamped = Math.max(0, Math.min(sections.length - 1, i));
+    if (inFlight) return;
+    var now = Date.now();
+    var dir = (clamped > index) ? 1 : (clamped < index ? -1 : 0);
+    if (dir !== 0 && dir === lastDir && (now - lastNavAt) < NAV_COOLDOWN) return;
+
+    inFlight = true;
     lock = true;
+    index = clamped;
+    lastDir = dir;
+    lastNavAt = now;
+
     sections[clamped].scrollIntoView({ block: 'start', behavior: 'smooth' });
-    // [TUNING] 스무스 스크롤 시간 여유
-    setTimeout(function(){ lock = false; }, 420);
+
+    function onEnd(){
+      try { feed.removeEventListener('scrollend', onEnd); } catch(_) {}
+      releaseLocks();
+    }
+    try { feed.addEventListener('scrollend', onEnd, { once: true }); } catch(_) {}
+
+    function onScroll(){
+      if (settleTimer) { clearTimeout(settleTimer); }
+      settleTimer = setTimeout(function(){
+        try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
+        releaseLocks();
+      }, 260);
+    }
+    feed.addEventListener('scroll', onScroll, { passive: true });
+
+    settleTimer = setTimeout(function(){
+      try { feed.removeEventListener('scroll', onScroll); } catch(_) {}
+      releaseLocks();
+    }, 900);
   }
 
-  // ── 터치(모바일)
   var startY = 0, lastY = 0, moved = false;
   feed.addEventListener('touchstart', function(e){
     if (e.touches.length !== 1) return;
@@ -400,54 +434,34 @@
   }, { passive: true });
 
   feed.addEventListener('touchmove', function(e){
-    if (lock || e.touches.length !== 1) return;
+    if (lock || inFlight || e.touches.length !== 1) return;
     lastY = e.touches[0].clientY;
     moved = true;
   }, { passive: true });
 
   feed.addEventListener('touchend', function(){
-    if (lock || !moved) return;
-    var dy = lastY - startY;              // + 아래(이전), - 위(다음)
-    var THRESHOLD = 84;                   // 감도 노브: 60~96 권장. 수치↑ = 둔감
-    if (Math.abs(dy) <= THRESHOLD) {
-      // 임계치 미만이면 현재 카드로 되돌림
-      scrollToIndex(index);
-      return;
-    }
-
-    // [NEW] 같은 방향 연속 제스처 컷
-    var dir = (dy < 0 ? 1 : -1);
-    var now = performance.now();
-    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
-    lastNavAt = now; lastDir = dir;
-
+    if (lock || inFlight || !moved) return;
+    var dy = lastY - startY;
+    if (Math.abs(dy) < THRESHOLD) return;
+    var dir = (dy > 0) ? -1 : 1;
     scrollToIndex(index + dir);
   }, { passive: true });
 
-  // ── 휠/트랙패드(데스크톱)
   feed.addEventListener('wheel', function(e){
-    if (lock) return;
-    var THRESHOLD_WHEEL = 52;             // 휠 감도 노브: 40~64 권장
-    if (Math.abs(e.deltaY) < THRESHOLD_WHEEL) return;
-
-    // [중요] 네이티브 관성으로 2~3장 넘김 방지
-    e.preventDefault();
-
-    // [NEW] 같은 방향 연속 휠 컷
-    var dir = (e.deltaY > 0 ? 1 : -1);
-    var now = performance.now();
-    if (now - lastNavAt < NAV_COOLDOWN && dir === lastDir) return;
-    lastNavAt = now; lastDir = dir;
-
+    if (lock || inFlight) return;
+    var dy = e.deltaY;
+    if (Math.abs(dy) < THRESHOLD_WHEEL) return;
+    var dir = (dy > 0) ? 1 : -1;
     scrollToIndex(index + dir);
-  }, { passive: false });
+  }, { passive: true });
+
+  feed.addEventListener('scroll', function(){
+    var max = feed.scrollHeight - feed.clientHeight;
+    if (feed.scrollTop <= 0) feed.scrollTop = 1;
+    else if (feed.scrollTop >= max) feed.scrollTop = Math.max(0, max - 1);
+  }, {passive:true});
 })();
-
-
-
-
-
-  // IFrame API 준비 콜백 (observer가 mount를 담당)
+// IFrame API 준비 콜백 (observer가 mount를 담당)
   window.onYouTubeIframeAPIReady = function(){};
 </script>
 
@@ -491,32 +505,5 @@
 
 
 
-<script>
-(function(){
-  var stable = 0;
-  var raf = null;
-  function compute(){
-    var cur = window.innerHeight || document.documentElement.clientHeight || 0;
-    if (window.visualViewport && window.visualViewport.height) {
-      cur = window.visualViewport.height;
-    }
-    if (cur > stable) stable = cur; // track max seen height
-    var addr = Math.max(0, stable - cur);
-    document.documentElement.style.setProperty('--stablevh', stable + 'px');
-    document.documentElement.style.setProperty('--addrbar', addr + 'px');
-  }
-  function schedule(){ if (raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(compute); }
-  schedule();
-  window.addEventListener('resize', schedule);
-  window.addEventListener('orientationchange', function(){
-    stable = 0;
-    setTimeout(schedule, 150);
-  });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', schedule);
-    window.visualViewport.addEventListener('scroll', schedule);
-  }
-})();
-</script>
 </body>
 </html>
