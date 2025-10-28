@@ -1621,9 +1621,7 @@ padding:16px;
 
 <!-- 홈 화면 추가 버튼 -->
 <div class="a2hs-wrap">
-  <button id="a2hsBtn" type="button" class="a2hs-btn" hidden>
-    📲 홈 화면에 추가
-  </button>
+  <button id="a2hsBtn" type="button" class="a2hs-btn" hidden>📲 홈 화면에 추가</button>
 </div>
 
 
@@ -3193,27 +3191,33 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+
+	
 <script>
 (function(){
   const btn = document.getElementById('a2hsBtn');
-  let deferred; // beforeinstallprompt 이벤트 저장
+  let deferred; // beforeinstallprompt 이벤트 캐시
 
-  // iOS Safari 판단
   const ua = navigator.userAgent.toLowerCase();
   const isIOS = /iphone|ipad|ipod/.test(ua);
   const isSafari = /^((?!chrome|crios|fxios|edgios|naver|whale|samsung).)*safari/.test(ua);
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 
-  // 안드로이드(Chromium 계열: Chrome/삼성/Edge/Whale 등)는 beforeinstallprompt 지원
+  // 1) 안드로이드/삼성 인터넷/크로미움 계열: 설치 이벤트 대기
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferred = e;
-    if (!isStandalone) btn.hidden = false; // 이미 설치된 경우 숨김
+    if (!isStandalone) btn.hidden = false;      // 설치 가능 → 버튼 표시
   });
 
-  window.addEventListener('appinstalled', () => { btn.hidden = true; deferred = null; });
+  // 2) 설치 완료 시 버튼 숨김
+  window.addEventListener('appinstalled', () => {
+    btn.hidden = true;
+    deferred = null;
+  });
 
-  btn?.addEventListener('click', async () => {
+  // 3) 클릭 시 동작
+  btn.addEventListener('click', async () => {
     if (deferred) {
       deferred.prompt();
       const { outcome } = await deferred.userChoice;
@@ -3222,23 +3226,12 @@ if ('serviceWorker' in navigator) {
       return;
     }
     if (isIOS && isSafari) {
-      showIOSGuide();
+      alert('iOS Safari: 공유 버튼(⬆️) → "홈 화면에 추가"로 설치하세요.');
       return;
     }
-    showOpenInBrowserGuide();
+    // 여기까지 왔다면, 아직 설치 조건이 충족되지 않은 상태.
+    alert('설치 조건을 충족하면 버튼이 자동으로 활성화됩니다.\n(서비스워커/매니페스트/아이콘/경로를 다시 확인해 주세요)');
   });
-
-  function showIOSGuide(){
-    alert('iOS Safari에서는 공유 버튼(⬆️) → "홈 화면에 추가"를 눌러 설치할 수 있어요.');
-  }
-  function showOpenInBrowserGuide(){
-    alert('홈 화면 추가가 보이지 않으면 Chrome/삼성 인터넷/Edge/네이버 웨일 등 기본 브라우저로 열어 주세요.');
-  }
-
-  // PC에서도 버튼 노출(일부 브라우저는 beforeinstallprompt를 안 줄 수 있어 안내용 표시)
-  setTimeout(() => {
-    if (btn && !isStandalone && btn.hidden && !isIOS) btn.hidden = false;
-  }, 1500);
 })();
 </script>
 
