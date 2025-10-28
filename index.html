@@ -1592,6 +1592,13 @@ padding:16px;
 .a2hs-btn:hover{transform:translateY(-1px)}
 
 
+
+/* 앱처럼 실행될 때(A2HS로 실행) 설치 버튼/인앱 배너 숨김 */
+@media (display-mode: standalone), (display-mode: minimal-ui), (display-mode: fullscreen) {
+  .a2hs-wrap, #openOutBanner { display: none !important; }
+}
+
+
 	
 </style>
 
@@ -3208,6 +3215,7 @@ if ('serviceWorker' in navigator) {
 	
 <script>
 (function(){
+  const btnWrap = document.querySelector('.a2hs-wrap');
   const btn = document.getElementById('a2hsBtn');
   let deferred; // beforeinstallprompt 이벤트 캐시
 
@@ -3216,37 +3224,45 @@ if ('serviceWorker' in navigator) {
   const isSafari = /^((?!chrome|crios|fxios|edgios|naver|whale|samsung).)*safari/.test(ua);
   const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 
-  // 1) 안드로이드/삼성 인터넷/크로미움 계열: 설치 이벤트 대기
+  // 기본은 숨김
+  if (btn) btn.hidden = true;
+
+  // 1) 설치 가능 상태가 되면 브라우저가 이벤트를 보냄 → 그때만 버튼 표시
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferred = e;
-    if (!isStandalone) btn.hidden = false;      // 설치 가능 → 버튼 표시
+    if (!isStandalone && btn) btn.hidden = false;
+    if (btnWrap) btnWrap.style.display = 'block';
   });
 
-  // 2) 설치 완료 시 버튼 숨김
+  // 2) 설치 완료되면 버튼/영역 숨김
   window.addEventListener('appinstalled', () => {
-    btn.hidden = true;
+    if (btn) btn.hidden = true;
+    if (btnWrap) btnWrap.style.display = 'none';
     deferred = null;
   });
 
-  // 3) 클릭 시 동작
-  btn.addEventListener('click', async () => {
+  // 3) 클릭 시 설치 프롬프트
+  btn?.addEventListener('click', async () => {
     if (deferred) {
       deferred.prompt();
-      const { outcome } = await deferred.userChoice;
+      const { outcome } = await deferred.userChoice; // accepted/dismissed
+      // outcome이 dismissed여도, 나중에 브라우저가 다시 프롬프트 조건이 되면
+      // beforeinstallprompt가 다시 와서 버튼이 다시 보입니다.
       deferred = null;
-      if (outcome === 'accepted') btn.hidden = true;
       return;
     }
+    // iOS Safari 가이드(설치 이벤트가 존재하지 않음)
     if (isIOS && isSafari) {
       alert('iOS Safari: 공유 버튼(⬆️) → "홈 화면에 추가"로 설치하세요.');
       return;
     }
-    // 여기까지 왔다면, 아직 설치 조건이 충족되지 않은 상태.
-    alert('삼성 브라우저/크롬/네이버 등 브라우저로 실행하여 다운로드 진행해주시길 바랍니다.');
+    // 그 외: 아직 설치 조건이 미충족(버튼이 안 보여야 정상인데 혹시 눌린 경우)
+    alert('설치 조건이 충족되면 버튼이 자동으로 활성화됩니다.');
   });
 })();
 </script>
+
 
 
 
