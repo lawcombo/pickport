@@ -1598,6 +1598,11 @@ padding:16px;
   .a2hs-wrap, #openOutBanner { display: none !important; }
 }
 
+/* 데스크톱(마우스+포인터 있는 환경)에서는 A2HS 버튼 숨김 */
+@media (hover: hover) and (pointer: fine){
+  .a2hs-wrap { display:none !important; }
+}
+
 
 	
 </style>
@@ -3225,7 +3230,9 @@ if ('serviceWorker' in navigator) {
   const isIOS = /iphone|ipad|ipod/.test(ua);
   const isSafari = /^((?!chrome|crios|fxios|edgios|naver|whale|samsung).)*safari/.test(ua);
   const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  const isMobile = /android|iphone|ipad|ipod/.test(ua);
 
+	
   // 기본은 숨김
   if (btn) btn.hidden = true;
 
@@ -3233,8 +3240,9 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferred = e;
-    if (!isStandalone && btn) btn.hidden = false;
-    if (btnWrap) btnWrap.style.display = 'block';
+    if (!isStandalone && isMobile && btn) btn.hidden = false;   // 모바일에서만 노출
+	if (isMobile && btnWrap) btnWrap.style.display = 'block';   // 래퍼도 모바일에서만
+
   });
 
   // 2) 설치 완료되면 버튼/영역 숨김
