@@ -1580,6 +1580,19 @@ padding:16px;
 
 
 
+
+/* 바탕화면 바로가기 */
+.a2hs-wrap{max-width:1100px;margin:10px auto 0;padding:0 16px}
+.a2hs-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#0b7af0,#0657bb);
+  color:#fff;border:0;border-radius:14px;padding:10px 14px;
+  font-weight:900;box-shadow:0 10px 22px rgba(11,122,240,.28);cursor:pointer
+}
+.a2hs-btn:hover{transform:translateY(-1px)}
+
+
+	
 </style>
 
 
@@ -1603,6 +1616,15 @@ padding:16px;
 
 <!-- 🔽 쿠팡 배너 자리 (JS가 채움) -->
 <div class="banner"></div>
+
+
+
+<!-- 홈 화면 추가 버튼 -->
+<div class="a2hs-wrap">
+  <button id="a2hsBtn" type="button" class="a2hs-btn" hidden>
+    📲 홈 화면에 추가
+  </button>
+</div>
 
 
 <!-- 2) 히어로 -->
@@ -3157,11 +3179,68 @@ $(function(){
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.location.href = './coupang_shorts.html'; }
   });
 });
-
-
 </script>
 
 
+
+	
+<script>
+//서비스워커 등록 스크립트
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // 프로젝트 페이지 기준 경로 주의!
+    navigator.serviceWorker.register('/pickport/sw.js').catch(console.warn);
+  });
+}
+</script>
+<script>
+(function(){
+  const btn = document.getElementById('a2hsBtn');
+  let deferred; // beforeinstallprompt 이벤트 저장
+
+  // iOS Safari 판단
+  const ua = navigator.userAgent.toLowerCase();
+  const isIOS = /iphone|ipad|ipod/.test(ua);
+  const isSafari = /^((?!chrome|crios|fxios|edgios|naver|whale|samsung).)*safari/.test(ua);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+  // 안드로이드(Chromium 계열: Chrome/삼성/Edge/Whale 등)는 beforeinstallprompt 지원
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferred = e;
+    if (!isStandalone) btn.hidden = false; // 이미 설치된 경우 숨김
+  });
+
+  window.addEventListener('appinstalled', () => { btn.hidden = true; deferred = null; });
+
+  btn?.addEventListener('click', async () => {
+    if (deferred) {
+      deferred.prompt();
+      const { outcome } = await deferred.userChoice;
+      deferred = null;
+      if (outcome === 'accepted') btn.hidden = true;
+      return;
+    }
+    if (isIOS && isSafari) {
+      showIOSGuide();
+      return;
+    }
+    showOpenInBrowserGuide();
+  });
+
+  function showIOSGuide(){
+    alert('iOS Safari에서는 공유 버튼(⬆️) → "홈 화면에 추가"를 눌러 설치할 수 있어요.');
+  }
+  function showOpenInBrowserGuide(){
+    alert('홈 화면 추가가 보이지 않으면 Chrome/삼성 인터넷/Edge/네이버 웨일 등 기본 브라우저로 열어 주세요.');
+  }
+
+  // PC에서도 버튼 노출(일부 브라우저는 beforeinstallprompt를 안 줄 수 있어 안내용 표시)
+  setTimeout(() => {
+    if (btn && !isStandalone && btn.hidden && !isIOS) btn.hidden = false;
+  }, 1500);
+})();
+</script>
 
 
 
