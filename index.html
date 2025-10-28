@@ -1632,19 +1632,19 @@ padding:16px;
 
 
 <!-- ✅ 인앱 브라우저 안내 배너 (여기에 추가) -->
+<!-- 인앱 브라우저 안내 배너 -->
 <div id="openOutBanner" style="display:none;max-width:1100px;margin:10px auto 0;padding:12px 16px;border-radius:12px;background:#fff3cd;border:1px solid #ffe69c;">
   <div style="font-weight:700;margin-bottom:8px;">앱 내 브라우저에서 열렸어요</div>
-  <div style="font-size:14px;line-height:1.4;margin-bottom:10px;">
+  <div id="openOutMsg" style="font-size:14px;line-height:1.4;margin-bottom:10px;">
     설치하려면 외부 브라우저로 여세요. 아래 버튼 중 하나를 누르면 이동합니다.
   </div>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     <a id="openSamsung" class="a2hs-btn" style="padding:8px 12px;border-radius:10px;background:#0b63c4;color:#fff;text-decoration:none;">삼성 인터넷으로 열기</a>
     <a id="openChrome"  class="a2hs-btn" style="padding:8px 12px;border-radius:10px;background:#0b63c4;color:#fff;text-decoration:none;">크롬으로 열기</a>
-	<!-- 
     <a id="openWhale"   class="a2hs-btn" style="padding:8px 12px;border-radius:10px;background:#0b63c4;color:#fff;text-decoration:none;">웨일로 열기</a>
-	--> 
   </div>
 </div>
+
 
 <!-- 홈 화면 추가 버튼 -->
 <div class="a2hs-wrap">
@@ -3279,43 +3279,47 @@ if ('serviceWorker' in navigator) {
 <!-- ✅ 인앱브라우저 감지 + 외부 브라우저로 열기 -->
 <script>
 (function(){
-  const ua = navigator.userAgent.toLowerCase();
-  const isAndroid = /android/.test(ua);
-  const isIOS = /iphone|ipad|ipod/.test(ua);
-  // 카톡/인스타/페북/네이버 등 대표 인앱 패턴
-  const isInApp = /(kakaotalk|line|instagram|fb_iab|fbav|twitter|naver(inapp)?|daumapps)/i.test(navigator.userAgent);
+  const ua = navigator.userAgent;
+  const uaL = ua.toLowerCase();
+  const isAndroid = /android/i.test(ua);
+  const isIOS = /iphone|ipad|ipod/i.test(ua);
+  // 카톡/인스타/페북/네이버 등 인앱 감지
+  const isInApp = /(kakaotalk|line|instagram|fb_iab|fbav|twitter|naver(inapp)?|daumapps)/i.test(ua);
 
   const $banner  = document.getElementById('openOutBanner');
+  const $msg     = document.getElementById('openOutMsg');
   const $samsung = document.getElementById('openSamsung');
   const $chrome  = document.getElementById('openChrome');
   const $whale   = document.getElementById('openWhale');
 
-  if (!$banner) return; // 배너가 없으면 종료
+  if (!$banner || !$msg) return;
 
   if (isInApp) {
-    // 인앱에서만 배너 노출
-    $banner.style.display = 'block';
-
-    // 현재 페이지를 외부 브라우저 앱으로 여는 intent URL (Android)
-    const current  = location.href;
-    const hostPath = location.host + location.pathname + location.search + location.hash;
-    const fallback = encodeURIComponent(current);
+    // 기본 문구(안드로이드용 버튼 안내)
+    $msg.innerHTML = '설치하려면 외부 브라우저로 여세요. 아래 버튼 중 하나를 누르면 이동합니다.';
 
     if (isAndroid) {
-      $samsung.href = `intent://${hostPath}#Intent;scheme=https;package=com.sec.android.app.sbrowser;S.browser_fallback_url=${fallback};end`;
-      $chrome.href  = `intent://${hostPath}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallback};end`;
-      $whale.href   = `intent://${hostPath}#Intent;scheme=https;package=com.naver.whale;S.browser_fallback_url=${fallback};end`;
+      // 안드로이드: intent 링크로 외부 브라우저 열기
+      const current  = location.href;
+      const hostPath = location.host + location.pathname + location.search + location.hash;
+      const fallback = encodeURIComponent(current);
+      if ($samsung) $samsung.href = `intent://${hostPath}#Intent;scheme=https;package=com.sec.android.app.sbrowser;S.browser_fallback_url=${fallback};end`;
+      if ($chrome)  $chrome.href  = `intent://${hostPath}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallback};end`;
+      if ($whale)   $whale.href   = `intent://${hostPath}#Intent;scheme=https;package=com.naver.whale;S.browser_fallback_url=${fallback};end`;
     } else if (isIOS) {
-      // iOS는 외부 브라우저 자동 전환 제한 → 안내만
-      $samsung.style.display = 'none';
-      $chrome.style.display  = 'none';
-      $whale.style.display   = 'none';
-      $banner.querySelector('div:nth-child(2)').innerHTML =
-        'iOS에선 인앱 브라우저에서 외부 브라우저 자동 이동이 제한돼요. 우측 상단의 <b>⋯</b> 메뉴에서 <b>Safari로 열기</b>를 눌러주세요.';
+      // iOS: 외부 브라우저 자동 실행 제한 → 버튼 숨기고 안내로 교체
+      if ($samsung) $samsung.style.display = 'none';
+      if ($chrome)  $chrome.style.display  = 'none';
+      if ($whale)   $whale.style.display   = 'none';
+      $msg.innerHTML = 'iOS에선 인앱 브라우저에서 외부 브라우저 자동 이동이 제한돼요. 우측 상단의 <b>⋯</b> 메뉴에서 <b>Safari로 열기</b>를 눌러주세요.';
     }
+
+    // 마지막에 배너 표시
+    $banner.style.display = 'block';
   }
 })();
 </script>
+
 	
 <script>
 (function(){
