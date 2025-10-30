@@ -51,12 +51,14 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+
 <!-- style.css -->
 <link rel="stylesheet" href="./assets/css/style.css">
-	
+
 <!-- script -->
 <script defer src="./assets/js/main.js"></script>
-	
+
+
 </head>
 <body>
 
@@ -170,89 +172,17 @@
     <div class="chip-viewport">
       <div class="chip-track" id="chipTrack">
         <button class="chip all active" data-target="all" type="button">전체</button>
-        <button class="chip" data-target="deals" type="button">오늘의 특가</button>
-        <button class="chip" data-target="best" type="button">최근 많이 팔린</button>
-		<button class="chip" data-target="promobanners" type="button">추천 배너</button>
-        <button class="chip" data-target="oneplus" type="button">1+1</button>
-        <button class="chip" data-target="pcvalue" type="button">가성비 컴퓨터</button>
-		<button class="chip" data-target="keyboard" type="button">키보드</button>
-		<button class="chip" data-target="petproduct" type="button">애완용품</button>
+        <a href="./deals.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">오늘의 특가</a>
+		<a href="./best.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">최근 많이 팔린</a>
+		<a href="./promo-banners.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">추천 배너</a>
+		<a href="./one-plus.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">1+1</a>
+		<a href="./pc-value.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">컴퓨터</a>
+		<a href="./keyboard.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">키보드</a>
+		<a href="./pet-products.html" class="chip" style="text-decoration:none;color:inherit;font-size:smaller;">애완용품</a>
       </div>
     </div>
   </div>
 </div>
-
-
-<!-- 섹션들 -->
-<section class="section section-deals" data-section="deals">
-  <div class="section-head">
-    <div class="section-title" data-label="DEALS">오늘의 특가 <span class="badge">HOT</span></div>
-    <a class="more-btn" href="https://link.coupang.com/a/cXMQhf" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-deals"></div>
-</section>
-
-
-
-
-
-<section class="section section-best" data-section="best">
-  <div class="section-head">
-    <div class="section-title" data-label="BEST">최근 많이 팔린 상품</div>
-    <a class="more-btn" href="https://link.coupang.com/a/cWL1HW" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-best"></div>
-</section>
-
-
-<!-- ★ 신규: 배너 상품(3개 랜덤) 섹션 -->
-<section class="section section-promobanners" data-section="promobanners" aria-label="프로모션 배너">
-  <div class="section-head">
-    <div class="section-title" data-label="PROMO">추천 배너</div>
-    <span class="badge">✨훈픽스 추천</span>
-  </div>
-  <div class="promo-grid" id="promo-banners"></div>
-</section>
-
-
-
-
-<section class="section section-oneplus" data-section="oneplus">
-  <div class="section-head">
-    <div class="section-title" data-label="1+1">1+1 상품</div>
-    <a class="more-btn" href="https://link.coupang.com/a/cWz0ck" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-oneplus"></div>
-</section>
-
-
-<section class="section section-pcvalue" data-section="pcvalue">
-  <div class="section-head">
-    <div class="section-title" data-label="PC VALUE">가성비 컴퓨터</div>
-    <a class="more-btn" href="https://link.coupang.com/a/cWPnFA" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-pcvalue"></div>
-</section>
-
-
-
-<section class="section section-keyboard" data-section="keyboard">
-  <div class="section-head">
-    <div class="section-title" data-label="keyboard">키보드</div>
-    <a class="more-btn" href="https://link.coupang.com/a/cXNFlG" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-keyboard"></div>
-</section>
-
-
-
-<section class="section section-petproduct" data-section="petproduct">
-  <div class="section-head">
-    <div class="section-title" data-label="petproduct">애완용품</div>
-    <a class="more-btn" href="https://link.coupang.com/a/cXOOLf" target="_blank" rel="noopener sponsored nofollow">더보기</a>
-  </div>
-  <div class="cards" id="cards-petproduct"></div>
-</section>
 
 
 
@@ -318,163 +248,6 @@
 
 
 
-
-
-<!-- ======================= 상품 소스(생략 없음) ======================= -->
-<div id="sources" class="hidden" aria-hidden="true">
-  <!-- 오늘의 특가 -->
-  <div id="src-deals">
-    <a href="https://link.coupang.com/a/cXIBLi" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1a.coupangcdn.com/image/affiliate/banner/4a732d9ebb444e3ebed5d65553b83952@2x.jpg" alt="코카콜라 오리지널, 190ml, 30개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXIDtN" target="_blank" referrerpolicy="unsafe-url"><img src="https://image13.coupangcdn.com/image/affiliate/banner/2ed043e346594445f5a9b79d22359806@2x.jpg" alt="무항생제 신선한 대란, 30구, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXIFA7" target="_blank" referrerpolicy="unsafe-url"><img src="https://image8.coupangcdn.com/image/affiliate/banner/996889a65214a09316cc67cf8c773bbd@2x.jpg" alt="[10% 환급가전] 홈플래닛 4K UHD LED 프리미엄 베젤리스 TV, HPT550ULMA, 고객직접설치, 스탠드형, 140cm(55인치)" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXIZFu" target="_blank" referrerpolicy="unsafe-url"><img src="https://image1.coupangcdn.com/image/affiliate/banner/811276beedca3e69176ece3f964c4bd9@2x.jpg" alt="롤앤롤 라벤더 화장지 30롤 3겹 고급롤화장지(3겹이상) 30m, 30개입, 3개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI0Hn" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/ae53b047761ecd1624f623d4e3740be3@2x.jpg" alt="[국가대표] 작년반값 온라인초특가 꿀맛범벅 청도반시, 1박스, 5kg (로얄과)" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI1lr" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5a.coupangcdn.com/image/affiliate/banner/4445970d9112a424473ee4cd25e05ca6@2x.jpg" alt="예소담 특오이소박이, 1kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI1On" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/ad225d9ca2d132ad2aea8624d40ab850@2x.jpg" alt="코멧 순백 3겹 라벤더 바닐라 롤화장지 30m, 30개입, 2개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI2dN" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/440c5c7b1fd552f6aa6dbea4ee97a1ce@2x.jpg" alt="온슬로 레티놀 미간 주름 패치, 2개, 45개입" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI2Lg" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/ab52fe0c2449ef3334567632d994db38@2x.jpg" alt="오스틱니 1+1 초특가 남성 봄가을 라운드넥 심플 날염 빅사이즈 트레이닝 맨투맨" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI24e" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/f2e7618f0672602faf04764f73857af8@2x.jpg" alt="귤탐 당도선별 11brix 감귤, 2kg(로열과), 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI3o6" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/a66dec2330a19233e3d17819ade90e7e@2x.jpg" alt="닥터지 블랙 스네일 토너 150ml + 에멀전 150ml 스페셜 선물세트, 3세트" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI3D9" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/4e85b973fa79eae4cffd4d0179f6e403@2x.jpg" alt="탐사 샘물 무라벨, 2L, 36개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI3Ve" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/969e0a9e1c78614d93632ccd98fe1d23@2x.jpg" alt="풀무원 얄피꽉찬 쌀 물만두 (냉동), 1kg, 2개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI38x" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/2eeb5f6057e6ab0d37bce119cbce72ec@2x.jpg" alt="가농 무항생제 1+등급 초란, 30구, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI4pa" target="_blank" referrerpolicy="unsafe-url"><img src="https://image11.coupangcdn.com/image/affiliate/banner/993947d61308835095eb6aa308147232@2x.jpg" alt="모아미트 캐나다산 보리먹인 암퇘지 삼겹살 구이용 (냉장), 1kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI4Go" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/402329cb9d8d9e18033baee724cc541b@2x.jpg" alt="PSK 칠레산 블루베리, 310g, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI4TQ" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/5f6d4dec67617eb067715b59a3d937cf@2x.jpg" alt="오뚜기 맛있는 오뚜기밥, 210g, 12개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI48N" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/b27670b123748ff9fa581bab29f121b4@2x.jpg" alt="종가 오래오래 맛있는 열무김치, 1.5kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI5qA" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/e39ed017734e6fcbf6407eb11a454741@2x.jpg" alt="가가호호 2025년산 햅쌀 우포 따오기쌀 백미, 10kg, 1개, 상등급" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI5Qm" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/30cb8e252862ec84fdc856890f5f9cc0@2x.jpg" alt="코멧 샤인 아기물티슈 캡형, 100매, 10개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI6Xo" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/d7f8670a6105739649947828835b0059@2x.jpg" alt="대구농산 건강한밥상 국산 현미, 4kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI7Eq" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4c.coupangcdn.com/image/affiliate/banner/3f1c53d01ca06980a42aaa53438a14e6@2x.jpg" alt="평창수 무라벨 생수, 2L, 24개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI8al" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/a6e1874c17686785f6cd997f9aa93d0c@2x.jpg" alt="곰곰 언양식 소불고기 (냉장), 1kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI8tH" target="_blank" referrerpolicy="unsafe-url"><img src="https://image2.coupangcdn.com/image/affiliate/banner/808ba65ca1f22587e6f79b7a3a402526@2x.jpg" alt="삼양라면, 20개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI8L7" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/cfcab49e90ad815ea19d6cb34d4e1bb3@2x.jpg" alt="델몬트 필리핀 바나나, 1.4kg 내외, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI8Yd" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/f968ac2a4c2fde851a37ffdde9f8b449@2x.jpg" alt="바나나맛우유, 240ml, 12개" width="120" height="240"></a>
-  </div>
-
-  <!-- 최근 많이 팔린 -->
-  <div id="src-best">
-    <a href="https://link.coupang.com/a/cXI9v7" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/c21c5c45469fdd40c068d083f578bb7d@2x.jpg" alt="신라면 120g, 5개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI9H6" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2a.coupangcdn.com/image/affiliate/banner/964e72b25617b905060caf093b293085@2x.jpg" alt="곰곰 신선한 1A 우유, 900ml, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI9S9" target="_blank" referrerpolicy="unsafe-url"><img src="https://image9.coupangcdn.com/image/affiliate/banner/aa5035fcd7f37e97f867bedda845cdfa@2x.jpg" alt="국내산 백오이, 2개입, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXI96C" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/cb58daae941f8b05f0fe431c97392b34@2x.jpg" alt="국내산 양파, 1kg, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJamt" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/5d2d17fa66e2c8027b70911855eab73a@2x.jpg" alt="돌 스위티오 바나나, 1kg 내외, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJawy" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/f1d35304e8da41677fa303d93a3582c4@2x.jpg" alt="곰곰 무항생제 신선한 대란, 15구, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJaGy" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1a.coupangcdn.com/image/affiliate/banner/cce5d396f75ee5fc88b2035b3614a954@2x.jpg" alt="남양유업 맛있는 우유 GT, 900ml, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJaQH" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/26edfdf6e76771245c839b2fe6b5f0da@2x.jpg" alt="국내산 애호박, 1개입, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJa0H" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/fc7a2ca45e44e4bcc5db1c2635f30ec1@2x.jpg" alt="[무라벨 빈병회수] 스파클 생수 2리터×6병, 2L, 6개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJa9v" target="_blank" referrerpolicy="unsafe-url"><img src="https://image1.coupangcdn.com/image/affiliate/banner/cea4665e1e26a3d6bab7a803e8d2b013@2x.jpg" alt="국내산 감자(햇), 500g, 1개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJbhp" target="_blank" referrerpolicy="unsafe-url"><img src="https://static.coupangcdn.com/image/affiliate/banner/fd5f7d16bc3d8b8424e68a5385ff7d6b@2x.jpg" alt="친환경 국내산 팽이버섯, 300g(150gx2개입), 1개" width="120" height="240"></a>
-  </div>
-
-
-
-
-  <!-- 1+1 -->
-  <div id="src-oneplus">
-    <a href="https://link.coupang.com/a/cXJbFi" target="_blank" referrerpolicy="unsafe-url"><img src="https://image8.coupangcdn.com/image/affiliate/banner/bf1ecda65a25c39415e7c3f82eb9cbcc@2x.jpg" alt="로랜텍 부착가이드 강화유리 사생활 프라이버시 휴대폰 액정보호필름 2p 세트, 1세트" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJbOg" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/15ae7c0d8344625ce81016d2be49b336@2x.jpg" alt="미와이 베이직 무지 오버핏 맨투맨 1+1" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJbYw" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/fe1814d0ad2fab571ca7c0ba751fe3a8@2x.jpg" alt="미와이 베이직 무지 오버핏 후드티 1+1" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJb9K" target="_blank" referrerpolicy="unsafe-url"><img src="https://image2.coupangcdn.com/image/affiliate/banner/b272c67b1c8084abc15862904cb0fe27@2x.jpg" alt="1+1 남자 맨투맨 긴팔티 데일리 오버핏 무지 면질 맨투맨 2장 세트 남녀공용 Sevenmoon" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJcif" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/0ca2b025ed2373705a47bd8c6abd05f7@2x.jpg" alt="1+1남성용 트레이닝바지 데일리 세미 와이드 스판 밴딩 슬랙스 바지 2장세트 베이잉" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJcqx" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/ab52fe0c2449ef3334567632d994db38@2x.jpg" alt="오스틱니 1+1 초특가 남성 봄가을 라운드넥 심플 날염 빅사이즈 트레이닝 맨투맨" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJczu" target="_blank" referrerpolicy="unsafe-url"><img src="https://image11.coupangcdn.com/image/affiliate/banner/ef440ee1496c028597d00758cd46a2cd@2x.jpg" alt="남자 맨투맨 긴팔티 면질 데일리 맨투맨 2장 세트 남자여사 TANLZ-018" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJcI0" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3c.coupangcdn.com/image/affiliate/banner/9d1c11ac7cb8a1ff1d9bc3c7075f8ceb@2x.jpg" alt="[1+1 이벤트] EMBY 문어 괄사 두피 마사지기 머리 지압기, 핑크, 2개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJcTE" target="_blank" referrerpolicy="unsafe-url"><img src="https://image2.coupangcdn.com/image/affiliate/banner/abd9e4bcfca8dab9f9a395f51920cae6@2x.jpg" alt="[1+1] 발편한 기능성 구름깔창" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJddM" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/2ceaed30b99ad1ce5217f5c77db57c42@2x.jpg" alt="일이오 1+1 나이키 에브리데이 쿠션 장목양말 2팩 6세트 SX7664-100" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJdwT" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/347d4004b51a81b1df103713a2c8b665@2x.jpg" alt="런던옴므 1+1 남성 자동 벨트 가죽 허리띠" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJdME" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/5bb42e22b44a0c71f0236b609d7dd1ef@2x.jpg" alt="불스원 Rain OK 에탄올 3in1 발수코팅 워셔액, 1.8L, 2개" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJd4F" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/6f4b15d71632b04bd150d5c67adbbc00@2x.jpg" alt="코멧 스포츠 프리미엄 논슬립 아령, 2개, 1kg" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJeA0" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/1d86f856d85ca95ea41cf68a984382fe@2x.jpg" alt="별하늘 [1+1] 남성 여름 빅사이즈 라운드 나시티 민소매 티셔츠 2P" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJfdO" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1a.coupangcdn.com/image/affiliate/banner/fda3fc4755b446d75db9c70de3f62574@2x.jpg" alt="롯데웰푸드 ABC 초콜릿, 187g, 2개" width="120" height="240"></a>
-  </div>
-
-  <!-- 가성비 컴퓨터 -->
-  <div id="src-pcvalue">
-    <a href="https://link.coupang.com/a/cXJfDA" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/4371135d0e6f2b5a0e223bfacab44f43@2x.jpg" alt="롤컴퓨터 조립컴퓨터 게이밍pc 게임용 컴퓨터본체 ..." width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJfNF" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/e0bef331ad3eda417f550859adb0a49b@2x.jpg" alt="바른컴퓨터 게이밍 컴퓨터 조립PC 본체 ... RTX 5060" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJfY8" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/7b6882d49be69546c439228dbbc3b921@2x.jpg" alt="미니 PC 가성비컴퓨터 Intel I5-1240P 16GB 512GB" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJga3" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/179b95c387dfa236accca475c95c0705@2x.jpg" alt="가성비 RTX 2060 게이밍 조립 컴퓨터 ..." width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJgjo" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/65ff6c8b62b3dc7904a8865d182188db@2x.jpg" alt="@@삼성 중고컴퓨터@@ DB400SCA 인텔10세대 i3-10100 슬림본체 사무용 1년무상AS 윈도우11, 블랙, DB400SCA_i3, 1TB, 16GB, WIN11 Pro" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJgsT" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/34fc8af9a0369e9870ae25f00cb1616f@2x.jpg" alt="온컴PC 주식용 컴퓨터 2모니터 4모니터용 가성비 주식 PC, 기본형" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJgCg" target="_blank" referrerpolicy="unsafe-url"><img src="https://image13.coupangcdn.com/image/affiliate/banner/50bc099046ce30fdb08dce092f38ae20@2x.jpg" alt="피씨오브플레이어 컴퓨터 게이밍 조립컴퓨터 올인원 풀세트 모니터포함 고사양PC 오버워치 피파, 풀세트 02번, 내장 그래픽, 8GB, 256GB, WIN11 Home" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJgQt" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/7ac987387938d5587e1fc4053994a397@2x.jpg" alt="피씨스토어 가성비 PC 조립 게임용 컴퓨터 본체 롤 데스크탑 사무용 오피스 게임용 리그오브레전드 디아블로 배틀그라운드 배그 오버워치 로스트아크 유튜브 넷플릭스 메이플스토리 발로란트, 1TB, 16GB, CPR06" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJg5r" target="_blank" referrerpolicy="unsafe-url"><img src="https://image15.coupangcdn.com/image/affiliate/banner/8933a779c1387e5af891c8bbd287db3c@2x.jpg" alt="게이밍컴퓨터 조립PC 데스크탑 본체, i5-6500, 16GB, 240GB, WIN11 Home" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJhjA" target="_blank" referrerpolicy="unsafe-url"><img src="https://image6.coupangcdn.com/image/affiliate/banner/144c1ca670564ec0a1b5aa816d7403cd@2x.jpg" alt="피씨오브플레이어 컴퓨터 게이밍 조립컴퓨터 올인원 풀세트 모니터포함 고사양PC 오버워치 피파, 풀세트 01번, 라데온 RX Vega 8, 8GB, 256GB, WIN11 Home" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJhJf" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2a.coupangcdn.com/image/affiliate/banner/1e190bdec368649f83ecafe37ae75470@2x.jpg" alt="[왕가PC] 게이밍 데스크탑 게임용 고사양 조립컴퓨터 하이엔드PC 컴퓨터본체, b.슈퍼스트림PC WX19, 블랙" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJim1" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1a.coupangcdn.com/image/affiliate/banner/425ed5642fe0f8e5024d311c9e7e3dfe@2x.jpg" alt="고사양 i7 갓성비 초고속 SSD장착 디아블로4 배그 롤 피파4 오버워치 발로란트 조립 게이밍 컴퓨터 GTX1060 본체 PC, i7-4770, GTX 1060, 16GB, 240GB, Free DOS" width="120" height="240"></a>
-    <a href="https://link.coupang.com/a/cXJj1o" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/498e940e4a43c1c9a776e4239563a1ab@2x.jpg" alt="디클 2025 올인원 PC 셀러론 인텔11세대, 화이트, 8GB, 128GB, WIN11 Home, CUP-A24S" width="120" height="240"></a>
-  </div>
-
-   <!-- 키보드 -->
-  <div id="src-keyboard">
-  	<a href="https://link.coupang.com/a/cXNAbD" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4a.coupangcdn.com/image/affiliate/banner/f048505007bffd35ba901ec50c7159d2@2x.jpg" alt="앱코 저소음 풀배열 멤브레인 108키 키보드, 블랙, MK108, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAl1" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/b2ff0ee8656d5880eb9f1a8587650744@2x.jpg" alt="로지텍 MX KEYS S 무선 일반형 키보드, 그래파이트, 920-011598" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAtM" target="_blank" referrerpolicy="unsafe-url"><img src="https://image15.coupangcdn.com/image/affiliate/banner/c56114183b3c8ef343e05b17b8c00c13@2x.jpg" alt="맥스틸 USB 유선 일반형 키보드 + 키스킨 세트, 블랙, MO-K100US" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAAx" target="_blank" referrerpolicy="unsafe-url"><img src="https://image6.coupangcdn.com/image/affiliate/banner/140564b9e6d14c57365e5da8b6b83381@2x.jpg" alt="에이투 게이밍 LED 기계식 유선 일반형 키보드 USB 리니어, 화이트, AG0302, 적축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAHm" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/98715db8b569ee71068c216a736f52fb@2x.jpg" alt="지클릭커 OFFICEPRO 사일런스 M RGB 풀윤활 무소음 98키 유선 키보드, CORAL CR1, OPK50, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAN3" target="_blank" referrerpolicy="unsafe-url"><img src="https://image1.coupangcdn.com/image/affiliate/banner/e508a1e2cc2d8f3c8e1a90b5e2787341@2x.jpg" alt="포팩트 ACT99 유무선 저소음 기계식 키보드 VIA 오테뮤 저소음피치축V3, 화이트, ACT99(피치V3)" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNAUs" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/f136c74a7fdbd3a70694fd025ce6e1a8@2x.jpg" alt="앱코 저소음 풀배열 멤브레인 108키 키보드, 오트밀, MK108, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNA6e" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/0f66670d30f76dde9f3efcc214858fa9@2x.jpg" alt="퓨리큐브 IP98 무소음 특조 기계식 감각 멤브레인 키보드 - 방수 PBT 측각 영어 키캡 스마트 노브+디스플레이 유선 LED 98키 블랙베리 그레이 그러데이션 컨투어, 블랙베리 그라데이션" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBg2" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/c48a1ef6435cc2a19314c59996655eb5@2x.jpg" alt="지클릭커 오피스프로 사일런스 M RGB 무소음 방수 유선 키보드, Greenwich CR1, OPK50, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBmq" target="_blank" referrerpolicy="unsafe-url"><img src="https://static.coupangcdn.com/image/affiliate/banner/80b0e14b1ea04c32129a1606d8a9e2c3@2x.jpg" alt="앱코 저소음 멤브레인 키보드 유선 일반형, 블루, MK108, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBv0" target="_blank" referrerpolicy="unsafe-url"><img src="https://static.coupangcdn.com/image/affiliate/banner/d641f0431d7a47d167504ac4b55d6d96@2x.jpg" alt="지클릭커 G3 Plus 레인보우 LED 유선 일반형 키보드, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBB1" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/f66af5084909341c92d7a42869211865@2x.jpg" alt="지클릭커 오피스프로 사일런스 M RGB 무소음 방수 유선 키보드, SKY CITY CR1, OPK50, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBIl" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/f3d09fd11646ce2ea37f25466eff1a4d@2x.jpg" alt="레오보그 유무선 듀얼 스크린 기계식 키보드, 사이버 라이트, AMG65, 세이야축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBQs" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2a.coupangcdn.com/image/affiliate/banner/213d550161d2a63064b3b74be5c0215f@2x.jpg" alt="지클릭커 G3 Plus 레인보우 LED 유선 일반형 키보드, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNBW0" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4c.coupangcdn.com/image/affiliate/banner/a4189bc87d14dec17499941059dcb407@2x.jpg" alt="레이저 Blackwidow V3 TKL Linear KR 유선 텐키리스 키보드, 블랙, RZ03-0349, 황축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNB4d" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/7420fdd039452f8a0d99abc2edd64b6c@2x.jpg" alt="커세어 K70 PRO TKL MGX 래피드트리거 게이밍 기계식 키보드, BLACK, 마그네틱축(자석축)" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCbX" target="_blank" referrerpolicy="unsafe-url"><img src="https://image13.coupangcdn.com/image/affiliate/banner/84da968d1771a5e39a6ac832d41b0f58@2x.jpg" alt="앱코 저소음 텐키리스 87키 멤브레인 키보드, 블루, MK87(블루)" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCks" target="_blank" referrerpolicy="unsafe-url"><img src="https://image15.coupangcdn.com/image/affiliate/banner/8780026d0ff69df38c15daf08fda08bc@2x.jpg" alt="레이니 75 3모드 기계식 유무선 키보드, 블루, 바이올렛축, 제조사축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCqb" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/b212c52082a3a0362525e565e6e4e273@2x.jpg" alt="큐센 풀윤활 가스켓 유무선 기계식 키보드, 화이트, Q104 PBT, 하이무 저소음 바다소금" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCxd" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/fba1f4865bdf385b48ce2eeb3945a050@2x.jpg" alt="앱코 HACKER 레인보우 LED 게이밍 멤브레인 유선 텐키리스 키보드, 화이트, K150" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCHm" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4a.coupangcdn.com/image/affiliate/banner/62a49e1a88e838109b0258dcfa9c085b@2x.jpg" alt="레이저 BLACKWIDOW V3 Linear KR 유선 일반형 키보드, 혼합색상, RZ03-0354(2400-R3K1), 크림옐로축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNCSP" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/8ff743be50f71bf1416c6869b01b1876@2x.jpg" alt="로지텍 WAVE KEYS 무선키보드, 로즈핑크, 920-012318" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNC3F" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/7ca1fcca7940b69dcdea81b82da96176@2x.jpg" alt="COX 미니 뉴타입 젤리 키캡 알루미늄 3모드 기계식 유무선겸용 키보드, Pink Soda Jelly, CF75, 오렌지축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNDhS" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3c.coupangcdn.com/image/affiliate/banner/6d4a28fb1b1a85a0415e2085c5bdbb96@2x.jpg" alt="조이트론 프로페셔널 텐키리스 유선 기계식 키보드, 블랙, JTMK-200S, 청축" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNDq6" target="_blank" referrerpolicy="unsafe-url"><img src="https://image2.coupangcdn.com/image/affiliate/banner/90f4e4ab3b4f071b2368bfe4928ab953@2x.jpg" alt="COX 108키 퀵스왑 기계식 유무선겸용 키보드, 벚꽃축, CS108, Soft Sky" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNDBK" target="_blank" referrerpolicy="unsafe-url"><img src="https://image4.coupangcdn.com/image/affiliate/banner/efd5b42cb4a71263dfad10c9a56e7dc9@2x.jpg" alt="앱코 HACKER 레인보우 LED 게이밍 키보드 + 마우스 세트, 블랙, KM400, 일반형" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNDXd" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/6a7e704738bd04cd7faf47b0a3c94e1b@2x.jpg" alt="엑토 레트로 무선 일반형 키보드, 핑크, KBD-48" width="120" height="240"></a>
-	<a href="https://link.coupang.com/a/cXNEg7" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/6a4c4d3d9abefe80f876ff567b3b3a51@2x.jpg" alt="커세어 K55 CORE TKL RGB 저소음 멤브레인 게이밍 유선 텐키리스 키보드, RGP0182, 제조사축" width="120" height="240"></a>
-  </div>
-
- <div id="src-petproduct">
- <a href="https://link.coupang.com/a/cXOGn4" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/5131a05e65ed098fb6343b4a74281b40@2x.jpg" alt="행복한댕냥이 반려동물 원터치 케어 브러쉬 10 x 18.5 cm, 블루, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOGyf" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/4e1a2097b0a6cb763c202c45a1e84b38@2x.jpg" alt="JW 반려동물 힐링 샤워 헤드, 혼합색상, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOGGO" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/9d55e7deb5ae226041871f0539141738@2x.jpg" alt="리스펫 반려동물 LED 다보여 발톱깎이 4.3 x 15 cm, 핑크, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOGN2" target="_blank" referrerpolicy="unsafe-url"><img src="https://image12.coupangcdn.com/image/affiliate/banner/929b4e52a78283119fe7ebef07ed1376@2x.jpg" alt="코멧 펫 강아지 쿠션, 그레이, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOGWl" target="_blank" referrerpolicy="unsafe-url"><img src="https://image13.coupangcdn.com/image/affiliate/banner/5415afa1cdc2b37f4083809137ce2099@2x.jpg" alt="탐사 실속형 배변패드, 100개입, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOG5f" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/3e35f9b2d920513f11600714efd78525@2x.jpg" alt="디클펫 반려동물 자동급식기 AT-210, 4L, Black, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOHdG" target="_blank" referrerpolicy="unsafe-url"><img src="https://image8.coupangcdn.com/image/affiliate/banner/bcccee31ec39e0013a441b3d29cb04c2@2x.jpg" alt="딩동펫 반려동물 폭신 도넛 방석, 그레이, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOHlo" target="_blank" referrerpolicy="unsafe-url"><img src="https://image11.coupangcdn.com/image/affiliate/banner/e27aee0e2057adde6638b0493a0bebd6@2x.jpg" alt="코멧 펫 강아지 로프 장난감 6종 세트, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOHNs" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/1a682b80bec84a862ade99ee28bcd28b@2x.jpg" alt="루다 펫클린 올인원 반려동물 진공 흡입 미용기, 1개, GDV06 모카베이지" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOHT8" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/dbf460a5ea6ef02ee5c0a4ee5c3d30ac@2x.jpg" alt="탐사 강아지 고구마말랭이 간식, 1kg, 1개, 고구마" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOH2a" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3c.coupangcdn.com/image/affiliate/banner/8eb4764e1e589a831b72fd3c5a34686f@2x.jpg" alt="푸르미 반려동물 보급형 물병식기, 인디핑크, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOIkh" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/ae48fe5c0dce2a0655bab732a35e534b@2x.jpg" alt="탐사 반려동물 듀얼 패드 일회용 손가락 칫솔, 화이트, 30개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOIux" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/df0abd746ddf5a53e31bd46853c87ea8@2x.jpg" alt="탐사 반려동물 탈취제 리필, 4L, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOIFg" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5a.coupangcdn.com/image/affiliate/banner/4497da767f4bdc7e7e645b892bb2f0f9@2x.jpg" alt="링펫 고양이 볼 자동장난감, P02, 레드, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOIY8" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/d02e59f5649c135f284810504dd85aca@2x.jpg" alt="맥슬리 강아지 노즈워크 지능개발 먹이퍼즐 장난감, 바이올렛, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOI8A" target="_blank" referrerpolicy="unsafe-url"><img src="https://image6.coupangcdn.com/image/affiliate/banner/8c01221733485e6a77effdf9b3fc3cab@2x.jpg" alt="제이셀르 자동으로 움직이는 반려동물 장난감 강아지 자동 공놀이 장난감, 레드, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOJmx" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/0e9071404b4221e5451fc119a3a0f79c@2x.jpg" alt="와우한빛 강아지 페리 배변패드 아로마향 50매, 50개입, 2개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOJzc" target="_blank" referrerpolicy="unsafe-url"><img src="https://image1.coupangcdn.com/image/affiliate/banner/32c220d002038a14044157d78d92b59f@2x.jpg" alt="OK 강아지 의사소통 훈련벨 애견 간식벨 7종세트, 1세트, 혼합색상" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOJOc" target="_blank" referrerpolicy="unsafe-url"><img src="https://image10.coupangcdn.com/image/affiliate/banner/845f6eefdd823d1225bc3b6ce3d11778@2x.jpg" alt="펫츠랜드 반려동물 스너그 슬링백 + 이너쿠션 세트, 그레이, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOJ1c" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5c.coupangcdn.com/image/affiliate/banner/885905c1de4db2d4c8af6c1ad0d2c90a@2x.jpg" alt="딩동펫 반려동물용 아기상어 하우스, 그레이, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOKad" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/dc1988927294615e3c8a6b98d595aa50@2x.jpg" alt="탐사 반려동물 울타리 12p, 투명, 12개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOKs4" target="_blank" referrerpolicy="unsafe-url"><img src="https://image2.coupangcdn.com/image/affiliate/banner/853aefd27edcdb3405f79241e4a1f7e5@2x.jpg" alt="딩동펫 반려동물 허그 수면쿠션, 그레이, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOKMG" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/9fccc01c84698d01f749a5a6982e7c7a@2x.jpg" alt="아키즈 애견용 마스터 클리퍼, 마스터 클리퍼 +5F+7F, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOK3T" target="_blank" referrerpolicy="unsafe-url"><img src="https://image11.coupangcdn.com/image/affiliate/banner/3b376e623eb0c1ac15c44eaebdc3d3c7@2x.jpg" alt="딩동펫 소프트 터치 방석, 블랙, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOLCL" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/d803ede7d14de2bba82b5d5b9b6c4285@2x.jpg" alt="스니피즈 강아지 우드스틱 장난감, 5개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOLSY" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/ba7f61ac883704cf55ef6bf75ab66343@2x.jpg" alt="바사바사 강아지칫솔 6개 세트, 혼합색상" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOMiq" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3c.coupangcdn.com/image/affiliate/banner/ae05e9adc95c4f6e20741301f0454318@2x.jpg" alt="댕냥이생활연구소 강아지 듬뿍 대용량 간식, 닭가슴, 1kg, 1개" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXOMBw" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/348bcb74cbe0fd5542f6e809bec2c116@2x.jpg" alt="탐사 강아지 수납형 3단 계단, 베이지" width="120" height="240"></a>
-<a href="https://link.coupang.com/a/cXONyM" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4c.coupangcdn.com/image/affiliate/banner/ae18e84b7ceba131b06808799f4ee569@2x.jpg" alt="딩동펫 고양이 낚시대 우드 야옹이 + 깃털 + 깃털 와이어 장난감 세트, 혼합 색상, 1세트" width="120" height="240"></a>
- </div>
-
-
-
-</div>
-<!-- ======================= /상품 소스 ======================= -->
-
 <!-- Footer -->
 <footer class="site-footer">
   <div class="container">
@@ -495,7 +268,7 @@
     </div>
     <div class="ft-bottom">
       <div>
-        © 2025 <a href="https://ansoft-90.github.io/" target="_blank" rel="noopener"> 에이엔소프트 [ANSOFT]</a>
+        © 2025 에이엔소프트 [ANSOFT]
       </div>
       <div class="ft-links">
         <p class="ft-notice">본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
@@ -504,6 +277,7 @@
   </div>
 </footer>
 
+	
 
 </body>
 </html>
