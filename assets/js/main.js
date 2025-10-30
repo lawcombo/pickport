@@ -47,11 +47,11 @@
     }
 
 
-	// 상품 8개씩 랜덤 노출
+	// 상품 12개씩 랜덤 노출
     function renderSection(sectionKey, srcId, dstId){
       var $src = $(srcId);
       var list = toArray($src.find('a'));
-      var picks = takeRandom(list, 8);
+      var picks = takeRandom(list, 12);
       var out = '';
       for(var i=0;i<picks.length;i++){ out += buildCard(picks[i]); }
       $(dstId).html(out);
