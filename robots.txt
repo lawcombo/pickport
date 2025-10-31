@@ -8,3 +8,4 @@ Allow: /
 # Disallow: /test/
 
 Sitemap: https://lawcombo.github.io/pickport/sitemap.xml
+Sitemap: https://lawcombo.github.io/pickport/sitemap.txt
