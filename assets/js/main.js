@@ -47,6 +47,8 @@
     }
 
 
+
+	// -----------------------------------------------------------------------------------------------------
 	// 상품 12개씩 랜덤 노출
     function renderSection(sectionKey, srcId, dstId){
       var $src = $(srcId);
@@ -56,7 +58,9 @@
       for(var i=0;i<picks.length;i++){ out += buildCard(picks[i]); }
       $(dstId).html(out);
     }
+	// -----------------------------------------------------------------------------------------------------
 
+	  
     // 엔진 실제 높이를 CSS 변수로 반영
     function setEngineHeightVar(){
       var el = document.getElementById('engineWrap');
@@ -76,23 +80,20 @@
 
     // 초기 렌더
     $(function(){
-      setEngineHeightVar();
-      window.addEventListener('resize', setEngineHeightVar);
+		setEngineHeightVar();
+		window.addEventListener('resize', setEngineHeightVar);
 
-      renderSection('deals',   '#src-deals',   '#cards-deals');
-      renderSection('best',    '#src-best',    '#cards-best');
-      renderSection('oneplus', '#src-oneplus', '#cards-oneplus');
-      renderSection('pcvalue', '#src-pcvalue', '#cards-pcvalue');
-	  renderSection('keyboard', '#src-keyboard', '#cards-keyboard');
-  	  renderSection('petproduct', '#src-petproduct', '#cards-petproduct');
+		renderSection('deals',   '#src-deals',   '#cards-deals'); 				// 오늘의 특가
+		renderSection('best',    '#src-best',    '#cards-best'); 				// 최근 많이 팔린
+		renderSection('oneplus', '#src-oneplus', '#cards-oneplus'); 			// 1+1
+		renderSection('pcvalue', '#src-pcvalue', '#cards-pcvalue'); 			// 컴퓨터
+		renderSection('keyboard', '#src-keyboard', '#cards-keyboard'); 			// 키보드
+		renderSection('petproduct', '#src-petproduct', '#cards-petproduct'); 	// 애완용품 
 
 
-	  
-      
-	
 		
 		// 필터 클릭 동작
-      var autoChipByScroll = true; // "전체"일 때만 자동 하이라이트
+		var autoChipByScroll = true; // "전체"일 때만 자동 하이라이트
 
       $('.chip').on('click', function(){
         var $btn = $(this);
@@ -178,20 +179,19 @@
       });
     });
 
-    // 공개 API: 섹션 재렌더
-    window.RebuildSections = function(){
-      renderSection('deals',   '#src-deals',   '#cards-deals');
-      renderSection('best',    '#src-best',    '#cards-best');
-      renderSection('oneplus', '#src-oneplus', '#cards-oneplus');
-      renderSection('pcvalue', '#src-pcvalue', '#cards-pcvalue');
-  	  renderSection('keyboard', '#src-keyboard', '#cards-keyboard');
-   	  renderSection('petproduct', '#src-petproduct', '#cards-petproduct');
+	// 공개 API: 섹션 재렌더
+	window.RebuildSections = function(){
+		renderSection('deals',   '#src-deals',   '#cards-deals'); 				// 오늘의 특가
+		renderSection('best',    '#src-best',    '#cards-best'); 				// 최근 많이 팔린
+		renderSection('oneplus', '#src-oneplus', '#cards-oneplus'); 			// 1+1
+		renderSection('pcvalue', '#src-pcvalue', '#cards-pcvalue'); 			// 컴퓨터
+		renderSection('keyboard', '#src-keyboard', '#cards-keyboard'); 			// 키보드
+		renderSection('petproduct', '#src-petproduct', '#cards-petproduct'); 	// 애완용품
     
-      
-      
-	renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
-};
-  })(jQuery);
+		renderPromoBanners(); // ★ 추가: 배너 3개 랜덤 구성
+	};
+	  
+})(jQuery);
 
 
 
