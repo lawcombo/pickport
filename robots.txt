@@ -7,4 +7,4 @@ Allow: /
 # Disallow: /private/
 # Disallow: /test/
 
-Sitemap: https://lawcombo.github.io/pickport/sitemap.xml
+Sitemap: https://lawcombo.github.io/pickport/sitemap-v2.xml
