@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 메인 -->
   <url>
     <loc>https://lawcombo.github.io/pickport/</loc>
     <lastmod>2025-10-31</lastmod>
@@ -8,7 +7,6 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- 카테고리 분리 페이지 (section_html/) -->
   <url>
     <loc>https://lawcombo.github.io/pickport/section_html/deals.html</loc>
     <lastmod>2025-10-31</lastmod>
