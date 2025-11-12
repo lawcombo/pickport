@@ -844,15 +844,19 @@ if ('serviceWorker' in navigator) {
 
 
 
-<script>
 (function () {
-  // 전역 카운터 식별자 (사이트 전체 합산)
+  // 같은 브라우저/탭 세션에서는 1회만 카운트되도록 sessionStorage 사용
+  var KEY = "pickport_session_counted";
+  if (sessionStorage.getItem(KEY)) return;
+
+  // 사이트 전역 카운터 ID (전체 사이트를 하나로 셈)
   var COUNTER_ID = "lawcombo.github.io/pickport";
 
-  // 페이지 로드마다 ping → 카운트 +1
+  // hits.sh에 '보이지 않는' 이미지 요청을 보내 카운트를 +1
   var ping = new Image();
-  ping.referrerPolicy = "no-referrer-when-downgrade";
-  // cache busting을 위해 타임스탬프 쿼리 추가
-  ping.src = "https://hits.sh/" + encodeURIComponent(COUNTER_ID) + ".svg?view=total&nc=" + Date.now();
+  ping.referrerPolicy = "no-referrer-when-downgrade"; // 선택 사항
+  ping.src = "https://hits.sh/" + encodeURIComponent(COUNTER_ID) + ".svg?view=total";
+
+  // 이 세션에서는 더 이상 증가하지 않도록 플래그
+  sessionStorage.setItem(KEY, "1");
 })();
-</script>
