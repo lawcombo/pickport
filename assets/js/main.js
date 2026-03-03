@@ -434,7 +434,6 @@ window.addEventListener('resize', (()=> {
 	"https://youtube.com/shorts/mT97G9kBJjc?si=KNDVSxdNonQt0AHz", 	// 차예련 가디건
 	"https://youtube.com/shorts/cswuUrOpd5M?si=F4IdWVVOgoyldvgs", 	// 권나라 화이트닝
 	"https://youtube.com/shorts/uGPcjkD35QQ?si=NyPGbd-_8Ai1iYNg", 	// 차예련 향수 (톰포드 타바코 바닐라 오드퍼퓸)
-    "https://youtube.com/shorts/cB0erbdES4s?si=jdeSR27i-8UabyRP",  	// 비누거치대
     "https://youtube.com/shorts/uS9EGnShj0s?si=Vb5JOQwZb3Q-jDPv", 	// 원스채칼 무 당근 쏨땀 야채슬라이서
     "https://youtube.com/shorts/8G3FHyKdIdg?si=8oDbu2d1NyVhaBdD", 	// 실리콘 채소 과일 보관용기
     "https://youtube.com/shorts/KOzPtqZJJzY?si=jyKq1VLswB6DPsWp",	// 샤오비 보조배터리
@@ -469,7 +468,6 @@ window.addEventListener('resize', (()=> {
 	"https://link.coupang.com/a/cYb5Ux", 	// 차예련 가디건
 	"https://link.coupang.com/a/cYb4n8", 	// 권나라 화이트닝
 	"https://link.coupang.com/a/cYb1zP", 	// 차예련향수(톰포드 타바코 바닐라 오드퍼퓸)
-    "https://link.coupang.com/a/cYbqpN", 	// 비누거치대
     "https://link.coupang.com/a/cYbmOW", 	// 원스채칼 무 당근 쏨땀 야채슬라이서
     "https://link.coupang.com/a/cYaTWq", 	// 실리콘 채소 과일 보관용기
     "https://link.coupang.com/a/cXZwtK",	// 샤오비 보조배터리
@@ -503,7 +501,6 @@ window.addEventListener('resize', (()=> {
 	"꾸안꾸 차예련 무드, 가디건 🧶",
 	"권나라 화이트닝 이거면 끝! ✨",
 	"닐라닐라 바닐라~ 차예련이 추천한 향수! ✨",
-	"미끌미끌 노프라블럼 비누거치대 🫧",
 	"썰·채·다짐 3초 컷 👩‍🍳",
 	"실리콘 채소 과일 보관용기 🥬",
 	"샤오미 미쳤음! 샤오미 보조배터리 🔋",
