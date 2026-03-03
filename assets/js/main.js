@@ -439,7 +439,6 @@ window.addEventListener('resize', (()=> {
     "https://youtube.com/shorts/8G3FHyKdIdg?si=8oDbu2d1NyVhaBdD", 	// 실리콘 채소 과일 보관용기
     "https://youtube.com/shorts/KOzPtqZJJzY?si=jyKq1VLswB6DPsWp",	// 샤오비 보조배터리
     "https://youtube.com/shorts/8-1YuPzJLHA?si=YXfw8O9aKX-uvQvC",	// 미니 빨래 건조대
-    "https://youtube.com/shorts/wN1tRDnO1fE?si=5x61qSlsODXfwGmI",	// 아가짱 샤워덕 조이 목욕핸들
     "https://youtube.com/shorts/e4JobP8rqH0?si=e8T6Jk2AQK6rRGVc",	// 하이라이터 밑줄 스티커 펜
     "https://youtube.com/shorts/lL05TQy27Ig?si=NBsyT6doLf6WSaiW"	// 방풍비닐
   ];
@@ -475,7 +474,6 @@ window.addEventListener('resize', (()=> {
     "https://link.coupang.com/a/cYaTWq", 	// 실리콘 채소 과일 보관용기
     "https://link.coupang.com/a/cXZwtK",	// 샤오비 보조배터리
     "https://link.coupang.com/a/cXZFI2",	// 미니 빨래 건조대
-    "https://link.coupang.com/a/cXZNOd",	// 아가짱 샤워덕 조이 목욕핸들
     "https://link.coupang.com/a/cX46Ru",	// 하이라이터 밑줄 스티커 펜
     "https://link.coupang.com/a/cX310L"		// 방풍비닐
   ];
@@ -510,7 +508,6 @@ window.addEventListener('resize', (()=> {
 	"실리콘 채소 과일 보관용기 🥬",
 	"샤오미 미쳤음! 샤오미 보조배터리 🔋",
 	"빨래는 미니 빨래 건조대로 뽀송하게 🧺",
-	"목욕시간 목욕핸들로 즐겁게 🛁",
 	"밑줄 쫙— 하이라이터 밑줄 스티커 펜 ✍️",
 	"이번 겨울 필수템! 바람 그만! 🌬️"
 	];
